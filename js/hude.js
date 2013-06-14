@@ -176,15 +176,28 @@ function hudeOpenDialog(path) {
     });
 }
 
-function startBarcodeScan() {
-    alert("scan gedrueckt");
-    window.plugins.barcodeScanner.scan(function(result) {
-        hudeOpenPage('page_scan_result.html');
-        $('#scanResult').val(result.text);
-    }, function(error) {
+function hudeQRCodeScan() {
+    console.log('Übergebe http://mo.gastinhude.de/index.html');
+    hudeSplitURL('http://m.gastinhude.de/index.html');
+    /*
+     window.plugins.barcodeScanner.scan(function(result) {
+     hudeOpenPage('page_scan_result.html');
+     $('#scanResult').val(result.text);
+     }, function(error) {
+     
+     alert("Scanning failed: " + error);
+     
+     });
+     */
+}
 
-        alert("Scanning failed: " + error);
-
-    });
-
+function hudeSplitURL(url) {
+    var domain = 'http://m.gastinhude.de/';
+    if (url.indexOf(domain) !== -1) {
+        url = url.replace(domain, '').trim();
+        hudeOpenPage(url);
+    } else {
+        alert('Fehlerhafter QR-Code!');
+        //console.log('String nicht gefunden: ' + url);
+    }
 }
