@@ -24,6 +24,7 @@
             document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
                 $('#pageIndex').show();
+                alert("Device Ready");
                 var element = document.getElementById('deviceProperties');
 
                 element.innerHTML = 'Device Name: ' + device.name + '<br />' +
