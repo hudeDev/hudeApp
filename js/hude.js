@@ -177,18 +177,12 @@ function hudeOpenDialog(path) {
 }
 
 function hudeQRCodeScan() {
-    console.log('Übergebe http://mo.gastinhude.de/index.html');
-    hudeSplitURL('http://m.gastinhude.de/index.html');
-    /*
-     window.plugins.barcodeScanner.scan(function(result) {
-     hudeOpenPage('page_scan_result.html');
-     $('#scanResult').val(result.text);
-     }, function(error) {
-     
-     alert("Scanning failed: " + error);
-     
-     });
-     */
+    window.plugins.barcodeScanner.scan(function(result) {
+        hudeSplitURL(result.text);
+    }, function(error) {
+        alert("Scanning failed: " + error);
+    });
+
 }
 
 function hudeSplitURL(url) {
