@@ -1,0 +1,37 @@
+<script>
+    var db = initiateLocalStorage();
+</script>
+<div data-role="dialog">
+    <div data-role="header">
+        <h1>Einstellungen</h1>
+    </div>
+    <div data-role="content">
+        <h5>Zielgruppeneinstellung</h5>
+        <div data-role="fieldcontain" class="ui-hide-label">
+            <fieldset data-role="controlgroup">
+                <!-- id vom input & for vom label müssen identisch sein -->
+                <input type="radio" name="audienceSelect" id="audienceNone" value="0" class="custom" data-mini="true" onclick="saveAudience()" />
+                <label for="audienceNone">Keine Angaben</label>
+                <input type="radio" name="audienceSelect" id="audienceFamily" value="1" class="custom" data-mini="true" onclick="saveAudience()" />
+                <label for="audienceFamily">Familien mit Kind</label>
+                <input type="radio" name="audienceSelect" id="audienceBestAger" value="2" class="custom" data-mini="true" onclick="saveAudience()" />
+                <label for="audienceBestAger">Best Ager (50+)</label>
+            </fieldset>
+        </div>
+        <h6>Audio-Sprache</h6>
+        <div data-role="fieldcontain" class="ui-hide-label">
+            <fieldset data-role="controlgroup">
+                <!-- id vom input & for vom label müssen identisch sein -->
+                <input type="radio" name="audioSelect" id="audioDeutsch" value="0" class="custom" data-mini="true" onclick="saveAudio()" />
+                <label for="audioDeutsch">Deutsch</label>
+                <input type="radio" name="audioSelect" id="audioEnglisch" value="1" class="custom" data-mini="true" onclick="saveAudio()" />
+                <label for="audioEnglisch">Englisch</label>
+                <input type="radio" name="audioSelect" id="audioPlatt" value="2" class="custom" data-mini="true" onclick="saveAudio()" />
+                <label for="audioPlatt">Plattdeutsch</label>
+            </fieldset>
+        </div>
+        <h6>Schriftgröße</h6>
+        <a id="openStorage" href="#" data-role="button" data-icon="arrow-d" title="Speicher" data-iconpos="notext" onclick="alert(print_r(db))">Inhalte des LocalStorage</a>
+        <a href="index.html" data-role="button" data-rel="back" onclick="saveAudience()">Schließen</a> 
+    </div>
+</div>

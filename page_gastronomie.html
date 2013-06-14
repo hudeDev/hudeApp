@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0" />
+        <!-- PhoneGap Abhängigkeiten -->
+        <script src="phonegap.js"></script>
+        <script src="barcodescanner.js"></script>
+        <!-- Funktionlität Abhängigkeiten -->
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/jquery.mobile-1.3.1.min.js"></script>
+        <script src="js/print_r.js"></script>
+        <script src="js/hude.js"></script>
+        <!-- Design Abhängigkeiten -->
+        <link href="css/jquery.mobile-1.3.1.min.css" rel="stylesheet">
+        <link href="css/hude-theme.css" rel="stylesheet">
+        <link href="css/normalize.css" rel="stylesheet">
+        <link href="css/foundation.css" rel="stylesheet">
+        <link href="css/hude.css" rel="stylesheet">
+        <!-- Auszuführender Code beim App-Start -->
+        <script type="text/javascript">
+            $(document).on('pageinit', function(event) {
+                hudeAppStartUp();
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Seiten Aufbau -->
+        <div id="pageGastronomie" data-role="page">
+            <!-- Kopf der Seite -->
+            <div id="hudeHeader" data-role="header">
+                <!-- Button zum Öffnen der Seitenleiste -->
+                <a href="#hudePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1></h1>
+            </div>
+            <!-- Inhalt der Seite -->
+            <div data-role="content">
+                <img src="images/gastronomie/gastronomie.jpg" />
+                <div data-role="collapsible-set" data-inset="false">
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>Hören Sie die Informationen</h1>
+                        Player integrieren
+                    </div>
+                    <div data-role="collapsible" data-collapsed="false" data-inset="false">
+                        <h1>Gastronomie</h1>
+                        <p>Lassen Sie sich doch einfach mal rundum verwöhnen und genießen Sie in Hude das abwechslungsreiche gastronomische Angebot.</p>
+                        <p>Urige Restaurants, moderne Bistros und gemütliche Cafés lassen keine Wünsche offen. Ob kulinarische Leckerbissen, deftige Hausmannskost, norddeutsche Spezialitäten wie „Kohl & Pinkel“ oder einfach mal ein Eis für zwischendurch, hier ist für jeden Geschmack etwas dabei.</p>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>Lokalitäten</h1>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                <a href="page_gastro_burgdorfs.html" onclick="hudeOpenPage('page_gastro_burgdorfs.html');">
+                                    <img src="images/gastronomie/burgdorfs.jpg" />
+                                    <h2>Burgdorf's</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page_gastro_cafe21.html" onclick="hudeOpenPage('page_gastro_cafe21.html');">
+                                    <img src="images/gastronomie/cafe-21.jpg" />
+                                    <h2>Cafe 21</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page_gastro_eiscafe_italia.html" onclick="hudeOpenPage('page_gastro_eiscafe_italia.html');">
+                                    <img src="images/gastronomie/eiscafeitalia.jpg" />
+                                    <h2>Eiscafé Italia</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page_gastro_klosterschaenke.html" onclick="hudeOpenPage('page_gastro_klosterschaenke.html');">
+                                    <img src="images/gastronomie/klosterschaenke-hude02.jpg" />
+                                    <h2>Klosterschänke</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page_gastro_moritz_wuestenlander_hof.html" onclick="hudeOpenPage('page_gastro_moritz_wuestenlander_hof.html');">
+                                    <img src="images/gastronomie/moritz-wuestenlander-hof.jpg" />
+                                    <h2>Moritz Wüstenlander Hof</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page_gastro_spanhacke.html" onclick="hudeOpenPage('page_gastro_spanhacke.html');">
+                                    <img src="images/gastronomie/spanhacke-hude.jpg" />
+                                    <h2>Spanhacke Café, Bäckerei & Konditorei</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page_gastro_vielstedter_bauernhaus.html" onclick="hudeOpenPage('page_gastro_vielstedter_bauernhaus.html');">
+                                    <img src="images/gastronomie/vielstedter-bauernhaus.jpg" />
+                                    <h2>Vielstedter Bauernhaus</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page_gastro_vielstedter_melkhus.html" onclick="hudeOpenPage('page_gastro_vielstedter_melkhus.html');">
+                                    <img src="images/gastronomie/melkhus-hude.jpg" />
+                                    <h2>Vielstedter Melkhus</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page_gastro_zorbas.html" onclick="hudeOpenPage('page_gastro_zorbas.html');">
+                                    <img src="images/gastronomie/zorbas.jpg" />
+                                    <h2>Zorbas</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="page_gastro_zur_krone.html" onclick="hudeOpenPage('page_gastro_zur_krone.html');">
+                                    <img src="images/gastronomie/zur-krone.jpg" />
+                                    <h2>Zur Krone</h2>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                </div>
+                <!-- Fuß der Seite -->
+                <div id="hudeFooter" data-role="footer" data-position="fixed">
+                </div>
+                <!-- Seitenleiste der Seite -->
+                <div id="hudePanel" data-role="panel" data-position="left" data-display="push" data-position-fixed="true">
+                    <div class="row">
+                        <img src="images/hude_logo.jpg" />
+                    </div>
+                    <ul id="hudePanelList" data-role="listview" data-theme="a">
+                        <li data-icon="arrow-l"><a href="#hudePanel" data-rel="close"></a></li>
+                        <li data-role="list-divider" data-theme="a">Navigation</li>
+                        <li><a href="page_hude-info.html" onclick="hudeOpenPage('page_hude-info.html')">Hude-Info</a></li>
+                        <li><a href="page_sehenswuerdigkeiten.html" onclick="hudeOpenPage('page_sehenswuerdigkeiten.html')">Sehenswürdigkeiten</a></li>
+                        <li><a href="page_unterkuenfte.html" onclick="hudeOpenPage('page_unterkuenfte.html')">Unterkünfte</a></li>
+                        <li><a href="page_gastronomie.html" onclick="hudeOpenPage('page_gastronomie.html')">Gastronomie</a></li>
+                        <li><a href="page_ec-automaten.html" onclick="hudeOpenPage('page_ec-automaten.html')">EC-Automaten</a></li>
+                        <li><a href="page_einkaufen.html" onclick="hudeOpenPage('page_einkaufen.html')">Einkaufen</a></li>
+                        <li><a href="page_parkmoeglichkeiten.html" onclick="hudeOpenPage('page_parkmoeglichkeiten.html')">Parkmöglichkeiten</a></li>
+                        <li><a href="page_gesundheit.html" onclick="hudeOpenPage('page_gesundheit.html')">Gesundheit</a></li>
+                        <li><a href="page_veranstaltungen.html" onclick="hudeOpenPage('page_veranstaltungen.html')">Veranstaltungen</a></li>
+                        <li><a href="page_schnitzeljagd.html" onclick="hudeOpenPage('page_schnitzeljagd.html')">Schnitzeljagd</a></li>
+                        <li><a href="page_hude-perfekt.html" onclick="hudeOpenPage('page_hude-perfekt.html')">Hude-Perfekt</a></li>
+                    </ul>
+                </div>
+            </div>
+    </body>
+</html>

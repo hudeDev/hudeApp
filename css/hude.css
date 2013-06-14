@@ -1,0 +1,94 @@
+.ui-bar-a {
+    background: linear-gradient(#008A7E, #008A7E) repeat scroll 0 0 #008A7E;
+}
+
+.ui-header .ui-btn, .ui-header .ui-icon, .ui-header .ui-btn-inner {
+    width: 40px;
+    height: 46px;
+    background: #008A7E;
+    border: 0;
+}
+
+.ui-header .ui-title, .ui-footer .ui-title {
+    font-size: 26px;
+}
+
+.ui-header {
+    height: 60px;
+}
+
+.ui-icon-slider {
+    background: url("images/icon-slidersoff.png") no-repeat 50% 50% !important;      
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
+    margin-top:0;/*Adjust this value to position the icon*/
+}
+
+.ui-icon-hudeEinstellungen {
+    background: url("images/icon-cog.png") no-repeat 50% 50% !important;      
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
+    margin-top:5px;/*Adjust this value to position the icon*/
+}
+
+.ui-icon-hudeEmail {
+    background: url("images/icon-emailalt.png") no-repeat 50% 50% !important;      
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
+    margin-top:5px;/*Adjust this value to position the icon*/
+}
+
+.ui-icon-hudeGPS {
+    background: url("images/icon-gpson.png") no-repeat 50% 50% !important;      
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
+    margin-top:5px;/*Adjust this value to position the icon*/
+}
+
+.ui-icon-hudeHaus {
+    background: url("images/icon-home.png") no-repeat 50% 50% !important;      
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
+    margin-top:5px;/*Adjust this value to position the icon*/
+}
+
+.ui-icon-hudeQR {
+    background: url("images/icon-qrcode.png") no-repeat 50% 50% !important;      
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
+    margin-top:5px;/*Adjust this value to position the icon*/
+}
+
+h1, h2, h3, h4, h5 {
+    color: #dfdfdf;
+}
+
+div[class=headimage] img {
+    width: 100%;
+}
+
+a:hover, a:focus {
+    color: #008A7E;
+}
+
+div[data-role=content] h1, h2, h3, h4, h5 {
+    color: #222222;
+}
+
+.sehenswuerdigkeit {
+    
+}
+
+.todo {
+    color: red;
+    font-style: inherit;
+    font-family: cursive verdana;
+    font-weight: bold;
+    font-size: small;
+}

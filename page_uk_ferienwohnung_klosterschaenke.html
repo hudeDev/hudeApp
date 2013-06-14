@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0" />
+        <!-- PhoneGap Abhängigkeiten -->
+        <script src="phonegap.js"></script>
+        <script src="barcodescanner.js"></script>
+        <!-- Funktionlität Abhängigkeiten -->
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/jquery.mobile-1.3.1.min.js"></script>
+        <script src="js/print_r.js"></script>
+        <script src="js/hude.js"></script>
+        <!-- Design Abhängigkeiten -->
+        <link href="css/jquery.mobile-1.3.1.min.css" rel="stylesheet">
+        <link href="css/hude-theme.css" rel="stylesheet">
+        <link href="css/normalize.css" rel="stylesheet">
+        <link href="css/foundation.css" rel="stylesheet">
+        <link href="css/hude.css" rel="stylesheet">
+        <!-- Auszuführender Code beim App-Start -->
+        <script type="text/javascript">
+            $(document).on('pageinit', function(event) {
+                hudeAppStartUp();
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Seiten Aufbau -->
+        <div data-role="page">
+            <!-- Kopf der Seite -->
+            <div id="hudeHeader" data-role="header">
+                <!-- Button zum Öffnen der Seitenleiste -->
+                <a href="#hudePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1></h1>
+            </div>
+            <!-- Inhalt der Seite -->
+            <div data-role="content">
+                <img src="images/unterkuenfte/ferienwohnungen/klosterschaenke-01_large.jpg" />
+                <div data-role="collapsible-set" data-inset="false">
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>Hören Sie die Informationen</h1>
+                        <p>Player integrieren!</p>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="false" data-inset="false">
+                        <h1>Beschreibung</h1>
+                        <p>Im Klosterbezirk, direkt am Wanderweg Huder Bach liegen die 48 qm großen Ferienwohnungen der Klosterschänke Hude. Die gemütlichen Komfortwhg. verfügen über eine Vollausstattung: WM, Trockner, Du/WC, Sat-TV, Abstellr., Zimmersafe, Wohnraum mit Schlafsofa und Kaminofen, Essecke, offene Küche, Geschirrspüler u. ein Schlafzi. mit Doppelbett. Kinderbett, Leihfahrräder (7,-/Tag) u. kostenloses W-LAN stehen zur Verfügung. Angelmöglichkeiten hinterm Haus, 9/18 Loch-Golfplatz gegenüber, Naturbad 100 m., Ponyhof 500 m, Urwald Hasbruch vor Ort. Traumhafter Ausblick auf den von-Witzleben-Park. Hund auf Anfrage. Parkplatz.</p>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>Preise</h1>
+                        <p>Pro Tag ab 49 € | Betten: 1 - 6</p>
+                        <p>Endreinigung: 29,- €. Bettwäsche + Handtücher inkl.</p>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>Kontakt</h1>
+                        <p>Familie Jens Burgdorf<br/>von-Witzleben-Allee 3<br/>27798 Hude</p>
+                        <p>Tel: <a href="tel:044087777">(0 44 08) 77 77</a> <br/>Fax (0 44 08) 22 11</p>
+                        <p>
+                            <a href="http://www.klosterschaenke-hude.de">www.klosterschaenke-hude.de</a><br/>
+                            <a href="mailto:info@klosterschaenke-hude.de">info@klosterschaenke-hude.de</a>
+
+                        </p>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>Bilder</h1>
+                        <a href="#klosterschaenke01" data-rel="popup" data-position-to="window" data-transition="fade">
+                            <img class="popphoto" src="images/unterkuenfte/ferienwohnungen/klosterschaenke-01_large.jpg" alt="Klosterschänke" style="width:30%">
+                        </a>
+                        <!-- 
+                        Darstellung des großen Bild mit Rahmen 
+                        -->
+                        <div data-role="popup" id="klosterschaenke01" data-overlay-theme="a" data-theme="d" data-corners="false">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Schließen</a>
+                            <!-- 
+                            src="" : ist der Pfad zum Bild
+                            alt="" : Beschreibt das Bild 
+                            -->
+                            <img class="popphoto" src="images/unterkuenfte/ferienwohnungen/klosterschaenke-01_large.jpg" alt="Klosterschänke">
+                        </div>
+                        <a href="#klosterschaenke02" data-rel="popup" data-position-to="window" data-transition="fade">
+                            <img class="popphoto" src="images/unterkuenfte/ferienwohnungen/klosterschaenke-02_large.jpg" alt="Klosterschänke" style="width:30%">
+                        </a>
+                        <!-- 
+                        Darstellung des großen Bild mit Rahmen 
+                        -->
+                        <div data-role="popup" id="klosterschaenke02" data-overlay-theme="a" data-theme="d" data-corners="false">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Schließen</a>
+                            <!-- 
+                            src="" : ist der Pfad zum Bild
+                            alt="" : Beschreibt das Bild 
+                            -->
+                            <img class="popphoto" src="images/unterkuenfte/ferienwohnungen/klosterschaenke-02_large.jpg" alt="Klosterschänke">
+                        </div>
+                        <a href="#klosterschaenke03" data-rel="popup" data-position-to="window" data-transition="fade">
+                            <img class="popphoto" src="images/unterkuenfte/ferienwohnungen/klosterschaenke-03_large.jpg" alt="Klosterschänke" style="width:30%">
+                        </a>
+                        <!-- 
+                        Darstellung des großen Bild mit Rahmen 
+                        -->
+                        <div data-role="popup" id="klosterschaenke03" data-overlay-theme="a" data-theme="d" data-corners="false">
+                            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Schließen</a>
+                            <!-- 
+                            src="" : ist der Pfad zum Bild
+                            alt="" : Beschreibt das Bild 
+                            -->
+                            <img class="popphoto" src="images/unterkuenfte/ferienwohnungen/klosterschaenke-03_large.jpg" alt="Klosterschänke">
+                        </div>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Fuß der Seite -->
+            <div id="hudeFooter" data-role="footer" data-position="fixed">
+            </div>
+            <!-- Seitenleiste der Seite -->
+            <div id="hudePanel" data-role="panel" data-position="left" data-display="push" data-position-fixed="true">
+                <div class="row">
+                    <img src="images/hude_logo.jpg" />
+                </div>
+                <ul id="hudePanelList" data-role="listview" data-theme="a">
+                    <li data-icon="arrow-l"><a href="#hudePanel" data-rel="close"></a></li>
+                    <li data-role="list-divider" data-theme="a">Navigation</li>
+                    <li><a href="page_hude-info.html" onclick="hudeOpenPage('page_hude-info.html')">Hude-Info</a></li>
+                    <li><a href="page_sehenswuerdigkeiten.html" onclick="hudeOpenPage('page_sehenswuerdigkeiten.html')">Sehenswürdigkeiten</a></li>
+                    <li><a href="page_unterkuenfte.html" onclick="hudeOpenPage('page_unterkuenfte.html')">Unterkünfte</a></li>
+                    <li><a href="page_gastronomie.html" onclick="hudeOpenPage('page_gastronomie.html')">Gastronomie</a></li>
+                    <li><a href="page_ec-automaten.html" onclick="hudeOpenPage('page_ec-automaten.html')">EC-Automaten</a></li>
+                    <li><a href="page_einkaufen.html" onclick="hudeOpenPage('page_einkaufen.html')">Einkaufen</a></li>
+                    <li><a href="page_parkmoeglichkeiten.html" onclick="hudeOpenPage('page_parkmoeglichkeiten.html')">Parkmöglichkeiten</a></li>
+                    <li><a href="page_gesundheit.html" onclick="hudeOpenPage('page_gesundheit.html')">Gesundheit</a></li>
+                    <li><a href="page_veranstaltungen.html" onclick="hudeOpenPage('page_veranstaltungen.html')">Veranstaltungen</a></li>
+                    <li><a href="page_schnitzeljagd.html" onclick="hudeOpenPage('page_schnitzeljagd.html')">Schnitzeljagd</a></li>
+                    <li><a href="page_hude-perfekt.html" onclick="hudeOpenPage('page_hude-perfekt.html')">Hude-Perfekt</a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
