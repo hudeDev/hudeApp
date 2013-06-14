@@ -223,7 +223,8 @@ function hudeGPSonError(error) {
 }
 
 function hudeGPSDistance() {
-    $('#positionGPS').append('<div id="positionGPS"></div>');
+    alert("los geht es");
+    $('#positionGPS').html('<div id="positionGPS"></div>');
     var lat1 = position.coords.latitude;
     var lon1 = position.coords.longitude;
     $('#positionGPS').append('</p>' + lat1 + ' ' + lon1 + '</p>');
