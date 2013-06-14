@@ -183,17 +183,13 @@ function hudeQRCodeScan() {
         scanner.scan(
                 function(result) {
                     hudeSplitURL(result.text);
-                    alert("We got a barcode\n" +
-                            "Result: " + result.text + "\n" +
-                            "Format: " + result.format + "\n" +
-                            "Cancelled: " + result.cancelled);
                 },
                 function(error) {
-                    alert("Scanning failed: " + error);
+                    hudeOpenDialog('dialog_qr-code_scan_fehler.html');
                 }
         );
     } catch (exception) {
-        alert(print_r(exception));
+        hudeOpenDialog('dialog_qr-code_scan_fehler.html');
     }
 
 }
@@ -207,7 +203,7 @@ function hudeQRCodeScanOld() {
             alert("Scanning failed: " + error);
         });
     } catch (exception) {
-        alert(print_r(exception));
+        hudeOpenDialog('dialog_qr-code_ungueltig.html');
     }
 
 }
@@ -218,7 +214,6 @@ function hudeSplitURL(url) {
         url = url.replace(domain, '').trim();
         hudeOpenPage(url);
     } else {
-        alert('Fehlerhafter QR-Code!');
-        //console.log('String nicht gefunden: ' + url);
+        hudeOpenDialog('dialog_qr-code_ungueltig.html');
     }
 }
