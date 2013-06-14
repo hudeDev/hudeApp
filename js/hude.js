@@ -1,7 +1,6 @@
 function hudeAppStartUp() {
     var db = initiateLocalStorage();
     hudeLoadFooter();
-
     $(document).delegate('div[data-role=dialog]', 'pageinit', function() {
         checkAudience();
         checkAudio();
@@ -9,14 +8,14 @@ function hudeAppStartUp() {
 }
 
 function hudeLoadFooter() {
-    // Lade Footer
+// Lade Footer
     $('[data-role=footer]').load('_footer.html', function() {
         $(this).trigger("create");
     });
 }
 
 function hudeCachePages() {
-    // Seiten der App im DOM platzieren. 
+// Seiten der App im DOM platzieren. 
     $.mobile.loadPage('page_ec-automaten.html', true);
     $.mobile.loadPage('page_einkaufen.html', true);
     $.mobile.loadPage('page_gastronomie.html', true);
@@ -31,7 +30,7 @@ function hudeCachePages() {
 }
 
 function appStartUp() {
-    // doing some shit on appstartup
+// doing some shit on appstartup
     var db = initiateLocalStorage();
     // check if app starts up for the first time
     var firstStart = db.getItem("firstStart");
@@ -76,7 +75,7 @@ function loadAudience() {
 }
 
 function saveAudience() {
-    // Speichert den gewählten Filter im LocalStorage
+// Speichert den gewählten Filter im LocalStorage
     var db = initiateLocalStorage();
     db.setItem("audienceSelect", $('input[name=audienceSelect]:checked').val());
     console.log("Speichere Einstellung");
@@ -100,7 +99,7 @@ function loadAudio() {
     return audioSelector;
 }
 function saveAudio() {
-    // Speichert den gewählten Filter im LocalStorage
+// Speichert den gewählten Filter im LocalStorage
     var db = initiateLocalStorage();
     db.setItem("audioSelect", $('input[name=audioSelect]:checked').val());
     console.log("Speichere Einstellung")
@@ -110,7 +109,7 @@ function pagebeforecreate() {
     appStartUp();
     // Aktiviere Swype
     $("[data-role=page]").on("swiperight", function() {
-        //$(".hudePanel").panel("open");
+//$(".hudePanel").panel("open");
         console.log("Swype");
     });
     // Lade Panel
@@ -130,7 +129,6 @@ function pagebeforecreate() {
         checkAudience();
         checkAudio();
     });
-
     // Nutze den Browser um Links zu öffnen
     $(function() {
         $('.openBrowser').on('click', function(event) {
@@ -144,7 +142,7 @@ function pagebeforecreate() {
 
 
 function close11() {
-    // Open Collapsible
+// Open Collapsible
     $('#einsPunkteins').trigger('expand');
     // Close Collapsible
     $('#einsPunkteins').trigger('collapse');
@@ -177,7 +175,6 @@ function hudeOpenDialog(path) {
 }
 
 function hudeQRCodeScan() {
-    alert("Scan gedrückt");
     try {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(
@@ -193,21 +190,6 @@ function hudeQRCodeScan() {
     }
 
 }
-
-function hudeQRCodeScanOld() {
-    alert("Scan gedrückt");
-    try {
-        window.plugins.barcodeScanner.scan(function(result) {
-            hudeSplitURL(result.text);
-        }, function(error) {
-            alert("Scanning failed: " + error);
-        });
-    } catch (exception) {
-        hudeOpenDialog('dialog_qr-code_ungueltig.html');
-    }
-
-}
-
 function hudeSplitURL(url) {
     var domain = 'http://m.gastinhude.de/';
     if (url.indexOf(domain) !== -1) {
@@ -216,4 +198,24 @@ function hudeSplitURL(url) {
     } else {
         hudeOpenDialog('dialog_qr-code_ungueltig.html');
     }
+}
+
+function hudeGPSonSuccess(position) {
+    $('#position').append(
+            'Latitude: ' + position.coords.latitude + ' < br / > ' +
+            'Longitude: ' + position.coords.longitude + '<br />' +
+            'Altitude: ' + position.coords.altitude + '<br />' +
+            'Accuracy: ' + position.coords.accuracy + '<br />' +
+            'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '<br />' +
+            'Heading: ' + position.coords.heading + '<br />' +
+            'Speed: ' + position.coords.speed + '<br />' +
+            'Timestamp: ' + position.timestamp + '<br />');
+    alert(print_r(position));
+}
+
+// onError Callback receives a PositionError object
+//
+function hudeGPSonError(error) {
+    alert('code: ' + error.code + '\n' +
+            'message: ' + error.message + '\n');
 }
