@@ -200,6 +200,10 @@ function hudeSplitURL(url) {
     }
 }
 
+function hudeGetGPS() {
+    navigator.geolocation.getCurrentPosition(hudeGPSonSuccess, hudeGPSonError);
+}
+
 function hudeGPSonSuccess(position) {
     $('#position').append(
             'Latitude: ' + position.coords.latitude + ' < br / > ' +

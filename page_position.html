@@ -28,9 +28,7 @@
     <body>
         <!-- Seiten Aufbau -->
         <div id="pagePosition" data-role="page">
-            <script>
-                navigator.geolocation.getCurrentPosition(hudeGPSonSuccess, hudeGPSonError);
-            </script>
+            <script>hudeGetGPS();</script>
             <!-- Kopf der Seite -->
             <div id="hudeHeader" data-role="header">
                 <!-- Button zum Öffnen der Seitenleiste -->
@@ -41,6 +39,7 @@
             <!-- Inhalt der Seite -->
             <div data-role="content">
                 <div id="position"></div>
+                <a href="#" onclick="hudeGetGPS();" data-role="button">Refresh</a>
             </div>
             <!-- Fuß der Seite -->
             <div id="hudeFooter" data-role="footer" data-position="fixed">
