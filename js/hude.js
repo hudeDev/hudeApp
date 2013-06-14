@@ -223,13 +223,16 @@ function hudeGPSonError(error) {
 }
 
 function hudeGPSDistance() {
+    $('#positionGPS').append('<div id="positionGPS"></div>');
     var lat1 = position.coords.latitude;
     var lon1 = position.coords.longitude;
-    pausecomp(3000);
+    $('#positionGPS').append('</p>' + lat1 + ' ' + lon1 + '</p>');
+    pausecomp(15000);
     var lat2 = position.coords.latitude;
     var lon2 = position.coords.longitude;
-    dist = 6378.388 * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(lon2 - lon1));
-    $('#positionDistance').html('<div id="positionGPS">' + dist + '</div>');
+    $('#positionGPS').append('</p>' + lat2 + ' ' + lon2 + '</p>');
+    var dist = 6378.388 * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(lon2 - lon1));
+    $('#positionGPS').append('<p>' + dist + '</p>');
 }
 
 function pausecomp(ms) {
