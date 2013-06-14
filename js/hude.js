@@ -178,11 +178,16 @@ function hudeOpenDialog(path) {
 
 function hudeQRCodeScan() {
     alert("Scan gedrückt");
-    window.plugins.barcodeScanner.scan(function(result) {
-        hudeSplitURL(result.text);
-    }, function(error) {
-        alert("Scanning failed: " + error);
-    });
+    try {
+        window.plugins.barcodeScanner.scan(function(result) {
+            hudeSplitURL(result.text);
+        }, function(error) {
+            alert("Scanning failed: " + error);
+        });
+    } catch (exception) {
+        alert(print_r(exception));
+    }
+
 }
 
 function hudeSplitURL(url) {

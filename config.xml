@@ -15,8 +15,10 @@
         <preference name="phonegap-version" value="2.7.0" />
         <preference name="orientation" value="default" />
         <preference name="fullscreen" value="false" />
+        <!--
         <icon src="icon.png" />
         <gap:splash src="splash.png" />        
+        -->
         <!-- Android 
         <icon src="android_icon-ldpi.png" gap:platform="android" gap:density="ldpi" />
         <icon src="android_icon-mdpi.png" gap:platform="android" gap:density="mdpi" />

@@ -22,19 +22,8 @@
         <script type="text/javascript">
             
             document.addEventListener("deviceready", onDeviceReady, false);
-            function onDeviceReady() {
-                $('#pageIndex').show();
-                alert("Device Ready");
-                var element = document.getElementById('deviceProperties');
-
-                element.innerHTML = 'Device Name: ' + device.name + '<br />' +
-                        'Device Cordova: ' + device.cordova + '<br />' +
-                        'Device Platform: ' + device.platform + '<br />' +
-                        'Device UUID: ' + device.uuid + '<br />' +
-                        'Device Model: ' + device.model + '<br />' +
-                        'Device Version: ' + device.version + '<br />';
-                
-                alert(print_r(element));
+            function onDeviceReady() {              
+                alert(print_r(device));
             }
 
             var db = initiateLocalStorage();
@@ -115,7 +104,6 @@
             </div>
         </div>
         <script>
-            $('#pageIndex').hide();
             $('#pageIndex').on('pagecreate', function() {
                 hudeCachePages();
             });
