@@ -177,6 +177,7 @@ function hudeOpenDialog(path) {
 }
 
 function hudeQRCodeScan() {
+    alert("Scan gedrückt");
     window.plugins.barcodeScanner.scan(function(result) {
         hudeSplitURL(result.text);
     }, function(error) {
