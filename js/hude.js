@@ -183,7 +183,6 @@ function hudeQRCodeScan() {
     }, function(error) {
         alert("Scanning failed: " + error);
     });
-
 }
 
 function hudeSplitURL(url) {
