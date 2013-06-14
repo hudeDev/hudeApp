@@ -226,7 +226,9 @@ function hudeGPSDistance() {
     alert("los geht es");
     $('#positionGPS').html('<div id="positionGPS"></div>');
     var lat1 = position.coords.latitude;
+    alert(lat1);
     var lon1 = position.coords.longitude;
+    alert(lon2);
     $('#positionGPS').append('</p>' + lat1 + ' ' + lon1 + '</p>');
     pausecomp(15000);
     var lat2 = position.coords.latitude;
@@ -238,9 +240,8 @@ function hudeGPSDistance() {
 
 function pausecomp(ms) {
     ms += new Date().getTime();
-    var i = 0;
     while (new Date() < ms) {
-        $('#positionDistance').append(i + ' ');
+        $('#positionGPS').append(i + ' ');
         i++;
     }
 } 
