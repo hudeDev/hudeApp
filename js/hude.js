@@ -201,12 +201,12 @@ function hudeSplitURL(url) {
 }
 
 function hudeGetGPS() {
-    navigator.geolocation.getCurrentPosition(hudeGPSonSuccess, hudeGPSonError, {maximumAge: 600000, timeout: 5000, enableHighAccuracy: true});
+    navigator.geolocation.getCurrentPosition(hudeGPSonSuccess, hudeGPSonError, {maximumAge: 600000, timeout: 30000, enableHighAccuracy: true});
 }
 
 function hudeGPSonSuccess(position) {
     $('#position').append(
-            '<p>Latitude: ' + position.coords.latitude + ' < br /> ' +
+            '<p>Latitude: ' + position.coords.latitude + ' <br /> ' +
             'Longitude: ' + position.coords.longitude + '<br />' +
             'Altitude: ' + position.coords.altitude + '<br />' +
             'Accuracy: ' + position.coords.accuracy + '<br />' +
@@ -221,3 +221,22 @@ function hudeGPSonError(error) {
             'code: ' + error.code + '\n' +
             'message: ' + error.message + '\n');
 }
+
+function hudeGPSDistance() {
+    var lat1 = position.coords.latitude;
+    var lon1 = position.coords.longitude;
+    pausecomp(3000);
+    var lat2 = position.coords.latitude;
+    var lon2 = position.coords.longitude;
+    dist = 6378.388 * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(lon2 - lon1));
+    $('#positionDistance').html('<div id="positionGPS">' + dist + '</div>');
+}
+
+function pausecomp(ms) {
+    ms += new Date().getTime();
+    var i = 0;
+    while (new Date() < ms) {
+        $('#positionDistance').append(i + ' ');
+        i++;
+    }
+} 
