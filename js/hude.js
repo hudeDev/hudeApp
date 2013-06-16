@@ -214,6 +214,21 @@ function hudeGPSonSuccess(position) {
             'Heading: ' + position.coords.heading + '<br />' +
             'Speed: ' + position.coords.speed + '<br />' +
             'Timestamp: ' + position.timestamp + '<br /></p>');
+    width = Math.round($('#pagePosition').width() * 0.9);
+    height = Math.round($('#pagePosition').height() * 0.9);
+    $('#map_canvas').css("width", width);
+    $('#map_canvas').css("height", height);
+    console.log(position.coords.latitude);
+    var yourStartLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    $('#map_canvas').gmap({'center': yourStartLatLng});
+    $('#map_canvas').gmap(
+            'addMarker', {
+        /*id:'m_1',*/
+        'position': position.coords.latitude + ',' + position.coords.longitude,
+        'bounds': true
+    });
+    $('#map_canvas').gmap('option', 'zoom', 14);
+
 }
 
 function hudeGPSonError(error) {
