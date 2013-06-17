@@ -216,15 +216,13 @@ function hudeGPSonSuccess(position) {
             'Speed: ' + position.coords.speed + '<br />' +
             'Timestamp: ' + position.timestamp + '<br /></p></div>');
     */
-    $('#map_canvas').css("width", Math.round($('#pagePosition').width() * 0.8));
-    $('#map_canvas').css("height", Math.round($('#pagePosition').height() * 0.8));
+    $('#map_canvas').css("width", Math.round($('#pagePosition').width() * 0.9));
+    $('#map_canvas').css("height", Math.round($('#pagePosition').height() * 0.9));
     var yourStartLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     $('#map_canvas').gmap({'center': yourStartLatLng});
     $('#map_canvas').gmap(
             'addMarker', {
-        /*id:'m_1',*/
         'position': position.coords.latitude + ',' + position.coords.longitude
-        //'bounds': true
     });
     $('#map_canvas').gmap('option', 'zoom', 18);
 

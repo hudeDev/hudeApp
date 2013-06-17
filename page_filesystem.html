@@ -29,7 +29,7 @@
     </head>
     <body>
         <!-- Seiten Aufbau -->
-        <div id="pagePosition" data-role="page">
+        <div id="pageFilesystem" data-role="page">
             <!-- Kopf der Seite -->
             <div id="hudeHeader" data-role="header">
                 <!-- Button zum Öffnen der Seitenleiste -->
@@ -39,9 +39,9 @@
             </div>
             <!-- Inhalt der Seite -->
             <div data-role="content">
-                <div id="position"></div>
-                <div id="map_canvas" style="margin: 0 auto;"></div>
-                <a href="#" onclick="hudeGetGPS();" data-role="button">Refresh</a>
+                <div id="fileSystemName"></div>
+                <div id="fileSystemRootName"></div>    
+
             </div>
             <!-- Fuß der Seite -->
             <div id="hudeFooter" data-role="footer" data-position="fixed">
@@ -67,6 +67,23 @@
                     <li><a href="page_hude-perfekt.html" onclick="hudeOpenPage('page_hude-perfekt.html')">Hude-Perfekt</a></li>
                 </ul>
             </div>
+            <script>
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+            }
+            function onFileSystemSuccess(fileSystem) {
+                console.log(fileSystem.name);
+                $('#fileSystemName').html('<div id="fileSystemName">' + fileSystem.name + '</div>');
+                console.log(fileSystem.root.name);
+                $('#fileSystemRootName').html('<div id="fileSystemRootName">' + fileSystem.root.name + '</div>');
+            }
+
+            function fail(evt) {
+                console.log(evt.target.error.code);
+            }
+
+            </script>
         </div>
     </body>
 </html>
