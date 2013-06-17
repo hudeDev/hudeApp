@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0" />
+        <!-- PhoneGap Abhängigkeiten -->
+        <script src="phonegap.js"></script>
+        <script src="barcodescanner.js"></script>
+        <!-- Funktionlität Abhängigkeiten -->
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/jquery.mobile-1.3.1.min.js"></script>
+        <script src="js/print_r.js"></script>
+        <script src="js/hude.js"></script>
+        <!-- Design Abhängigkeiten -->
+        <link href="css/jquery.mobile-1.3.1.min.css" rel="stylesheet">
+        <link href="css/hude-theme.css" rel="stylesheet">
+        <link href="css/normalize.css" rel="stylesheet">
+        <link href="css/foundation.css" rel="stylesheet">
+        <link href="css/hude.css" rel="stylesheet">
+        <!-- Auszuführender Code beim App-Start -->
+        <script type="text/javascript">
+            $(document).on('pageinit', function(event) {
+                hudeAppStartUp();
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Seiten Aufbau -->
+        <div id="pageRaetselPLP" data-role="page">
+            <!-- Kopf der Seite -->
+            <div id="hudeHeader" data-role="header">
+                <!-- Button zum Öffnen der Seitenleiste -->
+                <a href="#hudePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1>Schnitzeljagd</h1>
+            </div>
+            <!-- Inhalt der Seite -->
+            <div data-role="content">
+                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div class="row">&nbsp;</div>
+                <fieldset data-role="controlgroup" data-type="horizontal" >
+                    <legend id="plf01">Welchen Durchmesser hat die Sonnenkugel auf dem Lehr-Pfad?</legend>
+                    <input name="plf01" id="plf01a" value="falsch" type="radio">
+                    <label for="plf01a">13 cm</label>
+                    <input name="plf01" id="plf01b" value="richtig" type="radio">
+                    <label for="plf01b">139 cm</label>
+                    <input name="plf01" id="plf01c" value="falsch" type="radio">
+                    <label for="plf01c">13 mm</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf04">Wie weit ist unsere Modellerde von der Modellsonne entfernt? </legend>
+                    <input name="plf04" id="plf04a" value="falsch" type="radio">
+                    <label for="plf04a">59 Meter</label>
+                    <input name="plf04" id="plf04b" value="richtig" type="radio">
+                    <label for="plf04b">150 Meter</label>
+                    <input name="plf04" id="plf04c" value="falsch" type="radio">
+                    <label for="plf04c">6 Kilometer</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf09">Was ist der Mittelpunkt unseres Sonnensystems? (Auf dem Lehr-Pfad ist es Anfangs- bzw. Endpunkt.)</legend>
+                    <input name="plf09" id="plf09a" value="falsch" type="radio">
+                    <label for="plf09a">Erde</label>
+                    <input name="plf09" id="plf09b" value="richtig" type="radio">
+                    <label for="plf09b">Sonne</label>
+                    <input name="plf09" id="plf09c" value="falsch" type="radio">
+                    <label for="plf09c">Mond</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf11">in Wassereimer wiegt auf der Erde ca. 10 kg. Wieviel wiegt er auf dem Jupiter?</legend>
+                    <input name="plf11" id="plf11a" value="falsch" type="radio">
+                    <label for="plf11a">3,9 kg</label>
+                    <input name="plf11" id="plf11b" value="falsch" type="radio">
+                    <label for="plf11b">8,9 kg</label>
+                    <input name="plf11" id="plf11c" value="richtig" type="radio">
+                    <label for="plf11c">25,6 kg</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf12">Welche Strecke legt die Modellerde des Lehr-Pfades in einem Tag zurück?</legend>
+                    <input name="plf12" id="plf12a" value="richtig" type="radio">
+                    <label for="plf12a">2,60 m</label>
+                    <input name="plf12" id="plf12b" value="falsch" type="radio">
+                    <label for="plf12b">150 m</label>
+                    <input name="plf12" id="plf12c" value="falsch" type="radio">
+                    <label for="plf12c">38 cm</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf15">Welcher Planet hat am schnellsten die Sonne umrundet?</legend>
+                    <input name="plf15" id="plf15a" value="falsch" type="radio">
+                    <label for="plf15a">Erde</label>
+                    <input name="plf15" id="plf15b" value="falsch" type="radio">
+                    <label for="plf15b">Pluto</label>
+                    <input name="plf15" id="plf15c" value="richtig" type="radio">
+                    <label for="plf15c">Merkur</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf16">Von welchem Planeten aus kann man auf dem Lehr-Pfad gerade noch die Sonne erkennen?</legend>
+                    <input name="plf16" id="plf16a" value="falsch" type="radio">
+                    <label for="plf16a">Jupiter</label>
+                    <input name="plf16" id="plf16b" value="falsch" type="radio">
+                    <label for="plf16b">Pluto</label>
+                    <input name="plf16" id="plf16c" value="richtig" type="radio">
+                    <label for="plf16c">Saturn</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf18">Zwischen welchen zwei Planeten befindet sich der Planetoidengürtel?</legend>
+                    <input name="plf18" id="plf18a" value="falsch" type="radio">
+                    <label for="plf18a">Erde und Mars</label>
+                    <input name="plf18" id="plf18b" value="falsch" type="radio">
+                    <label for="plf18b">Uranus und Neptun</label>
+                    <input name="plf18" id="plf18c" value="richtig" type="radio">
+                    <label for="plf18c">Mars und Jupiter</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf35">Die Planeten leuchten selbst. Ist diese Aussage richtig oder falsch? </legend>
+                    <input name="plf35" id="plf35a" value="falsch" type="radio">
+                    <label for="plf35a">Richtig</label>
+                    <input name="plf35" id="plf35b" value="richtig" type="radio">
+                    <label for="plf35b">Falsch</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf43">Die Planeten leuchten selbst. Ist diese Aussage richtig oder falsch? </legend>
+                    <input name="plf43" id="plf43a" value="falsch" type="radio">
+                    <label for="plf43a">J.H. Schroeter</label>
+                    <input name="plf43" id="plf43b" value="richtig" type="radio">
+                    <label for="plf43b">W. Olbers </label>
+                    <input name="plf43" id="plf43c" value="falsch" type="radio">
+                    <label for="plf43c">H. Kohl</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf44">Wie heißt der „rote Planet“? Er war gleichzeitig römischer Kriegsgott.</legend>
+                    <input name="plf44" id="plf44a" value="falsch" type="radio">
+                    <label for="plf44a">Twix</label>
+                    <input name="plf44" id="plf44b" value="falsch" type="radio">
+                    <label for="plf44b">Milky Way</label>
+                    <input name="plf44" id="plf44c" value="richtig" type="radio">
+                    <label for="plf44c">Mars</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="pfl45">Welcher Planet wurde nach dem Boten der Götter benannt? Gleichzeitig ist er bei den Römern Gott der Diebe sowie des Handels und Verkehrs!</legend>
+                    <input name="plf45" id="plf45a" value="falsch" type="radio">
+                    <label for="plf45a">Pluto</label>
+                    <input name="plf45" id="plf45b" value="falsch" type="radio">
+                    <label for="plf45b">Asterix</label>
+                    <input name="plf45" id="plf45c" value="richtig" type="radio">
+                    <label for="plf45c">Merkur</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="pfl50">Auf welchem Planeten dauert ein Tag länger als ein Jahr?</legend>
+                    <input name="plf50" id="plf50a" value="falsch" type="radio">
+                    <label for="plf50a">Erde</label>
+                    <input name="plf50" id="plf50b" value="richtig" type="radio">
+                    <label for="plf50b">Venus</label>
+                    <input name="plf50" id="plf50c" value="falsch" type="radio">
+                    <label for="plf50c">Merkur</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="pfl57">Wie heißte unsere "Milchstraße" auf Griechisch?</legend>
+                    <input name="plf57" id="plf57a" value="falsch" type="radio">
+                    <label for="plf57a">Milky Way</label>
+                    <input name="plf57" id="plf57b" value="richtig" type="radio">
+                    <label for="plf57b">Galaxie</label>
+                    <input name="plf57" id="plf57c" value="falsch" type="radio">
+                    <label for="plf57c">Kosmos</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf60">Sieht man von der Erde aus immer nur eine Seite des Mondes?</legend>
+                    <input name="plf60" id="plf60a" value="richtig" type="radio">
+                    <label for="plf60a">Ja</label>
+                    <input name="plf60" id="plf60b" value="falsch" type="radio">
+                    <label for="plf60b">Nein</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="pfl63">Wie lange braucht die Sonne, um die Erde einmal zu umkreisen?</legend>
+                    <input name="plf63" id="plf63a" value="falsch" type="radio">
+                    <label for="plf63a">1 Jahr</label>
+                    <input name="plf63" id="plf63b" value="richtig" type="radio">
+                    <label for="plf63b">Die Sonne umkreis die Erde nicht</label>
+                    <input name="plf63" id="plf63c" value="falsch" type="radio">
+                    <label for="plf63c">1 Tag</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="pfl64">Welchen Ausdruck haben wir für das seltene Ereignis, wenn der Mond genau auf einer Achser zwischen Erde und Sonne steht?</legend>
+                    <input name="plf64" id="plf64a" value="falsch" type="radio">
+                    <label for="plf64a">Mondfinsternis</label>
+                    <input name="plf64" id="plf64b" value="richtig" type="radio">
+                    <label for="plf64b">Sonnenfinsternis</label>
+                    <input name="plf64" id="plf64c" value="falsch" type="radio">
+                    <label for="plf64c">Sonnenwind</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf67">Ist eine Mondfinsternis das gleiche wie Neumond?</legend>
+                    <input name="plf67" id="plf67a" value="falsch" type="radio">
+                    <label for="plf67a">Ja</label>
+                    <input name="plf67" id="plf67b" value="richtig" type="radio">
+                    <label for="plf67b">Nein</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="pfl70">Wie heißt die "Trennlinie" zwischen Himmel und Erde?</legend>
+                    <input name="plf70" id="plf70a" value="richtig" type="radio">
+                    <label for="plf70a">Horizont</label>
+                    <input name="plf70" id="plf70b" value=falsch"" type="radio">
+                    <label for="plf70b">Ekliptik</label>
+                    <input name="plf70" id="plf70c" value="falsch" type="radio">
+                    <label for="plf70c">Firmament</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="pfl73">Welcher andere Ausdruck ist richtig für Weltall</legend>
+                    <input name="plf73" id="plf73a" value="falsch" type="radio">
+                    <label for="plf73a">Konstellation</label>
+                    <input name="plf73" id="plf73b" value="richtig" type="radio">
+                    <label for="plf73b">Kosmos</label>
+                    <input name="plf73" id="plf73c" value="falsch" type="radio">
+                    <label for="plf73c">Kosmetik</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf75">Warum fallen wir Menschen nicht von der Erde, obwohl sie sich dreht</legend>
+                    <input name="plf75" id="plf75a" value="falsch" type="radio">
+                    <label for="plf75a">Trägheit</label>
+                    <input name="plf75" id="plf75b" value="falsch" type="radio">
+                    <label for="plf75b">Fliehkraft</label>
+                    <input name="plf75" id="plf75c" value="richtig" type="radio">
+                    <label for="plf75c">Schwerkraft</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf86">Warum fallen wir Menschen nicht von der Erde, obwohl sie sich dreht</legend>
+                    <input name="plf86" id="plf86a" value="falsch" type="radio">
+                    <label for="plf86a">Äquator</label>
+                    <input name="plf86" id="plf86b" value="richtig" type="radio">
+                    <label for="plf86b">Südpol</label>
+                    <input name="plf86" id="plf86c" value="falsch" type="radio">
+                    <label for="plf86c">Nordpol</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf88">Warum fallen wir Menschen nicht von der Erde, obwohl sie sich dreht</legend>
+                    <input name="plf88" id="plf88a" value="richtig" type="radio">
+                    <label for="plf88a">Frühlings-, Herbstanfang</label>
+                    <input name="plf88" id="plf88b" value="falsch" type="radio">
+                    <label for="plf88b">Sommeranfang</label>
+                    <input name="plf88" id="plf88c" value="falsch" type="radio">
+                    <label for="plf88c">Winteranfang</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plf92">Warum fallen wir Menschen nicht von der Erde, obwohl sie sich dreht</legend>
+                    <input name="plf92" id="plf92a" value="falsch" type="radio">
+                    <label for="plf92a">Das Bier</label>
+                    <input name="plf92" id="plf92b" value="falsch" type="radio">
+                    <label for="plf92b">Der NDR</label>
+                    <input name="plf92" id="plf92c" value="richtig" type="radio">
+                    <label for="plf92c">Der Planeten-Lehr-Pfad</label>
+                </fieldset>
+                <a id="auswertenPLP" onclick="hudeRaetselPLP();" data-role="button">Auswerten</a>
+                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div class="row">&nbsp;</div>
+            </div>
+            <!-- Fuß der Seite -->
+            <div id="hudeFooter" data-role="footer" data-position="fixed">
+            </div>
+            <!-- Seitenleiste der Seite -->
+            <div id="hudePanel" data-role="panel" data-position="left" data-display="push" data-position-fixed="true">
+                <div class="row">
+                    <img src="images/hude_logo.jpg" />
+                </div>
+                <ul id="hudePanelList" data-role="listview" data-theme="a">
+                    <li data-icon="arrow-l"><a href="#hudePanel" data-rel="close"></a></li>
+                    <li data-role="list-divider" data-theme="a">Navigation</li>
+                    <li><a href="page_hude-info.html" onclick="hudeOpenPage('page_hude-info.html');">Hude-Info</a></li>
+                    <li><a href="page_sehenswuerdigkeiten.html" onclick="hudeOpenPage('page_sehenswuerdigkeiten.html');">Sehenswürdigkeiten</a></li>
+                    <li><a href="page_unterkuenfte.html" onclick="hudeOpenPage('page_unterkuenfte.html');">Unterkünfte</a></li>
+                    <li><a href="page_gastronomie.html" onclick="hudeOpenPage('page_gastronomie.html');">Gastronomie</a></li>
+                    <li><a href="page_ec-automaten.html" onclick="hudeOpenPage('page_ec-automaten.html');">EC-Automaten</a></li>
+                    <li><a href="page_einkaufen.html" onclick="hudeOpenPage('page_einkaufen.html');">Einkaufen</a></li>
+                    <li><a href="page_parkmoeglichkeiten.html" onclick="hudeOpenPage('page_parkmoeglichkeiten.html');">Parkmöglichkeiten</a></li>
+                    <li><a href="page_gesundheit.html" onclick="hudeOpenPage('page_gesundheit.html');">Gesundheit</a></li>
+                    <li><a href="page_veranstaltungen.html" onclick="hudeOpenPage('page_veranstaltungen.html');">Veranstaltungen</a></li>
+                    <li><a href="page_schnitzeljagd.html" onclick="hudeOpenPage('page_schnitzeljagd.html');">Schnitzeljagd</a></li>
+                    <li><a href="page_hude-perfekt.html" onclick="hudeOpenPage('page_hude-perfekt.html');">Hude-Perfekt</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </body>
+</html>

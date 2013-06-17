@@ -102,7 +102,7 @@ function saveAudio() {
 // Speichert den gewählten Filter im LocalStorage
     var db = initiateLocalStorage();
     db.setItem("audioSelect", $('input[name=audioSelect]:checked').val());
-    console.log("Speichere Einstellung")
+    console.log("Speichere Einstellung");
 }
 
 function pagebeforecreate() {
@@ -256,4 +256,204 @@ function pausecomp(ms) {
         $('#positionGPS').append(i + ' ');
         i++;
     }
-} 
+}
+
+/*
+ * Auswertungen für Rätsel
+ */
+function hudeRaetselPLP() {
+    var richtig = 0;
+    if ($('input[name=plf01]:checked').val() === 'richtig') {
+        $('#plf01').css("background-color", "green");
+        $('#plf01').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf01').css("background-color", "red");
+        $('#plf01').css("color", "white");
+    }
+    if ($('input[name=plf04]:checked').val() === 'richtig') {
+        $('#plf04').css("background-color", "green");
+        $('#plf04').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf04').css("background-color", "red");
+        $('#plf04').css("color", "white");
+    }
+    if ($('input[name=plf09]:checked').val() === 'richtig') {
+        $('#plf09').css("background-color", "green");
+        $('#plf09').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf09').css("background-color", "red");
+        $('#plf09').css("color", "white");
+    }
+    if ($('input[name=plf11]:checked').val() === 'richtig') {
+        $('#plf11').css("background-color", "green");
+        $('#plf11').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf11').css("background-color", "red");
+        $('#plf11').css("color", "white");
+    }
+    if ($('input[name=plf12]:checked').val() === 'richtig') {
+        $('#plf12').css("background-color", "green");
+        $('#plf12').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf12').css("background-color", "red");
+        $('#plf12').css("color", "white");
+    }
+    if ($('input[name=plf15]:checked').val() === 'richtig') {
+        $('#plf15').css("background-color", "green");
+        $('#plf15').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf15').css("background-color", "red");
+        $('#plf15').css("color", "white");
+    }
+    if ($('input[name=plf16]:checked').val() === 'richtig') {
+        $('#plf16').css("background-color", "green");
+        $('#plf16').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf16').css("background-color", "red");
+        $('#plf16').css("color", "white");
+    }
+    if ($('input[name=plf18]:checked').val() === 'richtig') {
+        $('#plf18').css("background-color", "green");
+        $('#plf18').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf18').css("background-color", "red");
+        $('#plf18').css("color", "white");
+    }
+    if ($('input[name=plf35]:checked').val() === 'richtig') {
+        $('#plf35').css("background-color", "green");
+        $('#plf35').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf35').css("background-color", "red");
+        $('#plf35').css("color", "white");
+    }
+    if ($('input[name=plf43]:checked').val() === 'richtig') {
+        $('#plf43').css("background-color", "green");
+        $('#plf43').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf43').css("background-color", "red");
+        $('#plf43').css("color", "white");
+    }
+    if ($('input[name=plf44]:checked').val() === 'richtig') {
+        $('#plf44').css("background-color", "green");
+        $('#plf44').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf44').css("background-color", "red");
+        $('#plf44').css("color", "white");
+    }
+    if ($('input[name=plf45]:checked').val() === 'richtig') {
+        $('#plf45').css("background-color", "green");
+        $('#plf45').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf45').css("background-color", "red");
+        $('#plf45').css("color", "white");
+    }
+    if ($('input[name=plf50]:checked').val() === 'richtig') {
+        $('#plf50').css("background-color", "green");
+        $('#plf50').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf50').css("background-color", "red");
+        $('#plf50').css("color", "white");
+    }
+    if ($('input[name=plf57]:checked').val() === 'richtig') {
+        $('#plf57').css("background-color", "green");
+        $('#plf57').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf57').css("background-color", "red");
+        $('#plf57').css("color", "white");
+    }
+    if ($('input[name=plf60]:checked').val() === 'richtig') {
+        $('#plf60').css("background-color", "green");
+        $('#plf60').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf60').css("background-color", "red");
+        $('#plf60').css("color", "white");
+    }
+    if ($('input[name=plf63]:checked').val() === 'richtig') {
+        $('#plf63').css("background-color", "green");
+        $('#plf63').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf63').css("background-color", "red");
+        $('#plf63').css("color", "white");
+    }
+    if ($('input[name=plf64]:checked').val() === 'richtig') {
+        $('#plf64').css("background-color", "green");
+        $('#plf64').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf64').css("background-color", "red");
+        $('#plf64').css("color", "white");
+    }
+    if ($('input[name=plf67]:checked').val() === 'richtig') {
+        $('#plf67').css("background-color", "green");
+        $('#plf67').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf67').css("background-color", "red");
+        $('#plf67').css("color", "white");
+    }
+    if ($('input[name=plf70]:checked').val() === 'richtig') {
+        $('#plf70').css("background-color", "green");
+        $('#plf70').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf70').css("background-color", "red");
+        $('#plf70').css("color", "white");
+    }
+    if ($('input[name=plf73]:checked').val() === 'richtig') {
+        $('#plf73').css("background-color", "green");
+        $('#plf73').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf73').css("background-color", "red");
+        $('#plf73').css("color", "white");
+    }
+    if ($('input[name=plf75]:checked').val() === 'richtig') {
+        $('#plf75').css("background-color", "green");
+        $('#plf75').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf75').css("background-color", "red");
+        $('#plf75').css("color", "white");
+    }
+    if ($('input[name=plf86]:checked').val() === 'richtig') {
+        $('#plf86').css("background-color", "green");
+        $('#plf86').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf86').css("background-color", "red");
+        $('#plf86').css("color", "white");
+    }
+    if ($('input[name=plf88]:checked').val() === 'richtig') {
+        $('#plf88').css("background-color", "green");
+        $('#plf88').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf88').css("background-color", "red");
+        $('#plf88').css("color", "white");
+    }
+    if ($('input[name=plf92]:checked').val() === 'richtig') {
+        $('#plf92').css("background-color", "green");
+        $('#plf92').css("color", "white");
+        richtig++;
+    } else {
+        $('#plf92').css("background-color", "red");
+        $('#plf92').css("color", "white");
+    }
+    console.log(richtig);
+}
