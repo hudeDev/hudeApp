@@ -82,9 +82,12 @@ div[data-role=content] h1, h2, h3, h4, h5 {
 }
 
 .sehenswuerdigkeit {
-    
+    background-color: #ffffff;
 }
 
+#hudeHeader h1 {
+    font-size: 1em;
+}
 .todo {
     color: red;
     font-style: inherit;

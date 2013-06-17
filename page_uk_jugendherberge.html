@@ -11,13 +11,13 @@
         <script src="js/jquery-1.9.1.min.js"></script>
         <script src="js/jquery.mobile-1.3.1.min.js"></script>
         <script src="js/print_r.js"></script>
-        <script src="js/jugendherberge.js"></script>
+        <script src="js/hude.js"></script>
         <!-- Design Abhängigkeiten -->
         <link href="css/jquery.mobile-1.3.1.min.css" rel="stylesheet">
         <link href="css/jugendherberge-theme.css" rel="stylesheet">
         <link href="css/normalize.css" rel="stylesheet">
         <link href="css/foundation.css" rel="stylesheet">
-        <link href="css/jugendherberge.css" rel="stylesheet">
+        <link href="css/hude.css" rel="stylesheet">
         <!-- Auszuführender Code beim App-Start -->
         <script type="text/javascript">
             $(document).on('pageinit', function(event) {
@@ -29,9 +29,9 @@
         <!-- Seiten Aufbau -->
         <div data-role="page">
             <!-- Kopf der Seite -->
-            <div id="jugendherbergeHeader" data-role="header">
+            <div id="hudeHeader" data-role="header">
                 <!-- Button zum Öffnen der Seitenleiste -->
-                <a href="#jugendherbergePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <a href="#hudePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
                 <!-- Überschrift der Seite -->
                 <h1>Jugendherberge</h1>
             </div>
@@ -109,12 +109,13 @@
                         <p>&nbsp;</p>
                     </div>
                 </div>
+                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <!-- Fuß der Seite -->
-            <div id="jugendherbergeFooter" data-role="footer" data-position="fixed">
+            <div id="hudeFooter" data-role="footer" data-position="fixed">
             </div>
             <!-- Seitenleiste der Seite -->
-            <div id="jugendherbergePanel" data-role="panel" data-position="left" data-display="push" data-position-fixed="true">
+            <div id="hudePanel" data-role="panel" data-position="left" data-display="push" data-position-fixed="true">
                 <div class="row">
                     <img src="images/jugendherberge_logo.jpg" />
                 </div>
