@@ -306,7 +306,7 @@ function hudeSJPLPAbiturA() {
     richtig += hudeUeberpruefeMultipleChoice('plpAbiA29');
     richtig += hudeUeberpruefeMultipleChoice('plpAbiA30');
     richtig += hudeUeberpruefeMultipleChoice('plpAbiA31');
-    $('#sjPLPAbiturAErgebnis').html('<p id="sjPLPAbiturAErgebnis">Sie haben ' + richtig + ' von 31 Fragen richtig beantwortet!</p>');
+    $('#sjPLPAbiturAErgebnis').html('<p id="sjPLPAbiturAErgebnis"><h1>Sie haben ' + richtig + ' von 31 Fragen richtig beantwortet!</h1></p>');
 }
 
 function hudeSJPLPAbiturB() {
@@ -333,7 +333,7 @@ function hudeSJPLPAbiturB() {
     richtig += hudeUeberpruefeMultipleChoice('plpAbiB20');
     richtig += hudeUeberpruefeMultipleChoice('plpAbiB21');
     richtig += hudeUeberpruefeMultipleChoice('plpAbiB22');
-    $('#sjPLPAbiturBErgebnis').html('<p id="sjPLPAbiturBErgebnis">Sie haben ' + richtig + ' von 22 Fragen richtig beantwortet!</p>');
+    $('#sjPLPAbiturBErgebnis').html('<p id="sjPLPAbiturBErgebnis"><h1>Sie haben ' + richtig + ' von 22 Fragen richtig beantwortet!</h1></p>');
 }
 
 function hudeSJPLPAbiturC() {
@@ -375,5 +375,5 @@ function hudeSJPLPAbiturC() {
     richtig += hudeUeberpruefeMultipleChoice('plpAbiC35');
     richtig += hudeUeberpruefeMultipleChoice('plpAbiC36');
     richtig += hudeUeberpruefeMultipleChoice('plpAbiC37');
-    $('#sjPLPAbiturCErgebnis').html('<p id="sjPLPAbiturCErgebnis">Sie haben ' + richtig + ' von 37 Fragen richtig beantwortet!</p>');
+    $('#sjPLPAbiturCErgebnis').html('<p id="sjPLPAbiturCErgebnis"><h1>Sie haben ' + richtig + ' von 37 Fragen richtig beantwortet!</h1></p>');
 }
