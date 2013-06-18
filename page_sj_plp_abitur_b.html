@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0" />
+        <!-- PhoneGap Abhängigkeiten -->
+        <script src="phonegap.js"></script>
+        <script src="barcodescanner.js"></script>
+        <!-- Funktionlität Abhängigkeiten -->
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/jquery.mobile-1.3.1.min.js"></script>
+        <script src="js/print_r.js"></script>
+        <script src="js/hude.js"></script>
+        <!-- Design Abhängigkeiten -->
+        <link href="css/jquery.mobile-1.3.1.min.css" rel="stylesheet">
+        <link href="css/hude-theme.css" rel="stylesheet">
+        <link href="css/normalize.css" rel="stylesheet">
+        <link href="css/foundation.css" rel="stylesheet">
+        <link href="css/hude.css" rel="stylesheet">
+        <!-- Auszuführender Code beim App-Start -->
+        <script type="text/javascript">
+            $(document).on('pageinit', function(event) {
+                hudeAppStartUp();
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Seiten Aufbau -->
+        <div id="pageRaetselPLP" data-role="page">
+            <!-- Kopf der Seite -->
+            <div id="hudeHeader" data-role="header">
+                <!-- Button zum Öffnen der Seitenleiste -->
+                <a href="#hudePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1>Abitur B</h1>
+            </div>
+            <!-- Inhalt der Seite -->
+            <div data-role="content">
+                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div class="row">&nbsp;</div>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB01">Wie weit muss man gehen, um auf dem Planeten-Lehrpfad zum nächsten Fixstern zu gelangen ?</legend>
+                    <input name="plpAbiB01" id="plpAbiB01a" value="falsch" type="radio">
+                    <label for="plpAbiB01a">Bahnhof Hude</label>
+                    <input name="plpAbiB01" id="plpAbiB01b" value="richtig" type="radio">
+                    <label for="plpAbiB01b">1x um die Erde</label>
+                    <input name="plpAbiB01" id="plpAbiB01c" value="falsch" type="radio">
+                    <label for="plpAbiB01c">Bahnhof Wüsting</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB02">Die Planeten leuchten selbst. Ist diese Aussage richtig oder falsch ?</legend>
+                    <input name="plpAbiB02" id="plpAbiB02a" value="falsch" type="radio">
+                    <label for="plpAbiB02a">Richtig</label>
+                    <input name="plpAbiB02" id="plpAbiB02b" value="richtig" type="radio">
+                    <label for="plpAbiB02b">Falsch</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB03">Welcher Planet ist für die Erde „Morgen – bzw. Abendstern“ ?</legend>
+                    <input name="plpAbiB03" id="plpAbiB03a" value="falsch" type="radio">
+                    <label for="plpAbiB03a">Merkur</label>
+                    <input name="plpAbiB03" id="plpAbiB03b" value="richtig" type="radio">
+                    <label for="plpAbiB03b">Venus</label>
+                    <input name="plpAbiB03" id="plpAbiB03c" value="falsch" type="radio">
+                    <label for="plpAbiB03c">Pluto</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB04">Welcher Planet ist doppelt so groß wie alle anderen zusammen ?</legend>
+                    <input name="plpAbiB04" id="plpAbiB04a" value="falsch" type="radio">
+                    <label for="plpAbiB04a">Saturn</label>
+                    <input name="plpAbiB04" id="plpAbiB04b" value="falsch" type="radio">
+                    <label for="plpAbiB04b">Pluto</label>
+                    <input name="plpAbiB04" id="plpAbiB04c" value="richtig" type="radio">
+                    <label for="plpAbiB04c">Jupiter</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB05">Welcher Planet wurde nach dem Göttervater benannt ?</legend>
+                    <input name="plpAbiB05" id="plpAbiB05a" value="falsch" type="radio">
+                    <label for="plpAbiB05a">Neptun</label>
+                    <input name="plpAbiB05" id="plpAbiB05b" value="falsch" type="radio">
+                    <label for="plpAbiB05b">Mars</label>
+                    <input name="plpAbiB05" id="plpAbiB05c" value="richtig" type="radio">
+                    <label for="plpAbiB05c">Jupiter</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB06">Welcher Planet hat den gleichen Namen wie die römische Göttin der Liebe ?</legend>
+                    <input name="plpAbiB06" id="plpAbiB06a" value="falsch" type="radio">
+                    <label for="plpAbiB06a">Mars</label>
+                    <input name="plpAbiB06" id="plpAbiB06b" value="falsch" type="radio">
+                    <label for="plpAbiB06b">Neptun</label>
+                    <input name="plpAbiB06" id="plpAbiB06c" value="richtig" type="radio">
+                    <label for="plpAbiB06c">Jupiter</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB07">Welcher Planet ist nach dem Gott des Meeres benannt ?</legend>
+                    <input name="plpAbiB07" id="plpAbiB07a" value="falsch" type="radio">
+                    <label for="plpAbiB07a">Mars</label>
+                    <input name="plpAbiB07" id="plpAbiB07b" value="falsch" type="radio">
+                    <label for="plpAbiB07b">Uranus</label>
+                    <input name="plpAbiB07" id="plpAbiB07c" value="richtig" type="radio">
+                    <label for="plpAbiB07c">Neptun</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB08">Welcher Planet hat die „4 Galileischen Monde“ ?</legend>
+                    <input name="plpAbiB08" id="plpAbiB08a" value="falsch" type="radio">
+                    <label for="plpAbiB08a">Pluto</label>
+                    <input name="plpAbiB08" id="plpAbiB08b" value="richtig" type="radio">
+                    <label for="plpAbiB08b">Jupiter</label>
+                    <input name="plpAbiB08" id="plpAbiB08c" value="falsch" type="radio">
+                    <label for="plpAbiB08c">Erde</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB09">Auf welchem Planeten gibt es einen "Treibhauseffekt"</legend>
+                    <input name="plpAbiB09" id="plpAbiB09a" value="richtig" type="radio">
+                    <label for="plpAbiB09a">Venus</label>
+                    <input name="plpAbiB09" id="plpAbiB09b" value="falsch" type="radio">
+                    <label for="plpAbiB09b">Merkur</label>
+                    <input name="plpAbiB09" id="plpAbiB09c" value="falsch" type="radio">
+                    <label for="plpAbiB09c">Uranus</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB10">Wie heißt der Entdecker der Planetoiden Vesta und Pallas ?</legend>
+                    <input name="plpAbiB10" id="plpAbiB10a" value="falsch" type="radio">
+                    <label for="plpAbiB10a">J. H. Schroetere</label>
+                    <input name="plpAbiB10" id="plpAbiB10b" value="richtig" type="radio">
+                    <label for="plpAbiB10b">W. Olbers</label>
+                    <input name="plpAbiB10" id="plpAbiB10c" value="falsch" type="radio">
+                    <label for="plpAbiB10c">H. Kohl</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB11">Wie heißt der „Rote Planet“ ? Er war gleichzeitig römischer Kriegsgott</legend>
+                    <input name="plpAbiB11" id="plpAbiB11a" value="falsch" type="radio">
+                    <label for="plpAbiB11a">Twix</label>
+                    <input name="plpAbiB11" id="plpAbiB11b" value="falsch" type="radio">
+                    <label for="plpAbiB11b">Milky Way</label>
+                    <input name="plpAbiB11" id="plpAbiB11c" value="richtig" type="radio">
+                    <label for="plpAbiB11c">Mars</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB12">Welcher Planet wurde nach dem Boten der Götter benannt ? Gleichzeitig ist er bei den Römern Gott der Diebe sowie des Handels und Verkehrs !</legend>
+                    <input name="plpAbiB12" id="plpAbiB12a" value="falsch" type="radio">
+                    <label for="plpAbiB12a">Pluto</label>
+                    <input name="plpAbiB12" id="plpAbiB12b" value="falsch" type="radio">
+                    <label for="plpAbiB12b">Asterix</label>
+                    <input name="plpAbiB12" id="plpAbiB12c" value="richtig" type="radio">
+                    <label for="plpAbiB12c">Merkur</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB13">Wie heiß ist es im Kern der Erde ?</legend>
+                    <input name="plpAbiB13" id="plpAbiB13a" value="falsch" type="radio">
+                    <label for="plpAbiB13a">100 °C</label>
+                    <input name="plpAbiB13" id="plpAbiB13b" value="falsch" type="radio">
+                    <label for="plpAbiB13b">500 °C</label>
+                    <input name="plpAbiB13" id="plpAbiB13c" value="richtig" type="radio">
+                    <label for="plpAbiB13c">6.000 °C</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB14">Wie lange braucht das Licht von der Erde zum Mond ?</legend>
+                    <input name="plpAbiB14" id="plpAbiB14a" value="falsch" type="radio">
+                    <label for="plpAbiB14a">1 Tag</label>
+                    <input name="plpAbiB14" id="plpAbiB14b" value="falsch" type="radio">
+                    <label for="plpAbiB14b">1 Nacht</label>
+                    <input name="plpAbiB14" id="plpAbiB14c" value="richtig" type="radio">
+                    <label for="plpAbiB14c">ca 1,2 Sekunden</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB15">Wie lange benötigt das Licht von der Erde bis zur Sonne ?</legend>
+                    <input name="plpAbiB15" id="plpAbiB15a" value="falsch" type="radio">
+                    <label for="plpAbiB15a">1 Tag</label>
+                    <input name="plpAbiB15" id="plpAbiB15b" value="falsch" type="radio">
+                    <label for="plpAbiB15b">1 Nacht</label>
+                    <input name="plpAbiB15" id="plpAbiB15c" value="richtig" type="radio">
+                    <label for="plpAbiB15c">ca. 8,3 Minuten</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB16">Wie oft kann das Licht in einer Sekunde die Erde umkreisen ?</legend>
+                    <input name="plpAbiB16" id="plpAbiB16a" value="falsch" type="radio">
+                    <label for="plpAbiB16a">1mal</label>
+                    <input name="plpAbiB16" id="plpAbiB16b" value="falsch" type="radio">
+                    <label for="plpAbiB16b">100mal</label>
+                    <input name="plpAbiB16" id="plpAbiB16c" value="richtig" type="radio">
+                    <label for="plpAbiB16c">7 1/2mal</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB17">Auf welchem Planeten dauert ein Tag länger als ein Jahr ?</legend>
+                    <input name="plpAbiB17" id="plpAbiB17a" value="falsch" type="radio">
+                    <label for="plpAbiB17a">Erde</label>
+                    <input name="plpAbiB17" id="plpAbiB17b" value="richtig" type="radio">
+                    <label for="plpAbiB17b">Venus</label>
+                    <input name="plpAbiB17" id="plpAbiB17c" value="falsch" type="radio">
+                    <label for="plpAbiB17c">Merkur</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB18">Warum darf man nie mit dem Fernglas direkt in die Sonne schauen ?</legend>
+                    <input name="plpAbiB18" id="plpAbiB18a" value="falsch" type="radio">
+                    <label for="plpAbiB18a">Große Überraschung</label>
+                    <input name="plpAbiB18" id="plpAbiB18b" value="falsch" type="radio">
+                    <label for="plpAbiB18b">Nicht jugendfrei</label>
+                    <input name="plpAbiB18" id="plpAbiB18c" value="richtig" type="radio">
+                    <label for="plpAbiB18c">Erblindung</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB19">Unsere „Milchstraße“ (die eigene Galaxis) hat ca. 100 Milliarden Sterne. Wie viele Galaxien wie die unsere gibt es etwa im Universum ?</legend>
+                    <input name="plpAbiB19" id="plpAbiB19a" value="falsch" type="radio">
+                    <label for="plpAbiB19a">5</label>
+                    <input name="plpAbiB19" id="plpAbiB19b" value="falsch" type="radio">
+                    <label for="plpAbiB19b">1.000</label>
+                    <input name="plpAbiB19" id="plpAbiB19c" value="richtig" type="radio">
+                    <label for="plpAbiB19c">100 Milliarden</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB20">Im Sommer ist die Erde näher an der Sonne als im Winter.</legend>
+                    <input name="plpAbiB20" id="plpAbiB20a" value="falsch" type="radio">
+                    <label for="plpAbiB20a">Stimmt</label>
+                    <input name="plpAbiB20" id="plpAbiB20b" value="richtig" type="radio">
+                    <label for="plpAbiB20b">Stimmt nicht</label>
+                    <input name="plpAbiB20" id="plpAbiB20c" value="falsch" type="radio">
+                    <label for="plpAbiB20c">Stimmt nur in Hude</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB21">An welchen beiden Tagen geht die Sonne genau im Westen unter ?</legend>
+                    <input name="plpAbiB21" id="plpAbiB21a" value="falsch" type="radio">
+                    <label for="plpAbiB21a">Sommeranfang</label>
+                    <input name="plpAbiB21" id="plpAbiB21b" value="falsch" type="radio">
+                    <label for="plpAbiB21b">Winteranfang</label>
+                    <input name="plpAbiB21" id="plpAbiB21c" value="richtig" type="radio">
+                    <label for="plpAbiB21c">Frühlings- und Herbstanfang</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiB22">Welche Himmelrichtung zeigt der Polarstern an ?</legend>
+                    <input name="plpAbiB22" id="plpAbiB22a" value="richtig" type="radio">
+                    <label for="plpAbiB22a">Norden</label>
+                    <input name="plpAbiB22" id="plpAbiB22b" value="falsch" type="radio">
+                    <label for="plpAbiB22b">Osten</label>
+                    <input name="plpAbiB22" id="plpAbiB22c" value="falsch" type="radio">
+                    <label for="plpAbiB22c">Westen</label>
+                </fieldset>
+                <a id="auswertenPLP" onclick="hudeSJPLPAbiturB();" data-role="button">Auswerten</a>
+                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div class="row">&nbsp;</div>
+            </div>
+            <!-- Fuß der Seite -->
+            <div id="hudeFooter" data-role="footer" data-position="fixed">
+            </div>
+            <!-- Seitenleiste der Seite -->
+            <div id="hudePanel" data-role="panel" data-position="left" data-display="push" data-position-fixed="true">
+                <div class="row">
+                    <img src="images/hude_logo.jpg" />
+                </div>
+                <ul id="hudePanelList" data-role="listview" data-theme="a">
+                    <li data-icon="arrow-l"><a href="#hudePanel" data-rel="close"></a></li>
+                    <li data-role="list-divider" data-theme="a">Navigation</li>
+                    <li><a href="page_hude-info.html" onclick="hudeOpenPage('page_hude-info.html');">Hude-Info</a></li>
+                    <li><a href="page_sehenswuerdigkeiten.html" onclick="hudeOpenPage('page_sehenswuerdigkeiten.html');">Sehenswürdigkeiten</a></li>
+                    <li><a href="page_unterkuenfte.html" onclick="hudeOpenPage('page_unterkuenfte.html');">Unterkünfte</a></li>
+                    <li><a href="page_gastronomie.html" onclick="hudeOpenPage('page_gastronomie.html');">Gastronomie</a></li>
+                    <li><a href="page_ec-automaten.html" onclick="hudeOpenPage('page_ec-automaten.html');">EC-Automaten</a></li>
+                    <li><a href="page_einkaufen.html" onclick="hudeOpenPage('page_einkaufen.html');">Einkaufen</a></li>
+                    <li><a href="page_parkmoeglichkeiten.html" onclick="hudeOpenPage('page_parkmoeglichkeiten.html');">Parkmöglichkeiten</a></li>
+                    <li><a href="page_gesundheit.html" onclick="hudeOpenPage('page_gesundheit.html');">Gesundheit</a></li>
+                    <li><a href="page_veranstaltungen.html" onclick="hudeOpenPage('page_veranstaltungen.html');">Veranstaltungen</a></li>
+                    <li><a href="page_schnitzeljagd.html" onclick="hudeOpenPage('page_schnitzeljagd.html');">Schnitzeljagd</a></li>
+                    <li><a href="page_hude-perfekt.html" onclick="hudeOpenPage('page_hude-perfekt.html');">Hude-Perfekt</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </body>
+</html>

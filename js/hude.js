@@ -260,200 +260,115 @@ function pausecomp(ms) {
 
 /*
  * Auswertungen für Rätsel
+ * @param name dieser ist mit dem Namen der Auswahlfelder gleichzusetzen. 
  */
-function hudeRaetselPLP() {
-    var richtig = 0;
-    if ($('input[name=plf01]:checked').val() === 'richtig') {
-        $('#plf01').css("background-color", "green");
-        $('#plf01').css("color", "white");
-        richtig++;
+function hudeUeberpruefeMultipleChoice(name) {
+    $('#' + name).css('color', 'white');
+    if ($('input[name=' + name + ']:checked').val() === 'richtig') {
+        $('#' + name).css('background-color', 'green');
+        return 1;
     } else {
-        $('#plf01').css("background-color", "red");
-        $('#plf01').css("color", "white");
+        $('#' + name).css('background-color', 'red');
+        return 0;
     }
-    if ($('input[name=plf04]:checked').val() === 'richtig') {
-        $('#plf04').css("background-color", "green");
-        $('#plf04').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf04').css("background-color", "red");
-        $('#plf04').css("color", "white");
-    }
-    if ($('input[name=plf09]:checked').val() === 'richtig') {
-        $('#plf09').css("background-color", "green");
-        $('#plf09').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf09').css("background-color", "red");
-        $('#plf09').css("color", "white");
-    }
-    if ($('input[name=plf11]:checked').val() === 'richtig') {
-        $('#plf11').css("background-color", "green");
-        $('#plf11').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf11').css("background-color", "red");
-        $('#plf11').css("color", "white");
-    }
-    if ($('input[name=plf12]:checked').val() === 'richtig') {
-        $('#plf12').css("background-color", "green");
-        $('#plf12').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf12').css("background-color", "red");
-        $('#plf12').css("color", "white");
-    }
-    if ($('input[name=plf15]:checked').val() === 'richtig') {
-        $('#plf15').css("background-color", "green");
-        $('#plf15').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf15').css("background-color", "red");
-        $('#plf15').css("color", "white");
-    }
-    if ($('input[name=plf16]:checked').val() === 'richtig') {
-        $('#plf16').css("background-color", "green");
-        $('#plf16').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf16').css("background-color", "red");
-        $('#plf16').css("color", "white");
-    }
-    if ($('input[name=plf18]:checked').val() === 'richtig') {
-        $('#plf18').css("background-color", "green");
-        $('#plf18').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf18').css("background-color", "red");
-        $('#plf18').css("color", "white");
-    }
-    if ($('input[name=plf35]:checked').val() === 'richtig') {
-        $('#plf35').css("background-color", "green");
-        $('#plf35').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf35').css("background-color", "red");
-        $('#plf35').css("color", "white");
-    }
-    if ($('input[name=plf43]:checked').val() === 'richtig') {
-        $('#plf43').css("background-color", "green");
-        $('#plf43').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf43').css("background-color", "red");
-        $('#plf43').css("color", "white");
-    }
-    if ($('input[name=plf44]:checked').val() === 'richtig') {
-        $('#plf44').css("background-color", "green");
-        $('#plf44').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf44').css("background-color", "red");
-        $('#plf44').css("color", "white");
-    }
-    if ($('input[name=plf45]:checked').val() === 'richtig') {
-        $('#plf45').css("background-color", "green");
-        $('#plf45').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf45').css("background-color", "red");
-        $('#plf45').css("color", "white");
-    }
-    if ($('input[name=plf50]:checked').val() === 'richtig') {
-        $('#plf50').css("background-color", "green");
-        $('#plf50').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf50').css("background-color", "red");
-        $('#plf50').css("color", "white");
-    }
-    if ($('input[name=plf57]:checked').val() === 'richtig') {
-        $('#plf57').css("background-color", "green");
-        $('#plf57').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf57').css("background-color", "red");
-        $('#plf57').css("color", "white");
-    }
-    if ($('input[name=plf60]:checked').val() === 'richtig') {
-        $('#plf60').css("background-color", "green");
-        $('#plf60').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf60').css("background-color", "red");
-        $('#plf60').css("color", "white");
-    }
-    if ($('input[name=plf63]:checked').val() === 'richtig') {
-        $('#plf63').css("background-color", "green");
-        $('#plf63').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf63').css("background-color", "red");
-        $('#plf63').css("color", "white");
-    }
-    if ($('input[name=plf64]:checked').val() === 'richtig') {
-        $('#plf64').css("background-color", "green");
-        $('#plf64').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf64').css("background-color", "red");
-        $('#plf64').css("color", "white");
-    }
-    if ($('input[name=plf67]:checked').val() === 'richtig') {
-        $('#plf67').css("background-color", "green");
-        $('#plf67').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf67').css("background-color", "red");
-        $('#plf67').css("color", "white");
-    }
-    if ($('input[name=plf70]:checked').val() === 'richtig') {
-        $('#plf70').css("background-color", "green");
-        $('#plf70').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf70').css("background-color", "red");
-        $('#plf70').css("color", "white");
-    }
-    if ($('input[name=plf73]:checked').val() === 'richtig') {
-        $('#plf73').css("background-color", "green");
-        $('#plf73').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf73').css("background-color", "red");
-        $('#plf73').css("color", "white");
-    }
-    if ($('input[name=plf75]:checked').val() === 'richtig') {
-        $('#plf75').css("background-color", "green");
-        $('#plf75').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf75').css("background-color", "red");
-        $('#plf75').css("color", "white");
-    }
-    if ($('input[name=plf86]:checked').val() === 'richtig') {
-        $('#plf86').css("background-color", "green");
-        $('#plf86').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf86').css("background-color", "red");
-        $('#plf86').css("color", "white");
-    }
-    if ($('input[name=plf88]:checked').val() === 'richtig') {
-        $('#plf88').css("background-color", "green");
-        $('#plf88').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf88').css("background-color", "red");
-        $('#plf88').css("color", "white");
-    }
-    if ($('input[name=plf92]:checked').val() === 'richtig') {
-        $('#plf92').css("background-color", "green");
-        $('#plf92').css("color", "white");
-        richtig++;
-    } else {
-        $('#plf92').css("background-color", "red");
-        $('#plf92').css("color", "white");
-    }
-    console.log(richtig);
+}
+
+function hudeSJPLPAbiturA() {
+    hudeUeberpruefeMultipleChoice('plpAbiA01');
+    hudeUeberpruefeMultipleChoice('plpAbiA02');
+    hudeUeberpruefeMultipleChoice('plpAbiA03');
+    hudeUeberpruefeMultipleChoice('plpAbiA04');
+    hudeUeberpruefeMultipleChoice('plpAbiA05');
+    hudeUeberpruefeMultipleChoice('plpAbiA06');
+    hudeUeberpruefeMultipleChoice('plpAbiA07');
+    hudeUeberpruefeMultipleChoice('plpAbiA08');
+    hudeUeberpruefeMultipleChoice('plpAbiA09');
+    hudeUeberpruefeMultipleChoice('plpAbiA10');
+    hudeUeberpruefeMultipleChoice('plpAbiA11');
+    hudeUeberpruefeMultipleChoice('plpAbiA12');
+    hudeUeberpruefeMultipleChoice('plpAbiA13');
+    hudeUeberpruefeMultipleChoice('plpAbiA14');
+    hudeUeberpruefeMultipleChoice('plpAbiA15');
+    hudeUeberpruefeMultipleChoice('plpAbiA16');
+    hudeUeberpruefeMultipleChoice('plpAbiA17');
+    hudeUeberpruefeMultipleChoice('plpAbiA18');
+    hudeUeberpruefeMultipleChoice('plpAbiA19');
+    hudeUeberpruefeMultipleChoice('plpAbiA20');
+    hudeUeberpruefeMultipleChoice('plpAbiA21');
+    hudeUeberpruefeMultipleChoice('plpAbiA22');
+    hudeUeberpruefeMultipleChoice('plpAbiA23');
+    hudeUeberpruefeMultipleChoice('plpAbiA24');
+    hudeUeberpruefeMultipleChoice('plpAbiA25');
+    hudeUeberpruefeMultipleChoice('plpAbiA26');
+    hudeUeberpruefeMultipleChoice('plpAbiA27');
+    hudeUeberpruefeMultipleChoice('plpAbiA28');
+    hudeUeberpruefeMultipleChoice('plpAbiA29');
+    hudeUeberpruefeMultipleChoice('plpAbiA30');
+    hudeUeberpruefeMultipleChoice('plpAbiA31');
+}
+
+function hudeSJPLPAbiturB() {
+    hudeUeberpruefeMultipleChoice('plpAbiB01');
+    hudeUeberpruefeMultipleChoice('plpAbiB02');
+    hudeUeberpruefeMultipleChoice('plpAbiB03');
+    hudeUeberpruefeMultipleChoice('plpAbiB04');
+    hudeUeberpruefeMultipleChoice('plpAbiB05');
+    hudeUeberpruefeMultipleChoice('plpAbiB06');
+    hudeUeberpruefeMultipleChoice('plpAbiB07');
+    hudeUeberpruefeMultipleChoice('plpAbiB08');
+    hudeUeberpruefeMultipleChoice('plpAbiB09');
+    hudeUeberpruefeMultipleChoice('plpAbiB10');
+    hudeUeberpruefeMultipleChoice('plpAbiB11');
+    hudeUeberpruefeMultipleChoice('plpAbiB12');
+    hudeUeberpruefeMultipleChoice('plpAbiB13');
+    hudeUeberpruefeMultipleChoice('plpAbiB14');
+    hudeUeberpruefeMultipleChoice('plpAbiB15');
+    hudeUeberpruefeMultipleChoice('plpAbiB16');
+    hudeUeberpruefeMultipleChoice('plpAbiB17');
+    hudeUeberpruefeMultipleChoice('plpAbiB18');
+    hudeUeberpruefeMultipleChoice('plpAbiB19');
+    hudeUeberpruefeMultipleChoice('plpAbiB20');
+    hudeUeberpruefeMultipleChoice('plpAbiB21');
+    hudeUeberpruefeMultipleChoice('plpAbiB22');
+
+}
+
+function hudeSJPLPAbiturC() {
+    hudeUeberpruefeMultipleChoice('plpAbiC01');
+    hudeUeberpruefeMultipleChoice('plpAbiC02');
+    hudeUeberpruefeMultipleChoice('plpAbiC03');
+    hudeUeberpruefeMultipleChoice('plpAbiC04');
+    hudeUeberpruefeMultipleChoice('plpAbiC05');
+    hudeUeberpruefeMultipleChoice('plpAbiC06');
+    hudeUeberpruefeMultipleChoice('plpAbiC07');
+    hudeUeberpruefeMultipleChoice('plpAbiC08');
+    hudeUeberpruefeMultipleChoice('plpAbiC09');
+    hudeUeberpruefeMultipleChoice('plpAbiC10');
+    hudeUeberpruefeMultipleChoice('plpAbiC11');
+    hudeUeberpruefeMultipleChoice('plpAbiC12');
+    hudeUeberpruefeMultipleChoice('plpAbiC13');
+    hudeUeberpruefeMultipleChoice('plpAbiC14');
+    hudeUeberpruefeMultipleChoice('plpAbiC15');
+    hudeUeberpruefeMultipleChoice('plpAbiC16');
+    hudeUeberpruefeMultipleChoice('plpAbiC17');
+    hudeUeberpruefeMultipleChoice('plpAbiC18');
+    hudeUeberpruefeMultipleChoice('plpAbiC19');
+    hudeUeberpruefeMultipleChoice('plpAbiC20');
+    hudeUeberpruefeMultipleChoice('plpAbiC21');
+    hudeUeberpruefeMultipleChoice('plpAbiC22');
+    hudeUeberpruefeMultipleChoice('plpAbiC23');
+    hudeUeberpruefeMultipleChoice('plpAbiC24');
+    hudeUeberpruefeMultipleChoice('plpAbiC25');
+    hudeUeberpruefeMultipleChoice('plpAbiC26');
+    hudeUeberpruefeMultipleChoice('plpAbiC27');
+    hudeUeberpruefeMultipleChoice('plpAbiC28');
+    hudeUeberpruefeMultipleChoice('plpAbiC29');
+    hudeUeberpruefeMultipleChoice('plpAbiC30');
+    hudeUeberpruefeMultipleChoice('plpAbiC31');
+    hudeUeberpruefeMultipleChoice('plpAbiC32');
+    hudeUeberpruefeMultipleChoice('plpAbiC33');
+    hudeUeberpruefeMultipleChoice('plpAbiC34');
+    hudeUeberpruefeMultipleChoice('plpAbiC35');
+    hudeUeberpruefeMultipleChoice('plpAbiC36');
+    hudeUeberpruefeMultipleChoice('plpAbiC37');
 }

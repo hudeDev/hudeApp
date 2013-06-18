@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0" />
+        <!-- PhoneGap Abhängigkeiten -->
+        <script src="phonegap.js"></script>
+        <script src="barcodescanner.js"></script>
+        <!-- Funktionlität Abhängigkeiten -->
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/jquery.mobile-1.3.1.min.js"></script>
+        <script src="js/print_r.js"></script>
+        <script src="js/hude.js"></script>
+        <!-- Design Abhängigkeiten -->
+        <link href="css/jquery.mobile-1.3.1.min.css" rel="stylesheet">
+        <link href="css/hude-theme.css" rel="stylesheet">
+        <link href="css/normalize.css" rel="stylesheet">
+        <link href="css/foundation.css" rel="stylesheet">
+        <link href="css/hude.css" rel="stylesheet">
+        <!-- Auszuführender Code beim App-Start -->
+        <script type="text/javascript">
+            $(document).on('pageinit', function(event) {
+                hudeAppStartUp();
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Seiten Aufbau -->
+        <div id="pageRaetselPLP" data-role="page">
+            <!-- Kopf der Seite -->
+            <div id="hudeHeader" data-role="header">
+                <!-- Button zum Öffnen der Seitenleiste -->
+                <a href="#hudePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1>Abitur B</h1>
+            </div>
+            <!-- Inhalt der Seite -->
+            <div data-role="content">
+                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div class="row">&nbsp;</div>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA01">Welchen Durchmesser hat die Sonnenkugel auf dem Lehr-Pfad?</legend>
+                    <input name="plpAbiA01" id="plpAbiA01a" value="falsch" type="radio">
+                    <label for="plpAbiA01a">13 cm</label>
+                    <input name="plpAbiA01" id="plpAbiA01b" value="richtig" type="radio">
+                    <label for="plpAbiA01b">139 cm</label>
+                    <input name="plpAbiA01" id="plpAbiA01c" value="falsch" type="radio">
+                    <label for="plpAbiA01c">13 mm</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA02">Woraus besteht die Sonnenkugel unseres Lehrpfades?</legend>
+                    <input name="plpAbiA02" id="plpAbiA02a" value="falsch" type="radio">
+                    <label for="plpAbiA02a">Betonkugel</label>
+                    <input name="plpAbiA02" id="plpAbiA02b" value="richtig" type="radio">
+                    <label for="plpAbiA02b">Raketentreibstofftank</label>
+                    <input name="plpAbiA02" id="plpAbiA02c" value="falsch" type="radio">
+                    <label for="plpAbiA02c">Faußball</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA03">Die Sonne ist 400 mal so groß wie unser Mond. Wieviel mal weiter entfernt ist sie von der Erde als der Mond ?</legend>
+                    <input name="plpAbiA03" id="plpAbiA03a" value="falsch" type="radio">
+                    <label for="plpAbiA03a">4 mal</label>
+                    <input name="plpAbiA03" id="plpAbiA03b" value="falsch" type="radio">
+                    <label for="plpAbiA03b">40 mal</label>
+                    <input name="plpAbiA03" id="plpAbiA03c" value="richtig" type="radio">
+                    <label for="plpAbiA03c">400 mal</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA04">Wie weit ist unsere Modellerde von der Modellsonne entfernt ?</legend>
+                    <input name="plpAbiA04" id="plpAbiA04a" value="falsch" type="radio">
+                    <label for="plpAbiA04a">59 Meter</label>
+                    <input name="plpAbiA04" id="plpAbiA04b" value="richtig" type="radio">
+                    <label for="plpAbiA04b">150 Meter</label>
+                    <input name="plpAbiA04" id="plpAbiA04c" value="falsch" type="radio">
+                    <label for="plpAbiA04c">6 Kilometer</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA05">Wie heißt der Stern, der die Erde mit Licht und Wärme versorgt?</legend>
+                    <input name="plpAbiA05" id="plpAbiA05a" value="falsch" type="radio">
+                    <label for="plpAbiA05a">Mond</label>
+                    <input name="plpAbiA05" id="plpAbiA05b" value="richtig" type="radio">
+                    <label for="plpAbiA05b">Sonne</label>
+                    <input name="plpAbiA05" id="plpAbiA05c" value="falsch" type="radio">
+                    <label for="plpAbiA05c">Sirius</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA06">Wie lange wird es unsere Sonne wie jetzt höchstens noch geben?</legend>
+                    <input name="plpAbiA06" id="plpAbiA06a" value="falsch" type="radio">
+                    <label for="plpAbiA06a">Ewig</label>
+                    <input name="plpAbiA06" id="plpAbiA06b" value="richtig" type="radio">
+                    <label for="plpAbiA06b">4 1/2 Mrd. Jahre</label>
+                    <input name="plpAbiA06" id="plpAbiA06c" value="falsch" type="radio">
+                    <label for="plpAbiA06c">10 Mrd. Jahre</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA07">Wie oft passt unsere Erde insgesamt in die Sonne hinein?</legend>
+                    <input name="plpAbiA07" id="plpAbiA07a" value="falsch" type="radio">
+                    <label for="plpAbiA07a">109 mal</label>
+                    <input name="plpAbiA07" id="plpAbiA07b" value="richtig" type="radio">
+                    <label for="plpAbiA07b">1,3 Mio. mal</label>
+                    <input name="plpAbiA07" id="plpAbiA07c" value="falsch" type="radio">
+                    <label for="plpAbiA07c">10 mal</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA08">Wir wissen, dass die Erde eine Kugel ist. Was glaubten die Menschen im Mittelalter über das Aussehen der Erde?</legend>
+                    <input name="plpAbiA08" id="plpAbiA08a" value="falsch" type="radio">
+                    <label for="plpAbiA08a">Quadrat</label>
+                    <input name="plpAbiA08" id="plpAbiA08b" value="falsch" type="radio">
+                    <label for="plpAbiA08b">Ei</label>
+                    <input name="plpAbiA08" id="plpAbiA08c" value="richtig" type="radio">
+                    <label for="plpAbiA08c">Scheibe</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA09">Was ist der Mittelpunkt unseres Sonnensystems? (Auf dem Lehr-Pfad ist es Anfangs- bzw. Endpunkt)</legend>
+                    <input name="plpAbiA09" id="plpAbiA09a" value="falsch" type="radio">
+                    <label for="plpAbiA09a">Erde</label>
+                    <input name="plpAbiA09" id="plpAbiA09b" value="richtig" type="radio">
+                    <label for="plpAbiA09b">Sonne</label>
+                    <input name="plpAbiA09" id="plpAbiA09c" value="falsch" type="radio">
+                    <label for="plpAbiA09c">Mond</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA10">Wie heiß ist es im Kern der Sonne?</legend>
+                    <input name="plpAbiA10" id="plpAbiA10a" value="falsch" type="radio">
+                    <label for="plpAbiA10a">1000 °C</label>
+                    <input name="plpAbiA10" id="plpAbiA10b" value="falsch" type="radio">
+                    <label for="plpAbiA10b">100 °C</label>
+                    <input name="plpAbiA10" id="plpAbiA10c" value="richtig" type="radio">
+                    <label for="plpAbiA10c">15 Mio °C</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA11">Ein Eimer Wasser wiegt auf der Erde ca. 10 kg. Wie viel wiegt er auf dem Jupiter</legend>
+                    <input name="plpAbiA11" id="plpAbiA11a" value="falsch" type="radio">
+                    <label for="plpAbiA11a">3,9 kg</label>
+                    <input name="plpAbiA11" id="plpAbiA11b" value="falsch" type="radio">
+                    <label for="plpAbiA11b">8,9 kg</label>
+                    <input name="plpAbiA11" id="plpAbiA11c" value="richtig" type="radio">
+                    <label for="plpAbiA11c">25,6 kg</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA12">Welche Strecke legt die Modellerde des Lehr-Pfades an einem Tag zurück</legend>
+                    <input name="plpAbiA12" id="plpAbiA12a" value="richtig" type="radio">
+                    <label for="plpAbiA12a">2,6 m</label>
+                    <input name="plpAbiA12" id="plpAbiA12b" value="falsch" type="radio">
+                    <label for="plpAbiA12b">150 m</label>
+                    <input name="plpAbiA12" id="plpAbiA12c" value="falsch" type="radio">
+                    <label for="plpAbiA12c">38 cm</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA13">Wer strahlt den Mond in der Nacht an, so dass er aussieht, als hätte er eigenes Licht ?</legend>
+                    <input name="plpAbiA13" id="plpAbiA13a" value="falsch" type="radio">
+                    <label for="plpAbiA13a">Erde</label>
+                    <input name="plpAbiA13" id="plpAbiA13b" value="richtig" type="radio">
+                    <label for="plpAbiA13b">Sonne</label>
+                    <input name="plpAbiA13" id="plpAbiA13c" value="falsch" type="radio">
+                    <label for="plpAbiA13c">Jupiter</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA14">Welcher Planet ist der Sonne am nächsten ?</legend>
+                    <input name="plpAbiA14" id="plpAbiA14a" value="falsch" type="radio">
+                    <label for="plpAbiA14a">Mars</label>
+                    <input name="plpAbiA14" id="plpAbiA14b" value="falsch" type="radio">
+                    <label for="plpAbiA14b">Pluto</label>
+                    <input name="plpAbiA14" id="plpAbiA14c" value="richtig" type="radio">
+                    <label for="plpAbiA14c">Merkur</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA15">Welcher Planet hat am schnellsten die Sonne umrundet ?</legend>
+                    <input name="plpAbiA15" id="plpAbiA15a" value="falsch" type="radio">
+                    <label for="plpAbiA15a">Erde</label>
+                    <input name="plpAbiA15" id="plpAbiA15b" value="falsch" type="radio">
+                    <label for="plpAbiA15b">Pluto</label>
+                    <input name="plpAbiA15" id="plpAbiA15c" value="richtig" type="radio">
+                    <label for="plpAbiA15c">Merkur</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA16">Von welchem Planeten aus kann man auf dem Lehr-Pfad gerade noch die Sonne erkennen?</legend>
+                    <input name="plpAbiA16" id="plpAbiA16a" value="falsch" type="radio">
+                    <label for="plpAbiA16a">Jupiter</label>
+                    <input name="plpAbiA16" id="plpAbiA16b" value="falsch" type="radio">
+                    <label for="plpAbiA16b">Pluto</label>
+                    <input name="plpAbiA16" id="plpAbiA16c" value="richtig" type="radio">
+                    <label for="plpAbiA16c">Saturn</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA17">Welcher Planet hat ein von der Erde aus sichtbares Ringsystem ?</legend>
+                    <input name="plpAbiA17" id="plpAbiA17a" value="richtig" type="radio">
+                    <label for="plpAbiA17a">Saturn</label>
+                    <input name="plpAbiA17" id="plpAbiA17b" value="falsch" type="radio">
+                    <label for="plpAbiA17b">Pluto</label>
+                    <input name="plpAbiA17" id="plpAbiA17c" value="falsch" type="radio">
+                    <label for="plpAbiA17c">Jupiter</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA18">Zwischen welchen zwei Planeten befindet sich der Planetoidengürtel ?</legend>
+                    <input name="plpAbiA18" id="plpAbiA18a" value="falsch" type="radio">
+                    <label for="plpAbiA18a">Erde und mars</label>
+                    <input name="plpAbiA18" id="plpAbiA18b" value="falsch" type="radio">
+                    <label for="plpAbiA18b">Uranus und Neptun</label>
+                    <input name="plpAbiA18" id="plpAbiA18c" value="richtig" type="radio">
+                    <label for="plpAbiA18c">Mars und Jupiter</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA19">Welcher Planet hat nicht nur einen Mond, sondern 62 ?</legend>
+                    <input name="plpAbiA19" id="plpAbiA19a" value="richtig" type="radio">
+                    <label for="plpAbiA19a">Saturn</label>
+                    <input name="plpAbiA19" id="plpAbiA19b" value="falsch" type="radio">
+                    <label for="plpAbiA19b">Jupiter</label>
+                    <input name="plpAbiA19" id="plpAbiA19c" value="falsch" type="radio">
+                    <label for="plpAbiA19c">Uranus</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA20">Welcher Planet haben nur einen Mond ?</legend>
+                    <input name="plpAbiA20" id="plpAbiA20a" value="falsch" type="radio">
+                    <label for="plpAbiA20a">Venus</label>
+                    <input name="plpAbiA20" id="plpAbiA20b" value="richtig" type="radio">
+                    <label for="plpAbiA20b">Erde</label>
+                    <input name="plpAbiA20" id="plpAbiA20c" value="falsch" type="radio">
+                    <label for="plpAbiA20c">Merkur</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA21">Welcher Planet habt keinen Mond ?</legend>
+                    <input name="plpAbiA21" id="plpAbiA21a" value="falsch" type="radio">
+                    <label for="plpAbiA21a">Mars</label>
+                    <input name="plpAbiA21" id="plpAbiA21b" value="falsch" type="radio">
+                    <label for="plpAbiA21b">Saturn</label>
+                    <input name="plpAbiA21" id="plpAbiA21c" value="richtig" type="radio">
+                    <label for="plpAbiA21c">Merkur</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA22">Welcher Planet hat die meisten Monde ?</legend>
+                    <input name="plpAbiA22" id="plpAbiA22a" value="falsch" type="radio">
+                    <label for="plpAbiA22a">Erde</label>
+                    <input name="plpAbiA22" id="plpAbiA22b" value="richtig" type="radio">
+                    <label for="plpAbiA22b">Jupiter</label>
+                    <input name="plpAbiA22" id="plpAbiA22c" value="falsch" type="radio">
+                    <label for="plpAbiA22c">Saturn</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA23">Welcher Planet ist fast gleich groß wie die Erde ?</legend>
+                    <input name="plpAbiA23" id="plpAbiA23a" value="falsch" type="radio">
+                    <label for="plpAbiA23a">Jupiter</label>
+                    <input name="plpAbiA23" id="plpAbiA23b" value="falsch" type="radio">
+                    <label for="plpAbiA23b">Pluto</label>
+                    <input name="plpAbiA23" id="plpAbiA23c" value="richtig" type="radio">
+                    <label for="plpAbiA23c">Venus</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA24">Welcher Planet braucht am längsten für eine Sonnenumrundung ?</legend>
+                    <input name="plpAbiA24" id="plpAbiA24a" value="richtig" type="radio">
+                    <label for="plpAbiA24a">Neptun</label>
+                    <input name="plpAbiA24" id="plpAbiA24b" value="falsch" type="radio">
+                    <label for="plpAbiA24b">Jupiter</label>
+                    <input name="plpAbiA24" id="plpAbiA24c" value="falsch" type="radio">
+                    <label for="plpAbiA24c">Merkur</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA25">Welches ist der größte Planet ?</legend>
+                    <input name="plpAbiA25" id="plpAbiA25a" value="falsch" type="radio">
+                    <label for="plpAbiA25a">Erde</label>
+                    <input name="plpAbiA25" id="plpAbiA25b" value="falsch" type="radio">
+                    <label for="plpAbiA25b">Saturn</label>
+                    <input name="plpAbiA25" id="plpAbiA25c" value="richtig" type="radio">
+                    <label for="plpAbiA25c">Jupiter</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA26">Welcher Planet ist am weitesten entfernt von der Sonne ?</legend>
+                    <input name="plpAbiA26" id="plpAbiA26a" value="falsch" type="radio">
+                    <label for="plpAbiA26a">Merkur</label>
+                    <input name="plpAbiA26" id="plpAbiA26b" value="richtig" type="radio">
+                    <label for="plpAbiA26b">Pluto</label>
+                    <input name="plpAbiA26" id="plpAbiA26c" value="falsch" type="radio">
+                    <label for="plpAbiA26c">Erde</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA27">Welcher Planet hat 2 Monde ?</legend>
+                    <input name="plpAbiA27" id="plpAbiA27a" value="richtig" type="radio">
+                    <label for="plpAbiA27a">Mars</label>
+                    <input name="plpAbiA27" id="plpAbiA27b" value="falsch" type="radio">
+                    <label for="plpAbiA27b">Neptun</label>
+                    <input name="plpAbiA27" id="plpAbiA27c" value="falsch" type="radio">
+                    <label for="plpAbiA27c">Uranus</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA28">Auf dem Planeten-Lehrpfad Hude-Wüsting ist Alles um wie viel mal verkleinert worden ?</legend>
+                    <input name="plpAbiA28" id="plpAbiA28a" value="falsch" type="radio">
+                    <label for="plpAbiA28a">1 Mio. mal</label>
+                    <input name="plpAbiA28" id="plpAbiA28b" value="falsch" type="radio">
+                    <label for="plpAbiA28b">1.000 mal</label>
+                    <input name="plpAbiA28" id="plpAbiA28c" value="richtig" type="radio">
+                    <label for="plpAbiA28c">1 Mrd. mal</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA29">Wie lang ist der Planeten-Lehrpfad Hude-Wüsting ?</legend>
+                    <input name="plpAbiA29" id="plpAbiA29a" value="falsch" type="radio">
+                    <label for="plpAbiA29a">600 Meter</label>
+                    <input name="plpAbiA29" id="plpAbiA29b" value="richtig" type="radio">
+                    <label for="plpAbiA29b">6 Kilometer</label>
+                    <input name="plpAbiA29" id="plpAbiA29c" value="falsch" type="radio">
+                    <label for="plpAbiA29c">1,6 Kilometer</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA30">Wie lang ist diese Strecke in unserem Sonnensystem ?</legend>
+                    <input name="plpAbiA30" id="plpAbiA30a" value="falsch" type="radio">
+                    <label for="plpAbiA30a">600 Mio. Kilometer</label>
+                    <input name="plpAbiA30" id="plpAbiA30b" value="richtig" type="radio">
+                    <label for="plpAbiA30b">6 Mrd. Kilometer</label>
+                    <input name="plpAbiA30" id="plpAbiA30c" value="falsch" type="radio">
+                    <label for="plpAbiA30c">1,6 Mrd. Kilometer</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend id="plpAbiA31">Wie viele Planeten gibt es in unserem Sonnensystem ?</legend>
+                    <input name="plpAbiA31" id="plpAbiA31a" value="falsch" type="radio">
+                    <label for="plpAbiA31a">1</label>
+                    <input name="plpAbiA31" id="plpAbiA31b" value="falsch" type="radio">
+                    <label for="plpAbiA31b">16</label>
+                    <input name="plpAbiA31" id="plpAbiA31c" value="richtig" type="radio">
+                    <label for="plpAbiA31c">8</label>
+                </fieldset>
+                <a id="auswertenPLP" onclick="hudeSJPLPAbiturA();" data-role="button">Auswerten</a>
+                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div class="row">&nbsp;</div>
+            </div>
+            <!-- Fuß der Seite -->
+            <div id="hudeFooter" data-role="footer" data-position="fixed">
+            </div>
+            <!-- Seitenleiste der Seite -->
+            <div id="hudePanel" data-role="panel" data-position="left" data-display="push" data-position-fixed="true">
+                <div class="row">
+                    <img src="images/hude_logo.jpg" />
+                </div>
+                <ul id="hudePanelList" data-role="listview" data-theme="a">
+                    <li data-icon="arrow-l"><a href="#hudePanel" data-rel="close"></a></li>
+                    <li data-role="list-divider" data-theme="a">Navigation</li>
+                    <li><a href="page_hude-info.html" onclick="hudeOpenPage('page_hude-info.html');">Hude-Info</a></li>
+                    <li><a href="page_sehenswuerdigkeiten.html" onclick="hudeOpenPage('page_sehenswuerdigkeiten.html');">Sehenswürdigkeiten</a></li>
+                    <li><a href="page_unterkuenfte.html" onclick="hudeOpenPage('page_unterkuenfte.html');">Unterkünfte</a></li>
+                    <li><a href="page_gastronomie.html" onclick="hudeOpenPage('page_gastronomie.html');">Gastronomie</a></li>
+                    <li><a href="page_ec-automaten.html" onclick="hudeOpenPage('page_ec-automaten.html');">EC-Automaten</a></li>
+                    <li><a href="page_einkaufen.html" onclick="hudeOpenPage('page_einkaufen.html');">Einkaufen</a></li>
+                    <li><a href="page_parkmoeglichkeiten.html" onclick="hudeOpenPage('page_parkmoeglichkeiten.html');">Parkmöglichkeiten</a></li>
+                    <li><a href="page_gesundheit.html" onclick="hudeOpenPage('page_gesundheit.html');">Gesundheit</a></li>
+                    <li><a href="page_veranstaltungen.html" onclick="hudeOpenPage('page_veranstaltungen.html');">Veranstaltungen</a></li>
+                    <li><a href="page_schnitzeljagd.html" onclick="hudeOpenPage('page_schnitzeljagd.html');">Schnitzeljagd</a></li>
+                    <li><a href="page_hude-perfekt.html" onclick="hudeOpenPage('page_hude-perfekt.html');">Hude-Perfekt</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </body>
+</html>
