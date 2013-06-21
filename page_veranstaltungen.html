@@ -29,15 +29,33 @@
         <!-- Seiten Aufbau -->
         <div data-role="page">
             <!-- Kopf der Seite -->
-            <div id="hudeHeader" data-role="header">
+            <div id="hudeHeader" data-role="header" data-position="fixed">
                 <!-- Button zum Öffnen der Seitenleiste -->
                 <a href="#hudePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
                 <!-- Überschrift der Seite -->
                 <h1>Veranstaltungen</h1>
             </div>
             <!-- Inhalt der Seite -->
-            <div data-role="content">
+            <div id="pageVeranstaltungen" data-role="content">
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div id="tph_veranstaltungen">
+
+                </div>
+                <script>
+                    $.ajax({
+                        dataType: 'jsonp',
+                        jsonp: 'jsonp_callback',
+                        url: 'http://team-exhumedo.com/tph/tphserver.php',
+                        success: function(data) {
+                            alert('jo');
+                            $('#tph_veranstaltungen').html('<div id="tph_veranstaltungen">' + print_r(data) + '<div>');
+                        },
+                        error: function(XHR, textStatus, errorThrown) {
+                            console.log("ERREUR: " + textStatus);
+                            console.log("ERREUR: " + errorThrown);
+                        }
+                    });
+                </script>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <!-- Fuß der Seite -->
