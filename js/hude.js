@@ -27,6 +27,9 @@ function hudeCachePages() {
     $.mobile.loadPage('page_unterkuenfte.html', true);
     $.mobile.loadPage('dialog_einstellungen.html', true);
     $.mobile.loadPage('dialog_hude-kontakt.html', true);
+    $.mobile.loadPage('page_sj_plp_abitur_a.html', true);
+    $.mobile.loadPage('page_sj_plp_abitur_b.html', true);
+    $.mobile.loadPage('page_sj_plp_abitur_c.html', true);
 }
 
 function appStartUp() {
@@ -191,7 +194,7 @@ function hudeQRCodeScan() {
 
 }
 function hudeSplitURL(url) {
-    var domain = 'http://m.gastinhude.de/';
+    var domain = 'http://m.touristik-palette-hude.de/';
     if (url.indexOf(domain) !== -1) {
         url = url.replace(domain, '').trim();
         hudeOpenPage(url);
