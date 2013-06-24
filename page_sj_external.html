@@ -102,6 +102,7 @@
                         var localFileName = remoteFile.substring(remoteFile.lastIndexOf('/') + 1);
                         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
                             fileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
+                                alert('1');
                                 var localPath = fileEntry.fullPath;
                                 if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
                                     localPath = localPath.substring(7);
@@ -109,6 +110,7 @@
                                 var ft = new FileTransfer();
                                 ft.download(remoteFile,
                                         localPath, function(entry) {
+                                            alert('2');
                                     var dwnldImg = document.getElementById("dwnldImg");
                                     dwnldImg.src = entry.fullPath;
                                     dwnldImg.style.visibility = "visible";
@@ -118,7 +120,7 @@
                         }, fail);
                     }
                     function fail(error) {
-                        console.log(error.code);
+                        alert(error.code);
                     }
                 </script>
                 <h2>Download</h2>
