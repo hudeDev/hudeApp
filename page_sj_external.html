@@ -25,7 +25,7 @@
             });
         </script>
         <script>
-            
+
         </script>
     </head>
     <body>
@@ -48,9 +48,11 @@
                 <h2>Dateisystem</h2>
                 <div id="dateien"></div>
                 <script>
-                    dateisystem();
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFS, null);
+            function onFS(fs) {
+                alert(fs.root.fullPath);
+            }
                 </script>
-                <
                 <div class="row">&nbsp;</div>
             </div>
             <!-- Fuß der Seite -->
