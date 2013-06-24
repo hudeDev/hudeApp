@@ -24,6 +24,25 @@
                 hudeAppStartUp();
             });
         </script>
+        <script>
+            function  dateisystem() {
+                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
+                    console.log("Root = " + fs.root.fullPath);
+                    var directoryReader = fs.root.createReader();
+                    directoryReader.readEntries(function(entries) {
+                        var i;
+                        for (i = 0; i < entries.length; i++) {
+                            $('#dateien').append(entries[i].name + '<br/>');
+                            // console.log(entries[i].name);
+                        }
+                    }, function(error) {
+                        alert(error.code);
+                    })
+                }, function(error) {
+                    alert(error.code);
+                });
+            }
+        </script>
     </head>
     <body>
         <!-- Seiten Aufbau -->
@@ -42,6 +61,12 @@
                 <a href="#" onclick="window.open('http://heise', '_blank');">heise.de</a>
                 <a href="#" onclick="window.open('http://heise', '_blank');">heise.de</a>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <h2>Dateisystem</h2>
+                <div id="dateien"></div>
+                <script>
+                    dateisystem();
+                </script>
+                <
                 <div class="row">&nbsp;</div>
             </div>
             <!-- Fuß der Seite -->
