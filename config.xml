@@ -15,6 +15,7 @@
         <preference name="phonegap-version" value="2.7.0" />
         <preference name="orientation" value="default" />
         <preference name="fullscreen" value="false" />
+        <preference name="webviewbounce" value="true" />
         <!--
         <icon src="icon.png" />
         <gap:splash src="splash.png" />        
