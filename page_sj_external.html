@@ -54,15 +54,15 @@
                         }
                     }
                     function geraet() {
-                        $('#geraet').html('<div id="geraet">Device Name: '     + device.name     + '<br />' + 
-                            'Device Cordova: '  + device.cordova + '<br />' + 
-                            'Device Platform: ' + device.platform + '<br />' + 
-                            'Device UUID: '     + device.uuid     + '<br />' + 
-                            'Device Model: '    + device.model     + '<br />' + 
-                            'Device Version: '  + device.version  + '<br /></div>');
+                        $('#geraet').html('<div id="geraet">Device Name: ' + device.name + '<br />' +
+                                'Device Cordova: ' + device.cordova + '<br />' +
+                                'Device Platform: ' + device.platform + '<br />' +
+                                'Device UUID: ' + device.uuid + '<br />' +
+                                'Device Model: ' + device.model + '<br />' +
+                                'Device Version: ' + device.version + '<br /></div>');
                     }
                 </script>
-                <div class="row">&nbsp;</div>
+
                 <h2>Path</h2>
                 <p><a href="#" data-role="button" onclick="pfad();">Pfad</a></p>
                 <h2>Gerät</h2>
@@ -70,7 +70,8 @@
                 <h2>OPENING LINKS:</h2>
                 <p><a href="#" data-role="button" onclick="window.open('http://www.nhl.com', '_system', 'location=yes');">_system</a></p>
                 <p><a href="#" onclick="window.open('http://www.google.com', '_system', 'location=yes');">Google</a></p>
-                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <p><a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a></p>
+                <div class="row">&nbsp;</div>
             </div>
             <!-- Fuß der Seite -->
             <div id="hudeFooter" data-role="footer" data-position="fixed">
