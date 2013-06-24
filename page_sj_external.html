@@ -41,28 +41,32 @@
             <!-- Inhalt der Seite -->
             <div data-role="content">
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
-                <a href="#" onclick="window.open('http://www.uni-oldenburg.de', '_system');">uni-oldenburg.de</a>
-                <a href="#" onclick="window.open('http://heise', '_blank');">heise.de</a>
-                <a href="#" onclick="window.open('http://heise', '_blank');">heise.de</a>
-                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
-                <h2>Dateisystem</h2>
+                <h2>Ordner im System</h2>
                 <div id="pfad"></div>
+                <h2>Pfad der Datei</h2>
+                <div id="dir"></div>
                 <script>
-            function pfad() {
-                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFS, null);
-                function onFS(fs) {
-                    $('#pfad').html('<div id="pfad">' + fs.root.fullPath + '</div>')
-                    alert(fs.root.fullPath);
-                }
-            }
+                    function pfad() {
+                        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFS, null);
+                        function onFS(fs) {
+                            $('#pfad').html('<div id="pfad">' + fs.root.fullPath + '</div>')
+                            alert(fs.root.fullPath);
+                        }
+                    }
+                    function dir() {
+
+                        $('#dir').html('<div id="pfad">' + window.location.href + '</div>')
+
+                    }
                 </script>
                 <div class="row">&nbsp;</div>
                 <h2>Path</h2>
                 <p><a href="#" data-role="button" onclick="pfad();">Pfad</a></p>
+                <p><a href="#" data-role="button" onclick="dir();">dir</a></p>
                 <h2>OPENING LINKS:</h2>
-                <p><a href="#" data-role="button" onclick="window.open('http://www.nhl.com', '_blank', 'location=yes');">_blank</a></p>
                 <p><a href="#" data-role="button" onclick="window.open('http://www.nhl.com', '_system', 'location=yes');">_system</a></p>
-                <p><a href="#" data-role="button" onclick="window.open('http://www.nhl.com', '_self', 'location=yes');">_self</a></p>
+                <p><a href="#" data-role="button" onclick="window.open('http://www.google.com', '_system', 'location=yes');">Google</a></p>
+                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <!-- Fuß der Seite -->
             <div id="hudeFooter" data-role="footer" data-position="fixed">
