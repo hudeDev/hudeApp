@@ -261,6 +261,24 @@ function pausecomp(ms) {
     }
 }
 
+function dateisystem() {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
+        console.log("Root = " + fs.root.fullPath);
+        var directoryReader = fs.root.createReader();
+        directoryReader.readEntries(function(entries) {
+            var i;
+            for (i = 0; i < entries.length; i++) {
+                $('#dateien').append(entries[i].name + '<br/>');
+                // console.log(entries[i].name);
+            }
+        }, function(error) {
+            alert(error.code);
+        })
+    }, function(error) {
+        alert(error.code);
+    });
+}
+
 /*
  * Auswertungen für Rätsel
  * @param name dieser ist mit dem Namen der Auswahlfelder gleichzusetzen. 
