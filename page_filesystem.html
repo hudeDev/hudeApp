@@ -68,22 +68,6 @@
                     <li><a href="page_hude-perfekt.html" onclick="hudeOpenPage('page_hude-perfekt.html');">Hude-Perfekt</a></li>
                 </ul>
             </div>
-            <script>
-            function gotFS(fileSystem) {
-                console.log("got filesystem");
-                $('#fileSystemName').append("got filesystem");
-                // save the file system for later access
-                console.log(fileSystem.root.fullPath);
-                window.rootFS = fileSystem.root;
-                $('#fileSystemPath').append('<p>' + rootFS.fullPath + '</p>');
-            }
-
-            document.addEventListener('deviceready', function() {
-                window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-            }, false);
-
-            </script>
         </div>
     </body>
 </html>
