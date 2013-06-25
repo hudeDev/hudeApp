@@ -268,7 +268,7 @@ function dateisystem() {
         directoryReader.readEntries(function(entries) {
             var i;
             for (i = 0; i < entries.length; i++) {
-                $('#dateien').append(entries[i].name + '<br/>');
+                $('#eintraegeAnzeigen').append(entries[i].name + '<br/>');
                 // console.log(entries[i].name);
             }
         }, function(error) {
@@ -280,21 +280,54 @@ function dateisystem() {
 }
 
 
+function downloadNew() {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
+            function(fs) {
+                var directoryReader = fs.root.createReader();
+                directoryReader.readEntries(function(entries) {
+                    var i;
+                    for (i = 0; i < entries.length; i++) {
+                        $('#eintraegeAnzeigen').append(entries[i].name + '<br/>');
+                    }
+                }, function(error) {
+                    alert(error.code);
+                })
+            }, function(error) {
+        alert(print_r(error));
+    });
+}
+
+function downloadNewSuccess() {
+    console.log('downloadNewSuccess');
+    var directoryReader = dirEntry.createReader();
+    return null;
+}
+
+function downloadNewFail() {
+    console.log('downloadNewFail');
+    return null;
+}
+
 function download() {
     /* Lesen der Ordner
      * 
      * @type @exp;dirEntry@call;createReader
      */
 // Erstellen des DirectoryReader um Ordner zu lesen.
+    alert('download() #1');
     var directoryReader = dirEntry.createReader();
+    $('#filereaderPrintR').html('<div id="filereaderPrintR"></div>');
+    $('#filereaderPrintR').append(print_r(directoryReader));
     directoryReader.readEntries(function(entries) {
         // Erfolg
         $('#eintraegeAnzeigen').html('<div id="eintraegeAnzeigen"></div>');
+        alert('Erfolg');
         var i;
         for (i = 0; i < entries.length; i++) {
             $('#eintraegeAnzeigen').append(entries[i].name + '<br/>');
         }
     }, function(error) {
+        alert('Misserfolg');
         // Misserfolg
         $('#eintraegeAnzeigen').html('<div id="eintraegeAnzeigen"></div>');
         $('#eintraegeAnzeigen').append('<p>' + print_r(error) + '</p>');
