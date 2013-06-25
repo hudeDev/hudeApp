@@ -279,6 +279,30 @@ function dateisystem() {
     });
 }
 
+
+function download() {
+    /* Lesen der Ordner
+     * 
+     * @type @exp;dirEntry@call;createReader
+     */
+// Erstellen des DirectoryReader um Ordner zu lesen.
+    var directoryReader = dirEntry.createReader();
+    directoryReader.readEntries(function(entries) {
+        // Erfolg
+        $('#eintraegeAnzeigen').html('<div id="eintraegeAnzeigen"></div>');
+        var i;
+        for (i = 0; i < entries.length; i++) {
+            $('#eintraegeAnzeigen').append(entries[i].name + '<br/>');
+        }
+    }, function(error) {
+        // Misserfolg
+        $('#eintraegeAnzeigen').html('<div id="eintraegeAnzeigen"></div>');
+        $('#eintraegeAnzeigen').append('<p>' + print_r(error) + '</p>');
+    });
+
+
+}
+
 /*
  * Auswertungen für Rätsel
  * @param name dieser ist mit dem Namen der Auswahlfelder gleichzusetzen. 
