@@ -20,7 +20,7 @@
     <icon src="icon.png" />
     <gap:splash src="splash.png" />        
     -->
-    <icon src="images/splash/android/ldpi_splash.png" gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="images/splash/android/ldpi_splash.png" gap:platform="android" gap:density="ldpi" />
     <gap:splash src="images/splash/android/mdpi_splash.png" gap:platform="android" gap:density="mdpi" />
     <gap:splash src="images/splash/android/hdpi_splash.png" gap:platform="android" gap:density="hdpi" />
     <gap:splash src="images/splash/android/xhdpi_splash.png" gap:platform="android" gap:density="xhdpi" />
