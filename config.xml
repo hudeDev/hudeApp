@@ -16,6 +16,8 @@
     <preference name="orientation" value="default" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="true" />
+    <preference name="load-url-timeout" value="30000" />
+    <preference name="splash-screen-duration" value="15000" />
     <!--
     <icon src="icon.png" />
     <gap:splash src="splash.png" />        
