@@ -273,7 +273,7 @@ function dateisystem() {
             }
         }, function(error) {
             alert(error.code);
-        })
+        });
     }, function(error) {
         alert(error.code);
     });
@@ -291,7 +291,7 @@ function downloadNew() {
                     }
                 }, function(error) {
                     alert(error.code);
-                })
+                });
             }, function(error) {
         alert(print_r(error));
     });
