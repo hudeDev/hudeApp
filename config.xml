@@ -12,7 +12,7 @@
         Touristik-Palette Hude e.V.
     </author> 
     <!-- Allgemein -->
-    <preference name="phonegap-version" value="2.9.0" />
+    <preference name="phonegap-version" value="2.7.0" />
     <preference name="orientation" value="default" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="true" />
