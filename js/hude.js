@@ -12,7 +12,6 @@ function hudeLoadFooter() {
     $('[data-role=footer]').load('_footer.html', function() {
         $(this).trigger("create");
     });
-    alert('jetzt');
 }
 
 function hudeCachePages() {
