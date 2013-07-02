@@ -23,11 +23,14 @@
             $(document).on('pageinit', function(event) {
                 hudeAppStartUp();
             });
+            $('#pageRaetselPLPC').on("pagecreate", function(event) {
+                alert('erstellt');
+            });
         </script>
     </head>
     <body>
         <!-- Seiten Aufbau -->
-        <div id="pageRaetselPLP" data-role="page">
+        <div id="pageRaetselPLPC" data-role="page">
             <!-- Kopf der Seite -->
             <div id="hudeHeader" data-role="header">
                 <!-- Button zum Öffnen der Seitenleiste -->
