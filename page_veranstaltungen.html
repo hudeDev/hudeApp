@@ -61,7 +61,7 @@
                             for (var i = 0; i < data.length; i++) {
                                 
                                 append += '<tr>';
-                                $('#tph_veranstaltungen').append('<tr>');
+                                //$('#tph_veranstaltungen').append('<tr>');
                                 if (data[i]['datumEnd'] === '') {
                                     append += '<td>' + data[i]['datumStart'] + '</td>';
                                     // $('#tph_veranstaltungen').append('<td>' + data[i]['datumStart'] + '</td>');
@@ -70,8 +70,13 @@
                                     // $('#tph_veranstaltungen').append('<td>' + data[i]['datumStart'] + ' - ' + data[i]['datumEnd'] + '</td>');
                                 }
                                 append += '<td>' + data[i]['uhrzeit'] + '</td>';
-                                append += '<td>' + data[i]['titel'] + '</td>';
-                                append += '<td>' + data[i]['beschreibung'] + '</td>';
+                                append += '<td>&nbsp;</td>';
+                                append += '<tr>';
+                                append += '<td colspan="2">' + data[i]['titel'] + '</td>';
+                                append += '<td>&nbsp;</td>';
+                                append += '<tr>';
+                                append += '<td colspan="3">' + data[i]['beschreibung'] + '</td>';
+                                append += '</tr>';
                                 /*
                                 $('#tph_veranstaltungen').append('<td>' + data[i]['uhrzeit'] + '</td>');
                                 $('#tph_veranstaltungen').append('<td>' + data[i]['titel'] + '</td>');
