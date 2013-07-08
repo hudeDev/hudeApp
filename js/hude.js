@@ -236,8 +236,7 @@ function loadURL(url) {
 // Navigation
 function hudeOpenPage(path) {
     $.mobile.changePage(path, {
-        //transition: "none",
-        transition: "slide",
+        transition: "none",
         changeHash: true
     });
 }
