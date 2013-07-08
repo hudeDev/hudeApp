@@ -26,6 +26,16 @@
                 hudeAppStartUp();
             });
         </script>
+        <script>
+            function pfad() {
+                var pfad = fileSystem.root.fullPath;
+                $('#pfad').html('<p><span id="pfad">' + pfad + '</span></p>');
+                return pfad;
+            }
+            function deviceready() {
+                $('#pfadStatus').html('<p id="pfadStatus">Device Ready</p>')
+            }
+        </script>
     </head>
     <body>
         <!-- Seiten Aufbau -->
@@ -39,10 +49,16 @@
             </div>
             <!-- Inhalt der Seite -->
             <div data-role="content">
+                <p id="pfadStatus"></p>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
-                <div id="filereaderPrintR"></div>
-                <div id="eintraegeAnzeigen"></div>
-                <a href="#" onclick="downloadNew();" data-role="button">Download</a>
+                <script>
+                    document.addEventListener('deviceready', deviceready, false);
+                </script>
+                <div class="sehenswuerdigkeit">
+                    <h4>Pfad</h4>
+                    <p><span id="pfad"></span></p>
+                    <a href="#" data-role="button" onclick="pfad();">Pfad</a>
+                </div>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <!-- Fuß der Seite -->
