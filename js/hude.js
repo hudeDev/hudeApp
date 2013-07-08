@@ -16,29 +16,13 @@ function hudeLoadFooter() {
 
 function hudeCachePages() {
 // Seiten der App im DOM platzieren. 
-    /*
-     $.mobile.loadPage('page_ec-automaten.html', true);
-     $.mobile.loadPage('page_einkaufen.html', true);
-     $.mobile.loadPage('page_gastronomie.html', true);
-     $.mobile.loadPage('page_gesundheit.html', true);
-     $.mobile.loadPage('page_hude-info.html', true);
-     $.mobile.loadPage('page_hude-perfekt.html', true);
-     $.mobile.loadPage('page_schnitzeljagd.html', true);
-     $.mobile.loadPage('page_sehenswuerdigkeiten.html', true);
-     $.mobile.loadPage('page_unterkuenfte.html', true);
-     $.mobile.loadPage('dialog_einstellungen.html', true);
-     $.mobile.loadPage('dialog_hude-kontakt.html', true);
-     $.mobile.loadPage('page_sj_plp_abitur_a.html', true);
-     $.mobile.loadPage('page_sj_plp_abitur_b.html', true);
-     $.mobile.loadPage('page_sj_plp_abitur_c.html', true);
-     */
-    $.mobile.loadPage('_footer.html', true);
-    $.mobile.loadPage('_panel.html', true);
+    // $.mobile.loadPage('_footer.html', true);
+    // $.mobile.loadPage('_panel.html', true);
     $.mobile.loadPage('dialog_einstellungen.html', true);
     $.mobile.loadPage('dialog_hude-kontakt.html', true);
     $.mobile.loadPage('dialog_qr-code_scan_fehler.html', true);
     $.mobile.loadPage('dialog_qr-code_ungueltig.html', true);
-    $.mobile.loadPage('index.html', true);
+    // $.mobile.loadPage('index.html', true);
     $.mobile.loadPage('page_ec-automaten.html', true);
     $.mobile.loadPage('page_einkaufen.html', true);
     $.mobile.loadPage('page_filesystem.html', true);
@@ -54,14 +38,14 @@ function hudeCachePages() {
     $.mobile.loadPage('page_gastro_zur_krone.html', true);
     $.mobile.loadPage('page_gastronomie.html', true);
     $.mobile.loadPage('page_gesundheit.html', true);
-    $.mobile.loadPage('page_homescreen.html', true);
+    // $.mobile.loadPage('page_homescreen.html', true);
     $.mobile.loadPage('page_hude-info.html', true);
     $.mobile.loadPage('page_hude-perfekt.html', true);
     $.mobile.loadPage('page_parkmoeglichkeiten.html', true);
     $.mobile.loadPage('page_position.html', true);
     $.mobile.loadPage('page_schnitzeljagd.html', true);
     $.mobile.loadPage('page_sehenswuerdigkeiten.html', true);
-    $.mobile.loadPage('page_sj_external.html', true);
+    // $.mobile.loadPage('page_sj_external.html', true);
     $.mobile.loadPage('page_sj_plp_abitur.html', true);
     $.mobile.loadPage('page_sj_plp_abitur_a.html', true);
     $.mobile.loadPage('page_sj_plp_abitur_b.html', true);
@@ -115,7 +99,7 @@ function hudeCachePages() {
     $.mobile.loadPage('page_uk_pension_wuerdemann.html', true);
     $.mobile.loadPage('page_uk_wohnmobilstellplatz.html', true);
     $.mobile.loadPage('page_unterkuenfte.html', true);
-    $.mobile.loadPage('page_veranstaltungen.html', true);
+    // $.mobile.loadPage('page_veranstaltungen.html', true);
 
 }
 
