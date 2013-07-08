@@ -380,15 +380,21 @@ function hudeLoescheOrdner() {
 }
 
 function hudeLoeschenOrdnerErfolg(event) {
-    event.removeRecursively(successCallback, errorCallback);
+    event.removeRecursively(hudeLoeschenOrdnerErfolgSuccessCallback, hudeLoeschenOrdnerErfolgErrorCallback);
     $('#hudeLoescheOrdner').append('<p>hudeLoeschenOrdnerErfolg();</p>');
 }
 
 function hudeLoeschenOrdnerMissErfolg(event) {
-    $('#hudeLoescheOrdner').append(print_r(event));
+    $('#hudeLoescheOrdner').append('<p>hudeLoeschenOrdnerMissErfolg()</p>' + print_r(event));
 }
 
+function hudeLoeschenOrdnerErfolgSuccessCallback(event) {
+    $('#hudeLoescheOrdner').append('<p>hudeLoeschenOrdnerErfolgSuccessCallback</p>');
+}
 
+function hudeLoeschenOrdnerErfolgErrorCallback(event) {
+    $('#hudeLoescheOrdner').append('<p>hudeLoeschenOrdnerErfolgErrorCallback</p>');
+}
 
 /*
  * Auswertungen für Rätsel
