@@ -336,11 +336,12 @@ function pausecomp(ms) {
 function dateisystem() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
         console.log("Root = " + fs.root.fullPath);
+        $('#dateisystem').append('<p>Root = ' + fs.root.fullPath + '</p>');
         var directoryReader = fs.root.createReader();
         directoryReader.readEntries(function(entries) {
             var i;
             for (i = 0; i < entries.length; i++) {
-                $('#eintraegeAnzeigen').append(entries[i].name + '<br/>');
+                $('#dateisystem').append(entries[i].name + '<br/>');
                 // console.log(entries[i].name);
             }
         }, function(error) {

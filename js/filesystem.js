@@ -323,6 +323,7 @@ var FileClient = (function() {
 })();
 
 function testerKlasse() {
+    alert("an");
     fc = new FileClient();
     alert(print_r(fc.init()));
 }
