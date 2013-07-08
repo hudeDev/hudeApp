@@ -333,81 +333,62 @@ function pausecomp(ms) {
     }
 }
 
-function dateisystem() {
+function hudeDateisystem() {
+    $('#hudeDateisystem').html('<div id="hudeDateisystem"></div>');
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
-        console.log("Root = " + fs.root.fullPath);
-        $('#dateisystem').append('<p>Root = ' + fs.root.fullPath + '</p>');
+        $('#hudeDateisystem').append('<p>Root = ' + fs.root.fullPath + '</p>');
         var directoryReader = fs.root.createReader();
         directoryReader.readEntries(function(entries) {
             var i;
             for (i = 0; i < entries.length; i++) {
-                $('#dateisystem').append(entries[i].name + '<br/>');
+                $('#hudeDateisystem').append(entries[i].name + '<br/>');
                 // console.log(entries[i].name);
             }
         }, function(error) {
-            alert(error.code);
+            $('#hudeDateisystem').append('<p>' + error.code + '</p>');
         });
     }, function(error) {
-        alert(error.code);
+        $('#hudeDateisystem').append('<p>' + error.code + '</p>');
     });
 }
 
-
-function downloadNew() {
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
-            function(fs) {
-                var directoryReader = fs.root.createReader();
-                directoryReader.readEntries(function(entries) {
-                    var i;
-                    for (i = 0; i < entries.length; i++) {
-                        $('#eintraegeAnzeigen').append(entries[i].name + '<br/>');
-                    }
-                }, function(error) {
-                    alert(error.code);
-                });
-            }, function(error) {
-        alert(print_r(error));
-    });
-}
-
-function downloadNewSuccess() {
-    console.log('downloadNewSuccess');
-    var directoryReader = dirEntry.createReader();
-    return null;
-}
-
-function downloadNewFail() {
-    console.log('downloadNewFail');
-    return null;
-}
-
-function download() {
-    /* Lesen der Ordner
-     * 
-     * @type @exp;dirEntry@call;createReader
-     */
-// Erstellen des DirectoryReader um Ordner zu lesen.
-    alert('download() #1');
-    var directoryReader = dirEntry.createReader();
-    $('#filereaderPrintR').html('<div id="filereaderPrintR"></div>');
-    $('#filereaderPrintR').append(print_r(directoryReader));
-    directoryReader.readEntries(function(entries) {
-        // Erfolg
-        $('#eintraegeAnzeigen').html('<div id="eintraegeAnzeigen"></div>');
-        alert('Erfolg');
-        var i;
-        for (i = 0; i < entries.length; i++) {
-            $('#eintraegeAnzeigen').append(entries[i].name + '<br/>');
-        }
+function hudeErstelleOrdner() {
+    $('#hudeErstelleOrdner').html('<div id="hudeErstelleOrdner"></div>');
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
+        $('#hudeErstelleOrdner').append('<p>Root = ' + fs.root.fullPath + '</p>');
+        fs.root.getDirectory("Hude", {create: true, exclusive: false}, hudeErstelleOrdnerErfolg, hudeErstelleOrdnerMisserfolg);
     }, function(error) {
-        alert('Misserfolg');
-        // Misserfolg
-        $('#eintraegeAnzeigen').html('<div id="eintraegeAnzeigen"></div>');
-        $('#eintraegeAnzeigen').append('<p>' + print_r(error) + '</p>');
+        $('#hudeErstelleOrdner').append('<p>hudeErstelleOrdner():</p>' + print_r(error));
     });
-
-
 }
+
+function hudeErstelleOrdnerErfolg(event) {
+    $('#hudeErstelleOrdner').append('<p>hudeErstelleOrdnerErfolg():</p>' + print_r(event));
+}
+
+function hudeErstelleOrdnerMisserfolg(event) {
+    $('#hudeErstelleOrdner').append('<p>hudeErstelleOrdnerMisserfolg():</p>' + print_r(event));
+}
+
+function hudeLoescheOrdner() {
+    $('#hudeLoescheOrdner').html('<div id="hudeLoescheOrdner"></div>');
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
+        fs.root.getDirectory("Hude", {}, hudeLoeschenOrdnerErfolg, hudeLoeschenOrdnerMissErfolg);
+    }, function(error) {
+        $('#hudeLoescheOrdner').append('<p>hudeLoescheOrdner():</p>' + print_r(error));
+    });
+}
+
+function hudeLoeschenOrdnerErfolg(event) {
+    event.removeRecursively(successCallback, errorCallback);
+    $('#hudeLoescheOrdner').append('<p>hudeLoeschenOrdnerErfolg();</p>');
+}
+
+function hudeLoeschenOrdnerMissErfolg(event) {
+    $('#hudeLoescheOrdner').append(print_r(event));
+}
+
+
 
 /*
  * Auswertungen für Rätsel

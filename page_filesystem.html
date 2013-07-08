@@ -55,19 +55,17 @@
                 <script>
                     document.addEventListener('deviceready', deviceready, false);
                 </script>
-                <div class="sehenswuerdigkeit">
-                    <h4>Pfad</h4>
-                    <p><span id="pfad"></span></p>
-                    <a href="#" data-role="button" onclick="pfad();">Pfad</a>
+                <div class="sehenwuerdigkeit">
+                    <div id="hudeErstelleOrdner"></div>
+                    <a href="#" onclick="hudeErstelleOrdner();" data-role="button">Ordner erstellen</a>
                 </div>
-                <div class="sehenswuerdigkeit">
-                    <h4>Dateiliste</h4>
-                    <div id="dateisystem"></div>
-                    <a href="#" data-role="button" onclick="dateisystem();">File</a>
+                <div class="sehenwuerdigkeit">
+                    <div id="hudeDateisystem"></div>
+                    <a href="#" onclick="hudeDateisystem();" data-role="button">Dateisystem anzeigen</a>
                 </div>
-                <div class="sehenswuerdigkeit">
-                    <h4>Tester</h4>
-                    <a href="#" data-role="button" onclick="testerKlasse();">File</a>
+                <div class="sehenwuerdigkeit">
+                    <div id="hudeLoescheOrdner"></div>
+                    <a href="#" onclick="hudeLoescheOrdner();" data-role="button">Ordner löschen</a>
                 </div>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
