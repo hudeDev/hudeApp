@@ -492,11 +492,13 @@ function hudeDownloadContent() {
             }, function(error) {
                 alert('Fehler beim Lesen von Hude');
             });
+            alert('Hier sollte der Pfad passieren');
             // Pfad: 
             $('#hudeDownloadContent').append('<p>' + directory.root.fullPath + '</p>');
             // Auslesen von Hude
 
             // Download Dateien für Hude
+            alert('Download');
             var ft = new FileTransfer();
             var uri = encodeURI("http://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Wappen_Hude.png/140px-Wappen_Hude.png");
             var downloadPfad = directory.root.fullPath + '/hude.png';
