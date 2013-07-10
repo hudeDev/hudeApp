@@ -478,7 +478,7 @@ function hudeDownloadContent() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
         fileSystem.root.getDirectory("Hude", {create: true, exclusive: false}, function(directory) {
             // Ordner erstellt/Zugriff auf Ordner
-
+            $('#hudeDownloadContent').append(print_r(directory));
             // Auslesen von Hude 
             alert('auslesen #1');
             var directoryReader = fileSystem.root.createReader();
@@ -490,11 +490,11 @@ function hudeDownloadContent() {
                     // console.log(entries[i].name);
                 }
             }, function(error) {
-                alert('Fehler beim Lesen von Hude');
+                alert('Fehler beim Lesen von Hude' + print_r(error));
             });
             alert('Hier sollte der Pfad passieren');
             // Pfad: 
-            $('#hudeDownloadContent').append('<p>' + directory.root.fullPath + '</p>');
+            $('#hudeDownloadContent').append('<p>' + fileSystem.root.fullPath + '</p>');
             // Auslesen von Hude
 
             // Download Dateien für Hude
