@@ -484,8 +484,11 @@ function hudeListeDownloadContent() {
 function hudeDownloadContent() {
     // Zugriff auf das Dateisystem
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+        $('#hudeDownloadContent').append('<h1>filesystem</h1>');
+        $('#hudeDownloadContent').append(print_r(fileSystem));
         fileSystem.root.getDirectory("Hude", {create: true, exclusive: false}, function(directory) {
             // Ordner erstellt/Zugriff auf Ordner
+            $('#hudeDownloadContent').append('<h1>directory</h1>');
             $('#hudeDownloadContent').append(print_r(directory));
             // Auslesen von Hude 
             alert('auslesen #1');
