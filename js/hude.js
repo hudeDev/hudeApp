@@ -474,7 +474,7 @@ function hudeListeDownloadContent() {
     // Inhalte des Hude-Download Ordner anzeigen
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
         $('#hudeDownloadContent').append('<p>Zugriff aufs Dateisystem</p>');
-        fileSystem.root.getDirectory("Hude", {create: true, exclusive: false}, function(dir) {
+        fileSystem.root.getDirectory("/Hude", {create: true, exclusive: false}, function(dir) {
             var dirReader = dir.root.createReader();
             $('#hudeDownloadContent').append('<p style="background-color: red;">' + print_r(dirReader) + '</p>');
         }, function(error) {
