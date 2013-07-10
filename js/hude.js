@@ -403,14 +403,14 @@ function hudeDownloadDatei() {
 
 function hudeDownloadDateiDateisystemErfolg(filesystem) {
     $('#hudeDownloadDatei').append('<p>... Erfolg</p>');
-    hudeDownloadDateiDateisystemErfolgDownload();
+    hudeDownloadDateiDateisystemErfolgDownload(filesystem);
 }
 
 function hudeDownloadDateiDateisystemMisserfolg(event) {
     $('#hudeDownloadDatei').append('<p>... Fehler!</p><p>' + print_r(event) + '</p>');
 }
 
-function hudeDownloadDateiDateisystemErfolgDownload() {
+function hudeDownloadDateiDateisystemErfolgDownload(filesystem) {
     var downloadPfad = fileSystem.root.fullPath;
     $('#hudeDownloadDatei').append('<p> Der Download erfolgt in: ' + downloadPfad + '</p>');
 }
