@@ -474,8 +474,14 @@ function hudeListeDownloadContent() {
     // Inhalte des Hude-Download Ordner anzeigen
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
         $('#hudeDownloadContent').append('<p>Zugriff aufs Dateisystem</p>');
+        fileSystem.root.getDirectory("Hude", {}, function(dir) {
+            var dirReader = dir.root.createReader();
+            $('#hudeDownloadContent').append('<p style="background-color: red;">' + print_r(dirReader) + '</p>');
+        }, function(error) {
+            
+        });
         var dirReader = fileSystem.root.createReader();
-        $('#hudeDownloadContent').append('<p>' + print_r(dirReader) + '</p>');
+        $('#hudeDownloadContent').append('<p style="background-color: green;">' + print_r(dirReader) + '</p>');
     }, function(error) {
         alert('Error requestFileSystem' + error.code);
     });
