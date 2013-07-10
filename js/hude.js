@@ -395,6 +395,25 @@ function hudeLoeschenOrdnerErfolgErrorCallback(event) {
     $('#hudeLoescheOrdner').append('<p>hudeLoeschenOrdnerErfolgErrorCallback</p>');
 }
 
+function hudeDownloadDatei() {
+    // Dateisystem starten
+    $('#hudeDownloadDatei').append('<p>Hole Dateisystem ...</p>');
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, hudeDownloadDateiDateisystemErfolg, hudeDownloadDateiDateisystemMisserfolg);  
+}
+
+function hudeDownloadDateiDateisystemErfolg(filesystem) {
+    $('#hudeDownloadDatei').append('<p>... Erfolg</p>');
+    
+}
+
+function hudeDownloadDateiDateisystemMisserfolg(event) {
+    $('#hudeDownloadDatei').append('<p>... Fehler!</p><p>' + print_r(event) + '</p>');
+}
+
+function hudeDownloadDateiDateisystemErfolgDownload() {
+    var downloadPfad = fileSystem.root.fullPath;
+    $('#hudeDownloadDatei').append('<p> Der Download erfolgt in: ' + downloadPfad + '</p>');
+}
 /*
  * Auswertungen für Rätsel
  * @param name dieser ist mit dem Namen der Auswahlfelder gleichzusetzen. 
