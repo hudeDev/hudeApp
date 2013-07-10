@@ -411,7 +411,7 @@ function hudeDownloadDateiDateisystemMisserfolg(event) {
 }
 
 function hudeDownloadDateiDateisystemErfolgDownload(fileSystem) {
-    var downloadPfad = fileSystem.root.fullPath + 'hude.png';
+    var downloadPfad = fileSystem.root.fullPath + '/hude.png';
     $('#hudeDownloadDatei').append('<p> Der Download erfolgt in: ' + downloadPfad + '</p>');
 
     var ft = new FileTransfer();
