@@ -449,13 +449,13 @@ function hudeLoescheDatei() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
             function(fs) {
                 alert('Zugriff Dateisystem');
-                fs.getFile('hude.png', {create: false},
+                fs.root.getFile('hude.png', {create: false},
                 function(entry) {
                     alert('Datei gefunden');
                     entry.remove(function(entry) {alert('Löschen erfolgreich');}, function(entry) {alert('Löschen fehlgeschlagen');});
                 },
                         function(error) {
-                            alert(print_r(error));
+                            alert('nö');
                         });
             },
             function(error) {
