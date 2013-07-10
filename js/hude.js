@@ -401,16 +401,16 @@ function hudeDownloadDatei() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, hudeDownloadDateiDateisystemErfolg, hudeDownloadDateiDateisystemMisserfolg);  
 }
 
-function hudeDownloadDateiDateisystemErfolg(filesystem) {
+function hudeDownloadDateiDateisystemErfolg(fileSystem) {
     $('#hudeDownloadDatei').append('<p>... Erfolg</p>');
-    hudeDownloadDateiDateisystemErfolgDownload(filesystem);
+    hudeDownloadDateiDateisystemErfolgDownload(fileSystem);
 }
 
 function hudeDownloadDateiDateisystemMisserfolg(event) {
     $('#hudeDownloadDatei').append('<p>... Fehler!</p><p>' + print_r(event) + '</p>');
 }
 
-function hudeDownloadDateiDateisystemErfolgDownload(filesystem) {
+function hudeDownloadDateiDateisystemErfolgDownload(fileSystem) {
     var downloadPfad = fileSystem.root.fullPath;
     $('#hudeDownloadDatei').append('<p> Der Download erfolgt in: ' + downloadPfad + '</p>');
 }
