@@ -432,10 +432,11 @@ function hudeDownloadDateiDateisystemErfolgDownload(fileSystem) {
 
     ft.download(uri, downloadPfad,
             function(entry) {
+                $('#hudeDownloadDateiStatus').append('<p>' + entry.toURL() + '</p>');
                 var media = new Media(entry.fullPath, null, function(e) {
-                    alert(JSON.stringify(e));
+                    $('#hudeDownloadDateiStatus').append('<p>' + JSON.stringify(e) + '</p>');
                 });
-                media.play();
+                //media.play();
             },
             function(error) {
                 alert('Crap something went wrong...');
