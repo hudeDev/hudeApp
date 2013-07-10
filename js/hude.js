@@ -480,8 +480,10 @@ function hudeDownloadContent() {
             // Ordner erstellt/Zugriff auf Ordner
 
             // Auslesen von Hude 
+            alert('auslesen #1');
             var directoryReader = directory.root.createReader();
             directoryReader.readEntries(function(entries) {
+                alert('ordner anzeigen');
                 var i;
                 for (i = 0; i < entries.length; i++) {
                     $('#hudeDownloadContent').append(entries[i].name + '<br/>');
@@ -537,6 +539,7 @@ function hudeDownloadContent() {
             // Auslesen von Hude
 
         }, function(error) {
+            alert('Fehler beim Zugriff/erstellen');
             // Beim Zugriff/erstellen des Ordners ist ein Fehler aufgetreten
         });
     }, function(error) {
