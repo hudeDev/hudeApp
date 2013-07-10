@@ -443,6 +443,23 @@ function hudeDownloadDateiDateisystemErfolgDownload(fileSystem) {
                 alert('Crap something went wrong...');
             });
 }
+
+function hudeLoescheDatei() {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
+            function(fs) {
+                hudeDateisystem();
+                fs.getFile('hude.png', {create: false},
+                function(entry) {
+                    entry.remove($('#hudeLoescheDateiStatus').append('<p>Löschen erfolgreich</p>'), $('#hudeLoescheDateiStatus').append('<p>Löschen fehlgechlagen</p>'));
+                    hudeDateisystem()
+                },
+                        function(error) {
+                            $('#hudeLoescheDateiStatus').append('<p>' + print_r(error) + '</p>')
+                        });
+            },
+            function(error) {
+            });
+}
 /*
  * Auswertungen für Rätsel
  * @param name dieser ist mit dem Namen der Auswahlfelder gleichzusetzen. 
