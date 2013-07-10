@@ -433,6 +433,7 @@ function hudeDownloadDateiDateisystemErfolgDownload(fileSystem) {
     ft.download(uri, downloadPfad,
             function(entry) {
                 $('#hudeDownloadDateiStatus').append('<p>' + entry.toURL() + '</p>');
+                $('#hudeDownloadDateiStatus').append('<img src="' + entry.toURL() + '" />');
                 var media = new Media(entry.fullPath, null, function(e) {
                     $('#hudeDownloadDateiStatus').append('<p>' + JSON.stringify(e) + '</p>');
                 });
