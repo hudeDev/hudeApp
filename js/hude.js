@@ -470,7 +470,15 @@ function hudeLoescheDatei() {
 //function hudeLoesche
 
 function hudeListeDownloadContent() {
+    $('#hudeDownloadContent').html('<div id="hudeDownloadContent"></div>');
     // Inhalte des Hude-Download Ordner anzeigen
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+        $('#hudeDownloadContent').append('<p>Zugriff aufs Dateisystem</p>');
+        var dirReader = fileSystem.root.createReader();
+        $('#hudeDownloadContent').append('<p>' + print_r(dirReader) + '</p>');
+    }, function(error) {
+        alert('Error requestFileSystem' + error.code);
+    });
 }
 
 function hudeDownloadContent() {
