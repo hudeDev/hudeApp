@@ -496,14 +496,18 @@ function hudeDownloadContent() {
             directoryReader.readEntries(function(entries) {
                 alert('ordner anzeigen');
                 var i;
+                $('#hudeDownloadContent').append('<h1>inhalt start</h1>');
                 for (i = 0; i < entries.length; i++) {
+                    
                     $('#hudeDownloadContent').append(entries[i].name + '<br/>');
+                    
                     // console.log(entries[i].name);
                 }
+                $('#hudeDownloadContent').append('<h1>inhalt ende</h1>');
             }, function(error) {
                 alert('Fehler beim Lesen von Hude' + print_r(error));
             });
-            alert('Hier sollte der Pfad passieren');
+            //alert('Hier sollte der Pfad passieren');
             // Pfad: 
             $('#hudeDownloadContent').append('<p>' + fileSystem.root.fullPath + '</p>');
             // Auslesen von Hude
