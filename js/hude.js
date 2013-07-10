@@ -452,7 +452,11 @@ function hudeLoescheDatei() {
                 fs.root.getFile('hude.png', {create: false},
                 function(entry) {
                     alert('Datei gefunden');
-                    entry.remove(function(entry) {alert('Löschen erfolgreich');}, function(entry) {alert('Löschen fehlgeschlagen');});
+                    entry.remove(function(entry) {
+                        alert('Löschen erfolgreich');
+                    }, function(entry) {
+                        alert('Löschen fehlgeschlagen');
+                    });
                 },
                         function(error) {
                             alert('nö');
@@ -462,6 +466,88 @@ function hudeLoescheDatei() {
                 alert('Kein Zugriff aufs Dateisystem');
             });
 }
+
+//function hudeLoesche
+
+function hudeListeDownloadContent() {
+    // Inhalte des Hude-Download Ordner anzeigen
+}
+
+function hudeDownloadContent() {
+    // Zugriff auf das Dateisystem
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+        fileSystem.root.getDirectory("Hude", {create: true, exclusive: false}, function(directory) {
+            // Ordner erstellt/Zugriff auf Ordner
+
+            // Auslesen von Hude 
+            var directoryReader = directory.root.createReader();
+            directoryReader.readEntries(function(entries) {
+                var i;
+                for (i = 0; i < entries.length; i++) {
+                    $('#hudeDownloadContent').append(entries[i].name + '<br/>');
+                    // console.log(entries[i].name);
+                }
+            }, function(error) {
+                alert('Fehler beim Lesen von Hude');
+            });
+            // Pfad: 
+            $('#hudeDownloadContent').append('<p>' + directory.root.fullPath + '</p>');
+            // Auslesen von Hude
+
+            // Download Dateien für Hude
+            var ft = new FileTransfer();
+            var uri = encodeURI("http://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Wappen_Hude.png/140px-Wappen_Hude.png");
+            var downloadPfad = directory.root.fullPath + '/hude.png';
+            ft.onprogress = function(progressEvent) {
+                if (progressEvent.lengthComputable) {
+                    var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+                    $('#hudeDownloadContentStatus').html('<p id="hudeDownloadContentStatus">' + perc + "% geladen...</p>");
+                } else {
+                    $('#hudeDownloadContentStatus').html('<p id="hudeDownloadContentStatus">Kann Status nicht anzeigen - es wird geladen</p>');
+                }
+            };
+
+            ft.download(uri, downloadPfad,
+                    function(entry) {
+                        $('#hudeDownloadContent').append('<p>' + entry.toURL() + '</p>');
+                        $('#hudeDownloadContent').append('<img src="' + entry.toURL() + '" />');
+                        var media = new Media(entry.fullPath, null, function(e) {
+                            $('#hudeDownloadContent').append('<p>' + JSON.stringify(e) + '</p>');
+                        });
+                        //media.play();
+                    },
+                    function(error) {
+                        alert('Crap something went wrong...');
+                    });
+            // Download Dateien für Hude
+
+            // Auslesen von Hude 
+            var directoryReader = directory.root.createReader();
+            directoryReader.readEntries(function(entries) {
+                var i;
+                for (i = 0; i < entries.length; i++) {
+                    $('#hudeDownloadContent').append(entries[i].name + '<br/>');
+                    // console.log(entries[i].name);
+                }
+            }, function(error) {
+                alert('Fehler beim Lesen von Hude');
+            });
+            // Pfad: 
+            $('#hudeDownloadContent').append('<p>' + directory.root.fullPath + '</p>');
+            // Auslesen von Hude
+
+        }, function(error) {
+            // Beim Zugriff/erstellen des Ordners ist ein Fehler aufgetreten
+        });
+    }, function(error) {
+        // Beim Zugriff auf das Dateisystem ist ein Fehler aufgetreten
+    });
+
+    // Bilder
+    // Videos
+    // Kartenmaterial
+}
+
 /*
  * Auswertungen für Rätsel
  * @param name dieser ist mit dem Namen der Auswahlfelder gleichzusetzen. 
