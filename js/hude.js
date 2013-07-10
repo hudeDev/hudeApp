@@ -398,7 +398,7 @@ function hudeLoeschenOrdnerErfolgErrorCallback(event) {
 function hudeDownloadDatei() {
     // Dateisystem starten
     $('#hudeDownloadDatei').append('<p>Hole Dateisystem ...</p>');
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, hudeDownloadDateiDateisystemErfolg, hudeDownloadDateiDateisystemMisserfolg);  
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, hudeDownloadDateiDateisystemErfolg, hudeDownloadDateiDateisystemMisserfolg);
 }
 
 function hudeDownloadDateiDateisystemErfolg(fileSystem) {
@@ -411,8 +411,35 @@ function hudeDownloadDateiDateisystemMisserfolg(event) {
 }
 
 function hudeDownloadDateiDateisystemErfolgDownload(fileSystem) {
-    var downloadPfad = fileSystem.root.fullPath;
+    var downloadPfad = fileSystem.root.fullPath + 'hude.png';
     $('#hudeDownloadDatei').append('<p> Der Download erfolgt in: ' + downloadPfad + '</p>');
+
+    var ft = new FileTransfer();
+    var uri = encodeURI("http://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Wappen_Hude.png/140px-Wappen_Hude.png");
+
+    ft.onprogress = function(progressEvent) {
+        if (progressEvent.lengthComputable) {
+            var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+            $('#hudeDownloadDateiStatus').html('<div id="hudeDownloadDateiStatus">' + perc + "% loaded...</div>");
+        } else {
+            if ($('#hudeDownloadDateiStatus').text() == "") {
+                $('#hudeDownloadDateiStatus').html('<div id="hudeDownloadDateiStatus">%-Angabe nicht möglich aber wir laden</div>');
+            } else {
+                $('#hudeDownloadDateiStatus').html('<div id="hudeDownloadDateiStatus">sonstige Nachricht</div>');
+            }
+        }
+    };
+
+    ft.download(uri, downloadPfad,
+            function(entry) {
+                var media = new Media(entry.fullPath, null, function(e) {
+                    alert(JSON.stringify(e));
+                });
+                media.play();
+            },
+            function(error) {
+                alert('Crap something went wrong...');
+            });
 }
 /*
  * Auswertungen für Rätsel
