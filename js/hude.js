@@ -445,19 +445,21 @@ function hudeDownloadDateiDateisystemErfolgDownload(fileSystem) {
 }
 
 function hudeLoescheDatei() {
+    alert('Starte löschen der Datei');
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
             function(fs) {
-                hudeDateisystem();
+                alert('Zugriff Dateisystem');
                 fs.getFile('hude.png', {create: false},
                 function(entry) {
-                    entry.remove($('#hudeLoescheDateiStatus').append('<p>Löschen erfolgreich</p>'), $('#hudeLoescheDateiStatus').append('<p>Löschen fehlgechlagen</p>'));
-                    hudeDateisystem()
+                    alert('Datei gefunden');
+                    entry.remove(function(entry) {alert('Löschen erfolgreich');}, function(entry) {alert('Löschen fehlgeschlagen');});
                 },
                         function(error) {
-                            $('#hudeLoescheDateiStatus').append('<p>' + print_r(error) + '</p>')
+                            alert(print_r(error));
                         });
             },
             function(error) {
+                alert('Kein Zugriff aufs Dateisystem');
             });
 }
 /*
