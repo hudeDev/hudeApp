@@ -481,7 +481,7 @@ function hudeDownloadContent() {
 
             // Auslesen von Hude 
             alert('auslesen #1');
-            var directoryReader = directory.root.createReader();
+            var directoryReader = fileSystem.root.createReader();
             directoryReader.readEntries(function(entries) {
                 alert('ordner anzeigen');
                 var i;
