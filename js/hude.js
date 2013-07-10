@@ -403,7 +403,7 @@ function hudeDownloadDatei() {
 
 function hudeDownloadDateiDateisystemErfolg(filesystem) {
     $('#hudeDownloadDatei').append('<p>... Erfolg</p>');
-    
+    hudeDownloadDateiDateisystemErfolgDownload();
 }
 
 function hudeDownloadDateiDateisystemMisserfolg(event) {
