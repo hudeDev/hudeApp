@@ -4,7 +4,6 @@
  * @returns {undefined}
  */
 function tphZugriffDateisystem(option, filename) {
-    console.log('tphZugriffDateisystem(option, filename)');
     switch (option) {
         case 'erstellen':
             console.log('case: "erstelle"');
@@ -23,40 +22,33 @@ function tphZugriffDateisystem(option, filename) {
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, tphAuslesenOrdnerSuccessCallback, tphAuslesenOrdnerErrorCallback);
             break;
         case 'audioAbspielen':
-            //jquery
-            //console.log($(location).attr('href'));
             console.log('case: "abspielen"');
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(filesystem) {
                 console.log('Dateisystem');
-                filesystem.root.getDirectory('Hude/audio', {create: false, exclusive: false}, function(directory) {
+                filesystem.root.getDirectory('Hude/audio', {create: true, exclusive: false}, function(directory) {
                     console.log('directory');
                     var directoryReader = directory.createReader();
                     directoryReader.readEntries(function(entries) {
                         console.log('entries');
+                        var dateiGefunden = false;
                         for (var i = 0; i < entries.length; i++) {
-                            console.log(entries[i].name + ' <-> ' + filename);
+                            //console.log(entries[i].name + ' <-> ' + filename);
                             if (entries[i].name === filename) {
+                                dateiGefunden = true;
                                 var filepath = entries[i].fullPath;
-                                console.log(filepath);
-
-                                /*
-                                 console.log('gefunden');
-                                 var filepath = entries[i].fullPath;
-                                 console.log(filepath);
-                                 media = new Media(filepath, null, function(e) {
-                                 console.log(JSON.stringify(e));
-                                 });
-                                 media.play();
-                                 i = entries.length - 1;
-                                 console.log(print_r(media));
-                                 */
+                                //console.log(filepath);
                                 tphAudioAbspielen(filepath);
+                            }
+                            if (!dateiGefunden) {
+                                console.log('Datei nicht gefunden.');
                             }
                         }
                     }, function() {
                         console.log('directoryReader - fehler');
                     });
-                }, null);
+                }, function(error) {
+                    console.log(print_r(error));
+                });
             }, null);
             break;
         default:
@@ -83,17 +75,8 @@ function tphAudioAbspielen(file) {
 
     // get audio duration
     var duration = audio.getDuration();
-
-    // set slider data
-
-
-    if (duration > 0) {
-        $('#tphAudioPosition').attr('max', Math.round(duration));
-        $('#tphAudioPosition').slider('refresh');
-    }
-
+    //$('#tphAudioDauer').html('<span id="tphAudioDauer">' + duration + '</span>');
     // play audio
-    console.log('play');
     audio.play();
 
     audio.seekTo(pausePos * 1000);
@@ -106,11 +89,11 @@ function tphAudioAbspielen(file) {
                     function(position) { // get position success
                         if (position > -1) {
                             console.log('Position: ' + position);
-                            tphSetAudioPosition(position);
+                            //tphSetAudioPosition(position);
                         }
                     }, function(e) { // get position error
                 console.log("Error getting pos=" + e);
-                setAudioPosition(duration);
+                //setAudioPosition(duration);
             }
             );
         }, 1000);
@@ -137,8 +120,7 @@ function tphAudioStoppen() {
 function tphSetAudioPosition(position) {
     pausePos = position;
     position = Math.round(position);
-    $('#tphAudioPosition').val(position);
-    $('#tphAudioPosition').slider('refresh');
+    //$('#tphAudioPosition').html('<span id="tphAudioPosition">' + position + '</span>');
 }
 
 /*
@@ -189,6 +171,7 @@ function tphDownloadOrdnerSuccessCallback(directory) {
     var file;
     var downloadPfad;
     var pfad = directory.fullPath;
+   
     for (var i = 0; i < dateien.length; i++) {
         uri = encodeURI(dateien[i]);
         file = tphDownloadPfad(uri);
@@ -197,7 +180,10 @@ function tphDownloadOrdnerSuccessCallback(directory) {
         ft.onprogress = function(progressEvent) {
             if (progressEvent.lengthComputable) {
                 var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-                console.log(perc + '% geladen' + downloadPfad);
+                //console.log(perc + '% geladen' + downloadPfad);
+                if (progressEvent.loaded === progressEvent.total) {
+                    console.log(i + 'DOWNLOAD COMPLETE' + downloadPfad);
+                }
             } else {
                 console.log('Kann Status nicht anzeigen - es wird geladen');
             }
@@ -206,12 +192,7 @@ function tphDownloadOrdnerSuccessCallback(directory) {
         ft.download(uri, downloadPfad,
                 function(entry) {
                     console.log(entry.toURL());
-                    /*
-                     var media = new Media(entry.fullPath, null, function(e) {
-                     console.log(JSON.stringify(e));
-                     });
-                     //media.play();
-                     */
+                    i++;
                 },
                 function(error) {
                     console.log('Crap something went wrong...');

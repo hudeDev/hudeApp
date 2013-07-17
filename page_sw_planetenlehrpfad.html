@@ -42,7 +42,15 @@
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
                         <h1>Hören Sie die Informationen</h1>
-                        Player integrieren
+                        <div id="tphPlayer" style="dislay: none">
+                            <div id="tphPlayerControl">
+                                <div class="row">
+                                    <div class="small-4 columns"><a href="#" onclick="tphZugriffDateisystem('audioAbspielen', 'planetenlehrpfad.mp3');"><img src="images/player/tph_play.png" /></a></div>
+                                    <div class="small-4 columns"><a href="#" onclick="tphAudioPause();"><img src="images/player/tph_pause.png" /></a></div>
+                                    <div class="small-4 columns"><a href="#" onclick="tphAudioStoppen();"><img src="images/player/tph_stop.png" /></a></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div data-role="collapsible" data-collapsed="false" data-inset="false">
                         <h1>Über den Planetenlehrpfad</h1>
@@ -138,7 +146,7 @@
                     </div>
                     <div>&nbsp;</div>
                 </div>
-            <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <!-- Fuß der Seite -->
             <div id="hudeFooter" data-role="footer" data-position="fixed">

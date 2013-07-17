@@ -36,6 +36,15 @@
             function deviceready() {
                 $('#pfadStatus').html('<p id="pfadStatus">Device Ready</p>');
             }
+            function readLocalStorage() {
+                var db = initiateLocalStorage();
+                $('#readLocalStorage').html('<div id="readLocalStorage">' + print_r(db) + '</div>');
+            }
+
+            function deleteLocalStorage() {
+                var db = initiateLocalStorage();
+                db.clear();
+            }
         </script>
     </head>
     <body>
@@ -55,6 +64,11 @@
                 <script>
                     document.addEventListener('deviceready', deviceready, false);
                 </script>
+                <div id="inhaltLocalStorage">
+                    <div id="readLocalStorage"></div>
+                    <a href="#" data-role="button" onclick="readLocalStorage();">LocalStorage Anzeigen</a>
+                    <a href="#" data-role="button" onclick="deleteLocalStorage();">LocalStorage Anzeigen</a>
+                </div>
                 <div class="sehenwuerdigkeit">
                     <div id="tphPlayer" >
                         <div id="tphPlayerPosition">
