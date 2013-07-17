@@ -53,8 +53,24 @@
                 <p id="pfadStatus">Status des Geräts - nicht bereit:</p>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <script>
-                    //document.addEventListener('deviceready', deviceready, false);
+                    document.addEventListener('deviceready', deviceready, false);
                 </script>
+                <div class="sehenwuerdigkeit">
+                    <div id="tphPlayer" >
+                        <div id="tphPlayerPosition">
+                            <input name="tphAudioPosition" id="tphAudioPosition" type="range">
+                        </div>
+                        <p>&nbsp;</p>
+                        <div id="tphPlayerControl">
+                            <div class="row">
+                                <div class="small-4 columns"><a href="#" onclick="tphZugriffDateisystem('audioAbspielen', 'torkapelle.mp3');"><img src="images/player/tph_play.png" /></a></div>
+                                <div class="small-4 columns"><a href="#" onclick="tphAudioPause();"><img src="images/player/tph_pause.png" /></a></div>
+                                <div class="small-4 columns"><a href="#" onclick="tphAudioStoppen();"><img src="images/player/tph_stop.png" /></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>&nbsp;</p>
                 <div class="sehenwuerdigkeit">
                     <div id="hudeDateisystem">
                         <div id="tphPlay"></div>
