@@ -29,7 +29,7 @@
         </script>
         <script>
             function pfad() {
-                var pfad = fileSystem.root.fullPath;
+                //var pfad = fileSystem.root.fullPath;
                 $('#pfad').html('<p><span id="pfad">' + pfad + '</span></p>');
                 return pfad;
             }
@@ -53,35 +53,47 @@
                 <p id="pfadStatus">Status des Geräts - nicht bereit:</p>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <script>
-                    document.addEventListener('deviceready', deviceready, false);
+                    //document.addEventListener('deviceready', deviceready, false);
                 </script>
                 <div class="sehenwuerdigkeit">
                     <div id="hudeDateisystem">
-                       <div id="tphDateisystem"></div>
+                        <div id="tphPlay"></div>
+                        <div id="tphStop"></div>
+                    </div>
+                </div>
+                <div class="sehenwuerdigkeit">
+                    <div id="hudeDateisystem">
+                        <div id="tphDateisystem"></div>
+                    </div>
+                    <a href="#" onclick="tphZugriffDateisystem('audioAbspielen', 'torkapelle.mp3');" data-role="button">Torkapelle - Start</a>
+                </div>
+                <div class="sehenwuerdigkeit">
+                    <div id="hudeDateisystem">
+                        <div id="tphDateisystem"></div>
                     </div>
                     <a href="#" onclick="tphZugriffDateisystem('erstellen');" data-role="button">erstellen</a>
                 </div>
                 <div class="sehenwuerdigkeit">
                     <div id="hudeDateisystem">
-                       <div id="tphDateisystem"></div>
+                        <div id="tphDateisystem"></div>
                     </div>
                     <a href="#" onclick="tphZugriffDateisystem('download');" data-role="button">download</a>
                 </div>
                 <div class="sehenwuerdigkeit">
                     <div id="hudeDateisystem">
-                       <div id="tphDateisystem"></div>
+                        <div id="tphDateisystem"></div>
                     </div>
                     <a href="#" onclick="tphZugriffDateisystem('loesche');" data-role="button">löschen</a>
                 </div>
                 <div class="sehenwuerdigkeit">
                     <div id="hudeDateisystem">
-                       <div id="tphDateisystem"></div>
+                        <div id="tphDateisystem"></div>
                     </div>
                     <a href="#" onclick="tphZugriffDateisystem('auslesen');" data-role="button">auslesen</a>
                 </div>
                 <div class="sehenwuerdigkeit">
                     <div id="hudeDateisystem">
-                       <div id="tphDateisystem"></div>
+                        <div id="tphDateisystem"></div>
                     </div>
                     <a href="#" onclick="tphZugriffDateisystem();" data-role="button">default</a>
                 </div>
