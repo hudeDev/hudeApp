@@ -1,10 +1,20 @@
 function hudeAppStartUp() {
+    console.log('hudeAppStartUp');
     var db = initiateLocalStorage();
     hudeLoadFooter();
     $(document).delegate('div[data-role=dialog]', 'pageinit', function() {
         checkAudience();
         checkAudio();
     });
+    var tphPlayer = db.getItem('tphPlayer');
+    console.log('###' + tphPlayer + '###');
+    if (tphPlayer === true) {
+        console.log('###' + tphPlayer + '###');
+        $('#tphPlayer').show();
+        $(".collapsiblePlayer").collapsibleset("refresh");
+    } else {
+        $('#tphPlayer').hide();
+    }
 }
 
 function hudeLoadFooter() {

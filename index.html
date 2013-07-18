@@ -27,6 +27,19 @@
         <script type="text/javascript">
             document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
+                var db = initiateLocalStorage();
+                var tphAppErsterStart = db.getItem('tphAppErsterStart');
+                console.log(tphAppErsterStart);
+                if (tphAppErsterStart === null) {
+                    // Timestamp setzen des ersten Starts
+                    db.setItem('tphAppErsterStart', +new Date);
+                    db.setItem('tphPlayer', false);
+                    // Überprüfen ob Dateien vorhanden sind.                    
+                } else {
+                    console.log('wurde schon einmal gestartet: ' + db.getItem('tphAppErsterStart'));
+                    db.setItem('tphPlayer', true);
+                }
+                console.log(tphAppErsterStart);
                 hudeAppStartUp();
             }
 
