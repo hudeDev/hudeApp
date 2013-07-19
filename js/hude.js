@@ -1,26 +1,54 @@
-function hudeAppStartUp() {
-    console.log('hudeAppStartUp');
+function leselLocalSpeich() {
     var db = initiateLocalStorage();
-    hudeLoadFooter();
-    $(document).delegate('div[data-role=dialog]', 'pageinit', function() {
-        checkAudience();
-        checkAudio();
+    console.log(print_r(db));
+}
+
+function hudeAppStartUp() {
+    var db = initiateLocalStorage();
+    tphZugriffDateisystem('audioUeberpruefen');
+    $(document).delegate('div[data-role=page]', 'pageinit', function() {
+        console.log('delegate');
+        tphLadeFooter();
+        tphUeberpruefeZielgruppe();
+        tphUberpruefeTon();
     });
     var tphPlayer = db.getItem('tphPlayer');
-    console.log('###' + tphPlayer + '###');
-    if (tphPlayer === true) {
+    console.log('####' + tphPlayer);
+
+    var tphAudioSelect = db.getItem('audioSelect');   
+    if (tphAudioSelect === 'de') {
+        $('.tph_de').show();
+        $('.tph_en').hide();
+        $('.tph_pd').hide();
+    }
+    if (tphAudioSelect === 'en') {
+        $('.tph_de').hide();
+        $('.tph_en').show();
+        $('.tph_pd').hide();
+    }
+    if (tphAudioSelect === 'pd') {
+        $('.tph_de').hide();
+        $('.tph_en').hide();
+        $('.tph_pd').show();
+    }
+
+
+    if (tphPlayer === 'true') {
         console.log('###' + tphPlayer + '###');
-        $('#tphPlayer').show();
-        $(".collapsiblePlayer").collapsibleset("refresh");
+        $('#tphPlayerControl').show();
+        $('#tphPlayerKeineDateien').hide();
     } else {
-        $('#tphPlayer').hide();
+        console.log('verstecken');
+        $('#tphPlayerControl').hide();
+        $('#tphPlayerKeineDateien').show();
     }
 }
 
-function hudeLoadFooter() {
+function tphLadeFooter() {
 // Lade Footer
     $('[data-role=footer]').load('_footer.html', function() {
         $(this).trigger("create");
+        $(this).trigger("refresh");
     });
 }
 
@@ -127,14 +155,14 @@ function appStartUp() {
     console.log(print_r(db));
 }
 
-function checkAudience() {
+function tphUeberpruefeZielgruppe() {
     var audienceSelector = loadAudience();
     // Setzen des "checked"-Atrributs an den richtigen Radio-Button
-    if (audienceSelector === null || audienceSelector === 0 || audienceSelector === "0") {
+    if (audienceSelector === null || audienceSelector === 0 || audienceSelector === "audienceNone") {
         $("#audienceNone").attr("checked", "checked").checkboxradio('refresh');
-    } else if (audienceSelector === 1 || audienceSelector === "1") {
+    } else if (audienceSelector === "audienceFamily") {
         $("#audienceFamily").attr("checked", "checked").checkboxradio('refresh');
-    } else if (audienceSelector === 2 || audienceSelector === "2") {
+    } else if (audienceSelector === "audienceBestAger") {
         $("#audienceBestAger").attr("checked", "checked").checkboxradio('refresh');
     }
 }
@@ -158,21 +186,21 @@ function loadAudience() {
     return audienceSelector;
 }
 
-function saveAudience() {
+function tphSaveAudience() {
 // Speichert den gewählten Filter im LocalStorage
     var db = initiateLocalStorage();
     db.setItem("audienceSelect", $('input[name=audienceSelect]:checked').val());
     console.log("Speichere Einstellung");
 }
 
-function checkAudio() {
+function tphUberpruefeTon() {
     var audioSelector = loadAudio();
     // Setzen des "checked"-Atrributs an den richtigen Radio-Button
-    if (audioSelector === null || audioSelector === 0 || audioSelector === "0") {
+    if (audioSelector === null || audioSelector === 0 || audioSelector === "de") {
         $("#audioDeutsch").attr("checked", "checked").checkboxradio('refresh');
-    } else if (audioSelector === 1 || audioSelector === "1") {
+    } else if (audioSelector === "en") {
         $("#audioEnglisch").attr("checked", "checked").checkboxradio('refresh');
-    } else if (audioSelector === 2 || audioSelector === "2") {
+    } else if (audioSelector === "pd") {
         $("#audioPlatt").attr("checked", "checked").checkboxradio('refresh');
     }
 }
@@ -182,7 +210,7 @@ function loadAudio() {
     var audioSelector = db.getItem("audioSelect");
     return audioSelector;
 }
-function saveAudio() {
+function tphSaveAudio() {
 // Speichert den gewählten Filter im LocalStorage
     var db = initiateLocalStorage();
     db.setItem("audioSelect", $('input[name=audioSelect]:checked').val());
@@ -210,8 +238,8 @@ function pagebeforecreate() {
     // Setze Einstellungen der Auswahl;
     $(document).delegate('div[data-role=dialog]', 'pageinit', function() {
         console.log("check audience");
-        checkAudience();
-        checkAudio();
+        tphUeberpruefeZielgruppe();
+        tphUberpruefeTon();
     });
     // Nutze den Browser um Links zu öffnen
     $(function() {

@@ -1,6 +1,7 @@
 /*
  * 
  * @param {String} option Legt fest welche Operation nach dem Zugriff auf das Dateisystem durchgeführt werden soll.
+ * @param {String} filename Gibt an welche Datei abgespielt werden soll.
  * @returns {undefined}
  */
 function tphZugriffDateisystem(option, filename) {
@@ -23,6 +24,7 @@ function tphZugriffDateisystem(option, filename) {
             break;
         case 'audioAbspielen':
             console.log('case: "abspielen"');
+            // Abspielen der Datei
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(filesystem) {
                 console.log('Dateisystem');
                 filesystem.root.getDirectory('Hude/audio', {create: true, exclusive: false}, function(directory) {
@@ -30,17 +32,17 @@ function tphZugriffDateisystem(option, filename) {
                     var directoryReader = directory.createReader();
                     directoryReader.readEntries(function(entries) {
                         console.log('entries');
-                        var dateiGefunden = false;
                         for (var i = 0; i < entries.length; i++) {
                             //console.log(entries[i].name + ' <-> ' + filename);
                             if (entries[i].name === filename) {
-                                dateiGefunden = true;
                                 var filepath = entries[i].fullPath;
-                                //console.log(filepath);
+                                // Hole Spracheinstellungen
+                                var db = initiateLocalStorage();
+                                var audioSelect = db.getItem('audioSelect');
+                                // Dateipfad zur eingestellten Sprache
+                                filepath = tphAudioLanguagePath(filepath, audioSelect);
+                                // Abspielen der Datei starten
                                 tphAudioAbspielen(filepath);
-                            }
-                            if (!dateiGefunden) {
-                                console.log('Datei nicht gefunden.');
                             }
                         }
                     }, function() {
@@ -48,6 +50,60 @@ function tphZugriffDateisystem(option, filename) {
                     });
                 }, function(error) {
                     console.log(print_r(error));
+                });
+            }, null);
+            break;
+        case 'audioUeberpruefen':
+            console.log('Audio ueberpruefen');
+            // Überprüfen ob Orner & Dateien vorhanden sind
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(filesystem) {
+                // Überprüfen ob Ordner vorhanden ist
+                filesystem.root.getDirectory('Hude', {create: false, exclusive: false}, function() {
+                    db.setItem('tphPlayer', false);
+                    console.log('Ordner Hude')
+                }, function() {
+                    db.setItem('tphPlayer', false);
+                    console.log('Kein Ordner Hude')
+                });
+                filesystem.root.getDirectory('Hude/audio', {create: false, exclusive: false}, function(directory) {
+                    // Überprüfen ob Dateien vorhanden sind
+                    var dateien = tphDownloadOrdnerDateien();
+                    // Directory initialisieren
+                    var directoryReader = directory.createReader();
+                    // Ordner auslesen
+                    directoryReader.readEntries(function(entries) {
+                        console.log('Anzahl der MP3s: ' + entries.length);
+                        // Array mit den URI zum Download der Dateien
+                        var dateien = tphDownloadOrdnerDateien();
+                        // Anzahl der Dateien im Array
+                        var anzahlDateien = dateien.length;
+                        // Anzahl der Dateien im Ordner 'Hude/audio'
+                        var anzahlEntries = entries.length;
+                        // Unterschied zwischen Dateien in Dateiliste und den Dateien auf dem Dateisystem
+                        if (anzahlDateien !== anzahlEntries) {
+                            if (anzahlDateien > anzahlEntries) {
+                                // Nicht alle MP3s wurden vom Server heruntergeladen
+                                console.log(anzahlDateien + ' > ' + anzahlEntries);
+                                $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">' + anzahlEntries + '</span>');
+                                $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateien + '</span>');
+                                // Im localStorage festhalten: alle Dateien vorhanden
+                                var db = initiateLocalStorage();
+                                db.setItem('tphPlayer', false);
+                            }
+                        }
+                        // Im localStorage festhalten: alle Dateien vorhanden
+                        var db = initiateLocalStorage();
+                        db.setItem('tphPlayer', true);
+                        // Informationen auf der Einstellungen-Seite über die heruntergeladenen Dateien
+                        $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">' + anzahlEntries + '</span>');
+                        $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateien + '</span>');
+                    }, function() {
+                        console.log('directoryReader - fehler');
+                    });
+                }, function() {
+                    var anzahlDateien = tphDownloadOrdnerDateien();
+                    $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">0</span>');
+                    $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateien.length + '</span>');
                 });
             }, null);
             break;
@@ -161,54 +217,57 @@ function tphDownloadSuccessCallback(filesystem) {
 }
 
 function tphDownloadErrorCallback(error) {
-
+    console.log('#1');
 }
 
 function tphDownloadOrdnerSuccessCallback(directory) {
     var ft = new FileTransfer();
-
     var uri;
     var file;
     var downloadPfad;
     var pfad = directory.fullPath;
     var dateien = tphDownloadOrdnerDateien();
+    // Zurücksetzen der Anzeige in den Einstellungen von bereits heruntergeladenen Dateien und der zu ladenen Dateien.
+    $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">0</span>');
+    $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + dateien.length + '</span>');
+    // Download der Dateien starten
     for (var i = 0; i < dateien.length; i++) {
         uri = encodeURI(dateien[i]);
         file = tphDownloadPfad(uri);
         downloadPfad = pfad + '/' + file;
-
+        // Funktion die den Fortschritt der Datei angibt
         ft.onprogress = function(progressEvent) {
+            $('#tphDownloadStatus').html('<p id="tphDownloadStatus">Download wird ausgeführt ...</p>');
             if (progressEvent.lengthComputable) {
                 var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-                //console.log(perc + '% geladen' + downloadPfad);
+                console.log(perc + '% geladen' + downloadPfad);
                 if (progressEvent.loaded === progressEvent.total) {
-                    console.log(i + 'DOWNLOAD COMPLETE' + downloadPfad);
+                    var tphAnzahlAudioBereitsGeladen = parseInt($('#tphAnzahlAudioBereitsGeladen').text()) + 1;
+                    $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">' + tphAnzahlAudioBereitsGeladen + '</span>');
                 }
             } else {
                 console.log('Kann Status nicht anzeigen - es wird geladen');
             }
         };
-
+        // Funktion die den Download startet.
         ft.download(uri, downloadPfad,
                 function(entry) {
-                    console.log(entry.toURL());
-                    i++;
+                    $('#tphDownloadStatus').html('<p id="tphDownloadStatus">Download abgeschlossen</p>');
+                    //console.log(print_r(entry));
                 },
                 function(error) {
+                    $('#tphDownloadStatus').html('<p id="tphDownloadStatus"><strong style="color: red;">Fehler beim Download: ' + error.code + '</strong></p>');
                     console.log('Crap something went wrong...');
                 });
     }
 }
 
-
-
-
 function tphDownloadOrdnerErrorCallback(error) {
-
+    console.log('#2');
 }
 
 function tphDownloadOrdnerDateien() {
-    var dateien = new Array('http://m.touristik-palette-hude.de/download/audio/erde.mp3', 'http://m.touristik-palette-hude.de/download/audio/neptun.mp3', 'http://m.touristik-palette-hude.de/download/audio/unterkuenfte.mp3', 'http://m.touristik-palette-hude.de/download/audio/gastronomie.mp3', 'http://m.touristik-palette-hude.de/download/audio/planetenlehrpfad.mp3', 'http://m.touristik-palette-hude.de/download/audio/uranus.mp3', 'http://m.touristik-palette-hude.de/download/audio/hude-info.mp3', 'http://m.touristik-palette-hude.de/download/audio/pluto.mp3', 'http://m.touristik-palette-hude.de/download/audio/urwaldhasbruch.mp3', 'http://m.touristik-palette-hude.de/download/audio/jupiter.mp3', 'http://m.touristik-palette-hude.de/download/audio/saturn.mp3', 'http://m.touristik-palette-hude.de/download/audio/venus.mp3', 'http://m.touristik-palette-hude.de/download/audio/klosterbezirk.mp3', 'http://m.touristik-palette-hude.de/download/audio/schenke_und_remise.mp3', 'http://m.touristik-palette-hude.de/download/audio/vielstedter_bauernhaus.mp3', 'http://m.touristik-palette-hude.de/download/audio/kulturpfad.mp3', 'http://m.touristik-palette-hude.de/download/audio/skulpturenufer-und-haus.mp3', 'http://m.touristik-palette-hude.de/download/audio/wassermuehle.mp3', 'http://m.touristik-palette-hude.de/download/audio/mars.mp3', 'http://m.touristik-palette-hude.de/download/audio/sonne.mp3', 'http://m.touristik-palette-hude.de/download/audio/wittemoor.mp3', 'http://m.touristik-palette-hude.de/download/audio/merkur.mp3', 'http://m.touristik-palette-hude.de/download/audio/strassedermegalithkultur.mp3', 'http://m.touristik-palette-hude.de/download/audio/zeitstrahl2000.mp3', 'http://m.touristik-palette-hude.de/download/audio/museum.mp3', 'http://m.touristik-palette-hude.de/download/audio/torkapelle.mp3');
+    var dateien = new Array('http://m.touristik-palette-hude.de/download/audio/erde.mp3', 'http://m.touristik-palette-hude.de/download/audio/neptun.mp3', 'http://m.touristik-palette-hude.de/download/audio/unterkuenfte.mp3', 'http://m.touristik-palette-hude.de/download/audio/gastronomie.mp3', 'http://m.touristik-palette-hude.de/download/audio/planetenlehrpfad.mp3', 'http://m.touristik-palette-hude.de/download/audio/uranus.mp3', 'http://m.touristik-palette-hude.de/download/audio/hude-info.mp3', 'http://m.touristik-palette-hude.de/download/audio/pluto.mp3', 'http://m.touristik-palette-hude.de/download/audio/urwaldhasbruch.mp3', 'http://m.touristik-palette-hude.de/download/audio/jupiter.mp3', 'http://m.touristik-palette-hude.de/download/audio/saturn.mp3', 'http://m.touristik-palette-hude.de/download/audio/venus.mp3', 'http://m.touristik-palette-hude.de/download/audio/klosterbezirk.mp3', 'http://m.touristik-palette-hude.de/download/audio/schenke_und_remise.mp3', 'http://m.touristik-palette-hude.de/download/audio/vielstedter_bauernhaus.mp3', 'http://m.touristik-palette-hude.de/download/audio/kulturpfad.mp3', 'http://m.touristik-palette-hude.de/download/audio/skulpturenufer-und-haus.mp3', 'http://m.touristik-palette-hude.de/download/audio/wassermuehle.mp3', 'http://m.touristik-palette-hude.de/download/audio/mars.mp3', 'http://m.touristik-palette-hude.de/download/audio/sonne.mp3', 'http://m.touristik-palette-hude.de/download/audio/wittemoor.mp3', 'http://m.touristik-palette-hude.de/download/audio/merkur.mp3', 'http://m.touristik-palette-hude.de/download/audio/strassedermegalithkultur.mp3', 'http://m.touristik-palette-hude.de/download/audio/zeitstrahl2000.mp3', 'http://m.touristik-palette-hude.de/download/audio/museum.mp3', 'http://m.touristik-palette-hude.de/download/audio/torkapelle.mp3', 'http://m.touristik-palette-hude.de/download/audio/hude-info_en.mp3');
     return dateien;
 }
 
@@ -276,5 +335,17 @@ function tphDownloadPfad(url) {
         return downloadPfad;
     } else {
         console.log('ungueltige Domain');
+    }
+}
+
+function tphAudioLanguagePath(filepath, audioSelect) {
+    if (audioSelect === 'de') {
+        return filepath;
+    } else {
+        var i = filepath.indexOf(".");
+        if (i > 0) {
+            filepath = filepath.slice(0, i) + '_' + audioSelect + '.mp3';
+            return filepath;
+        }
     }
 }

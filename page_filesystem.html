@@ -26,24 +26,8 @@
             $(document).on('pageinit', function(event) {
                 hudeAppStartUp();
             });
-        </script>
-        <script>
-            function pfad() {
-                //var pfad = fileSystem.root.fullPath;
-                $('#pfad').html('<p><span id="pfad">' + pfad + '</span></p>');
-                return pfad;
-            }
             function deviceready() {
-                $('#pfadStatus').html('<p id="pfadStatus">Device Ready</p>');
-            }
-            function readLocalStorage() {
-                var db = initiateLocalStorage();
-                $('#readLocalStorage').html('<div id="readLocalStorage">' + print_r(db) + '</div>');
-            }
-
-            function deleteLocalStorage() {
-                var db = initiateLocalStorage();
-                db.clear();
+                $('#pfadStatus').html('<p id="pfadStatus">Status des Geräts - bereit</p>');
             }
         </script>
     </head>
@@ -62,13 +46,8 @@
                 <p id="pfadStatus">Status des Geräts - nicht bereit:</p>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <script>
-                    document.addEventListener('deviceready', deviceready, false);
+                    //document.addEventListener('deviceready', deviceready, false);
                 </script>
-                <div id="inhaltLocalStorage">
-                    <div id="readLocalStorage"></div>
-                    <a href="#" data-role="button" onclick="readLocalStorage();">LocalStorage Anzeigen</a>
-                    <a href="#" data-role="button" onclick="deleteLocalStorage();">LocalStorage Anzeigen</a>
-                </div>
                 <div class="sehenwuerdigkeit">
                     <div id="tphPlayer" >
                         <div id="tphPlayerPosition">

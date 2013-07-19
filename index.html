@@ -8,7 +8,7 @@
         <script src="phonegap.js"></script>
         <script src="barcodescanner.js"></script>
         <!-- Funktionlität Abhängigkeiten -->
-        <!-- <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script> -->
+        <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
 
         <script src="js/jquery-1.9.1.min.js"></script>
         <script src="js/jquery.mobile-1.3.1.min.js"></script>
@@ -29,29 +29,30 @@
             function onDeviceReady() {
                 var db = initiateLocalStorage();
                 var tphAppErsterStart = db.getItem('tphAppErsterStart');
-                console.log(tphAppErsterStart);
+                //console.log(tphAppErsterStart);
                 if (tphAppErsterStart === null) {
                     // Timestamp setzen des ersten Starts
                     db.setItem('tphAppErsterStart', +new Date);
+                    db.setItem('audioSelect', 'de');
                     db.setItem('tphPlayer', false);
                     // Überprüfen ob Dateien vorhanden sind.                    
                 } else {
-                    console.log('wurde schon einmal gestartet: ' + db.getItem('tphAppErsterStart'));
+                    //console.log('wurde schon einmal gestartet: ' + db.getItem('tphAppErsterStart'));
                     db.setItem('tphPlayer', true);
                 }
-                console.log(tphAppErsterStart);
-                hudeAppStartUp();
+                //console.log(tphAppErsterStart);
+                //hudeAppStartUp();
             }
 
             var db = initiateLocalStorage();
         </script>
         <script type="text/javascript">
             $(document).on('pageinit', function(event) {
-                //hudeAppStartUp();
+                hudeAppStartUp();
             });
         </script>
     </head>
-    <body class="use-fastclick">
+    <body> <!--class="use-fastclick" -->
         <!-- Seiten Aufbau -->
         <div id="pageIndex" data-role="page">
             <!-- Kopf der Seite -->
@@ -105,7 +106,7 @@
                         <li><a href="#" onclick="hudeOpenPage('index.html');" data-icon="hudeHaus"></a></li>
                         <li><a href="#" onclick="hudeQRCodeScan();" data-iconpos="noxtext" data-icon="hudeQR"></a></li>
                         <li><a href="#" onclick="hudeOpenPage('page_position.html');" data-iconpos="noxtext" data-icon="hudeGPS"></a></li>
-                        <li><a href="#" onclick="hudeOpenDialog('dialog_einstellungen.html');" data-icon="hudeEinstellungen"></a></li>
+                        <li><a href="#" onclick="hudeOpenPage('page_einstellungen.html');" data-icon="hudeEinstellungen"></a></li>
                         <li><a href="#" onclick="hudeOpenDialog('dialog_hude-kontakt.html');" data-icon="hudeEmail"></a></li>
                     </ul>
                 </div><!-- /navbar -->
