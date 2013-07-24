@@ -41,41 +41,62 @@
             </div>
             <!-- Inhalt der Seite -->
             <div data-role="content">
+                <!-- <img src="https://maps.googleapis.com/maps/api/staticmap?center=Madison, WI&amp;zoom=14&amp;size=288x200&amp;markers=Madison, WI&amp;sensor=false" height="200" width="288"> -->
                 <script>
-                    function netzwerkstatus() {
-                        console.log('netzwerkstatus');
-                        var networkState = navigator.connection.type;
-                        console.log('Status: ' + print_r(networkState));
-                        var states = {};
-
-                        states[Connection.UNKNOWN] = 'Unknown connection';
-                        states[Connection.ETHERNET] = 'Ethernet connection';
-                        states[Connection.WIFI] = 'WiFi connection';
-                        states[Connection.CELL_2G] = 'Cell 2G connection';
-                        states[Connection.CELL_3G] = 'Cell 3G connection';
-                        states[Connection.CELL_4G] = 'Cell 4G connection';
-                        states[Connection.CELL] = 'Cell generic connection';
-                        states[Connection.NONE] = 'No network connection';
-
-                        alert('Connection type: ' + states[networkState]);
-
-                        $('.verbindungstyp').html('<span class="verbindungstyp">' + print_r(networkState) + '<p>' + print_r(navigator.connection) + '</p></span>');
-                        console.log('abgeschlossen');
-                        if (networkState === 'wifi') {
-                            //none, 3g, 2g,
-                            $('.verbindungstyp').append('<p>Fette & Beste Verbindung</p>');
-                        }
-                    }
+                    // GPS abrufen + Kartenmaterial laden und einfügen
+                    tphGPSAbrufen('parkplaetze');
                 </script>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/parken/parkplatz.jpg" />
-                <div id="netzwerkstatus">
-                    <span class="verbindungstyp"></span>
-                    <a href="#" data-role="button" onclick="netzwerkstatus();">Verbindung?</a>
-                    <div class="tph_de"></div>
-                    <div class="tph_en"></div>
-                    <div class="tph_pd"></div>
+                <div id="tphParkplaetzeMap">
+
                 </div>
+                <div class="tph_de">
+                    <ul data-role="listview" data-inset="false">
+                        <li>
+                            <h2>Waldbad</h2>
+                            <p>Linteler Straße</p>
+                        </li>
+                        <li>
+                            <h2>St. Elisabeth Kirche</h2>
+                            <p>Kirchstraße</p>
+                        </li>
+                        <li>
+                            <h2>Sport- und Freizeitzentrum</h2>
+                            <p>Burgstraße/Vielstedter Kirchweg</p>
+                        </li>
+                        <li>
+                            <h2>Mehrzweckhalle</h2>
+                            <p>Vielstedter Kirchweg</p>
+                        </li>
+                        <li>
+                            <h2>Bibilothek</h2>
+                            <p>Vielstedter Kirchweg/Hurreler Weg</p>
+                        </li>
+                        <li>
+                            <h2>Skulpturenhaus</h2>
+                            <p>Mühlenweg</p>
+                        </li>
+                        <li>
+                            <h2>Hallenbad</h2>
+                            <p>Schützenstraße/Auf dem Klüterort</p>
+                        </li>
+                        <li>
+                            <h2>Bahnhofsvorplatz</h2>
+                            <p>Auf der Nordheide/Stöverskamp</p>
+                        </li>
+                        <li>
+                            <h2>Bahnhof</h2>
+                            <p>Bahnhof/Hohe Straße</p>
+                        </li>
+                        <li>
+                            <h2>Alter Torfplatz</h2>
+                            <p>Alter Torfplatz/Parkstraße</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tph_en"></div>
+                <div class="tph_pd">&nbsp;</div>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <!-- Fuß der Seite -->
