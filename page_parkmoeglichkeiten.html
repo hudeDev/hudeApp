@@ -33,12 +33,29 @@
                 <!-- Button zum Öffnen der Seitenleiste -->
                 <a href="#hudePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
                 <!-- Überschrift der Seite -->
-                <h1>Parkmöglichkeiten</h1>
+                <h1>
+                    <span class="tph_de">Parkmöglichkeiten</span>
+                    <span class="tph_en">Parkings</span>
+                    <span class="tph_pd">Parkplätze</span>
+                </h1>
             </div>
             <!-- Inhalt der Seite -->
             <div data-role="content">
+                <script>
+                    function netzwerkstatus() {
+                        var networkState = navigator.connection.type;
+                        $('#verbindungstyp').html('<span class="verbindungstyp">' + print_r(networkState) + '</span>');
+                    }
+                </script>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/parken/parkplatz.jpg" />
+                <div id="netzwerkstatus">
+                    <span class="verbindungstyp"></span>
+                    <a href="#" data-role="button" onclick="netzwerkstatus();">Verbindung?</a>
+                    <div class="tph_de"></div>
+                    <div class="tph_en"></div>
+                    <div class="tph_pd"></div>
+                </div>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <!-- Fuß der Seite -->

@@ -23,6 +23,7 @@
         <link href="css/hude.css" rel="stylesheet">
         <!-- Auszuführender Code beim App-Start -->
         <script type="text/javascript">
+
             $(document).on('pageinit', function(event) {
                 hudeAppStartUp();
             });
@@ -34,6 +35,40 @@
     <body>
         <!-- Seiten Aufbau -->
         <div id="pageFilesystem" data-role="page">
+            <script>
+                function tphGPSAbstand(lat1, lon1, lat2, lon2) {
+                    /*
+                     * http://snipplr.com/view/25479/ (letzter Abruf: 22.07.2013)
+                     */
+                    var R = 6371;
+                    var dLat = (lat2 - lat1) * Math.PI / 180;
+                    var dLon = (lon2 - lon1) * Math.PI / 180;
+                    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                    var d = R * c;
+                    if (d > 1) {
+                        return Math.round(d) + "km";
+                    }
+                    else if (d <= 1) {
+                        return Math.round(d * 1000) + "m";
+                    }
+                    return d;
+
+                }
+                function tphBildFinder(lat1, lon1, lat2, lon2) {
+                    var distanz = tphGPSAbstand(lat1, lon1, lat2, lon2);
+                    console.log(distanz.indexOf("km") !== -1);
+                    // Distanz < 1 km
+                    if (!distanz.indexOf("km") !== -1) {
+                        var meter = distanz.replace('m', '').trim();
+                        meter = parseInt(meter);
+                        if (meter <= 15) {
+                            // Bild wird als gesehen registriert
+                            console.log('Bild gefunden');
+                        }
+                    }
+                }
+            </script>
             <!-- Kopf der Seite -->
             <div id="hudeHeader" data-role="header">
                 <!-- Button zum Öffnen der Seitenleiste -->
@@ -48,6 +83,14 @@
                 <script>
                     //document.addEventListener('deviceready', deviceready, false);
                 </script>
+                <div class="sehenwuerdigkeit">
+                    <script>
+                        console.log('~ 20 Meter');
+                        tphBildFinder('53.145849323770705', '8.204485305846985', '53.14587402775898', '8.204700703261155', 'N');
+                        console.log('~ 80 Meter');
+                        tphBildFinder('51.145849323770705', '8.204485305846985', '53.14598575896011', '8.205440307402615', 'N');
+                    </script>
+                </div>
                 <div class="sehenwuerdigkeit">
                     <div id="tphPlayer" >
                         <div id="tphPlayerPosition">

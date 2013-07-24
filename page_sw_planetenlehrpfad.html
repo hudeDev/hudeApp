@@ -27,7 +27,7 @@
     </head>
     <body>
         <!-- Seiten Aufbau -->
-        <div id="klosterbezirk" data-role="page">
+        <div id="pagePlantenlehrpfad" data-role="page">
             <!-- Kopf der Seite -->
             <div id="hudeHeader" data-role="header">
                 <!-- Button zum Öffnen der Seitenleiste -->
@@ -41,7 +41,11 @@
                 <img src="images/sehenswuerdigkeiten/planetenlehrpfad/Planetenlehrpfad.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
-                        <h1>Hören Sie die Informationen</h1>
+                        <h1>
+                            <span class="tph_de">Hören Sie die Informationen</span>
+                            <span class="tph_en">Listen to the information</span>
+                            <span class="tph_pd">Lustern tau de Toon</span>
+                        </h1>
                         <div id="tphPlayer">
                             <div id="tphPlayerControl">
                                 <div class="row">
@@ -52,90 +56,264 @@
                             </div>
                         </div>
                     </div>
-                    <div data-role="collapsible" data-collapsed="false" data-inset="false">
-                        <h1>Über den Planetenlehrpfad</h1>
-                        <p>Einmal durchs Welten-All rollen: auf Inlinern oder mit dem Rad. Der Planetenlehrpfad bietet auf 6 Kilometern die einmalige Gelegenheit, eine Reise durch unser Sonnensystem zu unternehmen.</p>
-                        <p>Und da die Entfernungen und Größenordnungen rund eine Milliarde Mal verkleinert wurden, lässt sich die informative, abwechslungsreiche Strecke mühelos auch ohne Lichtgeschwindigkeit bewältigen.</p>
-                        <div data-role="collapsible-set" data-inset="false">
-                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
-                                <h1 class="todo">Zum Planetenlehrpfad gehören</h1>
-                                <ul data-role="listview" data-inset="false">
-                                    <li>
-                                        <a href="page_sw_plf_sonne.html" onclick="hudeOpenPage('page_sw_plf_sonne.html');">
-                                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/sonne.png" />
-                                            <h2>Sonne</h2>
-                                            <p>&nbsp;</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_sw_plf_merkur.html" onclick="hudeOpenPage('page_sw_plf_merkur.html');">
-                                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/merkur.png" />
-                                            <h2>Merkur</h2>
-                                            <p>&nbsp;</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_sw_plf_venus.html" onclick="hudeOpenPage('page_sw_plf_venus.html');">
-                                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/venus.png" />
-                                            <h2>Venus</h2>
-                                            <p>&nbsp;</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_sw_plf_erde.html" onclick="hudeOpenPage('page_sw_plf_erde.html');">
-                                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/erde.png" />
-                                            <h2>Erde</h2>
-                                            <p>&nbsp;</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_sw_plf_mars.html" onclick="hudeOpenPage('page_sw_plf_mars.html');">
-                                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/mars.png" />
-                                            <h2>Mars</h2>
-                                            <p>&nbsp;</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_sw_plf_jupiter.html" onclick="hudeOpenPage('page_sw_plf_jupiter.html');">
-                                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/jupiter.png"  />
-                                            <h2>Jupiter</h2>
-                                            <p>&nbsp;</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_sw_plf_saturn.html" onclick="hudeOpenPage('page_sw_plf_saturn.html');">
-                                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/saturn.png" />
-                                            <h2>Saturn</h2>
-                                            <p>&nbsp;</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_sw_plf_uranus.html" onclick="hudeOpenPage('page_sw_plf_uranus.html');">
-                                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/uranus.png" />
-                                            <h2>Uranus</h2>
-                                            <p>&nbsp;</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_sw_plf_neptun.html" onclick="hudeOpenPage('page_sw_plf_neptun.html');">
-                                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/neptun.png" />
-                                            <h2>Neptun</h2>
-                                            <p>&nbsp;</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_sw_plf_pluto.html" onclick="hudeOpenPage('page_sw_plf_pluto.html');">
-                                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/pluto.png" />
-                                            <h2>Pluto</h2>
-                                            <p>&nbsp;</p>
-                                        </a>
-                                    </li>
-                                </ul>
+                    <div class="tph_de">
+                        <div data-role="collapsible" data-collapsed="false" data-inset="false">
+                            <h1>Über den Planetenlehrpfad</h1>
+                            <p>Einmal durchs Welten-All rollen: auf Inlinern oder mit dem Rad. Der Planetenlehrpfad bietet auf 6 Kilometern die einmalige Gelegenheit, eine Reise durch unser Sonnensystem zu unternehmen.</p>
+                            <p>Und da die Entfernungen und Größenordnungen rund eine Milliarde Mal verkleinert wurden, lässt sich die informative, abwechslungsreiche Strecke mühelos auch ohne Lichtgeschwindigkeit bewältigen.</p>
+                            <div data-role="collapsible-set" data-inset="false">
+                                <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                    <h1 class="todo">Zum Planetenlehrpfad gehören</h1>
+                                    <ul data-role="listview" data-inset="false">
+                                        <li>
+                                            <a href="page_sw_plf_sonne.html" onclick="hudeOpenPage('page_sw_plf_sonne.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/sonne.png" />
+                                                <h2>Sonne</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_merkur.html" onclick="hudeOpenPage('page_sw_plf_merkur.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/merkur.png" />
+                                                <h2>Merkur</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_venus.html" onclick="hudeOpenPage('page_sw_plf_venus.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/venus.png" />
+                                                <h2>Venus</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_erde.html" onclick="hudeOpenPage('page_sw_plf_erde.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/erde.png" />
+                                                <h2>Erde</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_mars.html" onclick="hudeOpenPage('page_sw_plf_mars.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/mars.png" />
+                                                <h2>Mars</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_jupiter.html" onclick="hudeOpenPage('page_sw_plf_jupiter.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/jupiter.png"  />
+                                                <h2>Jupiter</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_saturn.html" onclick="hudeOpenPage('page_sw_plf_saturn.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/saturn.png" />
+                                                <h2>Saturn</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_uranus.html" onclick="hudeOpenPage('page_sw_plf_uranus.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/uranus.png" />
+                                                <h2>Uranus</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_neptun.html" onclick="hudeOpenPage('page_sw_plf_neptun.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/neptun.png" />
+                                                <h2>Neptun</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_pluto.html" onclick="hudeOpenPage('page_sw_plf_pluto.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/pluto.png" />
+                                                <h2>Pluto</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tph_en">
+                        <div data-role="collapsible" data-collapsed="false" data-inset="false">
+                            <h1>Über den Planetenlehrpfad</h1>
+                            <p>Einmal durchs Welten-All rollen: auf Inlinern oder mit dem Rad. Der Planetenlehrpfad bietet auf 6 Kilometern die einmalige Gelegenheit, eine Reise durch unser Sonnensystem zu unternehmen.</p>
+                            <p>Und da die Entfernungen und Größenordnungen rund eine Milliarde Mal verkleinert wurden, lässt sich die informative, abwechslungsreiche Strecke mühelos auch ohne Lichtgeschwindigkeit bewältigen.</p>
+                            <div data-role="collapsible-set" data-inset="false">
+                                <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                    <h1 class="todo">Zum Planetenlehrpfad gehören</h1>
+                                    <ul data-role="listview" data-inset="false">
+                                        <li>
+                                            <a href="page_sw_plf_sonne.html" onclick="hudeOpenPage('page_sw_plf_sonne.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/sonne.png" />
+                                                <h2>Sonne</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_merkur.html" onclick="hudeOpenPage('page_sw_plf_merkur.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/merkur.png" />
+                                                <h2>Merkur</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_venus.html" onclick="hudeOpenPage('page_sw_plf_venus.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/venus.png" />
+                                                <h2>Venus</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_erde.html" onclick="hudeOpenPage('page_sw_plf_erde.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/erde.png" />
+                                                <h2>Erde</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_mars.html" onclick="hudeOpenPage('page_sw_plf_mars.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/mars.png" />
+                                                <h2>Mars</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_jupiter.html" onclick="hudeOpenPage('page_sw_plf_jupiter.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/jupiter.png"  />
+                                                <h2>Jupiter</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_saturn.html" onclick="hudeOpenPage('page_sw_plf_saturn.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/saturn.png" />
+                                                <h2>Saturn</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_uranus.html" onclick="hudeOpenPage('page_sw_plf_uranus.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/uranus.png" />
+                                                <h2>Uranus</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_neptun.html" onclick="hudeOpenPage('page_sw_plf_neptun.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/neptun.png" />
+                                                <h2>Neptun</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_pluto.html" onclick="hudeOpenPage('page_sw_plf_pluto.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/pluto.png" />
+                                                <h2>Pluto</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tph_pd">
+                        <div data-role="collapsible" data-collapsed="false" data-inset="false">
+                            <h1>Über den Planetenlehrpfad</h1>
+                            <p>Einmal durchs Welten-All rollen: auf Inlinern oder mit dem Rad. Der Planetenlehrpfad bietet auf 6 Kilometern die einmalige Gelegenheit, eine Reise durch unser Sonnensystem zu unternehmen.</p>
+                            <p>Und da die Entfernungen und Größenordnungen rund eine Milliarde Mal verkleinert wurden, lässt sich die informative, abwechslungsreiche Strecke mühelos auch ohne Lichtgeschwindigkeit bewältigen.</p>
+                            <div data-role="collapsible-set" data-inset="false">
+                                <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                    <h1 class="todo">Zum Planetenlehrpfad gehören</h1>
+                                    <ul data-role="listview" data-inset="false">
+                                        <li>
+                                            <a href="page_sw_plf_sonne.html" onclick="hudeOpenPage('page_sw_plf_sonne.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/sonne.png" />
+                                                <h2>Sonne</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_merkur.html" onclick="hudeOpenPage('page_sw_plf_merkur.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/merkur.png" />
+                                                <h2>Merkur</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_venus.html" onclick="hudeOpenPage('page_sw_plf_venus.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/venus.png" />
+                                                <h2>Venus</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_erde.html" onclick="hudeOpenPage('page_sw_plf_erde.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/erde.png" />
+                                                <h2>Erde</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_mars.html" onclick="hudeOpenPage('page_sw_plf_mars.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/mars.png" />
+                                                <h2>Mars</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_jupiter.html" onclick="hudeOpenPage('page_sw_plf_jupiter.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/jupiter.png"  />
+                                                <h2>Jupiter</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_saturn.html" onclick="hudeOpenPage('page_sw_plf_saturn.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/saturn.png" />
+                                                <h2>Saturn</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_uranus.html" onclick="hudeOpenPage('page_sw_plf_uranus.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/uranus.png" />
+                                                <h2>Uranus</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_neptun.html" onclick="hudeOpenPage('page_sw_plf_neptun.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/neptun.png" />
+                                                <h2>Neptun</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="page_sw_plf_pluto.html" onclick="hudeOpenPage('page_sw_plf_pluto.html');">
+                                                <img src="images/sehenswuerdigkeiten/planetenlehrpfad/pluto.png" />
+                                                <h2>Pluto</h2>
+                                                <p>&nbsp;</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
-                        <h1>Bilder</h1>
+                        <h1>
+                            <span class="tph_de">Bilder</span>
+                            <span class="tph_en">Pictures</span>
+                            <span class="tph_pd">Schillerotsen</span>
+                        </h1>
                         <a href="#planetenlehrpfad01" data-rel="popup" data-position-to="window" data-transition="fade">
                             <img class="popphoto" src="images/sehenswuerdigkeiten/planetenlehrpfad/" alt="Planetenlehrpfad" style="width:20%">
                         </a>
