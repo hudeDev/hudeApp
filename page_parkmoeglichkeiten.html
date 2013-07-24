@@ -43,8 +43,14 @@
             <div data-role="content">
                 <script>
                     function netzwerkstatus() {
+                        console.log('netzwerkstatus');
                         var networkState = navigator.connection.type;
-                        $('#verbindungstyp').html('<span class="verbindungstyp">' + print_r(networkState) + '</span>');
+                        console.log('Status: ' + print_r(networkState));
+                        $('.verbindungstyp').html('<span class="verbindungstyp">' + print_r(networkState) + '<p>' + print_r(navigator.connection) + '</p></span>');
+                        console.log('abgeschlossen');
+                        if (networkState === 'wifi') {
+                            $('.verbindungstyp').append('<p>Fette & Beste Verbindung</p>');
+                        }
                     }
                 </script>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
