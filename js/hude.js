@@ -6,15 +6,15 @@ function leselLocalSpeich() {
 function hudeAppStartUp() {
     var db = initiateLocalStorage();
     tphZugriffDateisystem('audioUeberpruefen');
+    tphLadeFooter();
     $(document).delegate('div[data-role=page]', 'pageinit', function() {
         console.log('delegate');
-        tphLadeFooter();
+        //tphLadeFooter();
         tphUeberpruefeZielgruppe();
         tphUberpruefeTon();
     });
 
-    var tphPlayer = db.getItem('tphPlayer');
-    //console.log('####' + tphPlayer);
+
 
     var tphAudioSelect = db.getItem('audioSelect');
     if (tphAudioSelect === 'de') {
@@ -33,15 +33,98 @@ function hudeAppStartUp() {
         $('.tph_pd').show();
     }
 
+    var tphPlayer = db.getItem('tphPlayer');
+    console.log(tphPlayer);
     if (tphPlayer === 'true') {
-        //console.log('###' + tphPlayer + '###');
         $('#tphPlayerControl').show();
         $('#tphPlayerKeineDateien').hide();
     } else {
-        console.log('verstecken');
         $('#tphPlayerControl').hide();
         $('#tphPlayerKeineDateien').show();
     }
+}
+
+function tphGoogleMapsBild(lat, lon, zoom) {
+    // Latitude & Longitude zu einer Koordiate zusammenfassen
+    var koordinaten = lat + ',' + lon;
+    // Größe des Bildes errechnen
+    var breite = $(window).width() * 0.9;
+    var hoehe = $(window).height() * 0.7;
+    var abmessung = Math.round(breite) + 'x' + Math.round(hoehe);
+    // URI für erstellen
+    var bildpfad = 'https://maps.googleapis.com/maps/api/staticmap?center=' + koordinaten + '&zoom=' + zoom + '&size=' + abmessung + '&sensor=false';
+    // Bild in den Quellcode einfügen
+    $('.tphGoogleMapsBild').html('<div id="tphParkplaetzeMap" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
+    return bildpfad;
+}
+
+function tphGoogleMapsBildMitMarker(lat, lon, zoom, elementID) {
+
+    // Latitude & Longitude zu einer Koordiate zusammenfassen
+    var koordinaten = lat + ',' + lon;
+    // Größe des Bildes errechnen
+    var breite = $(window).width() * 0.9;
+    var hoehe = $(window).height() * 0.7;
+    var abmessung = Math.round(breite) + 'x' + Math.round(hoehe);
+    // URI für erstellen
+    var bildpfad = 'https://maps.googleapis.com/maps/api/staticmap?center=' + koordinaten + '&zoom=' + zoom + '&size=' + abmessung + '&markers=color:red||' + koordinaten + '&sensor=false';
+    // Bild in den Quellcode einfügen
+    if (elementID !== null) {
+        //$('#' + elementID).html('<div id="' + elementID + '" class="tphGoogleMapsBild" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
+        $('#' + elementID).append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
+    } else {
+        //$('.tphGoogleMapsBild').html('<div class="tphGoogleMapsBild" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
+        $('.tphGoogleMapsBild').append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
+    }
+    return bildpfad;
+}
+
+function tphLadeVeranstatungen() {
+    console.log('ausgeführt');
+    $.ajax({
+        dataType: 'jsonp',
+        jsonp: 'jsonp_callback',
+        url: 'http://team-exhumedo.com/tph/tphserver.php',
+        success: function(data) {
+            //console.log(print_r(data));
+            //$('#tph_veranstaltungen').append('<tbody>');
+            var append = '';
+            for (var i = 0; i < data.length; i++) {
+                append += '<tr>';
+                //$('#tph_veranstaltungen').append('<tr>');
+                if (data[i]['datumEnd'] === '') {
+                    append += '<td>' + data[i]['datumStart'] + '</td>';
+                    // $('#tph_veranstaltungen').append('<td>' + data[i]['datumStart'] + '</td>');
+                } else {
+                    append += '<td>' + data[i]['datumStart'] + ' - ' + data[i]['datumEnd'] + '</td>';
+                    // $('#tph_veranstaltungen').append('<td>' + data[i]['datumStart'] + ' - ' + data[i]['datumEnd'] + '</td>');
+                }
+                append += '<td>' + data[i]['uhrzeit'] + '</td>';
+                append += '<td>&nbsp;</td>';
+                append += '<tr>';
+                append += '<td colspan="2">' + data[i]['titel'] + '</td>';
+                append += '<td>&nbsp;</td>';
+                append += '<tr>';
+                append += '<td colspan="3">' + data[i]['beschreibung'] + '</td>';
+                append += '</tr>';
+                /*
+                 $('#tph_veranstaltungen').append('<td>' + data[i]['uhrzeit'] + '</td>');
+                 $('#tph_veranstaltungen').append('<td>' + data[i]['titel'] + '</td>');
+                 $('#tph_veranstaltungen').append('<td>' + data[i]['beschreibung'] + '</td>');
+                 $('#tph_veranstaltungen').append('</tr>');
+                 */
+                append += '</tr>' + "\n";
+            }
+            $('#tph_veranstaltungen').append(append);
+            //$('#tph_veranstaltungen').append('</tbody>');
+            //$('#tph_veranstaltungen').table('refresh');
+            //$('#tph_veranstaltungen').html('<div id="tph_veranstaltungen">' + print_r(data) + '<div>');
+        },
+        error: function(XHR, textStatus, errorThrown) {
+            console.log("ERREUR: " + textStatus);
+            console.log("ERREUR: " + errorThrown);
+        }
+    });
 }
 
 function tphGPSAbrufen(option) {
@@ -55,9 +138,6 @@ function tphGPSAbrufen(option) {
 
         switch (option) {
             case 'parkplaetze':
-                console.log('GPS - Parkplätze');
-                console.log(lat + ',' + lon);
-
                 var networkState = navigator.connection.type;
                 if (Connection.ETHERNET || Connection.WIFI || Connection.CELL_3G || Connection.CELL_4G) {
                     var gmapWidth = $(window).width() * 0.9;
@@ -65,16 +145,27 @@ function tphGPSAbrufen(option) {
                     // Größe der Karte einrichten 90% der Breite und Weite des Displays
                     $('#tphParkplaetzeMap').css('width', gmapWidth);
                     $('#tphParkplaetzeMap').css('height', gmapHeight);
-                    // Karte auf aktueller Position zentrieren
-                    $('#tphParkplaetzeMap').gmap({'center': new google.maps.LatLng(lat, lon)});
+                    // Karte auf aktueller Position zentrieren und Umkreis-Kreis hinzufügen
+                    var aktuellePosition = new google.maps.LatLng(lat, lon);
+                    $('#tphParkplaetzeMap').gmap('addMarker', {'id': 'aktuellePosition', 'position': aktuellePosition, 'bounds': false});
+                    $('#tphParkplaetzeMap').gmap('addShape', 'Circle', {
+                        'strokeWeight': 0,
+                        'fillColor': "#008595",
+                        'fillOpacity': 0.25,
+                        'center': aktuellePosition,
+                        'radius': 15,
+                        'clickable': false
+                    });
+                    $('#tphParkplaetzeMap').gmap({'center': aktuellePosition});
                     $('#tphParkplaetzeMap').gmap('option', 'zoom', 16);
                     // Parkplätze auf Karte hinzufügen
                     var parkplaetze = tphParkPlaetze();
+                    var icon = new google.maps.MarkerImage("http://m.touristik-palette-hude.de/download/image/parking.png");
                     for (var i = 0; i < parkplaetze.length; i++) {
                         // bounds: true richtet die Karte so aus, dass alle Marker zu sehen sind.
                         //$('#tphParkplaetzeMap').gmap('addMarker', {'position': parkplaetze[i], 'bounds': true});
                         // bounds: false fügt alle Marker lediglich der Karte hinzu
-                        $('#tphParkplaetzeMap').gmap('addMarker', {'position': parkplaetze[i], 'bounds': false});
+                        $('#tphParkplaetzeMap').gmap('addMarker', {'id': 'marker-' + i, 'position': parkplaetze[i], 'bounds': true, 'icon': icon});
                     }
                 } else {
                     $('#tphParkplaetzeMap').append('Datenverbindung reicht nicht für die Kartendarstellung aus');
@@ -97,7 +188,7 @@ function tphParkPlaetze() {
     // Waldbad
     parkplaetze.push('53.119665,8.445948');
     // Sport- und Freizeitzentrum
-    parkplaetze.push('53.111627,8.445061')
+    parkplaetze.push('53.111627,8.445061');
     // Mehrzweckhalle
     parkplaetze.push('53.108511,8.446442');
     // Bibliothek
@@ -625,10 +716,10 @@ function tphZugriffDateisystem(option, filename) {
                 // Überprüfen ob Ordner vorhanden ist
                 filesystem.root.getDirectory('Hude', {create: false, exclusive: false}, function() {
                     db.setItem('tphPlayer', false);
-                    console.log('Ordner Hude')
+                    console.log('Ordner Hude');
                 }, function() {
                     db.setItem('tphPlayer', false);
-                    console.log('Kein Ordner Hude')
+                    console.log('Kein Ordner Hude');
                 });
                 filesystem.root.getDirectory('Hude/audio', {create: false, exclusive: false}, function(directory) {
                     // Überprüfen ob Dateien vorhanden sind

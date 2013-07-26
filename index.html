@@ -39,7 +39,6 @@
                     db.setItem('tphPlayer', true);
                 }
             }
-
             var db = initiateLocalStorage();
         </script>
         <script type="text/javascript">
@@ -48,91 +47,2342 @@
             });
         </script>
     </head>
-    <body> <!--class="use-fastclick" -->
-        <!-- Seiten Aufbau -->
-        <div id="pageIndex" data-role="page">
-            <!-- Kopf der Seite -->
-            <div id="hudeHeader" data-role="header">
-                <!-- Button zum Öffnen der Seitenleiste -->
-                <a href="#hudePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
-                <!-- Überschrift der Seite -->
+    <body>
+        <!-- Seiten -->
+        <!-- Startseite/Index -->
+        <div data-role="page" id="tphSeiteIndex">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
                 <h1></h1>
+            </div>
+            <div data-role="content">	
+                <div class="row">
+                    <div class="row">
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteHudeInfo"><img src="images/icons_hude_info.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteSehenswuerdigkeiten"><img src="images/icons_hude_sehenswuerdigkeiten.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteUnterkuenfte"><img src="images/icons_hude_unterkuenfte.png" /></a></div>
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteGastronomie"><img src="images/icons_hude_gastronomie.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteECAutomaten"><img src="images/icons_hude_automaten.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteEinkaufen"><img src="images/icons_hude_einkaufen.png" /></a></div>
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteParkmoeglichkeiten"><img src="images/icons_hude_parken.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteGesundheit"><img src="images/icons_hude_gesundheit.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteVeranstaltungen"><img src="images/icons_hude_veranstaltungen.png" /></a></div>
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteSchnitzeljagd"><img src="images/icons_hude_schnitzeljagd.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a href="#tphSeiteHudePerfekt"><img src="images/icons_hude_perfekt.png" /></a></div>
+                        <div class="large-4 small-4 columns">&nbsp;<!--<a data-role="button" href="page_filesystem.html" onclick="hudeOpenPage('page_filesystem.html');">Dateisystem</a>--></div>
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
+        <!-- Hude-Info -->
+        <div data-role="page" id="tphSeiteHudeInfo">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1>
+                    <span class="tph_de">Hude-Info</span> <!-- auf deutsch -->
+                    <span class="tph_en">Hude-Info</span> <!-- auf englisch -->
+                    <span class="tph_pd">Hude-Informatschoon</span> <!-- auf plattdeutsch -->
+                </h1>
             </div>
             <!-- Inhalt der Seite -->
             <div data-role="content">
-                <div class="row">
-                    <div class="row">
-                        <div class="large-4 small-4 columns"><a href="page_hude-info.html" onclick="hudeOpenPage('page_hude-info.html');"><img src="images/icons_hude_info.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="page_sehenswuerdigkeiten.html" onclick="hudeOpenPage('page_sehenswuerdigkeiten.html');"><img src="images/icons_hude_sehenswuerdigkeiten.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="page_unterkuenfte.html" onclick="hudeOpenPage('page_unterkuenfte.html');"><img src="images/icons_hude_unterkuenfte.png" /></a></div>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <img src="images/hude-info/hude-info_large.jpg" />
+                <!-- Klappmenu Gruppe -->
+                <div data-role="collapsible-set" data-inset="false">
+                    <!-- Klappmenu für den Audio-Player, standardmäßig geschlossen -->
+                    <div data-role="collapsible" data-inset="false" data-collapsed="true">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Hören Sie die Informationen</span> <!-- auf deutsch -->
+                            <span class="tph_en">Listen to the information</span> <!-- auf englisch -->
+                            <span class="tph_pd">Lustern tau de Toon</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <!-- Audio-Player -->
+                        <div id="tphPlayer">
+                            <!-- Kontrollelemente des Players -->
+                            <div id="tphPlayerControl">
+                                <div class="row">
+                                    <!-- Kontrollelement: Abspielen -->
+                                    <div class="small-4 columns">
+                                        <a href="#" onclick="tphZugriffDateisystem('audioAbspielen', 'hude-info.mp3');">
+                                            <img src="images/player/tph_play.png" />
+                                        </a>
+                                    </div>
+                                    <!-- Kontrollelement: Pause -->
+                                    <div class="small-4 columns">
+                                        <a href="#" onclick="tphAudioPause();">
+                                            <img src="images/player/tph_pause.png" />
+                                        </a>
+                                    </div>
+                                    <!-- Kontrollelement: Stop -->
+                                    <div class="small-4 columns">
+                                        <a href="#" onclick="tphAudioStoppen();">
+                                            <img src="images/player/tph_stop.png" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tphPlayerKeineDateien">
+                                <p>Sie habe keine Audio-Inhalte heruntergeladen. Dies können Sie in den Einstellungen nachholen. Dazu klicken Sie bitte <a href="page_einstellungen.html" onclick="hudeOpenPage('page_einstellungen.html');">hier</a> und wählen "Download starten".</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        &nbsp;
+                    <!-- Klappmenu für den "Herzlich Willkommen in Hude"-Text -->
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Herzlich willkommen in Hude!</span> <!-- auf deutsch -->
+                            <span class="tph_en">Welcome to Hude</span> <!-- auf englisch -->
+                            <span class="tph_pd">Vun Harten willkamen</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <!-- Weiterführender Text auf deutsch -->
+                        <div class="tph_de">
+                            <p>„Historischer Klosterort im Grünen.“</p>
+                            <p>Malerisch eingebettet in der abwechslungsreichen Landschaft des Oldenburger Landes liegt der staatlich anerkannte Erholungsort Hude und lädt zum Entdecken, Erleben und Erholen ein.</p>
+                            <p>Die faszinierende Natur des Naturparks Wildeshauser Geest und eine bedeutungsvolle Geschichte verleihen Hude seinen unverwechselbaren Charme.</p>
+                            <p>Idyllische Marsch-, Moor- und Geestgebiete bestimmen das Landschaftsbild in einzigartigem Zusammenspiel.</p>
+                            <p>Mächtige Bäume im Urwald Hasbruch, alte Bauernhäuser, Kapitäns- und Kaufmannsvillen, vor allem aber die imposante Ruine eines Zisterzienserklosters aus dem 13. Jahrhundert prägen den historischen Klosterort.</p>
+                            <p>Ob Natur, Kultur oder Aktivität, Hude ist abwechslungsreich und vielseitig.</p>
+                            <p>Erholung vom Alltag für jedes Alter bieten:</p>
+                            <ul>
+                                <li>Fahrrad-, Reit- und Wanderwege</li>
+                                <li>interessante Themenpfade</li>
+                                <li>vielfältige Sport- und Freizeitangebote</li>
+                            </ul>
+                            <p>Durch die Lage zwischen den Städten Oldenburg und Bremen, die Nähe zur Nordseeküste und eine gute Verkehrsanbindung, ist Hude zudem idealer Ausgangspunkt für Entdeckungstouren in die Umgebung.</p>
+                            <p>Bei der Planung Ihres Aufenthalts und bei allen Fragen rund um Hude ist das Team der Touristik-Palette als kompetenter Ansprechpartner gerne persönlich für Sie da.</p>
+                        </div>
+                        <!-- Weiterführender Text auf englisch -->
+                        <div class="tph_en">
+                            <p>"Historical monastery village in the countryside."</p>
+                            <p>Sited in the varied landscape of the Oldenburg State is the state-recognized resort Hude and invites you to discover, experience and relax.</p>
+                            <p>The fascinating nature of the Wild Nature Park Geest and a meaningful story Hude lend its distinctive charm.</p>
+                            <p>Idyllic marsh, bog and moraine areas define the landscape in a unique interaction.</p>
+                            <p>Mighty trees in the jungle Hasbruch, old farmhouses, villas and merchant-captain, but especially the imposing ruins of a Cistercian monastery of the 13th Century mark the historic monastic site.</p>
+                            <p>Whether natural, cultural or activity, Hude is varied and versatile.</p>
+                            <p>Escape from everyday life for all ages offers bike paths, horse trails, hiking trails, paths and a variety of interesting topics of sports and leisure activities.</p>
+                            <p>Due to its location between the cities of Oldenburg and Bremen, the proximity to the North Sea coast, and good transport links, Hude is also the ideal base for exploring the surrounding area.</p>
+                            <p>When planning your stay and for all questions relating to Hude, the team of "tourism Palette" is a competent contact you personally for you.</p>
+                        </div>
+                        <!-- Weiterführender Text auf plattdeutsch -->
+                        <div class="tph_pd">
+                            Übersetzung
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="large-4 small-4 columns"><a href="page_gastronomie.html" onclick="hudeOpenPage('page_gastronomie.html');"><img src="images/icons_hude_gastronomie.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="page_ec-automaten.html" onclick="hudeOpenPage('page_ec-automaten.html');"><img src="images/icons_hude_automaten.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="page_einkaufen.html" onclick="hudeOpenPage('page_einkaufen.html');"><img src="images/icons_hude_einkaufen.png" /></a></div>
-                    </div>
-                    <div class="row">
-                        &nbsp;
-                    </div>
-                    <div class="row">
-                        <div class="large-4 small-4 columns"><a href="page_parkmoeglichkeiten.html" onclick="hudeOpenPage('page_parkmoeglichkeiten.html');"><img src="images/icons_hude_parken.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="page_gesundheit.html" onclick="hudeOpenPage('page_gesundheit.html');"><img src="images/icons_hude_gesundheit.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="page_veranstaltungen.html" onclick="hudeOpenPage('page_veranstaltungen.html');"><img src="images/icons_hude_veranstaltungen.png" /></a></div>
-                    </div>
-                    <div class="row">
-                        &nbsp;
-                    </div>
-                    <div class="row">
-                        <div class="large-4 small-4 columns"><a href="page_schnitzeljagd.html" onclick="hudeOpenPage('page_schnitzeljagd.html');"><img src="images/icons_hude_schnitzeljagd.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="page_hude-perfekt.html" onclick="hudeOpenPage('page_hude-perfekt.html');"><img src="images/icons_hude_perfekt.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a data-role="button" href="page_filesystem.html" onclick="hudeOpenPage('page_filesystem.html');">Dateisystem</a></div>
-                    </div>
-                    <div class="row">
-                        &nbsp;
+                    <!-- Klappmenu für "Geschichte" -->
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>
+                            <span class="tph_de">Geschichte</span> <!-- auf deutsch -->
+                            <span class="tph_en">History</span> <!-- auf englisch -->
+                            <span class="tph_pd">?</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <!-- Weiterführender Text auf deutsch -->
+                        <div class="tph_de">
+                            <p>Im Jahre 1232 errichteten Zisterziensermönche im schönen Oldenburger Land ein Kloster, aus dem später dann die Ortschaft Hude hervorging. Noch heute ist die uralte Klosterruine stummer Zeuge aus einer längst vergangenen Zeit. Und ein Denkmal von nationaler Bedeutung. Den imposanten Mittelpunkt der Ruine bilden die Überreste der im 16. Jahrhundert abgerissenen ehemaligen Klosterkirche. Als einziges Klosterbauwerk blieb die einstige Torkapelle und heutige Elisabethkirche in ihrer ursprünglichen Form erhalten.</p>
+                            <p>Nicht nur historisch Interessierte lassen ihrer Phantasie im Angesicht der alten Klosteranlage freien Lauf. Eindrucksvoll auch die "Sammlung zur Klostergeschichte" im angeschlossenen Museum. Ein Anziehungspunkt für Gäste aus nah und fern. </p>
+                        </div>
+                        <!-- Weiterführender Text auf englisch -->
+                        <div class="tph_en">
+                            <p>In 1232 Cistercian monks built a monastery in the beautiful Oldenburg, from which later emerged the town Hude. Today is the ancient monastery ruins silent witness of a time long past. And a monument of national importance. The center of the imposing ruins are the remains of the 16th Century former monastery church demolished. As the only monastery building the former and current Torkapelle Elizabeth Church was preserved in its original form.</p>
+                            <p>Not only interested in history let their imagination in the face of the old monastery run free. Also impressive are the "collection of the convent history" in the adjacent museum. An attraction for visitors from near and far.</p>
+                        </div>
+                        <!-- Weiterführender Text auf plattdeutsch -->
+                        <div class="tph_pd">
+                            ?
+                        </div>
                     </div>
                 </div>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
-            <!-- Fuß der Seite -->
-            <div id="hudeFooter" data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#" onclick="hudeOpenPage('index.html');" data-icon="hudeHaus"></a></li>
-                        <li><a href="#" onclick="hudeQRCodeScan();" data-iconpos="noxtext" data-icon="hudeQR"></a></li>
-                        <li><a href="#" onclick="hudeOpenPage('page_position.html');" data-iconpos="noxtext" data-icon="hudeGPS"></a></li>
-                        <li><a href="#" onclick="hudeOpenPage('page_einstellungen.html');" data-icon="hudeEinstellungen"></a></li>
-                        <li><a href="#" onclick="hudeOpenDialog('dialog_hude-kontakt.html');" data-icon="hudeEmail"></a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </div>
-            <!-- Seitenleiste der Seite -->
-            <div id="hudePanel" data-role="panel" data-position="left" data-display="push" data-position-fixed="true">
-                <div class="row">
-                    <img src="images/hude_logo.jpg" />
-                </div>
-                <ul id="hudePanelList" data-role="listview" data-theme="a">
-                    <li data-icon="arrow-l"><a href="#hudePanel" data-rel="close"></a></li>
-                    <li data-role="list-divider" data-theme="a">Navigation</li>
-                    <li><a href="page_hude-info.html" onclick="hudeOpenPage('page_hude-info.html');">Hude-Info</a></li>
-                    <li><a href="page_sehenswuerdigkeiten.html" onclick="hudeOpenPage('page_sehenswuerdigkeiten.html');">Sehenswürdigkeiten</a></li>
-                    <li><a href="page_unterkuenfte.html" onclick="hudeOpenPage('page_unterkuenfte.html');">Unterkünfte</a></li>
-                    <li><a href="page_gastronomie.html" onclick="hudeOpenPage('page_gastronomie.html');">Gastronomie</a></li>
-                    <li><a href="page_ec-automaten.html" onclick="hudeOpenPage('page_ec-automaten.html');">EC-Automaten</a></li>
-                    <li><a href="page_einkaufen.html" onclick="hudeOpenPage('page_einkaufen.html');">Einkaufen</a></li>
-                    <li><a href="page_einkaufen.html" onclick="hudeOpenPage('page_einkaufen.html');">Einkaufen</a></li>
-                    <li><a href="page_gesundheit.html" onclick="hudeOpenPage('page_gesundheit.html');">Gesundheit</a></li>
-                    <li><a href="page_veranstaltungen.html" onclick="hudeOpenPage('page_veranstaltungen.html');">Veranstaltungen</a></li>
-                    <li><a href="page_schnitzeljagd.html" onclick="hudeOpenPage('page_schnitzeljagd.html');">Schnitzeljagd</a></li>
-                    <li><a href="page_hude-perfekt.html" onclick="hudeOpenPage('page_hude-perfekt.html');">Hude-Perfekt</a></li>
-                </ul>
+            <!-- Fuß der Seite mit den Navigationselementen, wird aus der _footer.html geladen -->
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
             </div>
         </div>
-        <script>
-            $('#pageIndex').on('pagecreate', function() {
-                //hudeCachePages();
-            });
-        </script>
+        <!-- Sehenswürdigkeiten -->
+        <div data-role="page" id="tphSeiteSehenswuerdigkeiten">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1>
+                    <span class="tph_de">Sehenswürdigkeiten</span> <!-- auf deutsch -->
+                    <span class="tph_en">Tourist attraction</span> <!-- auf englisch -->
+                    <span class="tph_pd">Sehenswürdigkeiten</span> <!-- auf plattdeutsch -->
+                </h1>
+            </div>
+            <div data-role="content">
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div class="sehenswuerdigkeit">
+                    <!-- Überschrift/Name der Sehenswürdigkeit -->
+                    <h4>
+                        <span class="tph_de">Klosterbezirk</span> <!-- auf deutsch -->
+                        <span class="tph_en">Monastery area</span> <!-- auf englisch -->
+                        <span class="tph_pd">Kloosterbezirk</span> <!-- auf plattdeutsch -->
+                    </h4>
+                    <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude06.jpg" />
+                    <!-- Bilderunterschrift -->
+                    <p>
+                        <span class="tph_de">Altehrwürdige Klostermauern erinnern an bedeutungsvolle Geschichte.</span> <!-- auf deutsch -->
+                        <span class="tph_en">Ancient monastery walls remind meaningful story.</span> <!-- auf englisch -->
+                        <span class="tph_pd">Alterwürdige Klostermuur besinnen an bedeutungsvolle Geschich</span> <!-- auf plattdeutsch -->
+
+                    </p>
+                    <!-- Öffnet die Sehenswürdigkeit -->
+                    <a href="#" data-role="button">Mehr</a>
+                </div>
+                <div>&nbsp;</div>
+                <div class="sehenswuerdigkeit">
+                    <!-- Überschrift/Name der Sehenswürdigkeit -->
+                    <h4>
+                        <span class="tph_de">Kulturpfad</span> <!-- auf deutsch -->
+                        <span class="tph_en">Culture Trail</span> <!-- auf englisch -->
+                        <span class="tph_pd">Kulturpadd</span> <!-- auf plattdeutsch -->
+                    </h4>
+                    <!-- Bilderunterschrift -->
+                    <p>
+                        <span class="tph_de">Der Kulturpfad durch Hude bietet auf ca. 30 km Länge Interessantes und Sehenswertes.</span> <!-- auf deutsch -->
+                        <span class="tph_en">The cultural trail through Hude offers about 30 km of recreation and services.</span> <!-- auf englisch -->
+                        <span class="tph_pd">Der Kulturpadd dör Hude beiden op 30 km Läng interessantes und Sehenswertes.</span> <!-- auf plattdeutsch -->
+                    </p>
+                    <img src="images/sehenswuerdigkeiten/kulturpfad/artesischer-brunnen.jpg" />
+                    <!-- Öffnet die Sehenswürdigkeit -->
+                    <a href="#" data-role="button">Mehr</a>
+                </div>
+                <div>&nbsp;</div>
+                <div class="sehenswuerdigkeit">
+                    <!-- Überschrift/Name der Sehenswürdigkeit -->
+                    <h4>
+                        <span class="tph_de">Skulpturenufer- und Haus</span> <!-- auf deutsch -->
+                        <span class="tph_en">Sculptures and shore-house</span> <!-- auf englisch -->
+                        <span class="tph_pd">Skulpturenöver- un Huus</span> <!-- auf plattdeutsch -->
+                    </h4>
+                    <img src="images/sehenswuerdigkeiten/skulpturenufer/skulpturenufer-hude1.jpg" />
+                    <!-- Bilderunterschrift -->
+                    <p>
+                        <span class="tph_de">Ein Zusammenspiel von Kunst und Natur.</span> <!-- auf deutsch -->
+                        <span class="tph_en">A combination of art and nature.</span> <!-- auf englisch -->
+                        <span class="tph_pd">N'Zusammenspiel von Kunst un Natuur.</span> <!-- auf plattdeutsch -->
+                    </p>
+                    <a href="page_sw_skulpturenufer.html" onclick="hudeOpenPage('page_sw_skulpturenufer.html');" data-role="button">Mehr</a>
+                </div>
+                <div>&nbsp;</div>
+                <div class="sehenswuerdigkeit">
+                    <!-- Überschrift/Name der Sehenswürdigkeit -->
+                    <h4>
+                        <span class="tph_de">Vielstedter Bauernhaus</span> <!-- auf deutsch -->
+                        <span class="tph_en">Vielstedter farmhouse</span> <!-- auf englisch -->
+                        <span class="tph_pd">Vielstedter Buurhuus</span> <!-- auf plattdeutsch -->
+                    </h4>
+                    <img src="images/sehenswuerdigkeiten/vielstedter_bauernhaus/vielstedter-bauernhaus.jpg" />
+                    <!-- Bilderunterschrift -->
+                    <p>
+                        <span class="tph_de">Tauchen Sie ein in die Welt des 19. Jahrhunderts.</span> <!-- auf deutsch -->
+                        <span class="tph_en">Dip into the world of the 19th Century.</span> <!-- auf englisch -->
+                        <span class="tph_pd">Intuschen Sie in de Welt des 19. Johrhunnert.</span> <!-- auf plattdeutsch -->
+                    </p>
+                    <!-- Öffnet die Sehenswürdigkeit -->
+                    <a href="#" data-role="button">Mehr</a>
+                </div>
+                <div>&nbsp;</div>
+                <div class="sehenswuerdigkeit">
+                    <!-- Überschrift/Name der Sehenswürdigkeit -->
+                    <h4>
+                        <span class="tph_de">Planetenlehrpfad</span> <!-- auf deutsch -->
+                        <span class="tph_en">Planets trail</span>
+                        <span class="tph_pd">Planetenlerpadd</span> 
+                    </h4>
+                    <img src="images/sehenswuerdigkeiten/planetenlehrpfad/Planetenlehrpfad.jpg" />
+                    <!-- Bilderunterschrift -->
+                    <p>
+                        <span class="tph_de">Unternehmen Sie eine Reise durch unser Sonnensystem!</span> <!-- auf deutsch -->
+                        <span class="tph_en">Take a journey trough our solarsystem</span> <!-- auf englisch -->
+                        <span class="tph_pd">Unternehmen Sie eine Reise durch unser Sonnensystem!</span> <!-- auf plattdeutsch -->
+                    </p>
+                    <!-- Öffnet die Sehenswürdigkeit -->
+                    <a href="#" data-role="button">Mehr</a>
+                </div>
+                <div>&nbsp;</div>
+                <div class="sehenswuerdigkeit">
+                    <!-- Überschrift/Name der Sehenswürdigkeit -->
+                    <h4>
+                        <span class="tph_de">Zeitstrahl 2000</span> <!-- auf deutsch -->
+                        <span class="tph_en">Timeline 2000</span> <!-- auf englisch -->
+                        <span class="tph_pd">Tietstrol 2000</span> <!-- auf plattdeutsch -->
+                    </h4>
+                    <img src="images/sehenswuerdigkeiten/zeitstrahl/zeitstrahl-2000.jpg" />
+                    <!-- Bilderunterschrift -->
+                    <p>
+                        <span class="tph_de">Ein Spaziergang durch die Erdgeschichte.</span> <!-- auf deutsch -->
+                        <span class="tph_en">A walk through the earth.</span> <!-- auf englisch -->
+                        <span class="tph_pd">Lopen dör de Eerdgeschich.</span> <!-- auf plattdeutsch -->
+                    </p>
+                    <!-- Öffnet die Sehenswürdigkeit -->
+                    <a href="#" data-role="button">Mehr</a>
+                </div>
+                <div>&nbsp;</div>
+                <div class="sehenswuerdigkeit">
+                    <!-- Überschrift/Name der Sehenswürdigkeit -->
+                    <h4>
+                        <span class="tph_de">Straße der Megalithkultur</span> <!-- auf deutsch -->
+                        <span class="tph_en">Road of megalithic</span> <!-- auf englisch -->
+                        <span class="tph_pd">Stroot de Steentied/Megalithkultur</span> <!-- auf plattdeutsch -->
+                    </h4>
+                    <img src="images/sehenswuerdigkeiten/megalithkultur/megalithkultur.jpg" />
+                    <!-- Bilderunterschrift -->
+                    <p>
+                        <span class="tph_de">Genießen Sie Natur und konsumieren Sie Kultur!</span> <!-- auf deutsch -->
+                        <span class="tph_en">Enjoy nature and consume culture!</span> <!-- auf englisch -->
+                        <span class="tph_pd">Genete de Natuur un Kultur!</span> <!-- auf plattdeutsch -->
+                    </p>
+                    <!-- Öffnet die Sehenswürdigkeit -->
+                    <a href="#" data-role="button">Mehr</a>
+                </div>
+                <div>&nbsp;</div>
+                <div class="sehenswuerdigkeit">
+                    <!-- Überschrift/Name der Sehenswürdigkeit -->
+                    <h4>
+                        <span class="tph_de">Hasbruch</span> <!-- auf deutsch -->
+                        <span class="tph_en">Hasbruch</span> <!-- auf englisch -->
+                        <span class="tph_pd">Hasbruch</span> <!-- auf plattdeutsch -->
+                    </h4>
+                    <img src="images/sehenswuerdigkeiten/hasbruch/urwald-hasbruch.jpg" />
+                    <p>
+                        <span class="tph_de">Unser Wald - ganz ursprünglich.</span> <!-- auf deutsch -->
+                        <span class="tph_en">Our forest - all original.</span> <!-- auf englisch -->
+                        <span class="tph_pd">Us Holt - gans eerst.</span> <!-- auf plattdeutsch -->
+                    </p>
+                    <!-- Öffnet die Sehenswürdigkeit -->
+                    <a href="#" data-role="button">Mehr</a>
+                </div>
+                <div>&nbsp;</div>
+                <div class="sehenswuerdigkeit">
+                    <!-- Überschrift/Name der Sehenswürdigkeit -->
+                    <h4>
+                        <span class="tph_de">Wittemoor</span> <!-- auf deutsch -->
+                        <span class="tph_en">Wittemoor</span> <!-- auf englisch -->
+                        <span class="tph_pd">Wittemoor</span> <!-- auf plattdeutsch -->
+                    </h4>
+                    <img src="images/sehenswuerdigkeiten/wittemoor/wittemoor01.jpg" />
+                    <p>
+                        <span class="tph_de">Moorgebiete - natürlich und sehenswert.</span> <!-- auf deutsch -->
+                        <span class="tph_en">Moorlands - and of course worth seeing.</span> <!-- auf englisch -->
+                        <span class="tph_pd">Moorrebeet - notürlich un sehenswert.</span> <!-- auf plattdeutsch -->
+                    </p>
+                    <!-- Öffnet die Sehenswürdigkeit -->
+                    <a href="#" data-role="button">Mehr</a>
+                </div>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
+        <!-- Unterkünfte -->
+        <div data-role="page" id="tphSeiteUnterkuenfte">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1>
+                    <span class="tph_de">Unterkünfte</span> <!-- auf deutsch -->
+                    <span class="tph_en">Accommodations</span> <!-- auf englisch -->
+                    <span class="tph_pd">Quarteer</span> <!-- auf plattdeutsch -->
+                </h1>
+            </div>
+            <div data-role="content">   
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <!-- Klappmenu Gruppe -->
+                <div data-role="collapsible-set" data-inset="false">
+                    <!-- Klappmenu für den Audio-Player, standardmäßig geschlossen -->
+                    <div data-role="collapsible" data-inset="false" data-collapsed="true">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Hören Sie die Informationen</span> <!-- auf deutsch -->
+                            <span class="tph_en">Listen to the information</span> <!-- auf englisch -->
+                            <span class="tph_pd">Lustern tau de Toon</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <!-- Audio-Player -->
+                        <div id="tphPlayer">
+                            <!-- Kontrollelemente des Players -->
+                            <div id="tphPlayerControl">
+                                <div class="row">
+                                    <!-- Kontrollelement: Abspielen -->
+                                    <div class="small-4 columns">
+                                        <a href="#" onclick="tphZugriffDateisystem('audioAbspielen', 'unterkuenfte.mp3');">
+                                            <img src="images/player/tph_play.png" />
+                                        </a>
+                                    </div>
+                                    <!-- Kontrollelement: Pause -->
+                                    <div class="small-4 columns">
+                                        <a href="#" onclick="tphAudioPause();">
+                                            <img src="images/player/tph_pause.png" />
+                                        </a>
+                                    </div>
+                                    <!-- Kontrollelement: Stop -->
+                                    <div class="small-4 columns">
+                                        <a href="#" onclick="tphAudioStoppen();">
+                                            <img src="images/player/tph_stop.png" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tphPlayerKeineDateien">
+                                <p>Sie habe keine Audio-Inhalte heruntergeladen. Dies können Sie in den Einstellungen nachholen. Dazu klicken Sie bitte <a href="page_einstellungen.html" onclick="hudeOpenPage('page_einstellungen.html');">hier</a> und wählen "Download starten".</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="false" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Über die Unterkünfte</span> <!-- auf deutsch -->
+                            <span class="tph_en">About the accommodation</span> <!-- auf englisch -->
+                            <span class="tph_pd">Über die Unterkünfte</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <!-- Weiterführender Text -->
+                        <!-- auf deutsch -->
+                        <div class="tph_de">
+                            <p>Freundliche Gastgeber laden Sie ein.</p>
+                            <p>Die gastfreundliche Klostergemeinde bietet Ihnen für entspannte Tage und traumhafte Nächte eine große Auswahl verschiedener Übernachtungsmöglichkeiten.</p>
+                            <p>Das Angebot ist so vielseitig, wie die Bedürfnisse der Gäste in Hude.</p>
+                        </div>
+                        <!-- auf englisch -->
+                        <div class="tph_en">
+                            <p>Friendly hosts invite.</p>
+                            <p>Hospitable monastic community provides for relaxed days and dreamy nights a wide selection of accommodation options.</p>
+                            <p>The offer is as varied as the needs of guests in Hude.</p>
+                        </div>
+                        <!-- auf plattdeutsch -->
+                        <div class="tph_pd">
+                            <p>?</p>
+                            <p>?</p>
+                            <p>?</p>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Hotels</span> <!-- auf deutsch -->
+                            <span class="tph_en">Hotels</span> <!-- auf englisch -->
+                            <span class="tph_pd">Hotels</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <ul data-role="listview">
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/hotels/klosterschaenke-01_large.jpg" />
+                                    Hotel Klosterschänke <!-- Bildunterschrift, ohne Spracheinstellungen -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/hotels/burgdorf-hude02_large.jpg" />
+                                    Hotel Burgdorf <!-- Bildunterschrift, ohne Spracheinstellungen -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/hotels/garni-01_large.jpg" />
+                                    Hotel Garni <!-- Bildunterschrift, ohne Spracheinstellungen -->
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>
+                            <span class="tph_de">Pensionen &amp; Gästezimmer</span> <!-- auf deutsch -->
+                            <span class="tph_en">Inns &amp; Guest rooms</span> <!-- auf englisch -->
+                            <span class="tph_pd">Penschoon &amp; Gästkamer</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <ul data-role="listview">
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/pensionen/heinemann-03_large.JPG" />
+                                    <span class="tph_de">Pension Hof Heinemann</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Inn Hof Heinemann</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Penschoon Hof Heinemann</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/pensionen/paulus-01_large.jpg" />
+                                    <p>
+                                        <span class="tph_de">Pension W. Paulus</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Inn W. Paulus</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Penschoon W. Paulus</span> <!-- auf plattdeutsch -->
+                                    </p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/pensionen/wobig-03_large.jpg" />
+                                    <span class="tph_de">Gästehaus Wobig</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Guest house Wobig</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Gästhus Wobig</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/pensionen/wuerdemann-01_large.jpg" />
+                                    <span class="tph_de">Gästehaus Würdemann</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Guest house Würdemann</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Gästhus Würdemann</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Ferienwohnungen</span> <!-- auf deutsch -->
+                            <span class="tph_en">Vacation apartments</span> <!-- auf englisch -->
+                            <span class="tph_pd">Ferienwohnen</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <ul data-role="listview">
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/aschenbeck-03_large.jpg" />
+                                    <span class="tph_de">Ferienwohnungen Aschenbeck</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartments Aschenbeck</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen Aschenbeck</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/burgmannshof-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnung Burgmannshof</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartment Burgmannshof</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen Burgmannshof</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/lichtblick-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnungen Haus Lichtblick</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartments Haus Lichtblick</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen Haus Lichtblick</span> <!-- auf plattdeutsch -->
+                                </a>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/klosterschaenke-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnung Klosterschänke</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartment Klosterschänke</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen Klosterschänke</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/hattendorf-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnung F. Hattendorf</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartment F. Hattendorf</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen F. Hattendorf</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/mkallisch-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnungen M. Kallisch</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartments M. Kallisch</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen M. Kallisch</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/ukallisch-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnung U. Kallisch</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartments U. Kallisch</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen U. Kallisch</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/alte_baeckerei-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnung Alte Bäckerei</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartment Alte Bäckerei</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen Alte Bäckerei</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="images/unterkuenfte/ferienwohnungen/seekermann-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnung "Seekermann"</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartment "Seekermann"</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen "Seekermann"</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/eichkatz-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnung "Eichkatz"</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartment "Eichkatz"</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen "Eichkatz"</span> <!-- auf plattdeutsch -->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/stolle-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnungen Hof Stolle</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartments Hof Stolle</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen Hof Stolle</span> <!-- auf plattdeutsch -->
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/dat-luettje-huus-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnung „Dat lüttje Huus“</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartment „Dat lüttje Huus“</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen „Dat lüttje Huus“</span> <!-- auf plattdeutsch -->
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienwohnungen/hasbruch-01_large.jpg" />
+                                    <span class="tph_de">Ferienwohnung "Forsthaus Hasbruch"</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation apartment "Forsthaus Hasbruch"</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienwohnen "Forsthaus Hasbruch"</span> <!-- auf plattdeutsch -->
+                                </a> 
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Ferienhäuser</span> <!-- auf deutsch -->
+                            <span class="tph_en">Vacation houses</span> <!-- auf englisch -->
+                            <span class="tph_pd">Ferienhus</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <h1></h1>
+                        <ul data-role="listview">
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienhaeuser/aschenbeck-01_large.jpg" />
+                                    <span class="tph_de">Ferienhaus Aschenbeck</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation house Aschenbeck</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienhus Aschenbeck</span> <!-- auf plattdeutsch -->
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienhaeuser/ingridsruh-01_large.jpg" />
+                                    <span class="tph_de">Ferienhaus "Ingridsruh"</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation house "Ingridsruh"</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienhus "Ingridsruh"</span> <!-- auf plattdeutsch -->
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/ferienhaeuser/hude-01_large.jpg" />
+                                    <span class="tph_de">Ferienhaus Hude</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Vacation house Hude</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Ferienhus Hude</span> <!-- auf plattdeutsch -->
+                                </a> 
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Jugendherberge</span> <!-- auf deutsch -->
+                            <span class="tph_en">>Youth hostel</span> <!-- auf englisch -->
+                            <span class="tph_pd">Jugendharbarg</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <ul data-role="listview">
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/jugendherberge/jugendherberge-01_large.jpg" />
+                                    <span class="tph_de">Jugendherberge Hude</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Youth hostel Hude</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Jugendharbarg Hude</span> <!-- auf plattdeutsch -->
+                                </a> 
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>
+                            <span class="tph_de">Wohnmobilstellplatz</span> <!-- auf deutsch -->
+                            <span class="tph_en">>Recreation vehicle site</span> <!-- auf englisch -->
+                            <span class="tph_pd">Wohnmobilstellplatz</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <ul data-role="listview">
+                            <li>
+                                <a href="#">
+                                    <!-- Unterkunftsgrafik -->
+                                    <img src="images/unterkuenfte/wohnmobilstellplatz/wohnmobilstellplatz-01_large.jpg" />
+                                    <span class="tph_de">Wohnmobilstellplatz in Hude</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Recreation vehicle in Hude</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Wohnmobilstellplatz in Hude</span> <!-- auf plattdeutsch -->
+                                </a> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
+        <!-- Gastronomie -->
+        <div data-role="page" id="tphSeiteGastronomie">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1>
+                    <span class="tph_de">Gastronomie</span> <!-- auf deutsch -->
+                    <span class="tph_en">Gastronomy</span> <!-- auf englisch -->
+                    <span class="tph_pd">Gastronomie</span> <!-- auf plattdeutsch -->
+                </h1>
+            </div>
+            <div data-role="content">
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div data-role="collapsible-set" data-inset="false">
+                    <!-- Klappmenu für den Audio-Player, standardmäßig geschlossen -->
+                    <div data-role="collapsible" data-inset="false" data-collapsed="true">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Hören Sie die Informationen</span> <!-- auf deutsch -->
+                            <span class="tph_en">Listen to the information</span> <!-- auf englisch -->
+                            <span class="tph_pd">Lustern tau de Toon</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <!-- Audio-Player -->
+                        <div id="tphPlayer">
+                            <!-- Kontrollelemente des Players -->
+                            <div id="tphPlayerControl">
+                                <div class="row">
+                                    <!-- Kontrollelement: Abspielen -->
+                                    <div class="small-4 columns">
+                                        <a href="#" onclick="tphZugriffDateisystem('audioAbspielen', 'gastronomie.mp3');">
+                                            <img src="images/player/tph_play.png" />
+                                        </a>
+                                    </div>
+                                    <!-- Kontrollelement: Pause -->
+                                    <div class="small-4 columns">
+                                        <a href="#" onclick="tphAudioPause();">
+                                            <img src="images/player/tph_pause.png" />
+                                        </a>
+                                    </div>
+                                    <!-- Kontrollelement: Stop -->
+                                    <div class="small-4 columns">
+                                        <a href="#" onclick="tphAudioStoppen();">
+                                            <img src="images/player/tph_stop.png" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tphPlayerKeineDateien">
+                                <p>Sie habe keine Audio-Inhalte heruntergeladen. Dies können Sie in den Einstellungen nachholen. Dazu klicken Sie bitte <a href="page_einstellungen.html" onclick="hudeOpenPage('page_einstellungen.html');">hier</a> und wählen "Download starten".</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="false" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Über die Gastronomien</span> <!-- auf deutsch -->
+                            <span class="tph_en">About the restaurants</span> <!-- auf englisch -->
+                            <span class="tph_pd">?</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div class="tph_de">
+                            <p>Lassen Sie sich doch einfach mal rundum verwöhnen und genießen Sie in Hude das abwechslungsreiche gastronomische Angebot.</p>
+                            <p>Urige Restaurants, moderne Bistros und gemütliche Cafés lassen keine Wünsche offen. Ob kulinarische Leckerbissen, deftige Hausmannskost, norddeutsche Spezialitäten wie „Kohl &amp; Pinkel“ oder einfach mal ein Eis für zwischendurch, hier ist für jeden Geschmack etwas dabei.</p>
+                        </div>
+                        <div class="tph_en">
+                            <p>Let yourself be pampered and enjoy simple times in Hude a varied gastronomic offer.</p>
+                            <p>Quaint restaurants, modern bistros and cafés newsstands. Whether culinary delights, hearty home cooking, North German specialties such as "Kohl &amp; Pinkel" or just an ice cream in between, here is something for every taste.</p>
+                        </div>
+                        <div class="tph_pd">
+                            ?
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Gastronomien</span> <!-- auf deutsch -->
+                            <span class="tph_en">Gastronomy</span> <!-- auf englisch -->
+                            <span class="tph_pd">Gastronomien</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <ul data-role="listview" data-inset="false">
+                            <li>
+                                <a href="#">
+                                    <!-- Gastronomiegrafik -->
+                                    <img src="images/gastronomie/burgdorfs.jpg" />
+                                    <h2>Burgdorf's</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Gastronomiegrafik -->
+                                    <img src="images/gastronomie/cafe-21.jpg" />
+                                    <h2>Cafe 21</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Gastronomiegrafik -->
+                                    <img src="images/gastronomie/eiscafeitalia.jpg" />
+                                    <h2>Eiscafé Italia</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Gastronomiegrafik -->
+                                    <img src="images/gastronomie/klosterschaenke-hude02.jpg" />
+                                    <h2>Klosterschänke</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Gastronomiegrafik -->
+                                    <img src="images/gastronomie/moritz-wuestenlander-hof.jpg" />
+                                    <h2>Moritz Wüstenlander Hof</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Gastronomiegrafik -->
+                                    <img src="images/gastronomie/spanhacke-hude.jpg" />
+                                    <h2>Spanhacke Café, Bäckerei &amp; Konditorei</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Gastronomiegrafik -->
+                                    <img src="images/gastronomie/vielstedter-bauernhaus.jpg" />
+                                    <h2>Vielstedter Bauernhaus</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Gastronomiegrafik -->
+                                    <img src="images/gastronomie/melkhus-hude.jpg" />
+                                    <h2>Vielstedter Melkhus</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Gastronomiegrafik -->
+                                    <img src="images/gastronomie/zorbas.jpg" />
+                                    <h2>Zorbas</h2>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <!-- Gastronomiegrafik -->
+                                    <img src="images/gastronomie/zur-krone.jpg" />
+                                    <h2>Zur Krone</h2>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            </div> 
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
+        <!-- EC-Automaten -->
+        <div data-role="page" id="tphSeiteECAutomaten">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1>
+                    <span class="tph_de">Geldautomaten</span> <!-- auf deutsch -->
+                    <span class="tph_en">ATMs</span> <!-- auf englisch -->
+                    <span class="tph_pd">Geldautomaten</span> <!-- auf plattdeutsch -->
+                </h1>
+            </div>
+            <div data-role="content">
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div data-role="collapsible-set" data-inset="false">
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>
+                            <span class="tph_de">Banken &amp; Sparkassen</span> <!-- auf deutsch -->
+                            <span class="tph_en">Banks &amp; Penny bank</span> <!-- auf englisch -->
+                            <span class="tph_pd">Banken &amp; Spaarkaß</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Landessparkasse zu Oldenburg</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Parkstraße 10<br/>
+                                    27798 Hude<br/>
+                                    04408 / 98030<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:0440898030" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_lzo_parkstrasse_10" class="tphGoogleMapsBild"></div>
+                                <script>
+            // Lädt die Landkarte
+            tphGoogleMapsBildMitMarker('53.1113613', '8.4602462', '17', 'tph_lzo_parkstrasse_10');
+                                </script>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Oldenburgische Landesbank</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Dr. Gustav-Thye-Straße<br/>
+                                    27798 Hude<br/>
+                                    04408 / 981120<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408981120" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_olb_dr_gustav-thye-strasse" class="tphGoogleMapsBild"></div>
+                                <script>
+                                    // Lädt die Landkarte
+                                    tphGoogleMapsBildMitMarker('53.1113613', '8.4578633', '17', 'tph_olb_dr_gustav-thye-strasse');
+                                </script>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Volksbank Ganderkesee-Hude eG</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Auf der Nordheide 1<br/>
+                                    27798 Hude<br/>
+                                    04408 / 92830<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:0440892830" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_volksbank_auf_der_nordheide_1" class="tphGoogleMapsBild"></div>
+                                <script>
+                                    // Lädt die Landkarte
+                                    tphGoogleMapsBildMitMarker('53.1160866', '8.4568999', '17', 'tph_volksbank_auf_der_nordheide_1');
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <h1>Post</h1> <!-- Deutsch, Englisch, Plattdeutsch -->
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Deutsche Postfiliale</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Parkstraße 1<br/>
+                                    27798 Hude<br/>
+                                    04408 / 1570<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044081570" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_dp_hude" class="tphGoogleMapsBild"></div>
+                                <script>
+                                    // Lädt die Landkarte
+                                    tphGoogleMapsBildMitMarker('53.1160866', '8.4568999', '17', 'tph_dp_hude');
+                                </script>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Brüers, Vera</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Bahnhofstr. 4<br/>
+                                    27798 Hude (Wüsting)<br/>
+                                    04484 / 1627<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044841627" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_post_bruers" class="tphGoogleMapsBild">
+                                    <script>
+
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.1196496', '8.33425', '17', 'tph_post_bruers');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
+        <!-- Einkaufen -->
+        <div data-role="page" id="tphSeiteEinkaufen">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1>
+                    <span class="tph_de">Einkaufen</span> <!-- auf deutsch -->
+                    <span class="tph_en">Shoping</span> <!-- auf englisch -->
+                    <span class="tph_pd">Böschkup</span> <!-- auf plattdeutsch -->
+                </h1>
+            </div>
+            <div data-role="content">
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div data-role="collapsible-set" data-inset="false">
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Lebensmittel</span> <!-- auf deutsch -->
+                            <span class="tph_en">Groceries</span> <!-- auf englisch -->
+                            <span class="tph_pd">Wat ton Eten</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>aktiv &amp; irma</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Parkstraße 45<br/>
+                                    27798 Hude<br/>
+                                    04408 / 9849940<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044089849940" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_aktiv_irma_parkstraße_45" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.112375', '8.456166', '17', 'tph_aktiv_irma_parkstraße_45');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>ALDI</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Auf der Nordheite 45<br/>
+                                    27798 Hude<br/>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_aldi_auf_der_nordheide_45" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.108086', '8.468978', '17', 'tph_aldi_auf_der_nordheide_45');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Feine Kost</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Parkstraße 92<br/>
+                                    27798 Hude<br/>
+                                    04408 / 60934
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:0440860934" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_feine_kost_parkstrasse_92" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.117469', '8.453633', '17', 'tph_feine_kost_parkstrasse_92');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Ihr Bioladen</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Parkstraße 61<br/>
+                                    27798 Hude<br/>
+                                    04408 / 806508
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408806508" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_ihr_bioladen_parkstrasse_92" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.114655', '8.454697', '17', 'tph_ihr_bioladen_parkstrasse_92');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>LIDL</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Parkstraße 43<br/>
+                                    27798 Hude<br/>
+                                    04408 / 8039980
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408806508" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_lidl_parkstrasse_43" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.112585', '8.456988', '17', 'tph_lidl_parkstrasse_43');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>E-Center</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Burgstraße 2<br/>
+                                    27798 Hude<br/>
+                                    04408 / 80350
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:0440880350" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_e_center_burgstrasse_2" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.111712', '8.450929', '17', 'tph_e_center_burgstrasse_2');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Netto</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Stöverskamp 2<br/>
+                                    27798 Hude<br/>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_netto_stoeverskamp_2" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.109574', '8.462602', '17', 'tph_netto_stoeverskamp_2');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>NP Markt</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Bahnhofstraße<br/>
+                                    27798 Hude (Wüsting)<br/>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_np_markt_bahnhofstrasse" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.120483', '8.333427', '17', 'tph_np_markt_bahnhofstrasse');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Reformhaus</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Parkstraße 3<br/>
+                                    27798 Hude<br/>
+                                    04408 / 970313
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408970313" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_reformhaus_parkstrasse_3" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.110785', '8.460799', '17', 'tph_reformhaus_parkstrasse_3');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Bäckerei Spanhacke</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Schüzenstraße 15<br/>
+                                    27798 Hude<br/>
+                                    04408 / 375
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408375" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_baeckerei_spanhacke_schuetzenstrasse_15" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.107294', '8.458804', '17', 'tph_baeckerei_spanhacke_schuetzenstrasse_15');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>BIO Wingang, Traute</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Schüzenstraße 7<br/>
+                                    27798 Hude<br/>
+                                    04408 / 6817
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044086817" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_bio_wingang_traute_schuetzenstrasse_7" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.107809', '8.460134', '17', 'tph_bio_wingang_traute_schuetzenstrasse_7');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Wochenmärkte</span> <!-- auf deutsch -->
+                            <span class="tph_en">Weekly markets</span> <!-- auf englisch -->
+                            <span class="tph_pd">Weekenmarkt</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Huder Wochenmarkt</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Bahnhofsvorlatz<br/>
+                                    27798 Hude<br/>
+                                    Freitag 14-18 Uhr
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_huder_wochenmarkt_bahnhofsvorplatz" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.107809', '8.460134', '17', 'tph_huder_wochenmarkt_bahnhofsvorplatz');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Markt Hofgemeinschaft Grummersort</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Hauptmoorweg 3<br/>
+                                    27798 Hude (Wüsting)<br/>
+                                    Freitag 15-18 Uhr
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_markt_hofgemeinschaft_grummersort" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.124474', '8.379471', '17', 'tph_markt_hofgemeinschaft_grummersort');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Bauernmarkt auf Hof Heinemann</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Neuenweger Reihe 18<br/>
+                                    27798 Hude (Wüsting)<br/>
+                                    Freitag 9 - 18 Uhr <br/>
+                                    Samstag 9 - 12:30 Uhr
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_bauernmarkt_hof_heinemann" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.121976', '8.326582', '17', 'tph_bauernmarkt_hof_heinemann');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Fahrräder/-verleih</span> <!-- auf deutsch -->
+                            <span class="tph_en">Bicycles/for hire</span> <!-- auf englisch -->
+                            <span class="tph_pd">Rad/-vergeven</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Klosterspeiche</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Verkauf &amp; Verleih<br/>
+                                    Stöverskamp 6<br/>
+                                    27798 Hude<br/>
+                                    04408 / 806314
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408806314" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_klosterspeiche_stoeverskamp_6" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.108878', '8.463889', '17', 'tph_klosterspeiche_stoeverskamp_6');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Fahrzeug Schütte GmbH</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Verkauf &amp; Reperatur<br/>
+                                    Parkstraße 63<br/>
+                                    27798 Hude<br/>
+                                    04408 / 390
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408390" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_fahrzeug_schuette_gmbh_parkstrasse_63" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.114687', '8.454663', '17', 'tph_fahrzeug_schuette_gmbh_parkstrasse_63');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
+        <!-- Parkmöglichkeiten -->
+        <div data-role="page" id="tphSeiteParkmoeglichkeiten">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <h1>Parkmöglichkeit</h1>
+            </div>
+            <div data-role="content">   
+                <script>
+                    // GPS abrufen + Kartenmaterial laden und einfügen
+                    tphGPSAbrufen('parkplaetze');
+                </script>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <img src="images/parken/parkplatz.jpg" />
+                <div id="tphParkplaetzeMap">
+
+                </div>
+
+                <ul data-role="listview" data-inset="false">
+                    <li>
+                        <h2>Waldbad</h2>
+                        <p>Linteler Straße</p>
+                    </li>
+                    <li>
+                        <h2>St. Elisabeth Kirche</h2>
+                        <p>Kirchstraße</p>
+                    </li>
+                    <li>
+                        <h2>Sport- und Freizeitzentrum</h2>
+                        <p>Burgstraße/Vielstedter Kirchweg</p>
+                    </li>
+                    <li>
+                        <h2>Mehrzweckhalle</h2>
+                        <p>Vielstedter Kirchweg</p>
+                    </li>
+                    <li>
+                        <h2>Bibilothek</h2>
+                        <p>Vielstedter Kirchweg/Hurreler Weg</p>
+                    </li>
+                    <li>
+                        <h2>Skulpturenhaus</h2>
+                        <p>Mühlenweg</p>
+                    </li>
+                    <li>
+                        <h2>Hallenbad</h2>
+                        <p>Schützenstraße/Auf dem Klüterort</p>
+                    </li>
+                    <li>
+                        <h2>Bahnhofsvorplatz</h2>
+                        <p>Auf der Nordheide/Stöverskamp</p>
+                    </li>
+                    <li>
+                        <h2>Bahnhof</h2>
+                        <p>Bahnhof/Hohe Straße</p>
+                    </li>
+                    <li>
+                        <h2>Alter Torfplatz</h2>
+                        <p>Alter Torfplatz/Parkstraße</p>
+                    </li>
+                </ul>
+                <div class="tph_de">&nbsp;</div>
+                <div class="tph_en">&nbsp;</div>
+                <div class="tph_pd">&nbsp;</div>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
+        <!-- Gesundheit -->
+        <div data-role="page" id="tphSeiteGesundheit">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <!-- Überschrift der Seite -->
+                <h1>
+                    <span class="tph_de">Gesundheit</span> <!-- auf deutsch -->
+                    <span class="tph_en">Health</span> <!-- auf englisch -->
+                    <span class="tph_pd">Gesundheet</span> <!-- auf plattdeutsch -->
+                </h1>
+            </div>
+            <div data-role="content">
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#index" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div data-role="collapsible-set" data-inset="false">
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Allgemeinmedizin</span> <!-- auf deutsch -->
+                            <span class="tph_en">General Practice</span> <!-- auf englisch -->
+                            <span class="tph_pd">Allgemeinmedizin</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Dr. med Helmut Alexander</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Dr. med Helmut Alexander<br/>
+                                    Bäkenweg 4<br/>
+                                    27798 Hude (Wüsting)<br/>
+                                    04484 / 920923<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04484920923" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_dr_med_helmut_alexander" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.122311', '8.332565', '17', 'tph_dr_med_helmut_alexander');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Dr. med Hans-Werner Gotthier</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Dr. med Hans-Werner Gotthier<br/>
+                                    Hohe Straße 19<br/>
+                                    27798 Hude<br/>
+                                    04408 / 1310<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044081310" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_dr_med_hans_werner_gotthier" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.109619', '8.459063', '17', 'tph_dr_med_hans_werner_gotthier');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Gemeinschaftspraxis Dr. med Arun Kumar, Herr Bartels</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Gemeinschaftspraxis Dr. med Arun Kumar, Herr Bartels<br/>
+                                    Hohelucht 10<br/>
+                                    27798 Hude<br/>
+                                    04408 / 1001<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044081001" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_gemeinschaftspraxis_kumar_bartels" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.10607', '8.458847', '17', 'tph_gemeinschaftspraxis_kumar_bartels');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Gemeinschaftspraxis Dr. med Elisabeth Lencer, Jörg Lencer, Dr. med. Niels Haase, Katharina Melzer</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Gemeinschaftspraxis Dr. med Elisabeth Lencer, Jörg Lencer, Dr. med. Niels Haase, Katharina Melzer<br/>
+                                    Parkstraße 18<br/>
+                                    27798 Hude<br/>
+                                    04408 / 922222<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408922222" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_gemeinschaftspraxis_lencer_lencer_haase_melzer" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.111983', '8.459984', '17', 'tph_gemeinschaftspraxis_lencer_lencer_haase_melzer');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Apotheken</span> <!-- auf deutsch -->
+                            <span class="tph_en">Pharmacies</span> <!-- auf englisch -->
+                            <span class="tph_pd">Aptheek</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Alte Raben-Apotheke</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Alte Raben-Apotheke<br/>
+                                    Inh. Silke Langer<br/>
+                                    Parkstraße 12<br/>
+                                    27798 Hude<br/>
+                                    04408 / 321<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044041310" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_alte_raben_apotheke" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.111983', '8.459984', '17', 'tph_alte_raben_apotheke');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Apotheke am Schützenplatz</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Apotheke am Schützenlatz<br/>
+                                    Inh. Birgit Halfter<br/>
+                                    Schützenstraße 10<br/>
+                                    27798 Hude<br/>
+                                    04408 / 92110<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:0440892110" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_apotheke_am_schuetzenplatz" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.108002', '8.46007', '17', 'tph_apotheke_am_schuetzenplatz');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Flores Apotheke</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Flores Apotheke<br/>
+                                    Inh. Axel Schwirtz<br/>
+                                    Parkstraße 47<br/>
+                                    27798 Hude<br/>
+                                    04408 / 6363<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044086363" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_flores_apotheke" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.113213', '8.456585', '17', 'tph_flores_apotheke');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Augenarzt</span> <!-- auf deutsch -->
+                            <span class="tph_en">Ophthalmologist</span> <!-- auf englisch -->
+                            <span class="tph_pd">Augenarzt</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Gemeinschaftspraxis Dr. Carola Thurow, Dr. Rasmus Thurow</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Gemeinschaftspraxis Dr. Carola Thurow, Dr. Rasmus Thurow<br/>
+                                    Auf der Nordheide 4<br/>
+                                    27798 Hude<br/>
+                                    04408 / 807243<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408807243" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_carola_rasmus_thurow" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.110218', '8.461679', '17', 'tph_carola_rasmus_thurow');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Frauenheilkunde</span> <!-- auf deutsch -->
+                            <span class="tph_en">Gynecologist</span> <!-- auf englisch -->
+                            <span class="tph_pd">Frauenheilunde</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Monika Rundel-Tegtmeyer, Dr. med. Anke Willenbrink</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Monika Rundel-Tegtmeyer, Dr. med. Anke Willenbrink<br/>
+                                    Königstraße 4<br/>
+                                    27798 Hude<br/>
+                                    04408 / 92190<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:0440892190" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_rundel_tegtmeyer_wilenbrink" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.113528', '8.458997', '17', 'tph_rundel_tegtmeyer_wilenbrink');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Kinderarzt</span> <!-- auf deutsch -->
+                            <span class="tph_en">Pediatrician</span> <!-- auf englisch -->
+                            <span class="tph_pd">Kinderarzt</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Carsten Vocke</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Carsten Vocke<br/>
+                                    Auf der Nordheide 26<br/>
+                                    27798 Hude<br/>
+                                    04408 / 922073<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408922073" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_carsten_vocke" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.109007', '8.466979', '17', 'tph_carsten_vocke');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Tierarzt</span> <!-- auf deutsch -->
+                            <span class="tph_en">Vet</span> <!-- auf englisch -->
+                            <span class="tph_pd">Tierarzt</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Dr. med. vet. Gonzalo Bustamante</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Dr. med. vet. Gonzalo Bustamante<br/>
+                                    Hurreler Weg 5<br/>
+                                    27798 Hude<br/>
+                                    04408 / 7996<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408922073" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_gonzalo_bustamante" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.106251', '8.447453', '17', 'tph_gonzalo_bustamante');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Dr. med. vet. Christopher Jehner</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Dr. med. vet. Christopher Jehner<br/>
+                                    Holler Landstraße 65<br/>
+                                    27798 Hude (Wüsting)<br/>
+                                    04484 / 1572<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044841572" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_christopher_jehner" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.145908', '8.360463', '17', 'tph_christopher_jehner');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Gemeinschaftspraxis Frank Stickan, Dr. med. vet. Petra Stickan-Kemper</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Gemeinschaftspraxis Frank Stickan, Dr. med. vet. Petra Stickan-Kemper<br/>
+                                    Neuenweger Reiher 9<br/>
+                                    27798 Hude (Wüsting)<br/>
+                                    04484 / 373<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04484373" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_stickan_stickan_kemper" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.123908', '8.323063', '17', 'tph_stickan_stickan_kemper');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                        <!-- Überschrift des Klappmenus -->
+                        <h1>
+                            <span class="tph_de">Zahnarzt</span> <!-- auf deutsch -->
+                            <span class="tph_en">Dentist</span> <!-- auf englisch -->
+                            <span class="tph_pd">Zahnarzt</span> <!-- auf plattdeutsch -->
+                        </h1>
+                        <div data-role="collapsible-set" data-inset="false">
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Gemeinschaftspraxis Dr. med. dent. Andreas Hein, Msc. und Partner</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Gemeinschaftspraxis Dr. med. dent. Andreas Hein, Msc. und Partner<br/>
+                                    Parkstraße 44<br/>
+                                    27798 Hude<br/>
+                                    04408 / 970900<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408970900" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_hein_und_partner" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.113193', '8.456959', '17', 'tph_hein_und_partner');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Dr. med. dent. Siegfried Maslo</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Dr. med. dent. Siegfried Maslo<br/>
+                                    Auf dem Klüterort 20<br/>
+                                    27798 Hude<br/>
+                                    04408 / 922090<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:04408922090" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_siegfried_maslo" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.108209', '8.458096', '17', 'tph_siegfried_maslo');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Michael Pischke</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Michael Pischke<br/>
+                                    Auf der Nordheide 10<br/>
+                                    27798 Hude<br/>
+                                    04408 / 6345<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044086345" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_michael_pischke" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.109677', '8.464082', '17', 'tph_michael_pischke');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Gemeinschaftspraxis Dr. med. dent. Juliana Gorka, Dr. med. dent. Lutz Spanka</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Gemeinschaftspraxis Dr. med. dent. Juliana Gorka, Dr. med. dent. Lutz Spanka<br/>
+                                    Blumenstraße 4<br/>
+                                    27798 Hude<br/>
+                                    04408 / 7477<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044087477" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_juliana_gorka_lutz_spanka" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.112833', '8.458933', '17', 'tph_juliana_gorka_lutz_spanka');
+                                    </script>
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                                <!-- Überschrift des Klappmenus -->
+                                <h1>Marita Wiechmann-Gall</h1>
+                                <h4>
+                                    <span class="tph_de">Kontakt</span> <!-- auf deutsch -->
+                                    <span class="tph_en">Contact</span> <!-- auf englisch -->
+                                    <span class="tph_pd">Kontakt</span> <!-- auf plattdeutsch -->
+                                </h4>
+                                <p>
+                                    Marita Wiechmann-Gall<br/>
+                                    Bahnhofstraße 29<br/>
+                                    27798 Hude (Wüsting)<br/>
+                                    04484 / 1600<br/>
+                                    <!-- Button der die Telefon-App aufruft -->
+                                    <a href="tel:044841600" data-role="button">
+                                        <span class="tph_de">Anrufen</span> <!-- auf deutsch -->
+                                        <span class="tph_en">Call</span> <!-- auf englisch -->
+                                        <span class="tph_pd">Anroepen</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </p>
+                                <!-- Landkarte wo sich die Bank befindet -->
+                                <div id="tph_marita_wiechmann_gall" class="tphGoogleMapsBild">
+                                    <script>
+                                        // Lädt die Landkarte
+                                        tphGoogleMapsBildMitMarker('53.120586', '8.330594', '17', 'tph_marita_wiechmann_gall');
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-role="footer" data-position="fixed"></div>
+                <div data-role="panel" id="tphPanelLinks">
+
+                </div>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            </div>
+        </div>
+        <!-- Veranstaltungen -->
+        <div data-role="page" id="tphSeiteVeranstaltungen">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <h1>Veranstaltungen</h1>
+            </div>
+            <div data-role="content">
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <table data-role="table" id="tph_veranstaltungen" data-mode="columntoggle">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Datum</th>
+                            <th data-priority="2">Uhrzeit</th>
+                            <th data-priority="3">Titel</th>
+                            <th data-priority="4">Beschreibung</th>
+                        </tr>
+                    </thead>
+
+                </table>
+                <script>
+                    tphLadeVeranstatungen();
+                </script>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+            <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+            <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+        </div>
+        <!-- Schnitzeljagd -->
+        <div data-role="page" id="tphSeiteSchnitzeljagd">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <h1>Schnitzeljagd</h1>
+            </div>
+            <div data-role="content">
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <div class="row">&nbsp;</div>
+                <ul data-role="listview">
+                    <li>
+                        <a href="#">
+                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/Planetenlehrpfad.jpg">
+                            <h2>Planeten-Abitur</h2>
+                            <p>Spannende Fragen rund um den Plantenlehrpfad</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/fotojagd/IMG_20130723_123301.jpg">
+                            <h2>Fotojagd</h2>
+                            <p>Wo ist es bloß?</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+            <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+            <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+        </div>
+        <!-- Hude-Perfekt -->
+        <div data-role="page" id="tphSeiteHudePerfekt">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <h1>Hude-Perfekt</h1>
+            </div>
+            <div data-role="content">   
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <p>Hier fehlt weiterhin Inhalt</p>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
+        <!-- Einstellungen -->
+        <div data-role="page" id="tphSeiteEinstellungen">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <h1>Einstellungen</h1>
+            </div>
+            <div data-role="content">   
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <h6>Download der Audio-Inhalte</h6>
+                <p>Um die Audio-Inhalte anhören zu können, müssen diese heruntergeladen werden. Wir empfehlen dazu eine WLAN-Verbindung! Sie haben bereits <strong><span id="tphAnzahlAudioBereitsGeladen"></span> von <span id="tphAnzahlAudioInsgesamt"></span></strong> heruntergeladen.</p>
+                <p id="tphDownloadStatus"></p>
+                <a href="#" onclick="tphZugriffDateisystem('download');" data-role="button">Download Starten</a>
+                <h6>Zielgruppeneinstellung</h6>
+                <div data-role="fieldcontain" class="ui-hide-label">
+                    <fieldset data-role="controlgroup">
+                        <!-- id vom input & for vom label müssen identisch sein -->
+                        <input type="radio" name="audienceSelect" id="audienceNone" value="audienceNone" class="custom" data-mini="true" onclick="tphSaveAudience();" />
+                        <label for="audienceNone">Keine Angaben</label>
+                        <input type="radio" name="audienceSelect" id="audienceFamily" value="audienceFamily" class="custom" data-mini="true" onclick="tphSaveAudience();" />
+                        <label for="audienceFamily">Familien mit Kind</label>
+                        <input type="radio" name="audienceSelect" id="audienceBestAger" value="audienceBestAger" class="custom" data-mini="true" onclick="tphSaveAudience();" />
+                        <label for="audienceBestAger">Best Ager (50+)</label>
+                    </fieldset>
+                </div>
+                <h6>Audio-Sprache</h6>
+                <div data-role="fieldcontain" class="ui-hide-label">
+                    <fieldset data-role="controlgroup">
+                        <!-- id vom input & for vom label müssen identisch sein -->
+                        <input type="radio" name="audioSelect" id="audioDeutsch" value="de" class="custom" data-mini="true" onclick="tphSaveAudio();" />
+                        <label for="audioDeutsch">Deutsch</label>
+                        <input type="radio" name="audioSelect" id="audioEnglisch" value="en" class="custom" data-mini="true" onclick="tphSaveAudio();" />
+                        <label for="audioEnglisch">Englisch</label>
+                        <input type="radio" name="audioSelect" id="audioPlatt" value="pd" class="custom" data-mini="true" onclick="tphSaveAudio();" />
+                        <label for="audioPlatt">Plattdeutsch</label>
+                    </fieldset>
+                </div>
+                <h6>Schriftgröße</h6>
+                <a id="openStorage" href="#" data-role="button" data-icon="arrow-d" title="Speicher" onclick="leselLocalSpeich();">Inhalte des LocalStorage</a>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
+        <!-- Kontakt -->
+        <div data-role="page" id="tphSeiteTPHKontakt">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <h1>Einstellungen</h1>
+            </div>
+            <div data-role="content">   
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <img src="images/tph-logo.jpg" />
+                <h4>Touristik-Palette Hude e.V.</h4>
+                <p>Parkstraße 53a <br /> 27798 Hude</p>
+                <p>Tel:  <a href="tel:+4944088090950">04408 / 80 90 950</a> <br />
+                    Fax: 04408 / 80 90 959</p>
+                <p>Unsere Öffnungszeiten:<br />
+                    Mo - Fr von 10:00 bis 12:30 Uhr</p>     
+                <a id="openStorage" href="#" data-role="button" data-icon="arrow-d" title="Speicher" onclick="leselLocalSpeich();">Inhalte des LocalStorage</a>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
+        <!-- Dialoge -->
     </body>
 </html>
