@@ -27,44 +27,34 @@
     </head>
     <body>
         <!-- Seiten Aufbau -->
-        <div id="pageRaetselPLPA" data-role="page">
+        <div id="pageFJKlosterbezirk" data-role="page">
             <!-- Kopf der Seite -->
             <div id="hudeHeader" data-role="header">
                 <!-- Button zum Öffnen der Seitenleiste -->
                 <a href="#hudePanel" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
                 <!-- Überschrift der Seite -->
-                <h1>Planeten-lehr-pfad Abitur</h1>
+                <h1>
+                    <span class="tph_de">Fotojagd: Klosterbezirk</span>
+                    <span class="tph_en">Picture hunt: Monastery area</span>
+                    <span class="tph_pd">?</span>
+                </h1>
             </div>
             <!-- Inhalt der Seite -->
             <div data-role="content">
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
-                <div class="row">&nbsp;</div>
-                <ul data-role="listview">
-                    <li>
-                        <a href="page_sj_plp_abitur_a.html" onclick="hudeOpenPage('page_sj_plp_abitur_a.html');">
-                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/Planetenlehrpfad.jpg">
-                            <h2>Abitur A</h2>
-                            <p>Aufgepasst?</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="page_sj_plp_abitur_b.html" onclick="hudeOpenPage('page_sj_plp_abitur_b.html');">
-                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/Planetenlehrpfad.jpg">
-                            <h2>Abitur B</h2>
-                            <p>Nachgelesen?</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="page_sj_plp_abitur_c.html" onclick="hudeOpenPage('page_sj_plp_abitur_c.html');">
-                            <img src="images/sehenswuerdigkeiten/planetenlehrpfad/Planetenlehrpfad.jpg">
-                            <h2>Abitur C</h2>
-                            <p>Gewusst?</p>
-                        </a>
-                    </li>
-                </ul>
-                <div class="row">&nbsp;</div>
+                <a href="#popupBasic" data-rel="popup" data-role="button">Tooltip</a>
+                
+               
+
+                <div data-role="popup" id="popupBasic">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                    <!--<div data-role="header">x</div>-->
+                    <div data-role="content">
+                        <img src="https://maps.googleapis.com/maps/api/staticmap?center=53.117418,8.4488262&zoom=17&size=1139x406&sensor=false" />
+                        <p>Habe ich gesehen</p>
+                    </div>
+                </div>
                 <a href="index.html" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
-                <div class="row">&nbsp;</div>
             </div>
             <!-- Fuß der Seite -->
             <div id="hudeFooter" data-role="footer" data-position="fixed">
@@ -91,6 +81,5 @@
                 </ul>
             </div>
         </div>
-
     </body>
 </html>
