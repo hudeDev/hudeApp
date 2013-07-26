@@ -3,6 +3,13 @@ function leselLocalSpeich() {
     console.log(print_r(db));
 }
 
+function tphClick(link) {
+    $.mobile.changePage($(link), {
+        transition: 'pop',
+        changeHash: false
+    });
+}
+
 function hudeAppStartUp() {
     var db = initiateLocalStorage();
     tphZugriffDateisystem('audioUeberpruefen');
