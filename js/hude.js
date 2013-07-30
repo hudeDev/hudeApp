@@ -179,8 +179,8 @@ function tphGPSDistanz(lat1, lon1, lat2, lon2) {
         var meter = distanz.replace('m', '').trim();
         meter = parseInt(meter);
         if (meter <= 15) {
+            alert('gefunden');
             // Bild wird als gesehen registriert
-            console.log('Bild gefunden');
             return true;
         } else {
             return false;
@@ -195,7 +195,7 @@ function tphGPSDistanz1(lat1, lon1, lat2, lon2) {
 function tphGPSAbrufen(option, img) {
     var lat;
     var lon;
-    navigator.geolocation.getCurrentPosition(tphGeoOnSuccess, tphGeoOnError, {maximumAge: 600000, timeout: 30000, enableHighAccuracy: true});
+    navigator.geolocation.getCurrentPosition(tphGeoOnSuccess, tphGeoOnError, {maximumAge: 0, timeout: 30000, enableHighAccuracy: true});
 
     function tphGeoOnSuccess(position) {
         lat = position.coords.latitude;
@@ -244,9 +244,10 @@ function tphGPSAbrufen(option, img) {
                 // Feedback über die aktuelle Aktion
                 if (ergebnis) {
                     $('#' + img + 'Ergebnis').html('<div id=#"' + img + 'Ergebnis">Gefunden</div><p>Bild:<br/>' + latlonImage[0] + ' / ' + latlonImage[1] + '</p><p>' + lat + ' / ' + lon + '</p>');
+                    $('#' + img + 'Distanz').append('<p>' + tphGPSDistanz1(latlonImage[0], latlonImage[1], lat, lon) + '<br/>' + lat + ',' + lon + '</p>');
                 } else {
                     $('#' + img + 'Ergebnis').html('<div id=#"' + img + 'Ergebnis">Nicht Gefunden</div><p>Bild:<br/>' + latlonImage[0] + ' / ' + latlonImage[1] + '</p><p>' + lat + ' / ' + lon + '</p>');
-                    $('#' + img + 'Distanz').append('<p>' + tphGPSDistanz1(latlonImage[0], latlonImage[1], lat, lon) +'</p>');
+                    $('#' + img + 'Distanz').append('<p>' + tphGPSDistanz1(latlonImage[0], latlonImage[1], lat, lon) + '<br/>' + lat + ',' + lon + '</p>');
                 }
                 break;
             default:
@@ -254,8 +255,8 @@ function tphGPSAbrufen(option, img) {
         }
     }
 
-    function tphGeoOnError() {
-
+    function tphGeoOnError(e) {
+        alert('tphGeoOnError' + e.code);
     }
 }
 

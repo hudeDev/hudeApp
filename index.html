@@ -45,6 +45,7 @@
         </script>
         <script type="text/javascript">
             $(document).on('pageinit', function(event) {
+                $.mobile.defaultPageTransition = "none";
                 hudeAppStartUp();
                 console.log('wieder eine Seite geladen');
             });
@@ -10151,20 +10152,12 @@
                 </div>
                 <table>
                     <tr>
-                        <td><img id="tphSchnitzeljagdFotojagdKlosterbezirkBild1" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_1.jpg" /></td>
-                        <td><img id="tphSchnitzeljagdFotojagdKlosterbezirkBild2" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_10.jpg" /></td>
+                        <td><img id="tphSchnitzeljagdFotojagdKlosterbezirkBild1" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/IMG_20130730_161051.jpg" /></td>
+                        <td><img id="tphSchnitzeljagdFotojagdKlosterbezirkBild2" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/IMG_20130730_161156.jpg" /></td>
                     </tr>
                     <tr>
                         <td><a href="#tphDialogSchnitzeljagdFotojagdKlosterbezirk1" data-rel="dialog" data-role="button">Zeigen</a></td>
-                        <td><a href="#" onclick="tphGPSAbrufen('fotojagd', 'tphSchnitzeljagdFotojagdKlosterbezirkBild2');" data-role="button">Anzeigen 2</a></td>
-                    </tr>
-                    <tr>
-                        <td><img id="tphSchnitzeljagdFotojagdKlosterbezirkBild3" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/IMG_20130724_185224.jpg" /></td>
-                        <td><img id="tphSchnitzeljagdFotojagdKlosterbezirkBild4" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_10.jpg" /></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#tphDialogSchnitzeljagdFotojagdKlosterbezirk3" data-rel="dialog" data-role="button">Zeigen 3</a></td>
-                        <td><a href="#" onclick="tphGPSAbrufen('fotojagd', 'tphSchnitzeljagdFotojagdKlosterbezirkBild2');" data-role="button">Anzeigen 2</a></td>
+                        <td><a href="#tphDialogSchnitzeljagdFotojagdKlosterbezirk2" data-rel="dialog" data-role="button">Zeigen</a></td>
                     </tr>
                 </table>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
@@ -10176,33 +10169,28 @@
             </div>
         </div>        
         <!-- Dialoge -->
-        <!-- Dialog -> Schnitzeljagd -> Fotojagd -> Klosterbezirk -->
+        <!-- Dialog -> Schnitzeljagd -> Fotojagd -> Klosterbezirk 1 -->
         <div id="tphDialogSchnitzeljagdFotojagdKlosterbezirk1" data-role="page">
-            <script>
-                $('#tphSchnitzeljagdFotojagdKlosterbezirkBild1Ergebnis').html('<div id=#"tphSchnitzeljagdFotojagdKlosterbezirkBild1ErgebnisErgebnis"></div>')
-            </script>
             <div data-role="header">
                 
             </div>
             <div data-role="content">
-                <img id="tphSchnitzeljagdFotojagdKlosterbezirkBild1" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_1.jpg" />
+                <img id="tphSchnitzeljagdFotojagdKlosterbezirkBild1" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/IMG_20130730_161051.jpg" />
                 <div id="tphSchnitzeljagdFotojagdKlosterbezirkBild1Ergebnis"></div>
+                <div id="tphSchnitzeljagdFotojagdKlosterbezirkBild1Distanz"></div>
                 <a href="#" onclick="tphGPSAbrufen('fotojagd', 'tphSchnitzeljagdFotojagdKlosterbezirkBild1');" data-role="button">Gefunden!</a>
             </div>
         </div>
-        
-        <div id="tphDialogSchnitzeljagdFotojagdKlosterbezirk3" data-role="page">
-            <script>
-                $('#tphSchnitzeljagdFotojagdKlosterbezirkBild1Ergebnis').html('<div id=#"tphSchnitzeljagdFotojagdKlosterbezirkBild1ErgebnisErgebnis"></div>')
-            </script>
+        <!-- Dialog -> Schnitzeljagd -> Fotojagd -> Klosterbezirk 1 -->
+        <div id="tphDialogSchnitzeljagdFotojagdKlosterbezirk2" data-role="page">
             <div data-role="header">
                 
             </div>
             <div data-role="content">
-                <img id="tphSchnitzeljagdFotojagdKlosterbezirkBild3" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/IMG_20130724_185224.jpg" />
-                <div id="tphSchnitzeljagdFotojagdKlosterbezirkBild3Ergebnis"></div>
-                <div id="tphSchnitzeljagdFotojagdKlosterbezirkBild3Distanz"></div>
-                <a href="#" onclick="tphGPSAbrufen('fotojagd', 'tphSchnitzeljagdFotojagdKlosterbezirkBild3');" data-role="button">Gefunden!</a>
+                <img id="tphSchnitzeljagdFotojagdKlosterbezirkBild2" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/IMG_20130730_161156.jpg" />
+                <div id="tphSchnitzeljagdFotojagdKlosterbezirkBild2Ergebnis"></div>
+                <div id="tphSchnitzeljagdFotojagdKlosterbezirkBild2Distanz"></div>
+                <a href="#" onclick="tphGPSAbrufen('fotojagd', 'tphSchnitzeljagdFotojagdKlosterbezirkBild2');" data-role="button">Gefunden!</a>
             </div>
         </div>
     </body>
