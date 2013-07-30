@@ -173,7 +173,6 @@ function tphGPSAbstand(lat1, lon1, lat2, lon2) {
 
 function tphGPSDistanz(lat1, lon1, lat2, lon2) {
     var distanz = tphGPSAbstand(lat1, lon1, lat2, lon2);
-    alert(distanz);
     console.log(distanz.indexOf("km") !== -1);
     // Distanz < 1 km
     if (!distanz.indexOf("km") !== -1) {
@@ -187,6 +186,10 @@ function tphGPSDistanz(lat1, lon1, lat2, lon2) {
             return false;
         }
     }
+}
+function tphGPSDistanz1(lat1, lon1, lat2, lon2) {
+    var distanz = tphGPSAbstand(lat1, lon1, lat2, lon2);
+    return distanz;
 }
 
 function tphGPSAbrufen(option, img) {
@@ -243,6 +246,7 @@ function tphGPSAbrufen(option, img) {
                     $('#' + img + 'Ergebnis').html('<div id=#"' + img + 'Ergebnis">Gefunden</div><p>Bild:<br/>' + latlonImage[0] + ' / ' + latlonImage[1] + '</p><p>' + lat + ' / ' + lon + '</p>');
                 } else {
                     $('#' + img + 'Ergebnis').html('<div id=#"' + img + 'Ergebnis">Nicht Gefunden</div><p>Bild:<br/>' + latlonImage[0] + ' / ' + latlonImage[1] + '</p><p>' + lat + ' / ' + lon + '</p>');
+                    $('#' + img + 'Distanz').append('<p>' + tphGPSDistanz1(latlonImage[0], latlonImage[1], lat, lon) +'</p>');
                 }
                 break;
             default:
