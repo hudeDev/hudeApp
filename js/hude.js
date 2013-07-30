@@ -427,21 +427,24 @@ function hudeQRCodeScan() {
                     hudeSplitURL(result.text);
                 },
                 function(error) {
-                    hudeOpenDialog('dialog_qr-code_scan_fehler.html');
+                    $.mobile.changePage('#tphDialogQRCodeFehler', 'none', true, true);
+                    //hudeOpenDialog('dialog_qr-code_scan_fehler.html');
                 }
         );
     } catch (exception) {
-        hudeOpenDialog('dialog_qr-code_scan_fehler.html');
+        $.mobile.changePage('#tphDialogQRCodeFehler', 'none', true, true);
+        // hudeOpenDialog('dialog_qr-code_scan_fehler.html');
     }
 
 }
 function hudeSplitURL(url) {
-    var domain = 'http://m.touristik-palette-hude.de/';
+    var domain = 'http://m.touristik-palette-hude.de/index.html';
     if (url.indexOf(domain) !== -1) {
         url = url.replace(domain, '').trim();
-        hudeOpenPage(url);
+        $.mobile.changePage(url, 'none', true, true);
     } else {
-        hudeOpenDialog('dialog_qr-code_ungueltig.html');
+        // hudeOpenDialog('dialog_qr-code_ungueltig.html');
+        $.mobile.changePage('#tphDialogQRCodeUngueltig', 'none', true, true);
     }
 }
 
@@ -957,5 +960,21 @@ function tphAudioLanguagePath(filepath, audioSelect) {
             filepath = filepath.slice(0, i) + '_' + audioSelect + '.mp3';
             return filepath;
         }
+    }
+}
+
+function tphLeseAlleIDs() {
+    var ids = new Array();
+    $('[id]').each(function() { //Get elements that have an id=
+        var element = $(this).attr("id")
+        if (element.indexOf('tphSeite') > -1) {
+            if (element != 'tphSeitenHeader') {
+                ids.push(element); //add id to array
+            }
+        }
+    });
+    ids.sort();
+    for (var i = 0; i < ids.length; i++) {
+        $('#seitenIDs').append(' & ' + ids[i] + ' \\\\ <br/>');
     }
 }

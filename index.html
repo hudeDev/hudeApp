@@ -2353,6 +2353,8 @@
                         <label for="audioPlatt">Plattdeutsch</label>
                     </fieldset>
                 </div>
+                <a href="#" onclick="tphLeseAlleIDs()">IDs</a>
+                <div id="seitenIDs"></div>
                 <h6>Schriftgröße</h6>
                 <a id="openStorage" href="#" data-role="button" data-icon="arrow-d" title="Speicher" onclick="leselLocalSpeich();">Inhalte des LocalStorage</a>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
@@ -10169,10 +10171,34 @@
             </div>
         </div>        
         <!-- Dialoge -->
+        <!-- Dialog -> QR-Code -> Fehler -->
+        <div id="tphDialogQRCodeFehler" data-role="page">
+            <div data-role="header">
+                <h1>Fehler</h1>
+            </div>
+            <div data-role="content">
+                <h5>Fehler</h5>
+                <p>Der QR-Scanner konnte nicht gestartet werden. Möglicherweise besitzt ihr Smartphone keine funktionierende Kamera.</p>
+                <a href="index.html" data-role="button" data-rel="back">Ok</a> 
+            </div>
+        </div>
+        <!-- Dialog -> QR-Code -> Ungültig -->
+        <div id="tphDialogQRCodeUngueltig" data-role="page">
+            <div data-role="header">
+                <h1>Fehler</h1>
+            </div>
+            <div data-role="content">
+                <h5>Fehler</h5>
+                <p>Ein ungültiger QR-Code wurde gelesen!</p>
+                <p>Diese QR-Code ist nicht mit der Hude-Touristen-App verfiziert worden und wird aus diesem Grund nicht geöffnet.</p>
+                <p>Möchten Sie diesen QR-Code trotzdem öffnen, benutzen Sie bitte einen Barcode-Scanner aus Ihrem App Store</p>
+                <a href="index.html" data-role="button" data-rel="back">Ok</a> 
+            </div>
+        </div>
         <!-- Dialog -> Schnitzeljagd -> Fotojagd -> Klosterbezirk 1 -->
         <div id="tphDialogSchnitzeljagdFotojagdKlosterbezirk1" data-role="page">
             <div data-role="header">
-                
+
             </div>
             <div data-role="content">
                 <img id="tphSchnitzeljagdFotojagdKlosterbezirkBild1" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/IMG_20130730_161051.jpg" />
@@ -10184,7 +10210,7 @@
         <!-- Dialog -> Schnitzeljagd -> Fotojagd -> Klosterbezirk 1 -->
         <div id="tphDialogSchnitzeljagdFotojagdKlosterbezirk2" data-role="page">
             <div data-role="header">
-                
+
             </div>
             <div data-role="content">
                 <img id="tphSchnitzeljagdFotojagdKlosterbezirkBild2" exif="true" src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/IMG_20130730_161156.jpg" />
