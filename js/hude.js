@@ -23,6 +23,7 @@ function hudeAppStartUp() {
 
 
     var tphAudioSelect = db.getItem('audioSelect');
+    console.log(tphAudioSelect);
     if (tphAudioSelect === 'de') {
         $('.tph_de').show();
         $('.tph_en').hide();
@@ -77,10 +78,10 @@ function tphGoogleMapsBildMitMarker(lat, lon, zoom, elementID) {
     // Bild in den Quellcode einfügen
     if (elementID !== null) {
         //$('#' + elementID).html('<div id="' + elementID + '" class="tphGoogleMapsBild" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
-        $('#' + elementID).append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
+        //$('#' + elementID).append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
     } else {
         //$('.tphGoogleMapsBild').html('<div class="tphGoogleMapsBild" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
-        $('.tphGoogleMapsBild').append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
+        //$('.tphGoogleMapsBild').append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
     }
     return bildpfad;
 }
@@ -133,7 +134,62 @@ function tphLadeVeranstatungen() {
     });
 }
 
-function tphGPSAbrufen(option) {
+function tphExifReader(img) {
+    // http://blog.nihilogic.dk/2008/05/reading-exif-data-with-javascript.html
+    var lat = $('#' + img).exif("GPSLatitude");
+    var lon = $('#' + img).exif("GPSLongitude");
+    var latlon = tphDMSDec(lat, lon);
+    return latlon;
+}
+
+function tphDMSDec(lat, lon) {
+    //http://en.wikipedia.org/wiki/Geographic_coordinate_conversion
+    lat = (lat[0][1] * 60 + lat[0][2]) / 3600 + lat[0][0];
+    lon = (lon[0][1] * 60 + lon[0][2]) / 3600 + lon[0][0];
+    var latlon = new Array(lat, lon);
+    return latlon;
+}
+
+
+function tphGPSAbstand(lat1, lon1, lat2, lon2) {
+    /*
+     * http://snipplr.com/view/25479/ (letzter Abruf: 22.07.2013)
+     */
+    var R = 6371;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    if (d > 1) {
+        return Math.round(d) + "km";
+    }
+    else if (d <= 1) {
+        return Math.round(d * 1000) + "m";
+    }
+    return d;
+
+}
+
+function tphGPSDistanz(lat1, lon1, lat2, lon2) {
+    var distanz = tphGPSAbstand(lat1, lon1, lat2, lon2);
+    alert(distanz);
+    console.log(distanz.indexOf("km") !== -1);
+    // Distanz < 1 km
+    if (!distanz.indexOf("km") !== -1) {
+        var meter = distanz.replace('m', '').trim();
+        meter = parseInt(meter);
+        if (meter <= 15) {
+            // Bild wird als gesehen registriert
+            console.log('Bild gefunden');
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+function tphGPSAbrufen(option, img) {
     var lat;
     var lon;
     navigator.geolocation.getCurrentPosition(tphGeoOnSuccess, tphGeoOnError, {maximumAge: 600000, timeout: 30000, enableHighAccuracy: true});
@@ -175,6 +231,18 @@ function tphGPSAbrufen(option) {
                     }
                 } else {
                     $('#tphParkplaetzeMap').append('Datenverbindung reicht nicht für die Kartendarstellung aus');
+                }
+                break;
+            case 'fotojagd':
+                // Auslesen der Exif-Daten aus dem Bild
+                var latlonImage = tphExifReader(img);
+                // Berechnung der Distanz zwischen aktueller Position und den im Bild hinterlegten Daten
+                var ergebnis = tphGPSDistanz(latlonImage[0], latlonImage[1], lat, lon);
+                // Feedback über die aktuelle Aktion
+                if (ergebnis) {
+                    $('#' + img + 'Ergebnis').html('<div id=#"' + img + 'Ergebnis">Gefunden</div><p>Bild:<br/>' + latlonImage[0] + ' / ' + latlonImage[1] + '</p><p>' + lat + ' / ' + lon + '</p>');
+                } else {
+                    $('#' + img + 'Ergebnis').html('<div id=#"' + img + 'Ergebnis">Nicht Gefunden</div><p>Bild:<br/>' + latlonImage[0] + ' / ' + latlonImage[1] + '</p><p>' + lat + ' / ' + lon + '</p>');
                 }
                 break;
             default:
@@ -254,6 +322,40 @@ function initiateLocalStorage() {
             return storage;
         }
     } catch (event) {
+        function pagebeforecreate() {
+            appStartUp();
+            // Aktiviere Swype
+            $("[data-role=page]").on("swiperight", function() {
+//$(".hudePanel").panel("open");
+                console.log("Swype");
+            });
+            // Lade Panel
+            $("[data-role=panel]").load('_panel.html', function() {
+                $(this).trigger("create");
+                //console.log("Panel erzeugt");
+                $(this).trigger("updatelayout");
+            });
+            // Lade Footer
+            $("[data-role=footer]").load('_footer.html', function() {
+                $(this).trigger("create");
+                //console.log("Footer erzeugt");
+            });
+            // Setze Einstellungen der Auswahl;
+            $(document).delegate('div[data-role=dialog]', 'pageinit', function() {
+                console.log("check audience");
+                tphUeberpruefeZielgruppe();
+                tphUberpruefeTon();
+            });
+            // Nutze den Browser um Links zu öffnen
+            $(function() {
+                $('.openBrowser').on('click', function(event) {
+                    event.preventDefault();
+                    var url = $(this).attr('href');
+                    loadURL(url);
+                    console.log("openBrowser Klasse");
+                });
+            });
+        }
         console.log("ERROR initiateLocalStorage");
         return "Error";
     }
@@ -297,41 +399,6 @@ function tphSaveAudio() {
     console.log("Speichere Einstellung");
 }
 
-function pagebeforecreate() {
-    appStartUp();
-    // Aktiviere Swype
-    $("[data-role=page]").on("swiperight", function() {
-//$(".hudePanel").panel("open");
-        console.log("Swype");
-    });
-    // Lade Panel
-    $("[data-role=panel]").load('_panel.html', function() {
-        $(this).trigger("create");
-        //console.log("Panel erzeugt");
-        $(this).trigger("updatelayout");
-    });
-    // Lade Footer
-    $("[data-role=footer]").load('_footer.html', function() {
-        $(this).trigger("create");
-        //console.log("Footer erzeugt");
-    });
-    // Setze Einstellungen der Auswahl;
-    $(document).delegate('div[data-role=dialog]', 'pageinit', function() {
-        console.log("check audience");
-        tphUeberpruefeZielgruppe();
-        tphUberpruefeTon();
-    });
-    // Nutze den Browser um Links zu öffnen
-    $(function() {
-        $('.openBrowser').on('click', function(event) {
-            event.preventDefault();
-            var url = $(this).attr('href');
-            loadURL(url);
-            console.log("openBrowser Klasse");
-        });
-    });
-}
-
 
 function close11() {
 // Open Collapsible
@@ -345,25 +412,6 @@ function loadURL(url) {
         openExternal: true
     });
     consoloe.log(url);
-}
-/*
- function loadURL(url) {
- var ref = window.open(url, '_system');
- }
- */
-// Navigation
-function hudeOpenPage(path) {
-    $.mobile.changePage(path, {
-        transition: "none",
-        changeHash: true
-    });
-}
-
-// Dialog
-function hudeOpenDialog(path) {
-    $.mobile.changePage(path, {
-        role: "dialog"
-    });
 }
 
 function hudeQRCodeScan() {
@@ -424,22 +472,6 @@ function hudeGPSonError(error) {
     $('#position').append(
             'code: ' + error.code + '\n' +
             'message: ' + error.message + '\n');
-}
-
-function hudeGPSDistance() {
-    alert("los geht es");
-    $('#positionGPS').html('<div id="positionGPS"></div>');
-    var lat1 = position.coords.latitude;
-    alert(lat1);
-    var lon1 = position.coords.longitude;
-    alert(lon2);
-    $('#positionGPS').append('</p>' + lat1 + ' ' + lon1 + '</p>');
-    pausecomp(15000);
-    var lat2 = position.coords.latitude;
-    var lon2 = position.coords.longitude;
-    $('#positionGPS').append('</p>' + lat2 + ' ' + lon2 + '</p>');
-    var dist = 6378.388 * acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(lon2 - lon1));
-    $('#positionGPS').append('<p>' + dist + '</p>');
 }
 
 function pausecomp(ms) {
