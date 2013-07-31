@@ -1,6 +1,11 @@
 function leselLocalSpeich() {
-    var db = initiateLocalStorage();
+    var db = tphInitiateLocalStorage();
     console.log(print_r(db));
+}
+
+function loescheLocalSpeich() {
+    var db = tphInitiateLocalStorage();
+    db.clear();
 }
 
 function tphClick(path) {
@@ -10,7 +15,7 @@ function tphClick(path) {
 }
 
 function hudeAppStartUp() {
-    var db = initiateLocalStorage();
+    var db = tphInitiateLocalStorage();
     tphZugriffDateisystem('audioUeberpruefen');
     tphLadeFooter();
     $(document).delegate('div[data-role=page]', 'pageinit', function() {
@@ -19,36 +24,57 @@ function hudeAppStartUp() {
         tphUeberpruefeZielgruppe();
         tphUberpruefeTon();
     });
+}
 
-
-
+/*
+ * Lädt die Spracheinstellungen für die anzuzeigende Seite.
+ * @return {String} Läderkürzel de/en/pd
+ * @method tphLadeSprachEinstellungen
+ *
+ */
+function tphLadeSprachEinstellungen() {
+    var db = tphInitiateLocalStorage();
     var tphAudioSelect = db.getItem('audioSelect');
     console.log(tphAudioSelect);
+    // Deutsch sprachigen Text anzeigen
     if (tphAudioSelect === 'de') {
         $('.tph_de').show();
         $('.tph_en').hide();
         $('.tph_pd').hide();
     }
+    // Englisch sprachigen Text anzeigen
     if (tphAudioSelect === 'en') {
         $('.tph_de').hide();
         $('.tph_en').show();
         $('.tph_pd').hide();
     }
+    // Plattdeutsch sprachigen Text anzeigen
     if (tphAudioSelect === 'pd') {
         $('.tph_de').hide();
         $('.tph_en').hide();
         $('.tph_pd').show();
     }
+    return tphAudioSelect;
+}
 
+/*
+ * Überprüft ob alle Audio-Daten Vorhanden sind und zeigt dann dem entsprechend einen Player an oder einen Hinweistext
+ * @returns {Boolean} Returns True 
+ */
+function tphLadeAudioPlayer() {
+    var db = tphInitiateLocalStorage();
     var tphPlayer = db.getItem('tphPlayer');
-    console.log(tphPlayer);
+
     if (tphPlayer === 'true') {
-        $('#tphPlayerControl').show();
-        $('#tphPlayerKeineDateien').hide();
+        console.log('Dateien vorhanden');
+        $('.tphPlayerControl').show();
+        $('.tphPlayerKeineDateien').hide();
     } else {
-        $('#tphPlayerControl').hide();
-        $('#tphPlayerKeineDateien').show();
+        console.log('Keine Dateien vorhanden');
+        $('.tphPlayerControl').hide();
+        $('.tphPlayerKeineDateien').show();
     }
+    return tphPlayer;
 }
 
 function tphGoogleMapsBild(lat, lon, zoom) {
@@ -66,7 +92,6 @@ function tphGoogleMapsBild(lat, lon, zoom) {
 }
 
 function tphGoogleMapsBildMitMarker(lat, lon, zoom, elementID) {
-
     // Latitude & Longitude zu einer Koordiate zusammenfassen
     var koordinaten = lat + ',' + lon;
     // Größe des Bildes errechnen
@@ -173,7 +198,6 @@ function tphGPSAbstand(lat1, lon1, lat2, lon2) {
 
 function tphGPSDistanz(lat1, lon1, lat2, lon2) {
     var distanz = tphGPSAbstand(lat1, lon1, lat2, lon2);
-    console.log(distanz.indexOf("km") !== -1);
     // Distanz < 1 km
     if (!distanz.indexOf("km") !== -1) {
         var meter = distanz.replace('m', '').trim();
@@ -192,10 +216,11 @@ function tphGPSDistanz1(lat1, lon1, lat2, lon2) {
     return distanz;
 }
 
-function tphGPSAbrufen(option, img) {
+function tphGPSAbrufen(option, imgID, imgPfad) {
     var lat;
     var lon;
-    navigator.geolocation.getCurrentPosition(tphGeoOnSuccess, tphGeoOnError, {maximumAge: 0, timeout: 30000, enableHighAccuracy: true});
+    console.log('ABRUFEN');
+    navigator.geolocation.getCurrentPosition(tphGeoOnSuccess, tphGeoOnError, {maximumAge: 0, timeout: 15000, enableHighAccuracy: false});
 
     function tphGeoOnSuccess(position) {
         lat = position.coords.latitude;
@@ -238,16 +263,18 @@ function tphGPSAbrufen(option, img) {
                 break;
             case 'fotojagd':
                 // Auslesen der Exif-Daten aus dem Bild
-                var latlonImage = tphExifReader(img);
+                var latlonImage = tphExifReader(imgID);
                 // Berechnung der Distanz zwischen aktueller Position und den im Bild hinterlegten Daten
                 var ergebnis = tphGPSDistanz(latlonImage[0], latlonImage[1], lat, lon);
                 // Feedback über die aktuelle Aktion
                 if (ergebnis) {
-                    $('#' + img + 'Ergebnis').html('<div id=#"' + img + 'Ergebnis">Gefunden</div><p>Bild:<br/>' + latlonImage[0] + ' / ' + latlonImage[1] + '</p><p>' + lat + ' / ' + lon + '</p>');
-                    $('#' + img + 'Distanz').append('<p>' + tphGPSDistanz1(latlonImage[0], latlonImage[1], lat, lon) + '<br/>' + lat + ',' + lon + '</p>');
+                    tphSchnitzeljagdFotojagdSetze(imgPfad);
+
+                    $('#' + imgID + 'Ergebnis').html('<div id=#"' + imgID + 'Ergebnis">Gefunden</div><p>Bild:<br/>' + latlonImage[0] + ' / ' + latlonImage[1] + '</p><p>' + lat + ' / ' + lon + '</p>');
+                    $('#' + imgID + 'Distanz').append('<p>' + tphGPSDistanz1(latlonImage[0], latlonImage[1], lat, lon) + '<br/>' + lat + ',' + lon + '</p>');
                 } else {
-                    $('#' + img + 'Ergebnis').html('<div id=#"' + img + 'Ergebnis">Nicht Gefunden</div><p>Bild:<br/>' + latlonImage[0] + ' / ' + latlonImage[1] + '</p><p>' + lat + ' / ' + lon + '</p>');
-                    $('#' + img + 'Distanz').append('<p>' + tphGPSDistanz1(latlonImage[0], latlonImage[1], lat, lon) + '<br/>' + lat + ',' + lon + '</p>');
+                    $('#' + imgID + 'Ergebnis').html('<div id=#"' + imgID + 'Ergebnis">Nicht Gefunden</div><p>Bild:<br/>' + latlonImage[0] + ' / ' + latlonImage[1] + '</p><p>' + lat + ' / ' + lon + '</p>');
+                    $('#' + imgID + 'Distanz').append('<p>' + tphGPSDistanz1(latlonImage[0], latlonImage[1], lat, lon) + '<br/>' + lat + ',' + lon + '</p>');
                 }
                 break;
             default:
@@ -256,7 +283,7 @@ function tphGPSAbrufen(option, img) {
     }
 
     function tphGeoOnError(e) {
-        alert('tphGeoOnError' + e.code);
+        console.log('GPS-Problem');
     }
 }
 
@@ -296,7 +323,7 @@ function tphLadeFooter() {
 
 function appStartUp() {
 // doing some shit on appstartup
-    var db = initiateLocalStorage();
+    var db = tphInitiateLocalStorage();
     // check if app starts up for the first time
     var firstStart = db.getItem("firstStart");
     if (firstStart === null) {
@@ -309,7 +336,7 @@ function appStartUp() {
 }
 
 function tphUeberpruefeZielgruppe() {
-    var audienceSelector = loadAudience();
+    var audienceSelector = tphLoadAudience();
     // Setzen des "checked"-Atrributs an den richtigen Radio-Button
     if (audienceSelector === null || audienceSelector === 0 || audienceSelector === "audienceNone") {
         $("#audienceNone").attr("checked", "checked").trigger('create');
@@ -320,54 +347,20 @@ function tphUeberpruefeZielgruppe() {
     }
 }
 
-function initiateLocalStorage() {
+function tphInitiateLocalStorage() {
     try {
         if (window.localStorage) {
             var storage = window.localStorage;
             return storage;
         }
     } catch (event) {
-        function pagebeforecreate() {
-            appStartUp();
-            // Aktiviere Swype
-            $("[data-role=page]").on("swiperight", function() {
-//$(".hudePanel").panel("open");
-                console.log("Swype");
-            });
-            // Lade Panel
-            $("[data-role=panel]").load('_panel.html', function() {
-                $(this).trigger("create");
-                //console.log("Panel erzeugt");
-                $(this).trigger("updatelayout");
-            });
-            // Lade Footer
-            $("[data-role=footer]").load('_footer.html', function() {
-                $(this).trigger("create");
-                //console.log("Footer erzeugt");
-            });
-            // Setze Einstellungen der Auswahl;
-            $(document).delegate('div[data-role=dialog]', 'pageinit', function() {
-                console.log("check audience");
-                tphUeberpruefeZielgruppe();
-                tphUberpruefeTon();
-            });
-            // Nutze den Browser um Links zu öffnen
-            $(function() {
-                $('.openBrowser').on('click', function(event) {
-                    event.preventDefault();
-                    var url = $(this).attr('href');
-                    loadURL(url);
-                    console.log("openBrowser Klasse");
-                });
-            });
-        }
-        console.log("ERROR initiateLocalStorage");
-        return "Error";
     }
+    console.log("ERROR tphInitiateLocalStorage");
+    return "Error";
 }
 
-function loadAudience() {
-    var db = initiateLocalStorage();
+function tphLoadAudience() {
+    var db = tphInitiateLocalStorage();
     print_r(db);
     var audienceSelector = db.getItem("audienceSelect");
     return audienceSelector;
@@ -375,13 +368,13 @@ function loadAudience() {
 
 function tphSaveAudience() {
 // Speichert den gewählten Filter im LocalStorage
-    var db = initiateLocalStorage();
+    var db = tphInitiateLocalStorage();
     db.setItem("audienceSelect", $('input[name=audienceSelect]:checked').val());
     console.log("Speichere Einstellung");
 }
 
 function tphUberpruefeTon() {
-    var audioSelector = loadAudio();
+    var audioSelector = tphLoadAudio();
     // Setzen des "checked"-Atrributs an den richtigen Radio-Button
     if (audioSelector === null || audioSelector === 0 || audioSelector === "de") {
         $("#audioDeutsch").attr("checked", "checked").trigger('create');
@@ -392,14 +385,14 @@ function tphUberpruefeTon() {
     }
 }
 
-function loadAudio() {
-    var db = initiateLocalStorage();
+function tphLoadAudio() {
+    var db = tphInitiateLocalStorage();
     var audioSelector = db.getItem("audioSelect");
     return audioSelector;
 }
 function tphSaveAudio() {
 // Speichert den gewählten Filter im LocalStorage
-    var db = initiateLocalStorage();
+    var db = tphInitiateLocalStorage();
     db.setItem("audioSelect", $('input[name=audioSelect]:checked').val());
     console.log("Speichere Einstellung");
 }
@@ -419,12 +412,12 @@ function loadURL(url) {
     consoloe.log(url);
 }
 
-function hudeQRCodeScan() {
+function tphQRCodeScan() {
     try {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(
                 function(result) {
-                    hudeSplitURL(result.text);
+                    tphSplitURL(result.text);
                 },
                 function(error) {
                     $.mobile.changePage('#tphDialogQRCodeFehler', 'none', true, true);
@@ -437,7 +430,7 @@ function hudeQRCodeScan() {
     }
 
 }
-function hudeSplitURL(url) {
+function tphSplitURL(url) {
     var domain = 'http://m.touristik-palette-hude.de/index.html';
     if (url.indexOf(domain) !== -1) {
         url = url.replace(domain, '').trim();
@@ -446,40 +439,6 @@ function hudeSplitURL(url) {
         // hudeOpenDialog('dialog_qr-code_ungueltig.html');
         $.mobile.changePage('#tphDialogQRCodeUngueltig', 'none', true, true);
     }
-}
-
-function hudeGetGPS() {
-    navigator.geolocation.getCurrentPosition(hudeGPSonSuccess, hudeGPSonError, {maximumAge: 600000, timeout: 30000, enableHighAccuracy: true});
-}
-
-function hudeGPSonSuccess(position) {
-    /*
-     $('#position').html('<div id="position">'+
-     '<p>Latitude: ' + position.coords.latitude + ' <br /> ' +
-     'Longitude: ' + position.coords.longitude + '<br />' +
-     'Altitude: ' + position.coords.altitude + '<br />' +
-     'Accuracy: ' + position.coords.accuracy + '<br />' +
-     'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '<br />' +
-     'Heading: ' + position.coords.heading + '<br />' +
-     'Speed: ' + position.coords.speed + '<br />' +
-     'Timestamp: ' + position.timestamp + '<br /></p></div>');
-     */
-    $('#map_canvas').css("width", Math.round($('#pagePosition').width() * 0.9));
-    $('#map_canvas').css("height", Math.round($('#pagePosition').height() * 0.9));
-    var yourStartLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    $('#map_canvas').gmap({'center': yourStartLatLng});
-    $('#map_canvas').gmap(
-            'addMarker', {
-        'position': position.coords.latitude + ',' + position.coords.longitude
-    });
-    $('#map_canvas').gmap('option', 'zoom', 18);
-
-}
-
-function hudeGPSonError(error) {
-    $('#position').append(
-            'code: ' + error.code + '\n' +
-            'message: ' + error.message + '\n');
 }
 
 function pausecomp(ms) {
@@ -650,7 +609,7 @@ function tphZugriffDateisystem(option, filename) {
                             if (entries[i].name === filename) {
                                 var filepath = entries[i].fullPath;
                                 // Hole Spracheinstellungen
-                                var db = initiateLocalStorage();
+                                var db = tphInitiateLocalStorage();
                                 var audioSelect = db.getItem('audioSelect');
                                 // Dateipfad zur eingestellten Sprache
                                 filepath = tphAudioLanguagePath(filepath, audioSelect);
@@ -667,24 +626,30 @@ function tphZugriffDateisystem(option, filename) {
             }, null);
             break;
         case 'audioUeberpruefen':
+            var db = tphInitiateLocalStorage();
+            var returner = false;
             console.log('Audio ueberpruefen');
             // Überprüfen ob Orner & Dateien vorhanden sind
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(filesystem) {
+                var db = tphInitiateLocalStorage();
+                console.log('audioUeberpruefen - Dateisystem');
                 // Überprüfen ob Ordner vorhanden ist
                 filesystem.root.getDirectory('Hude', {create: false, exclusive: false}, function() {
                     db.setItem('tphPlayer', false);
-                    console.log('Ordner Hude');
                 }, function() {
                     db.setItem('tphPlayer', false);
-                    console.log('Kein Ordner Hude');
                 });
                 filesystem.root.getDirectory('Hude/audio', {create: false, exclusive: false}, function(directory) {
+                    db.setItem('tphPlayer', false);
+
                     // Überprüfen ob Dateien vorhanden sind
                     var dateien = tphDownloadOrdnerDateien();
                     // Directory initialisieren
                     var directoryReader = directory.createReader();
                     // Ordner auslesen
                     directoryReader.readEntries(function(entries) {
+                        db.setItem('tphPlayer', false);
+
                         console.log('Anzahl der MP3s: ' + entries.length);
                         // Array mit den URI zum Download der Dateien
                         var dateien = tphDownloadOrdnerDateien();
@@ -699,21 +664,28 @@ function tphZugriffDateisystem(option, filename) {
                                 console.log(anzahlDateien + ' > ' + anzahlEntries);
                                 $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">' + anzahlEntries + '</span>');
                                 $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateien + '</span>');
-                                // Im localStorage festhalten: alle Dateien vorhanden
-                                var db = initiateLocalStorage();
+                                // Im localStorage festhalten: nicht alle Dateien vorhanden
                                 db.setItem('tphPlayer', false);
+                                returner = false;
                             }
+                        } else {
+                            // Im localStorage festhalten: alle Dateien vorhanden
+                            db.setItem('tphPlayer', true);
+                            // Informationen auf der Einstellungen-Seite über die heruntergeladenen Dateien
+                            $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">' + anzahlEntries + '</span>');
+                            $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateien + '</span>');
+                            returner = true;
                         }
-                        // Im localStorage festhalten: alle Dateien vorhanden
-                        var db = initiateLocalStorage();
-                        db.setItem('tphPlayer', true);
-                        // Informationen auf der Einstellungen-Seite über die heruntergeladenen Dateien
-                        $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">' + anzahlEntries + '</span>');
-                        $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateien + '</span>');
                     }, function() {
                         console.log('directoryReader - fehler');
                     });
+                    if (returner) {
+                        return returner;
+                    } else {
+                        return returner;
+                    }
                 }, function() {
+                    console.log('7');
                     var anzahlDateien = tphDownloadOrdnerDateien();
                     $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">0</span>');
                     $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateien.length + '</span>');
@@ -977,4 +949,88 @@ function tphLeseAlleIDs() {
     for (var i = 0; i < ids.length; i++) {
         $('#seitenIDs').append(' & ' + ids[i] + ' \\\\ <br/>');
     }
+}
+
+function tphSchnitzeljagdFotojagdInitialisierer(arrayBilder) {
+    console.log('2');
+    var db = tphInitiateLocalStorage();
+    for (var i = 0; i < arrayBilder.length; i++) {
+        // Überprüfen ob Name im LocalStorage vorhanden ist
+        if (!db.getItem(arrayBilder[i])) {
+            // Bild im LocalStorage aktivieren
+            console.log('nicht vorhanden ' + arrayBilder[i]);
+            // Bild als 'false', also nicht gefunden setzen
+            db.setItem(arrayBilder[i], false);
+        } else {
+            console.log('alles vorhanden');
+        }
+    }
+}
+
+function eingefundne() {
+    var db = tphInitiateLocalStorage();
+    db.setItem('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_5.jpg', true);
+}
+
+function tphSchnitzeljagdFotojagdSetze(imgPfad) {
+    var db = tphInitiateLocalStorage();
+    db.setItem(imgPfad, true);
+}
+
+function tphSchnitzeljagdFotojagd(name) {
+    var anzahlBilder = tphSchnitzeljagdFotojagdBilder(name).length;
+}
+
+function tphSchnitzeljagdFotojagdBilder(name) {
+    console.log('3');
+    var bildpfad = new Array();
+    switch (name) {
+        case 'Klosterbezirk':
+            console.log('4');
+            // Bildpfad eingeben
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_1.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_2.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_3.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_4.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_5.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_6.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_7.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_8.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_9.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_10.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_11.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_12.jpg');
+            return bildpfad;
+            break;
+        case 'Hude':
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_hude/fotojagd_hude_1.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_hude/fotojagd_hude_2.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_hude/fotojagd_hude_3.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_hude/fotojagd_hude_4.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_hude/fotojagd_hude_5.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_hude/fotojagd_hude_6.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_hude/fotojagd_hude_7.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_hude/fotojagd_hude_8.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_hude/fotojagd_hude_9.jpg');
+            return bildpfad;
+            break;
+        case 'Test':
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_test/IMG_20130606_142019.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_test/IMG_20130730_161051.jpg');
+            bildpfad.push('images/schnitzeljagd/fotojagd/fotojagd_test/IMG_20130730_161156.jpg');
+            return bildpfad;
+            break;
+        default:
+            break;
+    }
+}
+
+function tphLadeFotojagden() {
+    console.log('1');
+    var klosterbezirk = tphSchnitzeljagdFotojagdBilder('Klosterbezirk');
+    tphSchnitzeljagdFotojagdInitialisierer(klosterbezirk);
+    var hude = tphSchnitzeljagdFotojagdBilder('Hude');
+    tphSchnitzeljagdFotojagdInitialisierer(hude);
+    var test = tphSchnitzeljagdFotojagdBilder('Test');
+    tphSchnitzeljagdFotojagdInitialisierer(test);
 }
