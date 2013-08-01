@@ -2,6 +2,7 @@
     <img src="images/hude-info/uebersicht_hude-info.jpg" />
     <br/>&nbsp;
 </div>
+<div id="tphPositionsKarte" style="width: 200px; height: 300px;"></div>
 <div class="section-container accordion" data-section="accordion">
     <section>
         <p class="title" data-section-title>
@@ -21,5 +22,6 @@
 <script>
     $(function() {
         tphHeaderUberschriftAendern('Hude-Info');
+        $('#tphPositionsKarte').gmap();
     });
 </script>

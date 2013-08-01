@@ -337,7 +337,9 @@ function tphGPSAbrufen(option, imgID, imgPfad) {
     var lon;
     navigator.geolocation.getCurrentPosition(tphGeoOnSuccess, tphGeoOnError, {maximumAge: 0, timeout: 15000, enableHighAccuracy: true});
 
+
     function tphGeoOnSuccess(position) {
+        console.log('tphGPSAbrufen' + ' ' + lat + ' ' + lon);
         lat = position.coords.latitude;
         lon = position.coords.longitude;
         var gmapWidth = $(window).width() * 0.9;
@@ -345,6 +347,7 @@ function tphGPSAbrufen(option, imgID, imgPfad) {
 
         switch (option) {
             case 'parkplaetze':
+                console.log('parkplaetze');
                 var networkState = navigator.connection.type;
                 if (Connection.ETHERNET || Connection.WIFI || Connection.CELL_3G || Connection.CELL_4G) {
                     // Größe der Karte einrichten 90% der Breite und Weite des Displays
@@ -377,6 +380,7 @@ function tphGPSAbrufen(option, imgID, imgPfad) {
                 }
                 break;
             case 'fotojagd':
+                console.log('fotojagd');
                 // Auslesen der Exif-Daten aus dem Bild
                 var latlonImage = tphExifReader(imgID);
                 // Berechnung der Distanz zwischen aktueller Position und den im Bild hinterlegten Daten
@@ -392,8 +396,9 @@ function tphGPSAbrufen(option, imgID, imgPfad) {
                 }
                 break;
             case 'position':
+                console.log('position');
                 $('#tphPositionsKoordinaten').html(print_r(position));
-                
+
                 $('#tphPositionsKarte').css('width', gmapWidth);
                 $('#tphPositionsKarte').css('height', gmapHeight);
                 // Karte auf aktueller Position zentrieren und Umkreis-Kreis hinzufügen
