@@ -36,18 +36,19 @@
                 min-height: 100%;
                 height: auto !important;
                 height: 100%;
-                margin: 0 auto -50px; /* the bottom margin is the negative value of the footer's height */
+                margin: 0 auto 0px; /* the bottom margin is the negative value of the footer's height */
             }
-            .footer, .push {
-                max-height: 50px; /* .push must be the same height as .footer */
-            }
+
             .stickyfooter {
+                /*
                 position: fixed;
                 bottom: 0;
                 left: 0;
                 right: 0;
                 padding-bottom:10px;
+                
                 background-color: black;
+                */
             }
             /* Überschrift */
             #tphHeaderUeberschrift {
@@ -117,12 +118,7 @@
             </div>
         </div>
         <div class="stickyfooter">
-            <div class="row">
-                <div class="large-3 small-3 columns"><a href="#tphSeiteIndex"><img src="images/icons_hude_schnitzeljagd.png" /></a></div>
-                <div class="large-3 small-3 columns"><a href="#" onclick="tphQRCodeScan();"><img src="images/icons_hude_perfekt.png" /></a></div>
-                <div class="large-3 small-3 columns"><a href="#tphSeitePosition"><img src="images/icons_hude_perfekt.png" /></a></div>
-                <div class="large-3 small-3 columns"><a href="#tphSeiteEinstellungen"><img src="images/icons_hude_perfekt.png" /></a></div>
-            </div>
+            
         </div>
         <div class="wrapper">
             <div class="push"></div>
@@ -154,7 +150,7 @@
             $(document).foundation();
 
             $(function() {
-                //tphAppStart();
+                tphAppStart();
                 // Bind an event to window.onhashchange that, when the hash changes, gets the
                 // hash and adds the class "selected" to any matching nav link.
                 $(window).hashchange(function() {
@@ -163,12 +159,13 @@
                     hash = (hash.replace(/^#/, '') || 'blank') + '.';
                     datei = hash + 'html';
                     $('.tphContent').load(datei);
+                    $('.stickyfooter').load('_footer.html');
                 })
 
                 // Since the event is only triggered when the hash changes, we need to trigger
                 // the event now, to handle the hash the page may have loaded with.
                 $(window).hashchange();
-
+                tphSetzeEinstellungenAufSeite();
             });
         </script>
 

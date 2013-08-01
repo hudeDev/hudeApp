@@ -1,9 +1,13 @@
+<div class="row">
+    <img src="images/hude-info/uebersicht_hude-info.jpg" />
+    <br/>&nbsp;
+</div>
 <div class="section-container accordion" data-section="accordion">
     <section>
         <p class="title" data-section-title><a href="#">Download Audio</a></p>
         <div class="content" data-section-content>
             <p>Um die Audio-Inhalte anhören zu können, müssen diese heruntergeladen werden. Wir empfehlen dazu eine WLAN-Verbindung! Sie haben bereits <strong><span id="tphAnzahlAudioBereitsGeladen"></span> von <span id="tphAnzahlAudioInsgesamt"></span></strong> heruntergeladen.</p>
-            <a href="#" onclick="" class="large button expand">Download Audio-Inhalte</a>
+            <span onclick="tphZugriffDateisystem('download')" class="large button expand">Download Audio-Inhalte</span>
         </div>
     </section>
     <section>
@@ -27,7 +31,7 @@
         </div>
     </section>
     <section>
-        <p class="title" data-section-title><a href="#">SchriftgrößeSchriftgrößeSchriftgrößeSchriftgrößeSchriftgröße Schriftgröße Schriftgröße</a></p>
+        <p class="title" data-section-title><a href="#">Schriftgröße</a></p>
         <div class="content" data-section-content>
             <label for="tphSchriftgroesse">
                 <input name="tphSchriftgroesse" type="radio" id="tphSchriftgroesse0" value="normal">
