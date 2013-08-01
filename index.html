@@ -27,10 +27,20 @@
         <script type="text/javascript">
             document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
+                $.mobile.defaultPageTransition = "none";
+                $.mobile.defaultDialogTransition = "none";
+
                 var db = tphInitiateLocalStorage();
                 var tphAppErsterStart = db.getItem('tphAppErsterStart');
+
+                tphUeberpruefeZielgruppe();
+                tphUberpruefeTon();
+                tphLadeFooter();
+
                 //console.log(tphAppErsterStart);
                 if (tphAppErsterStart === null) {
+                    // Fotojagden werden geladen
+                    tphLadeFotojagdenLaden();
                     // Timestamp setzen des ersten Starts
                     db.setItem('tphAppErsterStart', +new Date);
                     db.setItem('audioSelect', 'de');
@@ -42,28 +52,15 @@
                 }
             }
         </script>
+        
         <script type="text/javascript">
             $(document).on('pageinit', function(event) {
-                $.mobile.defaultPageTransition = "none";
-                $.mobile.defaultDialogTransition = "none";
-                hudeAppStartUp();
-
-                var db = tphInitiateLocalStorage();
-                var tphAppErsterStart = db.getItem('tphAppErsterStart');
-                //console.log(tphAppErsterStart);
-                if (tphAppErsterStart === null) {
-                    // Timestamp setzen des ersten Starts
-                    db.setItem('tphAppErsterStart', +new Date);
-                    db.setItem('audioSelect', 'de');
-                    db.setItem('tphPlayer', false);
-                    // Überprüfen ob Dateien vorhanden sind.                    
-                } else {
-                    //console.log('wurde schon einmal gestartet: ' + db.getItem('tphAppErsterStart'));
-                    console.log('thp Else: ' + tphZugriffDateisystem('audioUeberpruefen'));
-                }
-
+                //hudeAppStartUp();
             });
             $(document).on('pagechange', function(event) {
+                tphSchnitzeljagdFotojagdUebersichtGefunden('Klosterbezirk');
+                tphSchnitzeljagdFotojagdUebersichtGefunden('Hude');
+                tphSchnitzeljagdFotojagdUebersichtGefunden('Test');
                 tphLadeSprachEinstellungen();
                 tphLadeAudioPlayer();
             });
@@ -80,32 +77,32 @@
             <div data-role="content">
                 <div class="row">
                     <div class="row">
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteHudeInfo"><img src="images/icons_hude_info.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteSehenswuerdigkeiten"><img src="images/icons_hude_sehenswuerdigkeiten.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteUnterkuenfte"><img src="images/icons_hude_unterkuenfte.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteHudeInfo"><img src="images/icons_hude_info.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteSehenswuerdigkeiten"><img src="images/icons_hude_sehenswuerdigkeiten.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteUnterkuenfte"><img src="images/icons_hude_unterkuenfte.png" /></a></div>
                     </div>
                     <div class="row">
                         &nbsp;
                     </div>
                     <div class="row">
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteGastronomie"><img src="images/icons_hude_gastronomie.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteECAutomaten"><img src="images/icons_hude_automaten.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteEinkaufen"><img src="images/icons_hude_einkaufen.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteGastronomie"><img src="images/icons_hude_gastronomie.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteECAutomaten"><img src="images/icons_hude_automaten.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteEinkaufen"><img src="images/icons_hude_einkaufen.png" /></a></div>
                     </div>
                     <div class="row">
                         &nbsp;
                     </div>
                     <div class="row">
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteParkmoeglichkeiten"><img src="images/icons_hude_parken.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteGesundheit"><img src="images/icons_hude_gesundheit.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteVeranstaltungen"><img src="images/icons_hude_veranstaltungen.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteParkmoeglichkeiten"><img src="images/icons_hude_parken.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteGesundheit"><img src="images/icons_hude_gesundheit.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteVeranstaltungen"><img src="images/icons_hude_veranstaltungen.png" /></a></div>
                     </div>
                     <div class="row">
                         &nbsp;
                     </div>
                     <div class="row">
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteSchnitzeljagd"><img src="images/icons_hude_schnitzeljagd.png" /></a></div>
-                        <div class="large-4 small-4 columns"><a href="#tphSeiteHudePerfekt"><img src="images/icons_hude_perfekt.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteSchnitzeljagd"><img src="images/icons_hude_schnitzeljagd.png" /></a></div>
+                        <div class="large-4 small-4 columns"><a data-prefetch href="#tphSeiteHudePerfekt"><img src="images/icons_hude_perfekt.png" /></a></div>
                         <div class="large-4 small-4 columns">&nbsp;<!--<a data-role="button" href="page_filesystem.html" onclick="hudeOpenPage('page_filesystem.html');">Dateisystem</a>--></div>
                     </div>
                     <div class="row">
@@ -132,7 +129,7 @@
             <!-- Inhalt der Seite -->
             <div data-role="content">
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/hude-info/hude-info_large.jpg" />
                 <!-- Klappmenu Gruppe -->
                 <div data-role="collapsible-set" data-inset="false">
@@ -175,7 +172,7 @@
                         </div>
                     </div>
                     <!-- Klappmenu für den "Herzlich Willkommen in Hude"-Text -->
-                    <div data-role="collapsible" data-collapsed="true" data-inset="false">
+                    <div data-role="collapsible" data-collapsed="false" data-inset="false">
                         <!-- Überschrift des Klappmenus -->
                         <h1>
                             <span class="tph_de">Herzlich willkommen in Hude!</span> <!-- auf deutsch -->
@@ -240,7 +237,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <!-- Fuß der Seite mit den Navigationselementen, wird aus der _footer.html geladen -->
             <div data-role="footer" data-position="fixed"></div>
@@ -261,7 +258,7 @@
             </div>
             <div data-role="content">
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <div class="sehenswuerdigkeit">
                     <!-- Überschrift/Name der Sehenswürdigkeit -->
                     <h4>
@@ -278,7 +275,7 @@
 
                     </p>
                     <!-- Öffnet die Sehenswürdigkeit -->
-                    <a href="#tphSeiteSehenswuerdigkeitKlosterbezirk" data-role="button">Mehr</a>
+                    <a data-prefetch href="#tphSeiteSehenswuerdigkeitKlosterbezirk" data-role="button">Mehr</a>
                 </div>
                 <div>&nbsp;</div>
                 <div class="sehenswuerdigkeit">
@@ -296,7 +293,7 @@
                     </p>
                     <img src="images/sehenswuerdigkeiten/kulturpfad/artesischer-brunnen.jpg" />
                     <!-- Öffnet die Sehenswürdigkeit -->
-                    <a href="#tphSeiteSehenswuerdigkeitKulturpfad" data-role="button">Mehr</a>
+                    <a data-prefetch href="#tphSeiteSehenswuerdigkeitKulturpfad" data-role="button">Mehr</a>
                 </div>
                 <div>&nbsp;</div>
                 <div class="sehenswuerdigkeit">
@@ -313,7 +310,7 @@
                         <span class="tph_en">A combination of art and nature.</span> <!-- auf englisch -->
                         <span class="tph_pd">N'Zusammenspiel von Kunst un Natuur.</span> <!-- auf plattdeutsch -->
                     </p>
-                    <a href="#tphSeiteSehenswuerdigkeitSkulpturenuferHaus" data-role="button">Mehr</a>
+                    <a data-prefetch href="#tphSeiteSehenswuerdigkeitSkulpturenuferHaus" data-role="button">Mehr</a>
                 </div>
                 <div>&nbsp;</div>
                 <div class="sehenswuerdigkeit">
@@ -331,7 +328,7 @@
                         <span class="tph_pd">Intuschen Sie in de Welt des 19. Johrhunnert.</span> <!-- auf plattdeutsch -->
                     </p>
                     <!-- Öffnet die Sehenswürdigkeit -->
-                    <a href="#tphSeiteSehenswuerdigkeitVielstedterBauernhaus" data-role="button">Mehr</a>
+                    <a data-prefetch href="#tphSeiteSehenswuerdigkeitVielstedterBauernhaus" data-role="button">Mehr</a>
                 </div>
                 <div>&nbsp;</div>
                 <div class="sehenswuerdigkeit">
@@ -349,7 +346,7 @@
                         <span class="tph_pd">Unternehmen Sie eine Reise durch unser Sonnensystem!</span> <!-- auf plattdeutsch -->
                     </p>
                     <!-- Öffnet die Sehenswürdigkeit -->
-                    <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfad" data-role="button">Mehr</a>
+                    <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfad" data-role="button">Mehr</a>
                 </div>
                 <div>&nbsp;</div>
                 <div class="sehenswuerdigkeit">
@@ -367,7 +364,7 @@
                         <span class="tph_pd">Lopen dör de Eerdgeschich.</span> <!-- auf plattdeutsch -->
                     </p>
                     <!-- Öffnet die Sehenswürdigkeit -->
-                    <a href="#tphSeiteSehenswuerdigkeitZeitstrahl2000" data-role="button">Mehr</a>
+                    <a data-prefetch href="#tphSeiteSehenswuerdigkeitZeitstrahl2000" data-role="button">Mehr</a>
                 </div>
                 <div>&nbsp;</div>
                 <div class="sehenswuerdigkeit">
@@ -385,7 +382,7 @@
                         <span class="tph_pd">Genete de Natuur un Kultur!</span> <!-- auf plattdeutsch -->
                     </p>
                     <!-- Öffnet die Sehenswürdigkeit -->
-                    <a href="#tphSeiteSehenswuerdigkeitStrasseDerMegalithkultur" data-role="button">Mehr</a>
+                    <a data-prefetch href="#tphSeiteSehenswuerdigkeitStrasseDerMegalithkultur" data-role="button">Mehr</a>
                 </div>
                 <div>&nbsp;</div>
                 <div class="sehenswuerdigkeit">
@@ -402,7 +399,7 @@
                         <span class="tph_pd">Us Holt - gans eerst.</span> <!-- auf plattdeutsch -->
                     </p>
                     <!-- Öffnet die Sehenswürdigkeit -->
-                    <a href="#tphSeiteSehenswuerdigkeitHasbruch" data-role="button">Mehr</a>
+                    <a data-prefetch href="#tphSeiteSehenswuerdigkeitHasbruch" data-role="button">Mehr</a>
                 </div>
                 <div>&nbsp;</div>
                 <div class="sehenswuerdigkeit">
@@ -419,10 +416,10 @@
                         <span class="tph_pd">Moorrebeet - notürlich un sehenswert.</span> <!-- auf plattdeutsch -->
                     </p>
                     <!-- Öffnet die Sehenswürdigkeit -->
-                    <a href="#tphSeiteSehenswuerdigkeitWittemoor" data-role="button">Mehr</a>
+                    <a data-prefetch href="#tphSeiteSehenswuerdigkeitWittemoor" data-role="button">Mehr</a>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -442,7 +439,8 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <img src="images/unterkuenfte/TP.web_bild_unterkuenfte.jpg" />
                 <!-- Klappmenu Gruppe -->
                 <div data-role="collapsible-set" data-inset="false">
                     <!-- Klappmenu für den Audio-Player, standardmäßig geschlossen -->
@@ -519,21 +517,21 @@
                         </h1>
                         <ul data-role="listview">
                             <li>
-                                <a href="#tphSeiteUnterkuenfteHotelsHotelKlosterschänke">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteHotelsHotelKlosterschänke">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/hotels/klosterschaenke-01_large.jpg" />
                                     Hotel Klosterschänke <!-- Bildunterschrift, ohne Spracheinstellungen -->
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteHotelsHotelBurgdorf">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteHotelsHotelBurgdorf">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/hotels/burgdorf-hude02_large.jpg" />
                                     Hotel Burgdorf <!-- Bildunterschrift, ohne Spracheinstellungen -->
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteHotelsHotelGarni">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteHotelsHotelGarni">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/hotels/garni-01_large.jpg" />
                                     Hotel Garni <!-- Bildunterschrift, ohne Spracheinstellungen -->
@@ -549,7 +547,7 @@
                         </h1>
                         <ul data-role="listview">
                             <li>
-                                <a href="#tphSeiteUnterkuenftePensionHofHeinemann">
+                                <a data-prefetch href="#tphSeiteUnterkuenftePensionHofHeinemann">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/pensionen/heinemann-03_large.JPG" />
                                     <span class="tph_de">Pension Hof Heinemann</span> <!-- auf deutsch -->
@@ -558,7 +556,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenftePensionWPaulus">
+                                <a data-prefetch href="#tphSeiteUnterkuenftePensionWPaulus">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/pensionen/paulus-01_large.jpg" />
                                     <p>
@@ -569,7 +567,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteGaestehausWobig">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteGaestehausWobig">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/pensionen/wobig-03_large.jpg" />
                                     <span class="tph_de">Gästehaus Wobig</span> <!-- auf deutsch -->
@@ -578,7 +576,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteGaestehausWuerdemann">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteGaestehausWuerdemann">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/pensionen/wuerdemann-01_large.jpg" />
                                     <span class="tph_de">Gästehaus Würdemann</span> <!-- auf deutsch -->
@@ -597,7 +595,7 @@
                         </h1>
                         <ul data-role="listview">
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungenAschenbeck">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungenAschenbeck">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/aschenbeck-03_large.jpg" />
                                     <span class="tph_de">Ferienwohnungen Aschenbeck</span> <!-- auf deutsch -->
@@ -606,7 +604,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungBurgmannshof">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungBurgmannshof">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/burgmannshof-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnung Burgmannshof</span> <!-- auf deutsch -->
@@ -615,7 +613,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungenHausLichtblick">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungenHausLichtblick">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/lichtblick-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnungen Haus Lichtblick</span> <!-- auf deutsch -->
@@ -623,7 +621,7 @@
                                     <span class="tph_pd">Ferienwohnen Haus Lichtblick</span> <!-- auf plattdeutsch -->
                                 </a>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungKlosterschaenke">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungKlosterschaenke">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/klosterschaenke-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnung Klosterschänke</span> <!-- auf deutsch -->
@@ -632,7 +630,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungFHattendorf">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungFHattendorf">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/hattendorf-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnung F. Hattendorf</span> <!-- auf deutsch -->
@@ -641,7 +639,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungenMKallisch">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungenMKallisch">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/mkallisch-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnungen M. Kallisch</span> <!-- auf deutsch -->
@@ -650,7 +648,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungUKallisch">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungUKallisch">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/ukallisch-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnung U. Kallisch</span> <!-- auf deutsch -->
@@ -659,7 +657,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungAlteBaeckerei">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungAlteBaeckerei">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/alte_baeckerei-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnung Alte Bäckerei</span> <!-- auf deutsch -->
@@ -668,7 +666,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungSeekermann">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungSeekermann">
                                     <img src="images/unterkuenfte/ferienwohnungen/seekermann-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnung "Seekermann"</span> <!-- auf deutsch -->
                                     <span class="tph_en">Vacation apartment "Seekermann"</span> <!-- auf englisch -->
@@ -676,7 +674,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungEichkatz">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungEichkatz">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/eichkatz-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnung "Eichkatz"</span> <!-- auf deutsch -->
@@ -685,7 +683,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungHofStolle">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungHofStolle">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/stolle-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnungen Hof Stolle</span> <!-- auf deutsch -->
@@ -694,7 +692,7 @@
                                 </a> 
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungDatLuettjeHuus">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungDatLuettjeHuus">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/dat-luettje-huus-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnung „Dat lüttje Huus“</span> <!-- auf deutsch -->
@@ -703,7 +701,7 @@
                                 </a> 
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienwohnungForsthausHasbruch">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienwohnungForsthausHasbruch">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienwohnungen/hasbruch-01_large.jpg" />
                                     <span class="tph_de">Ferienwohnung "Forsthaus Hasbruch"</span> <!-- auf deutsch -->
@@ -723,7 +721,7 @@
                         <h1></h1>
                         <ul data-role="listview">
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienhausAschenbeck">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienhausAschenbeck">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienhaeuser/aschenbeck-01_large.jpg" />
                                     <span class="tph_de">Ferienhaus Aschenbeck</span> <!-- auf deutsch -->
@@ -732,7 +730,7 @@
                                 </a> 
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienhausIngridsruh">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienhausIngridsruh">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienhaeuser/ingridsruh-01_large.jpg" />
                                     <span class="tph_de">Ferienhaus "Ingridsruh"</span> <!-- auf deutsch -->
@@ -741,7 +739,7 @@
                                 </a> 
                             </li>
                             <li>
-                                <a href="#tphSeiteUnterkuenfteFerienhausHude">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteFerienhausHude">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/ferienhaeuser/hude-01_large.jpg" />
                                     <span class="tph_de">Ferienhaus Hude</span> <!-- auf deutsch -->
@@ -760,7 +758,7 @@
                         </h1>
                         <ul data-role="listview">
                             <li>
-                                <a href="#tphSeiteUnterkuenfteJugendherberge">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteJugendherberge">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/jugendherberge/jugendherberge-01_large.jpg" />
                                     <span class="tph_de">Jugendherberge Hude</span> <!-- auf deutsch -->
@@ -778,7 +776,7 @@
                         </h1>
                         <ul data-role="listview">
                             <li>
-                                <a href="#tphSeiteUnterkuenfteWohnmobilstellplaltz">
+                                <a data-prefetch href="#tphSeiteUnterkuenfteWohnmobilstellplaltz">
                                     <!-- Unterkunftsgrafik -->
                                     <img src="images/unterkuenfte/wohnmobilstellplatz/wohnmobilstellplatz-01_large.jpg" />
                                     <span class="tph_de">Wohnmobilstellplatz in Hude</span> <!-- auf deutsch -->
@@ -790,7 +788,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -810,7 +808,8 @@
             </div>
             <div data-role="content">
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <img src="images/gastronomie/TP.web_bild_gastronomie.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <!-- Klappmenu für den Audio-Player, standardmäßig geschlossen -->
                     <div data-role="collapsible" data-inset="false" data-collapsed="true">
@@ -878,70 +877,70 @@
                         </h1>
                         <ul data-role="listview" data-inset="false">
                             <li>
-                                <a href="#tphSeiteGastronomieBurgdorfs">
+                                <a data-prefetch href="#tphSeiteGastronomieBurgdorfs">
                                     <!-- Gastronomiegrafik -->
                                     <img src="images/gastronomie/burgdorfs.jpg" />
                                     <h2>Burgdorf's</h2>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteGastronomieCafe21">
+                                <a data-prefetch href="#tphSeiteGastronomieCafe21">
                                     <!-- Gastronomiegrafik -->
                                     <img src="images/gastronomie/cafe-21.jpg" />
                                     <h2>Cafe 21</h2>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteGastronomieEiscafeItalia">
+                                <a data-prefetch href="#tphSeiteGastronomieEiscafeItalia">
                                     <!-- Gastronomiegrafik -->
                                     <img src="images/gastronomie/eiscafeitalia.jpg" />
                                     <h2>Eiscafé Italia</h2>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteGastronomieKlosterschänke">
+                                <a data-prefetch href="#tphSeiteGastronomieKlosterschänke">
                                     <!-- Gastronomiegrafik -->
                                     <img src="images/gastronomie/klosterschaenke-hude02.jpg" />
                                     <h2>Klosterschänke</h2>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteGastronomieMoritzWuetenlanderHof">
+                                <a data-prefetch href="#tphSeiteGastronomieMoritzWuetenlanderHof">
                                     <!-- Gastronomiegrafik -->
                                     <img src="images/gastronomie/moritz-wuestenlander-hof.jpg" />
                                     <h2>Moritz Wüstenlander Hof</h2>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteGastronomieCafeSpanhacke">
+                                <a data-prefetch href="#tphSeiteGastronomieCafeSpanhacke">
                                     <!-- Gastronomiegrafik -->
                                     <img src="images/gastronomie/spanhacke-hude.jpg" />
                                     <h2>Spanhacke Café, Bäckerei &amp; Konditorei</h2>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteGastronomieVielstedterBauernhaus">
+                                <a data-prefetch href="#tphSeiteGastronomieVielstedterBauernhaus">
                                     <!-- Gastronomiegrafik -->
                                     <img src="images/gastronomie/vielstedter-bauernhaus.jpg" />
                                     <h2>Vielstedter Bauernhaus</h2>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteGastronomieVielstedterMelkhus">
+                                <a data-prefetch href="#tphSeiteGastronomieVielstedterMelkhus">
                                     <!-- Gastronomiegrafik -->
                                     <img src="images/gastronomie/melkhus-hude.jpg" />
                                     <h2>Vielstedter Melkhus</h2>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteGastronomieZorbas">
+                                <a data-prefetch href="#tphSeiteGastronomieZorbas">
                                     <!-- Gastronomiegrafik -->
                                     <img src="images/gastronomie/zorbas.jpg" />
                                     <h2>Zorbas</h2>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tphSeiteGastronomieZurKrone">
+                                <a data-prefetch href="#tphSeiteGastronomieZurKrone">
                                     <!-- Gastronomiegrafik -->
                                     <img src="images/gastronomie/zur-krone.jpg" />
                                     <h2>Zur Krone</h2>
@@ -951,7 +950,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div> 
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -971,7 +970,8 @@
             </div>
             <div data-role="content">
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <img src="images/ecautomaten/ecautomaten.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
                         <h1>
@@ -1121,7 +1121,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -1141,7 +1141,8 @@
             </div>
             <div data-role="content">
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <img src="images/einkaufen/einkaufen.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
                         <!-- Überschrift des Klappmenus -->
@@ -1571,7 +1572,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -1590,7 +1591,7 @@
                     tphGPSAbrufen('parkplaetze');
                 </script>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/parken/parkplatz.jpg" />
                 <div id="tphParkplaetzeMap">
 
@@ -1642,7 +1643,7 @@
                 <div class="tph_en">&nbsp;</div>
                 <div class="tph_pd">&nbsp;</div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -1663,6 +1664,7 @@
             <div data-role="content">
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
                 <a href="#index" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <img src="images/gesundheit/gesundheit.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
                         <!-- Überschrift des Klappmenus -->
@@ -2247,7 +2249,7 @@
 
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
         </div>
         <!-- Veranstaltungen -->
@@ -2258,7 +2260,7 @@
             </div>
             <div data-role="content">
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <table data-role="table" id="tph_veranstaltungen" data-mode="columntoggle">
                     <thead>
                         <tr>
@@ -2279,7 +2281,7 @@
 
             </div>
             <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-            <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
         </div>
         <!-- Schnitzeljagd -->
         <div data-role="page" data-dom-cache="true" id="tphSeiteSchnitzeljagd">
@@ -2289,18 +2291,18 @@
             </div>
             <div data-role="content">
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <div class="row">&nbsp;</div>
                 <ul data-role="listview">
                     <li>
-                        <a href="#tphSeiteSchnitzeljagdPlanetenAbitur">
+                        <a data-prefetch href="#tphSeiteSchnitzeljagdPlanetenAbitur">
                             <img src="images/listviews/schnitzeljagd/planetenlehrpfad/planetenlehrpfad.jpg">
                             <h2>Planeten-Abitur</h2>
                             <p>Spannende Fragen rund um den Plantenlehrpfad</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#tphSeiteSchnitzeljagdFotojagd">
+                        <a data-prefetch href="#tphSeiteSchnitzeljagdFotojagd">
                             <img src="images/listviews/schnitzeljagd/fotojagd/fotojagd_klosterbezirk.jpg">
                             <h2>Fotojagd</h2>
                             <p>Wo ist es bloß?</p>
@@ -2313,7 +2315,7 @@
 
             </div>
             <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-            <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+            <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
         </div>
         <!-- Hude-Perfekt -->
         <div data-role="page" data-dom-cache="true" id="tphSeiteHudePerfekt">
@@ -2323,10 +2325,10 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <p>Hier fehlt weiterhin Inhalt</p>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -2334,6 +2336,31 @@
             </div>
         </div>
         <!-- Position -->
+        <div data-role="page" data-dom-cache="true" id="tphSeitePosition">
+            <div id="tphSeitenHeader" data-role="header">
+                <a href="#tphPanelLinks" data-icon="slider" data-corners="false" data-iconpos="notext">Seitenleiste öffnen</a>
+                <h1>Position</h1>
+            </div>
+            <div data-role="content">   
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <!-- Ausgabe der Koordinaten -->
+                <div id="tphPositionsKoordinaten"></div>
+                <a href="#" data-role="button" onclick="tphGPSAbrufen('position');">Aktualisieren</a>
+                <!-- Ausgabe der Karte -->
+                <div id="tphPositionsKarte"></div>
+                <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <script>
+                // GPS abrufen + Kartenmaterial laden und einfügen
+                tphGPSAbrufen('position');
+                </script>
+            </div>
+            <div data-role="footer" data-position="fixed"></div>
+            <div data-role="panel" id="tphPanelLinks">
+
+            </div>
+        </div>
         <!-- Einstellungen -->
         <div data-role="page" data-dom-cache="true" id="tphSeiteEinstellungen">
             <div id="tphSeitenHeader" data-role="header">
@@ -2342,7 +2369,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <h6>Download der Audio-Inhalte</h6>
                 <p>Um die Audio-Inhalte anhören zu können, müssen diese heruntergeladen werden. Wir empfehlen dazu eine WLAN-Verbindung! Sie haben bereits <strong><span id="tphAnzahlAudioBereitsGeladen"></span> von <span id="tphAnzahlAudioInsgesamt"></span></strong> heruntergeladen.</p>
                 <p id="tphDownloadStatus"></p>
@@ -2378,8 +2405,9 @@
                 <a id="openStorage" href="#" data-role="button" data-icon="arrow-d" title="Speicher" onclick="loescheLocalSpeich();">Loschen des LocalStorage</a>
                 <a id="openStorage" href="#" data-role="button" data-icon="arrow-d" title="Speicher" onclick="eingefundne();">Eins gefunden</a>
                 <a id="hingfong" href="#" data-role="button" data-icon="arrow-d" title="Speicher" onclick="tphLadeFotojagden();">Spiel</a>
+                <div id="einstellungenLocalStorage"></div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -2398,7 +2426,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/tph-logo.jpg" />
                 <h4>Touristik-Palette Hude e.V.</h4>
                 <p>Parkstraße 53a <br /> 27798 Hude</p>
@@ -2408,7 +2436,7 @@
                     Mo - Fr von 10:00 bis 12:30 Uhr</p>     
                 <a id="openStorage" href="#" data-role="button" data-icon="arrow-d" title="Speicher" onclick="leselLocalSpeich();">Inhalte des LocalStorage</a>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -2481,35 +2509,35 @@
                                     <h1>Zum Klosterbezirk gehören</h1>
                                     <ul data-role="listview" data-inset="false">
                                         <li>
-                                            <a href="#tphSeiteSehenswuerdigkeitKlosterbezirkKlosterruine">
+                                            <a data-prefetch href="#tphSeiteSehenswuerdigkeitKlosterbezirkKlosterruine">
                                                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude06_small.jpg" />
                                                 <h2>Klosterruine - INHALT!</h2>
                                                 <p>Altehrwürdige Klostermauern erinnern an bedeutungsvolle Geschichte.</p>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#tphSeiteSehenswuerdigkeitKlosterbezirkWassermuehle">
+                                            <a data-prefetch href="#tphSeiteSehenswuerdigkeitKlosterbezirkWassermuehle">
                                                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude33_small.jpg" />
                                                 <h2>Wassermühle</h2>
                                                 <p>In der ehemaligen Wassermühle in der noch in den 50er Jahren unseres Jahrhunderts Korn gemahlen wurde, gibt es heute das Standesamt und eine tolle Location zum Feiern.</p>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#tphSeiteSehenswuerdigkeitKlosterbezirkKlosterschenkeUndRemise">
+                                            <a data-prefetch href="#tphSeiteSehenswuerdigkeitKlosterbezirkKlosterschenkeUndRemise">
                                                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude02_small.jpg" />
                                                 <h2>Klosterschenke und Remise</h2>
                                                 <p>Auch ist wieder Leben in die denkmalgeschützte Remise eingekehrt. Schöne Dinge für Haus & Garten, ein Wein-Depot, Antike Möbel und „Feiern in kleiner Runde“ sind die neuen Anziehungspunkte des Klosterbezirks.</p>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#tphSeiteSehenswuerdigkeitKlosterbezirkTorkapelle">
+                                            <a data-prefetch href="#tphSeiteSehenswuerdigkeitKlosterbezirkTorkapelle">
                                                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude01_small.jpg" />
                                                 <h2>Torkapelle</h2>
                                                 <p>Die ehemalige Torkapelle ist heute evangelische Pfarrkirche. In der Elisabethkirche ist freigelegte mittelalterliche Malerei und ein Altarretabel mit Schnitzwerk aus dem 14. Jahrhundert zu bewundern.</p>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#tphSeiteSehenswuerdigkeitKlosterbezirkMuseum">
+                                            <a data-prefetch href="#tphSeiteSehenswuerdigkeitKlosterbezirkMuseum">
                                                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude23_small.jpg" />
                                                 <h2>Museum</h2>
                                                 <p>In einem Tanzsaal aus der Zeit um 1900, zwischen Klosterruine und Klosterschänke gelegen, haben die Freunde des Klosters Hude e.V. ein kleines Museum eingerichtet.</p>
@@ -2873,7 +2901,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/artesischer-brunnen.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -2925,7 +2953,7 @@
                                     <span class="tph_pd">Zum Kulturpad gehören</span> <!-- auf plattdeutsch --></h1>
                                 <ul data-role="listview" data-inset="false">
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitKulturpfadSonnenuhr">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitKulturpfadSonnenuhr">
                                             <img src="#" />
                                             <h1>
                                                 <span class="tph_de">Sonnenuhr</span>
@@ -2940,7 +2968,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfad">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfad">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/Planetenlehrpfad.jpg" />
                                             <h1>
                                                 <span class="tph_de">Planetenlehrpfad</span>
@@ -2955,14 +2983,14 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitKulturpfadArtesischerBrunnen">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitKulturpfadArtesischerBrunnen">
                                             <img src="images/sehenswuerdigkeiten/kulturpfad/artesischer-brunnen.jpg" />
                                             <h1>Artesischer Brunnen</h1>
                                             <p class="todo">Inhalt + Audio fehlt</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitVielstedterBauernhaus">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitVielstedterBauernhaus">
                                             <img src="images/sehenswuerdigkeiten/overview_vielstedter-bauernhaus.jpg" />
                                             <h1>Vielsteder Bauernhaus</h1>
                                             <p>
@@ -2973,28 +3001,28 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitKulturpfadZiehbrunnen">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitKulturpfadZiehbrunnen">
                                             <img src="#" />
                                             <h1>Ziehbrunnen</h1>
                                             <p class="todo">Inhalt?! + Audio</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitKulturpfadWanderwegHuderBach">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitKulturpfadWanderwegHuderBach">
                                             <img src="#" />
                                             <h1>Wanderweg Huder Bach</h1>
                                             <p class="todo">Inhalt?!</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitSkulpturenuferHaus">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitSkulpturenuferHaus">
                                             <img src="images/sehenswuerdigkeiten/skulpturenufer/skulpturenufer-hude1.jpg" />
                                             <h1>Skulpturenufer</h1>
                                             <p>Ein Zusammenspiel von Kunst und Natur.</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitKlosterbezirk">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitKlosterbezirk">
                                             <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude06.jpg" />
                                             <h1>
                                                 <span class="tph_de">Klosterbezirk</span>
@@ -3029,7 +3057,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -3049,7 +3077,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
                         <h1>
@@ -3139,7 +3167,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -3159,7 +3187,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/vielstedter_bauernhaus/vielstedter-bauernhaus.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -3245,7 +3273,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -3265,7 +3293,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/planetenlehrpfad/Planetenlehrpfad.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -3333,7 +3361,7 @@
                                 </h1>
                                 <ul data-role="listview" data-inset="false">
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadSonne">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadSonne">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/sonne.png" />
                                             <h2>
                                                 <span class="tph_de">Sonne</span> <!-- auf deutsch -->
@@ -3344,7 +3372,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadMerkur">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadMerkur">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/merkur.png" />
                                             <h2>
                                                 <span class="tph_de">Merkur</span> <!-- auf deutsch -->
@@ -3355,14 +3383,14 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadVenus">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadVenus">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/venus.png" />
                                             <h2>Venus</h2>
                                             <p>&nbsp;</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadErde">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadErde">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/erde.png" />
                                             <h2>
                                                 <span class="tph_de">Erde</span> <!-- auf deutsch -->
@@ -3373,42 +3401,42 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadMars">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadMars">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/mars.png" />
                                             <h2>Mars</h2>
                                             <p>&nbsp;</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadJupiter">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadJupiter">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/jupiter.png"  />
                                             <h2>Jupiter</h2>
                                             <p>&nbsp;</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadSaturn">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadSaturn">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/saturn.png" />
                                             <h2>Saturn</h2>
                                             <p>&nbsp;</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadUranus">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadUranus">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/uranus.png" />
                                             <h2>Uranus</h2>
                                             <p>&nbsp;</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadNeptun">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadNeptun">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/neptun.png" />
                                             <h2>Neptun</h2>
                                             <p>&nbsp;</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadPluto">
+                                        <a data-prefetch href="#tphSeiteSehenswuerdigkeitPlanetenlehrpfadPluto">
                                             <img src="images/sehenswuerdigkeiten/planetenlehrpfad/pluto.png" />
                                             <h2>Pluto</h2>
                                             <p>&nbsp;</p>
@@ -3435,7 +3463,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -3455,7 +3483,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/zeitstrahl/zeitstrahl-2000.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -3622,7 +3650,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -3642,7 +3670,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/megalithkultur/megalithkultur.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -3718,7 +3746,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -3734,7 +3762,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/hasbruch/urwald-hasbruch.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -3815,7 +3843,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -3835,7 +3863,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/wittemoor/wittemoor01.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -3945,7 +3973,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -3965,7 +3993,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude23.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -4027,7 +4055,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -4047,7 +4075,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude33.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -4115,7 +4143,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -4135,7 +4163,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude02.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -4204,7 +4232,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -4224,7 +4252,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude01.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -4290,7 +4318,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -4306,7 +4334,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude23.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -4372,7 +4400,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -4392,7 +4420,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/klosterbezirk/kloster-hude23.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -4458,7 +4486,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -4478,7 +4506,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/artesischer-brunnen.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -4544,7 +4572,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -4564,7 +4592,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -4630,7 +4658,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -4650,7 +4678,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -4716,7 +4744,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -4736,7 +4764,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -4881,7 +4909,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -4901,7 +4929,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -5021,7 +5049,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -5037,7 +5065,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -5157,7 +5185,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -5177,7 +5205,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -5293,7 +5321,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -5309,7 +5337,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -5419,7 +5447,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -5435,7 +5463,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -5539,7 +5567,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -5559,7 +5587,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -5663,7 +5691,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -5679,7 +5707,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -5783,7 +5811,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -5799,7 +5827,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -5903,7 +5931,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -5919,7 +5947,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/sehenswuerdigkeiten/kulturpfad/#" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -6023,7 +6051,7 @@
                     <div>&nbsp;</div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -6039,7 +6067,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/hotels/klosterschaenke-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -6178,7 +6206,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -6195,7 +6223,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/hotels/burgdorf-hude02_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -6334,7 +6362,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -6351,7 +6379,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/hotels/garni-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -6507,7 +6535,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -6528,7 +6556,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <!-- <img src="images/unterkuenfte/pensionen/heinemann-03_large.JPG" /> -->
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -6668,7 +6696,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -6689,7 +6717,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/pensionen/paulus-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -6795,7 +6823,7 @@
                         </div>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -6817,7 +6845,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/pensionen/wobig-02_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -6953,7 +6981,7 @@
                         </div>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -6975,7 +7003,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/pensionen/wuerdemann-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -7081,7 +7109,7 @@
                         </div>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -7103,7 +7131,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/alte_baeckerei-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -7243,7 +7271,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -7265,7 +7293,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/aschenbeck-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -7431,7 +7459,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -7453,7 +7481,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/burgmannshof-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -7590,7 +7618,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -7612,7 +7640,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/dat-luettje-huus-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -7752,7 +7780,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -7774,7 +7802,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/eichkatz-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -7914,7 +7942,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -7936,7 +7964,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/hattendorf-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -8069,7 +8097,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -8091,7 +8119,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/stolle-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -8231,7 +8259,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -8253,7 +8281,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/klosterschaenke-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -8393,7 +8421,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -8415,7 +8443,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/mkallisch-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -8555,7 +8583,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -8577,7 +8605,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/seekermann-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -8687,7 +8715,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -8709,7 +8737,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/ukallisch-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -8847,7 +8875,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -8869,7 +8897,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/ukallisch-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -8996,7 +9024,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -9018,7 +9046,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienwohnungen/lichtblick-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -9164,7 +9192,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -9186,7 +9214,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienhaeuser/aschenbeck-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -9326,7 +9354,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -9348,7 +9376,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienhaeuser/hude-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -9488,7 +9516,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -9510,7 +9538,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/ferienhaeuser/ingridsruh-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -9651,7 +9679,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -9673,7 +9701,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/wohnmobilstellplatz/wohnmobilstellplatz-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -9763,7 +9791,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -9785,7 +9813,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/unterkuenfte/jugendherberge/jugendherberge-01_large.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -9922,7 +9950,7 @@
                         <p>&nbsp;</p>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -9939,7 +9967,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/gastronomie/burgdorfs.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -10005,7 +10033,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -10022,7 +10050,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/gastronomie/cafe-21.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -10088,7 +10116,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -10105,7 +10133,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/gastronomie/eiscafeitalia.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -10171,7 +10199,7 @@
                     </div>
                 </div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -10188,7 +10216,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/gastronomie/klosterschaenke-hude02.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -10259,7 +10287,7 @@
                         </div>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -10277,7 +10305,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/gastronomie/moritz-wuestenlander-hof.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -10348,7 +10376,7 @@
                         </div>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -10366,7 +10394,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/gastronomie/spanhacke-hude.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -10437,7 +10465,7 @@
                         </div>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -10455,7 +10483,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/gastronomie/vielstedter-bauernhaus.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -10526,7 +10554,7 @@
                         </div>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -10544,7 +10572,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/gastronomie/melkhus-hude.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -10615,7 +10643,7 @@
                         </div>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -10633,7 +10661,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/gastronomie/zorbas.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -10704,7 +10732,7 @@
                         </div>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -10722,7 +10750,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/gastronomie/zur-krone.jpg" />
                 <div data-role="collapsible-set" data-inset="false">
                     <div data-role="collapsible" data-collapsed="true" data-inset="false">
@@ -10793,7 +10821,7 @@
                         </div>
                     </div>
                     <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                    <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                    <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 </div>
                 <div data-role="footer" data-position="fixed"></div>
                 <div data-role="panel" id="tphPanelLinks">
@@ -10814,35 +10842,35 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/schnitzeljagd/planetenlehrpfad/planetenabitur_uebersicht_milchstrasse.jpg" />
                 <div class="row">&nbsp;</div>
                 <ul data-role="listview">
                     <li>
-                        <a href="#tphSeiteSchnitzeljagdPlanetenAbiturA">
+                        <a data-prefetch href="#tphSeiteSchnitzeljagdPlanetenAbiturA">
                             <img src="images/listviews/schnitzeljagd/planetenlehrpfad/planetenabiturA.jpg">
-                            <h2>Abitur A</h2>
+                            <h2>Planeten-Abitur A</h2>
                             <p>Aufgepasst?</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#tphSeiteSchnitzeljagdPlanetenAbiturB">
+                        <a data-prefetch href="#tphSeiteSchnitzeljagdPlanetenAbiturB">
                             <img src="images/listviews/schnitzeljagd/planetenlehrpfad/planetenabiturB.jpg">
-                            <h2>Abitur B</h2>
+                            <h2>Planeten-Abitur B</h2>
                             <p>Nachgelesen?</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#tphSeiteSchnitzeljagdPlanetenAbiturC">
+                        <a data-prefetch href="#tphSeiteSchnitzeljagdPlanetenAbiturC">
                             <img src="images/listviews/schnitzeljagd/planetenlehrpfad/planetenabiturC.jpg">
-                            <h2>Abitur C</h2>
+                            <h2>Planeten-Abitur C</h2>
                             <p>Gewusst?</p>
                         </a>
                     </li>
                 </ul>
                 <div class="row">&nbsp;</div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -10862,7 +10890,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/schnitzeljagd/planetenlehrpfad/planetenabiturA.jpg" />
                 <fieldset data-role="controlgroup">
                     <legend id="plpAbiA01">Welchen Durchmesser hat die Sonnenkugel auf dem Lehr-Pfad?</legend>
@@ -11146,7 +11174,7 @@
                 <a id="auswertenPLP" onclick="hudeSJPLPAbiturA();" data-role="button">Auswerten</a>
                 <p id="sjPLPAbiturAErgebnis"></p>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -11166,7 +11194,7 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/schnitzeljagd/planetenlehrpfad/planetenabiturB.jpg" />
                 <fieldset data-role="controlgroup">
                     <legend id="plpAbiB01">Wie weit muss man gehen, um auf dem Planeten-Lehrpfad zum nächsten Fixstern zu gelangen ?</legend>
@@ -11367,7 +11395,7 @@
                 <a id="auswertenPLP" onclick="hudeSJPLPAbiturB();" data-role="button">Auswerten</a>
                 <p id="sjPLPAbiturBErgebnis"></p>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -11387,26 +11415,26 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/schnitzeljagd/fotojagd/fotojagd_uebersicht.jpg" />
                 <div class="row">&nbsp;</div>
                 <ul data-role="listview">
                     <li>
-                        <a href="#tphSeiteSchnitzeljagdFotojagdKlosterbezirk">
+                        <a data-prefetch href="#tphSeiteSchnitzeljagdFotojagdKlosterbezirk">
                             <img src="images/listviews/schnitzeljagd/fotojagd/fotojagd_klosterbezirk.jpg">
                             <h2>Klosterbezirk</h2>
                             <p>Alles ist im Klosterbezirk zu finden!</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#tphSeiteSchnitzeljagdFotojagdHude">
+                        <a data-prefetch href="#tphSeiteSchnitzeljagdFotojagdHude">
                             <img src="images/listviews/schnitzeljagd/fotojagd/fotojagd_wappen_hude.jpg">
                             <h2>Hude</h2>
                             <p>Überall in Hude kann es sein!</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#tphSeiteSchnitzeljagdFotojagdTest">
+                        <a data-prefetch href="#tphSeiteSchnitzeljagdFotojagdTest">
                             <img src="images/listviews/schnitzeljagd/fotojagd/fotojagd_wappen_hude.jpg">
                             <h2>Test</h2>
                             <p>Vor der Haustür</p>
@@ -11415,7 +11443,7 @@
                 </ul>
                 <div class="row">&nbsp;</div>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -11435,11 +11463,12 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk.jpg" />
                 <div class="row">
                     &nbsp;
                 </div>
+                <div id="tphSeiteSchnitzeljagdFotojagdKlosterbezirkUebersichtGefunden"></div>
                 <table>
                     <tr>
                         <td><img src="images/schnitzeljagd/fotojagd/fotojagd_klosterbezirk/fotojagd_klosterbezirk_1.jpg" /></td>
@@ -11491,7 +11520,7 @@
                     </tr>
                 </table>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -11511,11 +11540,12 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/schnitzeljagd/fotojagd/fotojagd_hude.jpg" />
                 <div class="row">
                     &nbsp;
                 </div>
+                <div id="tphSeiteSchnitzeljagdFotojagdHudeUebersichtGefunden"></div>
                 <table>
                     <tr>
                         <td><img src="images/schnitzeljagd/fotojagd/fotojagd_hude/fotojagd_hude_1.jpg" /></td>
@@ -11559,7 +11589,7 @@
                     </tr>
                 </table>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -11858,11 +11888,12 @@
             </div>
             <div data-role="content">   
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
                 <img src="images/schnitzeljagd/fotojagd/fotojagd_hude.jpg" />
                 <div class="row">
                     &nbsp;
                 </div>
+                <div id="tphSeiteSchnitzeljagdFotojagdTestUebersichtGefunden"></div>
                 <table>
                     <tr>
                         <td><img src="images/schnitzeljagd/fotojagd/fotojagd_test/IMG_20130606_142019.jpg" /></td>
@@ -11882,7 +11913,7 @@
                     </tr>
                 </table>
                 <!-- Zurück Button der auf die vorangegangene Seite verweist. -->
-                <a href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
+                <a data-prefetch href="#tphSeiteIndex" data-role="button" data-rel="back" data-direction="reverse">Zurück</a>
             </div>
             <div data-role="footer" data-position="fixed"></div>
             <div data-role="panel" id="tphPanelLinks">
@@ -11925,6 +11956,10 @@
                 <a href="#" onclick="tphGPSAbrufen('fotojagd', 'tphSchnitzeljagdFotojagdTest3', 'images/schnitzeljagd/fotojagd/fotojagd_test/IMG_20130730_161156.jpg');" data-role="button">Gefunden!</a>
             </div>
         </div>
+
+        <script>
+        $.mobile.loadPage('#tphSeiteEinstellungen', true);
+        </script>
         
     </body>
 </html>
