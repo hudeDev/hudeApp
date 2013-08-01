@@ -109,8 +109,19 @@ function tphNutzeGPS(option) {
             case 'tphAktuellePosition':
                 $('#tphPositionsKarte').css('height', $(window).height() * 0.9);
                 $('#tphPositionsKarte').css('width', $(window).width() * 0.9);
-                $('#tphPositionsKarte').css('background-color', 'red');
-                $('#tphPositionsKarte').gmap();
+                $('#tphPositionsKarte').css('padding', '5px');
+                var aktuellePosition = new google.maps.LatLng(lat, lon);
+                $('#tphPositionsKarte').gmap('addMarker', {'id': 'aktuellePosition', 'position': aktuellePosition, 'bounds': true});
+                $('#tphPositionsKarte').gmap('addShape', 'Circle', {
+                    'strokeWeight': 0,
+                    'fillColor': "#008595",
+                    'fillOpacity': 0.25,
+                    'center': aktuellePosition,
+                    'radius': 15,
+                    'clickable': false
+                });
+                $('#tphPositionsKarte').gmap({'center': aktuellePosition});
+                $('#tphPositionsKarte').gmap('option', 'zoom', 17);
                 break;
         }
         console.log('erfolg' + $(window).width() * 0.9 + 'x' + $(window).height() * 0.9 + ' ' + lat + ' ' + lon);
