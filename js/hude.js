@@ -411,6 +411,7 @@ function tphGPSAbrufen(option, imgID, imgPfad) {
                 $('#tphPositionsKarte').gmap('option', 'zoom', 13);
                 break;
             default:
+                alert(lat + ' / ' + lon);
                 break;
         }
     }

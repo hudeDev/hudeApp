@@ -1,0 +1,43 @@
+<div class="section-container accordion" data-section="accordion">
+    
+    <section>
+        <p class="title" data-section-title><a href="#">Spracheinstellungen</a></p>
+        <div class="content" data-section-content>
+            was steht jetzt hier so
+        </div>
+    </section>
+    <section>
+        <p class="title" data-section-title><a href="#">SchriftgrößeSchriftgrößeSchriftgrößeSchriftgrößeSchriftgröße Schriftgröße Schriftgröße</a></p>
+        <div class="content" data-section-content>
+            <label for="tphSchriftgroesse">
+                <input name="tphSchriftgroesse" type="radio" id="tphSchriftgroesse0" value="klein">
+                <span class="custom radio"></span> 
+                Normal
+            </label>
+            <label for="tphSchriftgroesse">
+                <input name="tphSchriftgroesse" type="radio" id="tphSchriftgroesse1" value="mittel">
+                <span class="custom radio"></span> 
+                Mittel
+            </label>
+            <label for="tphSchriftgroesse">
+                <input name="tphSchriftgroesse" type="radio" id="tphSchriftgroesse2" value="gross">
+                <span class="custom radio"></span> 
+                Groß
+            </label>
+        </div>
+    </section>
+    <section>
+        <p class="title" data-section-title><a href="#">Zielgruppe</a></p>
+        <div class="content" data-section-content>
+            <p>Content of section 2.</p>
+        </div>
+    </section>
+</div>
+<script>
+    $(function() {
+        tphHeaderUberschriftAendern('Einstellungen');
+    });
+    $('input:radio').change(function(){
+        alert($(this).val());
+    });
+</script>
