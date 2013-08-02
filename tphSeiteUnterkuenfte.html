@@ -1,0 +1,139 @@
+<img src="images/unterkuenfte/uebersicht_unterkuenfte.jpg" />
+<br/>
+<div>&nbsp;</div>
+<div class="section-container accordion" data-section="accordion">
+    <section>
+        <p class="title" data-section-title>
+            <a href="#">
+                <span class="tphSpracheDE">Hören Sie die Informationen</span>
+                <span class="tphSpracheEN">Listen to the information</span>
+                <span class="tphSprachePD">Lustern tau de Toon</span>
+            </a>
+        </p>
+        <div class="content" data-section-content>
+            <!-- Audio-Player -->
+            <div id="tphPlayer">
+                <!-- Kontrollelemente des Players -->
+                <div class="tphPlayerControl">
+                    <div class="row">
+                        <!-- Kontrollelement: Abspielen -->
+                        <div class="small-4 columns">
+                            <a href="#" onclick="tphZugriffDateisystem('audioAbspielen', 'hude-info.mp3');">
+                                <img src="images/player/tph_play.png" />
+                            </a>
+                        </div>
+                        <!-- Kontrollelement: Pause -->
+                        <div class="small-4 columns">
+                            <a href="#" onclick="tphAudioPause();">
+                                <img src="images/player/tph_pause.png" />
+                            </a>
+                        </div>
+                        <!-- Kontrollelement: Stop -->
+                        <div class="small-4 columns">
+                            <a href="#" onclick="tphAudioStoppen();">
+                                <img src="images/player/tph_stop.png" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tphPlayerKeineDateien">
+                    <p>Sie habe keine Audio-Inhalte heruntergeladen. Dies können Sie in den Einstellungen nachholen. Dazu klicken Sie bitte <a href="#tphSeiteEinstellungen">hier</a> und wählen "Download starten".</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <p class="title" data-section-title>
+            <a href="#">
+                <span class="tphSpracheDE">Über die Unterkünfte</span> <!-- auf deutsch -->
+                <span class="tphSpracheEN">About the accommodation</span> <!-- auf englisch -->
+                <span class="tphSprachePD">Über die Unterkünfte</span> <!-- auf plattdeutsch -->
+            </a>
+        </p>
+        <div class="content" data-section-content>
+            <!-- Weiterführender Text -->
+            <!-- auf deutsch -->
+            <div class="tphSpracheDE">
+                <p>Freundliche Gastgeber laden Sie ein.</p>
+                <p>Die gastfreundliche Klostergemeinde bietet Ihnen für entspannte Tage und traumhafte Nächte eine große Auswahl verschiedener Übernachtungsmöglichkeiten.</p>
+                <p>Das Angebot ist so vielseitig, wie die Bedürfnisse der Gäste in Hude.</p>
+            </div>
+            <!-- auf englisch -->
+            <div class="tphSpracheEN">
+                <p>Friendly hosts invite.</p>
+                <p>Hospitable monastic community provides for relaxed days and dreamy nights a wide selection of accommodation options.</p>
+                <p>The offer is as varied as the needs of guests in Hude.</p>
+            </div>
+            <!-- auf plattdeutsch -->
+            <div class="tphSprachePD">
+                <p>?</p>
+                <p>?</p>
+                <p>?</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <p class="title">
+            <a href="#">
+                <span class="tphSpracheDE">Hotels</span> <!-- auf deutsch -->
+                <span class="tphSpracheEN">Hotels</span> <!-- auf englisch -->
+                <span class="tphSprachePD">Hotels</span> <!-- auf plattdeutsch -->
+            </a>
+        </p>
+        <div class="content" data-slug="section1">
+            <table>
+                <tr>
+                    <td>
+                        <a class="th radius" href="#tphSeiteUnterkuenfteHotelBurgdorf">
+                            <img src="images/listen/listview_hotel_burgdorf.jpg" style="max-width: none;">
+                        </a>
+                    </td>
+                    <td>
+                        <h5>
+                            Hotel Burgdorf
+                        </h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a class="th radius" href="#tphSeiteUnterkuenfteHotelGarni">
+                            <img src="images/listen/listview_hotel_garni.jpg" style="max-width: none;">
+                        </a>
+                    </td>
+                    <td>
+                        <h5>
+                            Hotel Garni
+                        </h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a class="th radius" href="#tphSeiteUnterkuenfteHotelKlosterschaenke">
+                            <img src="images/listen/listview_hotel_klosterschaenke.jpg" style="max-width: none;">
+                        </a>
+                    </td>
+                    <td>
+                        <h5>
+                            Hotel Klosterschänke
+                        </h5>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</div>
+<script>
+                                $(function() {
+                                    tphHeaderUberschriftAendern('Klosterbezirk');
+                                    tphSetzeEinstellungenAufSeite();
+                                });
+</script>
+
+<section>
+    <p class="title">
+        <a href="#">
+        </a>
+    </p>
+    <div class="content" data-slug="section1">
+    </div>
+</section>
