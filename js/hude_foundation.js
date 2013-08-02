@@ -396,6 +396,11 @@ function tphSetzeEinstellungenAufSeite() {
         $('.tphPlayerControl').show();
         $('.tphPlayerKeineDateien').hide();
     }
+    // Zurück-Button ermöglichen
+    $('a.back').click(function() {
+        parent.history.back();
+        return false;
+    });
 }
 
 // Speichert die Schriftgroesse im localStorage
