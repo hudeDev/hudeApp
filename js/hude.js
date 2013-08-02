@@ -55,25 +55,6 @@ function tphGoogleMapsBild(lat, lon, zoom) {
     return bildpfad;
 }
 
-function tphGoogleMapsBildMitMarker(lat, lon, zoom, elementID) {
-    // Latitude & Longitude zu einer Koordiate zusammenfassen
-    var koordinaten = lat + ',' + lon;
-    // Größe des Bildes errechnen
-    var breite = $(window).width() * 0.9;
-    var hoehe = $(window).height() * 0.7;
-    var abmessung = Math.round(breite) + 'x' + Math.round(hoehe);
-    // URI für erstellen
-    var bildpfad = 'https://maps.googleapis.com/maps/api/staticmap?center=' + koordinaten + '&zoom=' + zoom + '&size=' + abmessung + '&markers=color:red||' + koordinaten + '&sensor=false';
-    // Bild in den Quellcode einfügen
-    if (elementID !== null) {
-        //$('#' + elementID).html('<div id="' + elementID + '" class="tphGoogleMapsBild" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
-        $('#' + elementID).append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
-    } else {
-        //$('.tphGoogleMapsBild').html('<div class="tphGoogleMapsBild" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
-        $('.tphGoogleMapsBild').append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
-    }
-    return bildpfad;
-}
 
 function tphLadeVeranstatungen() {
     console.log('ausgeführt');
