@@ -24,7 +24,7 @@
         <script>
             document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
-                tphAppStart();
+                //tphAppStart();
             }
         </script>
         <style>
@@ -32,25 +32,17 @@
                 margin: 0;
             }
             html, body {
-                height: 100%;
+                /* height: 100%; */
             }
             .tphContent {
-                min-height: 100%;
-                height: auto !important;
-                height: 100%;
-                margin: 0 auto 0px; /* the bottom margin is the negative value of the footer's height */
+                /* margin-bottom: 20px; */
             }
-
-            .stickyfooter {
-                /*
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                padding-bottom:10px;
-                
+            .tphFooter {
                 background-color: black;
-                */
+                position: fixed;
+                bottom: 0px;
+                left: 0px;
+                width: 100%;
             }
             /* Überschrift */
             #tphHeaderUeberschrift {
@@ -59,16 +51,31 @@
 
             table {
                 width: 100%;
+                border: 0;
             }
+            p a {
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .large .button .expand {
+                background-color: red;
+            }
+
+            .tphKlappmenu {
+                background-color: red;
+            }
+
         </style>
     </head>
     <body>
-        <div id="tphHeader">
+        <div id="tphHeader" class="fixed">
             <nav class="top-bar">
                 <ul class="title-area">
                     <!-- Title Area -->
                     <li class="name">
-                        <h1 id="tphHeaderUeberschrift">x</h1>
+                        <h1 id="tphHeaderUeberschrift">Hude</h1>
                     </li>
                     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
                     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -244,6 +251,27 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a href="#tphSeiteSehenswuerdigkeitenSkulpturenufer">
+                                        <span class="tphSpracheDE">Skulpturenufer</span> <!-- auf deutsch -->
+                                        <span class="tphSpracheEN">Sculptureshore</span> <!-- auf englisch -->
+                                        <span class="tphSprachePD">Skulpturenufer</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tphSeiteSehenswuerdigkeitenArtesischerBrunnen">
+                                        <span class="tphSpracheDE">Vielstedter Bauernhaus</span> <!-- auf deutsch -->
+                                        <span class="tphSpracheEN">Vielstedter farmhouse</span> <!-- auf englisch -->
+                                        <span class="tphSprachePD">Vielstedter Buurhuus</span> <!-- auf plattdeutsch -->
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tphSeiteSehenswuerdigkeitenPlanetenlehrpfad">
+                                        <span class="tphSpracheDE">Planetenlehrpfad</span>
+                                        <span class="tphSpracheEN">Planetary educational path</span>
+                                        <span class="tphSprachePD">Planetenlehrpfad</span>
+                                    </a>
+                                </li>
                                 <li><a href="#tphSeiteSehenswuerdigkeitenZeitstrahl2000" >Zeitstrahl 2000</a></li>
                                 <li><a href="#tphSeiteSehenswuerdigkeitenStrasseDerMegalithkultur" >Straße der Megalithkultur</a></li>
                                 <li><a href="#tphSeiteSehenswuerdigkeitenHasbruch" >Hasbruch</a></li>
@@ -328,15 +356,15 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="#">Gastronomie</a></li>
-                        <li><a href="#">EC-Automaten</a></li>
-                        <li><a href="#">Einkaufen</a></li>
-                        <li><a href="#">Parken</a></li>
-                        <li><a href="#">Gesundheit</a></li>
-                        <li><a href="#">Veranstaltungen</a></li>
-                        <li><a href="#">Hude-Perfekt</a></li>
-                        <li><a href="#">Schnitzeljagd</a></li>
-                        <li><a href="#">Spielplätze</a></li>
+                        <li><a href="#tphSeiteGastronomie">Gastronomie</a></li>
+                        <li><a href="#tphSeiteECAutomaten">EC-Automaten</a></li>
+                        <li><a href="#tphSeiteEinkaufen">Einkaufen</a></li>
+                        <li><a href="#tphSeiteParkmoeglichkeiten">Parken</a></li>
+                        <li><a href="#tphSeiteGesundheit">Gesundheit</a></li>
+                        <li><a href="#tphSeiteVeranstaltungen">Veranstaltungen</a></li>
+                        <li><a href="#tphSeiteHudePerfekt">Hude-Perfekt</a></li>
+                        <li><a href="#tphSeiteSchnitzeljagd">Schnitzeljagd</a></li>
+                        <li><a href="#tphSeiteSpielplaetze">Spielplätze</a></li>
                     </ul>
                 </section>
             </nav>
@@ -351,29 +379,37 @@
                 &nbsp;
             </div>
             <div class="row">
-                <div class="large-4 small-4 columns"><a href="#"><img src="images/icons_hude_gastronomie.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#"><img src="images/icons_hude_automaten.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#"><img src="images/icons_hude_einkaufen.png" /></a></div>
+                <div class="large-4 small-4 columns"><a href="#tphSeiteGastronomie"><img src="images/icons_hude_gastronomie.png" /></a></div>
+                <div class="large-4 small-4 columns"><a href="#tphSeiteECAutomaten"><img src="images/icons_hude_automaten.png" /></a></div>
+                <div class="large-4 small-4 columns"><a href="#tphSeiteEinkaufen"><img src="images/icons_hude_einkaufen.png" /></a></div>
             </div>
             <div class="row">
                 &nbsp;
             </div>
             <div class="row">
-                <div class="large-4 small-4 columns"><a href="#"><img src="images/icons_hude_parken.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#"><img src="images/icons_hude_gesundheit.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#"><img src="images/icons_hude_veranstaltungen.png" /></a></div>
+                <div class="large-4 small-4 columns"><a href="#tphSeiteParkmoeglichkeiten"><img src="images/icons_hude_parken.png" /></a></div>
+                <div class="large-4 small-4 columns"><a href="#tphSeiteGesundheit"><img src="images/icons_hude_gesundheit.png" /></a></div>
+                <div class="large-4 small-4 columns"><a href="#tphSeiteVeranstaltungen"><img src="images/icons_hude_veranstaltungen.png" /></a></div>
             </div>
             <div class="row">
                 &nbsp;
             </div>
             <div class="row">
-                <div class="large-4 small-4 columns"><a href="#"><img src="images/icons_hude_schnitzeljagd.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#"><img src="images/icons_hude_perfekt.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#"><img src="images/icons_hude_perfekt.png" /></a></div>
+                <div class="large-4 small-4 columns"><a href="#tphSeiteHudePerfekt"><img src="images/icons_hude_perfekt.png" /></a></div>
+                <div class="large-4 small-4 columns"><a href="#tphSeiteSchnitzeljagd"><img src="images/icons_hude_schnitzeljagd.png" /></a></div>
+                <div class="large-4 small-4 columns"><a href="#tphSeiteSpielplaetze"><img src="images/icons_hude_perfekt.png" /></a></div>
             </div>
         </div>
-        <div class="stickyfooter">
-
+        <div class="row" id="puffer">
+            &nbsp;
+        </div>
+        <div class="tphFooter">
+            <div class="row tphFooter">
+                <div class="large-3 small-3 columns"><a href="tphSeiteIndex.html"><img width="32" height="32" src="images/toolbar/icon-home.png" /></a></div>
+                <div class="large-3 small-3 columns"><a href="#" onclick="tphQRCodeScan();"><img width="32" height="32"  src="images/toolbar/icon-qr.png" /></a></div>
+                <div class="large-3 small-3 columns"><a href="#tphSeitePosition"><img width="32" height="32"  src="images/toolbar/icon-location.png" /></a></div>
+                <div class="large-3 small-3 columns"><a href="#tphSeiteEinstellungen"><img width="32" height="32"  src="images/toolbar/icon-einstellungen.png" /></a></div>
+            </div>
         </div>
         <div class="wrapper">
             <div class="push"></div>
@@ -405,27 +441,26 @@
             $(document).foundation();
 
             $(function() {
-                //tphAppStart();
+                tphAppStart();
                 // Bind an event to window.onhashchange that, when the hash changes, gets the
                 // hash and adds the class "selected" to any matching nav link.
                 $(window).hashchange(function() {
                     var hash = location.hash;
                     var datei;
+
                     if (hash !== '#tphSeiteIndex') {
                         hash = (hash.replace(/^#/, '') || 'blank') + '.';
                         datei = hash + 'html';
                         $('.tphContent').load(datei);
                     }
-                    $('.stickyfooter').load('_footer.html');
-                })
+                    $('.tphFooter').load('_footer.html');
+                });
 
                 // Since the event is only triggered when the hash changes, we need to trigger
                 // the event now, to handle the hash the page may have loaded with.
                 $(window).hashchange();
                 tphSetzeEinstellungenAufSeite();
-
-                tphHeaderUberschriftAendern('Hude');
-
+                $('#puffer').css('height', Math.round($('nav').height() * 1.2));
             });
         </script>
     </body>

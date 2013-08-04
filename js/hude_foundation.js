@@ -150,7 +150,7 @@ function tphGoogleMapsBildMitMarker(lat, lon, zoom, elementID) {
     var koordinaten = lat + ',' + lon;
     // Größe des Bildes errechnen
     var breite = $(window).width() * 0.9;
-    var hoehe = $(window).height() * 0.7;
+    var hoehe = $(window).height() * 0.7 - $('nav').height();
     var abmessung = Math.round(breite) + 'x' + Math.round(hoehe);
     // URI für erstellen
     var bildpfad = 'https://maps.googleapis.com/maps/api/staticmap?center=' + koordinaten + '&zoom=' + zoom + '&size=' + abmessung + '&markers=color:red||' + koordinaten + '&sensor=false';
@@ -168,6 +168,7 @@ function tphGoogleMapsBildMitMarker(lat, lon, zoom, elementID) {
 // Wechselt die Überschrift im Header
 function tphHeaderUberschriftAendern(neueUeberschrift) {
     $('#tphHeaderUeberschrift').text(neueUeberschrift);
+    tphSetzeEinstellungenAufSeite();
 }
 
 // Lädt die Schriftgröße aus dem localStorage
@@ -198,6 +199,102 @@ function tphHoldeAudioPlayer() {
     return tphStorage.getItem('tphPlayer');
 }
 
+// GPS-Koordinaten Hude-Padd
+function tphHuderPadd() {
+    var wegpunkte = new Array();
+    wegpunkte.push(['53.110073', '8.460763']);
+    wegpunkte.push(['53.110516', '8.460983']);
+    wegpunkte.push(['53.111004', '8.460409']);
+    wegpunkte.push(['53.111389', '8.459712']);
+    wegpunkte.push(['53.111851', '8.458850']);
+    wegpunkte.push(['53.112301', '8.457994']);
+    wegpunkte.push(['53.112732', '8.457242']);
+    wegpunkte.push(['53.113232', '8.456738']);
+    wegpunkte.push(['53.113823', '8.456344']);
+    wegpunkte.push(['53.114124', '8.455778']);
+    wegpunkte.push(['53.114479', '8.454967']);
+    wegpunkte.push(['53.115032', '8.454329']);
+    wegpunkte.push(['53.115662', '8.453589']);
+    wegpunkte.push(['53.116356', '8.453104']);
+    wegpunkte.push(['53.116844', '8.452901']);
+    wegpunkte.push(['53.117401', '8.452732']);
+    wegpunkte.push(['53.117981', '8.452589']);
+    wegpunkte.push(['53.118050', '8.451604']);
+    wegpunkte.push(['53.117989', '8.450624']);
+    wegpunkte.push(['53.117958', '8.449495']);
+    wegpunkte.push(['53.117886', '8.448539']);
+    wegpunkte.push(['53.117344', '8.448465']);
+    wegpunkte.push(['53.116867', '8.448503']);
+    wegpunkte.push(['53.116444', '8.448051']);
+    wegpunkte.push(['53.115677', '8.447867']);
+    wegpunkte.push(['53.114960', '8.447889']);
+    wegpunkte.push(['53.114277', '8.448120']);
+    wegpunkte.push(['53.113647', '8.448528']);
+    wegpunkte.push(['53.113117', '8.448920']);
+    wegpunkte.push(['53.112518', '8.449199']);
+    wegpunkte.push(['53.112087', '8.448828']);
+    wegpunkte.push(['53.111706', '8.449397']);
+    wegpunkte.push(['53.111076', '8.449578']);
+    wegpunkte.push(['53.110352', '8.449479']);
+    wegpunkte.push(['53.109882', '8.449390']);
+    wegpunkte.push(['53.109348', '8.449678']);
+    wegpunkte.push(['53.108749', '8.450011']);
+    wegpunkte.push(['53.108078', '8.450183']);
+    wegpunkte.push(['53.107288', '8.450139']);
+    wegpunkte.push(['53.106815', '8.450058']);
+    wegpunkte.push(['53.106209', '8.449584']);
+    wegpunkte.push(['53.105656', '8.449693']);
+    wegpunkte.push(['53.105179', '8.450029']);
+    wegpunkte.push(['53.104618', '8.450257']);
+    wegpunkte.push(['53.104252', '8.450929']);
+    wegpunkte.push(['53.103741', '8.451407']);
+    wegpunkte.push(['53.103046', '8.452062']);
+    wegpunkte.push(['53.102398', '8.451883']);
+    wegpunkte.push(['53.101795', '8.451454']);
+    wegpunkte.push(['53.101345', '8.451200']);
+    wegpunkte.push(['53.100620', '8.451280']);
+    wegpunkte.push(['53.100426', '8.452136']);
+    wegpunkte.push(['53.100006', '8.452501']);
+    wegpunkte.push(['53.099564', '8.452898']);
+    wegpunkte.push(['53.098934', '8.452871']);
+    wegpunkte.push(['53.098293', '8.452845']);
+    wegpunkte.push(['53.097645', '8.452894']);
+    wegpunkte.push(['53.096962', '8.452940']);
+    wegpunkte.push(['53.096516', '8.453412']);
+    wegpunkte.push(['53.096989', '8.453989']);
+    wegpunkte.push(['53.097393', '8.454680']);
+    wegpunkte.push(['53.098034', '8.454912']);
+    wegpunkte.push(['53.098705', '8.454844']);
+    wegpunkte.push(['53.099339', '8.455352']);
+    wegpunkte.push(['53.099777', '8.456051']);
+    wegpunkte.push(['53.100281', '8.456706']);
+    wegpunkte.push(['53.100750', '8.457426']);
+    wegpunkte.push(['53.100883', '8.458231']);
+    wegpunkte.push(['53.101017', '8.459305']);
+    wegpunkte.push(['53.101463', '8.460101']);
+    wegpunkte.push(['53.101532', '8.461238']);
+    wegpunkte.push(['53.101555', '8.462281']);
+    wegpunkte.push(['53.102127', '8.461570']);
+    wegpunkte.push(['53.102631', '8.460908']);
+    wegpunkte.push(['53.103226', '8.460447']);
+    wegpunkte.push(['53.103821', '8.459979']);
+    wegpunkte.push(['53.104282', '8.459670']);
+    wegpunkte.push(['53.104618', '8.460594']);
+    wegpunkte.push(['53.105022', '8.461495']);
+    wegpunkte.push(['53.105412', '8.462320']);
+    wegpunkte.push(['53.105755', '8.463204']);
+    wegpunkte.push(['53.106247', '8.464025']);
+    wegpunkte.push(['53.106743', '8.464799']);
+    wegpunkte.push(['53.107231', '8.465322']);
+    wegpunkte.push(['53.107666', '8.464382']);
+    wegpunkte.push(['53.107983', '8.463564']);
+    wegpunkte.push(['53.108376', '8.462565']);
+    wegpunkte.push(['53.108761', '8.461651']);
+    wegpunkte.push(['53.109131', '8.460797']);
+    wegpunkte.push(['53.110080', '8.460760']);
+    return wegpunkte;
+}
+
 // Aktiviert den localStorage des Geräts und das localStorage Objekt zurück
 function tphLadeLocalStorage() {
     try {
@@ -210,6 +307,43 @@ function tphLadeLocalStorage() {
     console.log("ERROR tphInitiateLocalStorage");
     return "Error";
 }
+
+function tphLadeVeranstaltungen() {
+    $.ajax({
+        dataType: 'jsonp',
+        jsonp: 'jsonp_callback',
+        url: 'http://m.touristik-palette-hude.de/tph/tphserver.php',
+        success: function(data) {
+            var append = '';
+            for (var i = 0; i < data.length; i++) {
+                append += '<div class="row sehenswuerdigkeit">'
+                append += '<div class="large-12 small-12 columns">';
+                append += '<em>';
+                if (data[i]['datumEnd'] === data[i]['datumStart']) {
+                    append += data[i]['datumStart'];
+                    // $('#tphVeranstaltungen').append('<td>' + data[i]['datumStart'] + '</td>');
+                } else {
+                    append += data[i]['datumStart'] + ' - ' + data[i]['datumEnd'];
+                }
+                if (data[i]['uhrzeit'] !== '') {
+                    append += ', ' + data[i]['uhrzeit'];
+                }
+                append += '</em><br/>';
+                append += '<strong>' + data[i]['titel'] + '</strong>';
+                append += '<p>' + data[i]['beschreibung'].replace(/p.P/g, "&euro; p.P").replace(/&nbsp;/g, "") + '</p>';
+                append += '</div>';
+                append += '</div>';
+            }
+            $('#tphVeranstaltungen').append(append);
+        },
+        error: function(XHR, textStatus, errorThrown) {
+            console.log("ERREUR: " + textStatus);
+            console.log("ERREUR: " + errorThrown);
+        }
+    });
+    $('&nbsp;').remove();
+}
+
 // Gibt per console.log() den localStorage aus
 function tphLocalStorageAuselsen() {
     var tphStorage = tphLadeLocalStorage();
@@ -225,27 +359,66 @@ function tphNutzeGPS(option) {
     function tphNutzeGPSSuccess(position) {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
+        if (Connection.ETHERNET || Connection.WIFI || Connection.CELL_3G || Connection.CELL_4G) {
+            
+            
+            $('.tphGoogleMapsKarte').css('height', $(window).height() * 0.9);
+            $('.tphGoogleMapsKarte').css('width', $(window).width() * 0.9);
+            var aktuellePosition = new google.maps.LatLng(lat, lon);
+            $('.tphGoogleMapsKarte').gmap({'center': aktuellePosition});
+            $('.tphGoogleMapsKarte').gmap('option', 'zoom', 15);
+            $('.tphGoogleMapsKarte').gmap('addMarker', {'id': 'aktuellePosition', 'position': aktuellePosition, 'bounds': false});
+            $('.tphGoogleMapsKarte').gmap('addShape', 'Circle', {
+                'strokeWeight': 0,
+                'fillColor': "#008595",
+                'fillOpacity': 0.25,
+                'center': aktuellePosition,
+                'radius': 15,
+                'clickable': false
+            });
 
-        switch (option) {
-            case 'tphAktuellePosition':
-                $('#tphPositionsKarte').css('height', $(window).height() * 0.9);
-                $('#tphPositionsKarte').css('width', $(window).width() * 0.9);
-                $('#tphPositionsKarte').css('padding', '5px');
-                var aktuellePosition = new google.maps.LatLng(lat, lon);
-                $('#tphPositionsKarte').gmap('addMarker', {'id': 'aktuellePosition', 'position': aktuellePosition, 'bounds': true});
-                $('#tphPositionsKarte').gmap('addShape', 'Circle', {
-                    'strokeWeight': 0,
-                    'fillColor': "#008595",
-                    'fillOpacity': 0.25,
-                    'center': aktuellePosition,
-                    'radius': 15,
-                    'clickable': false
-                });
-                $('#tphPositionsKarte').gmap({'center': aktuellePosition});
-                $('#tphPositionsKarte').gmap('option', 'zoom', 17);
-                break;
+            switch (option) {
+                case 'tphParklaetzeHude':
+                    var parkplaetze = tphParkplaetze();
+                    var icon = new google.maps.MarkerImage("http://m.touristik-palette-hude.de/download/image/parking.png");
+                    for (var i = 0; i < parkplaetze.length; i++) {
+                        /* 
+                         * bounds: true richtet die Karte so aus, dass alle Marker zu sehen sind.
+                         * bounds: false fügt alle Marker lediglich der Karte hinzu
+                         */     $('.tphGoogleMapsKarte').gmap('addMarker', {'id': 'tphParkplatz-' + i, 'position': parkplaetze[i], 'bounds': true, 'icon': icon});
+                    }
+                    break;
+                case 'tphSpielplätze':
+                    var spielplaetze = tphSpielplaetze();
+                    var icon = new google.maps.MarkerImage("http://m.touristik-palette-hude.de/download/image/playground.png");
+                    for (var i = 0; i < spielplaetze.length; i++) {
+                        /* 
+                         * bounds: true richtet die Karte so aus, dass alle Marker zu sehen sind.
+                         * bounds: false fügt alle Marker lediglich der Karte hinzu
+                         */
+                        $('.tphGoogleMapsKarte').gmap('addMarker', {'id': 'tphSpielplatz-' + i, 'position': spielplaetze[i], 'bounds': true, 'icon': icon});
+                    }
+                    break;
+                case 'tphHudePadd':
+                    var hudePadd = tphHuderPadd();
+                    var koordinaten = new Array();
+                    for (var i = 0; i < hudePadd.length; i++) {
+                        koordinaten.push(new google.maps.LatLng(hudePadd[i][0], hudePadd[i][1]));
+                    }
+                    $('.tphGoogleMapsKarte').gmap('addShape', 'Polyline', {
+                        'path': koordinaten,
+                        'strokeColor': '#c00',
+                        'strokeThickness': 5
+                    });
+
+                    break;
+            }
+        } else {
+            console.log('KEINE AUSREICHENDE DATENVERBINDUNG');
+            $('.tphGoogleMapsKarte').html('<div id="tphGoogleMapsKarte">' + print_r(navigator) + '</div>');
+            cosole.log(print_r(navigator));
+            console.log('ENDE');
         }
-        console.log('erfolg' + $(window).width() * 0.9 + 'x' + $(window).height() * 0.9 + ' ' + lat + ' ' + lon);
     }
 
     function tphNutzeGPSError() {
@@ -259,8 +432,36 @@ function tphLoescheLocalStorage() {
     tphStorage.clear();
 }
 
-// Startet den QR-Code-Scanner
+// Enthält die Parkplätze, die auf der Karte angezeigt werden sollen
+function tphParkplaetze() {
+    var parkplaetze = new Array();
+    // Kirchstraße/Friedhof/St. Elisabeth Kirche
+    parkplaetze.push('53.118029,8.449199');
+    // Waldbad
+    parkplaetze.push('53.119665,8.445948');
+    // Sport- und Freizeitzentrum
+    parkplaetze.push('53.111627,8.445061');
+    // Mehrzweckhalle
+    parkplaetze.push('53.108511,8.446442');
+    // Bibliothek
+    parkplaetze.push('53.107213,8.446995');
+    // Hallenbad
+    parkplaetze.push('53.107957,8.458402');
+    // Skulpturenhaus
+    parkplaetze.push('53.109105,8.45892');
+    // 
+    parkplaetze.push('53.108672,8.461656');
+    // Netto
+    parkplaetze.push('53.110009,8.462197');
+    // Torfplatz
+    parkplaetze.push('53.111456,8.459861');
+    // An der Weide
+    parkplaetze.push('53.117967,8.455893');
+    parkplaetze.sort();
+    return parkplaetze;
+}
 function tphQRCodeScan() {
+// Startet den QR-Code-Scanner function tphQRCodeScan() {
     try {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(
@@ -269,12 +470,11 @@ function tphQRCodeScan() {
                 },
                 function(error) {
                     $.mobile.changePage('#tphDialogQRCodeFehler', 'none', true, true);
-                    //hudeOpenDialog('dialog_qr-code_scan_fehler.html');
+//hudeOpenDialog('dialog_qr-code_scan_fehler.html');
                 }
         );
     } catch (exception) {
-        alert('nene');
-        //$.mobile.changePage('#tphDialogQRCodeFehler', 'none', true, true);
+        alert('nene');         //$.mobile.changePage('#tphDialogQRCodeFehler', 'none', true, true);
         // hudeOpenDialog('dialog_qr-code_scan_fehler.html');
     }
 }
@@ -313,7 +513,7 @@ function tphSchnitzeljagdPlanetenlehrpfadAbiturA() {
     richtig += tphUeberpruefeMultipleChoice('plpAbiA29');
     richtig += tphUeberpruefeMultipleChoice('plpAbiA30');
     richtig += tphUeberpruefeMultipleChoice('plpAbiA31');
-    $('#sjPLPAbiturAErgebnis').html('<p id="sjPLPAbiturAErgebnis"><h1>Sie haben ' + richtig + ' von 31 Fragen richtig beantwortet!</h1></p>');
+    $('#tphSchnitzeljagdPlanetenlehrpfadAbiturAErgebnis').html('<p id="#tphSchnitzeljagdPlanetenlehrpfadAbiturAErgebnis"><h1>Sie haben ' + richtig + ' von 31 Fragen richtig beantwortet!</h1></p>');
 }
 
 // Fügt die einzelnen Fragen zur Überprüfung hinzu
@@ -341,7 +541,7 @@ function tphSchnitzeljagdPlanetenlehrpfadAbiturB() {
     richtig += tphUeberpruefeMultipleChoice('plpAbiB20');
     richtig += tphUeberpruefeMultipleChoice('plpAbiB21');
     richtig += tphUeberpruefeMultipleChoice('plpAbiB22');
-    $('#sjPLPAbiturBErgebnis').html('<p id="sjPLPAbiturBErgebnis"><h1>Sie haben ' + richtig + ' von 22 Fragen richtig beantwortet!</h1></p>');
+    $('#tphSchnitzeljagdPlanetenlehrpfadAbiturBErgebnis').html('<p id="tphSchnitzeljagdPlanetenlehrpfadAbiturBErgebnis"><h1>Sie haben ' + richtig + ' von 22 Fragen richtig beantwortet!</h1></p>');
 }
 
 // Fügt die einzelnen Fragen zur Überprüfung hinzu
@@ -384,12 +584,12 @@ function tphSchnitzeljagdPlanetenlehrpfadAbiturC() {
     richtig += tphUeberpruefeMultipleChoice('plpAbiC35');
     richtig += tphUeberpruefeMultipleChoice('plpAbiC36');
     richtig += tphUeberpruefeMultipleChoice('plpAbiC37');
-    $('#sjPLPAbiturCErgebnis').html('<p id="sjPLPAbiturCErgebnis"><h1>Sie haben ' + richtig + ' von 37 Fragen richtig beantwortet!</h1></p>');
+    $('#tphSchnitzeljagdPlanetenlehrpfadAbiturCErgebnis').html('<p id="tphSchnitzeljagdPlanetenlehrpfadAbiturCErgebnis"><h1>Sie haben ' + richtig + ' von 37 Fragen richtig beantwortet!</h1></p>');
 }
-
 // Setzt die Einstellungen in der Einstellungsseite
 function tphSetzeEinstellungenAufSeite() {
     var tphSprache = tphHoleSprache();
+    var tphZielgruppe = tphHoleZielgruppe();
     var tphAudioPlayer = tphHoldeAudioPlayer();
     console.log(tphSprache);
     // Zeigt nur den Text auf deutsch an
@@ -398,7 +598,7 @@ function tphSetzeEinstellungenAufSeite() {
         $('.tphSpracheEN').hide();
         $('.tphSprachePD').hide();
     }
-    // Zeigt nur den Text auf englisch an
+// Zeigt nur den Text auf englisch an
     if (tphSprache === 'en') {
         $('.tphSpracheDE').hide();
         $('.tphSpracheEN').show();
@@ -410,7 +610,27 @@ function tphSetzeEinstellungenAufSeite() {
         $('.tphSpracheEN').hide();
         $('.tphSprachePD').show();
     }
-    if (tphAudioPlayer === 'false') {
+    /*
+     * Zielgruppeneinstellungen verarbeiten
+     */
+    if (tphZielgruppe === 'keine') {
+        $('.tphZielgruppeKeine').show();
+        $('.tphZielgruppeFamilie').hide();
+        $('.tphZielgruppeBestager').hide();
+    }
+    if (tphZielgruppe === 'familie') {
+        $('.tphZielgruppeKeine').hide();
+        $('.tphZielgruppeFamilie').show();
+        $('.tphZielgruppeBestager').hide();
+    }
+    if (tphZielgruppe === 'bestager') {
+        $('.tphZielgruppeKeine').hide();
+        $('.tphZielgruppeFamilie').hide();
+        $('.tphZielgruppeBestager').show();
+    }
+
+
+    if (tphAudioPlayer === 'false' || tphAudioPlayer === false) {
         $('.tphPlayerControl').hide();
         $('.tphPlayerKeineDateien').show();
     } else {
@@ -430,17 +650,16 @@ function tphSetzeEinstellungenAufSeite() {
 
     // Zum Seitenanfang springen
     $(window).scrollTop(0);
+
+    // Panel nach klick minimieren
     if ($('nav').hasClass('expanded')) {
         $('nav').removeClass('expanded');
     }
-    
 }
-
 // Speichert die Schriftgroesse im localStorage
 function tphSpeicherSchriftgroesse(tphSchriftgroesse) {
     console.log(tphSchriftgroesse);
-    // normal, mittel, gross
-    var tphStorage = tphLadeLocalStorage();
+    // normal, mittel, gross     var tphStorage = tphLadeLocalStorage();
     tphStorage.setItem('tphSchriftgroesse', tphSchriftgroesse);
 }
 
@@ -460,6 +679,17 @@ function tphSpeicherZielgruppe(tphZielgruppe) {
     tphStorage.setItem('tphZielgruppe', tphZielgruppe);
 }
 
+// Enthält die GPS-Koordinaten von Spielplätzen
+function tphSpielplaetze() {
+    var spielplaetze = new Array();
+    spielplaetze.push('53.118085,8.454319');
+    spielplaetze.push('53.115497,8.459709');
+    spielplaetze.push('53.110063,8.449881');
+    spielplaetze.push('53.095256,8.464326');
+    spielplaetze.push('53.097363,8.484035');
+    return spielplaetze;
+}
+
 // Löscht den, für die Navigation in der App, unnötigen Teil der URL
 function tphSplitURL(url) {
     var domain = 'http://m.touristik-palette-hude.de/index.html';
@@ -471,6 +701,8 @@ function tphSplitURL(url) {
         $.mobile.changePage('#tphDialogQRCodeUngueltig', 'none', true, true);
     }
 }
+
+
 
 /*
  * Auswertungen für Rätsel
@@ -491,8 +723,7 @@ function tphUeberpruefeMultipleChoice(name) {
  * 
  * @param {String} option Legt fest welche Operation nach dem Zugriff auf das Dateisystem durchgeführt werden soll.
  * @param {String} filename Gibt an welche Datei abgespielt werden soll.
- * @returns {undefined}
- */
+ * @returns {undefined}  */
 function tphZugriffDateisystem(option, filename) {
     switch (option) {
         case 'erstellen':
@@ -623,7 +854,6 @@ function tphZugriffDateisystem(option, filename) {
         console.log('Zugriff auf das Dateisystem? - Verweigert!');
         console.log(print_r(error));
     }
-
     /*
      * Erstellen des Ordners "Hude" auf dem Dateisystem
      */
