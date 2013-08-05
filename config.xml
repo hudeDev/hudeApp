@@ -17,42 +17,42 @@
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="true" />
     <preference name="load-url-timeout" value="30000" />
-    <preference name="splash-screen-duration" value="15000" />
+    <preference name="splash-screen-duration" value="5000" />
     <!--
     <icon src="icon.png" />
     <gap:splash src="splash.png" />        
     -->
-    <icon src="images/icon/icon_android_36px_ldpi.png" gap:platform="android" gap:density="ldpi" />
-    <icon src="images/icon/icon_android_48px_mdpi.png" gap:platform="android" gap:density="mdpi" />
-    <icon src="images/icon/icon_android_72px_hdpi.png" gap:platform="android" gap:density="hdpi" />
-    <icon src="images/icon/icon_android_96px_xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+    <icon src="images/system/icon/icon_android_36px_ldpi.png" gap:platform="android" gap:density="ldpi" />
+    <icon src="images/system/icon/icon_android_48px_mdpi.png" gap:platform="android" gap:density="mdpi" />
+    <icon src="images/system/icon/icon_android_72px_hdpi.png" gap:platform="android" gap:density="hdpi" />
+    <icon src="images/system/icon/icon_android_96px_xhdpi.png" gap:platform="android" gap:density="xhdpi" />
     
-    <gap:splash src="images/splash/splash_android_720x1280px_portrait_xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
-    <gap:splash src="images/splash/splash_android_480x800px_portrait_hdpi.png"  gap:platform="android" gap:density="hdpi"/>
-    <gap:splash src="images/splash/splash_android_320x480px_portrait_mdpi.png"  gap:platform="android" gap:density="mdpi"/>
-    <gap:splash src="images/splash/splash_android_200x320px_portrait_ldpi.png"  gap:platform="android" gap:density="ldpi"/>
-    <gap:splash src="images/splash/splash_android_1280x720px_landscape_xhdpi.png" gap:platform="android" gap:density="xhdpi" width="1280" height="720" />
-    <gap:splash src="images/splash/splash_android_800x480px_landscape_hdpi.png"  gap:platform="android" gap:density="hdpi" width="800" height="480" />
-    <gap:splash src="images/splash/splash_android_480x320px_landscape_mdpi.png"  gap:platform="android" gap:density="mdpi" width="480" height="320" />
-    <gap:splash src="images/splash/splash_android_320x200px_landscape_ldpi.png"  gap:platform="android" gap:density="ldpi" width="320" height="200" />
+    <gap:splash src="images/system/splash/splash_android_720x1280px_portrait_xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
+    <gap:splash src="images/system/splash/splash_android_480x800px_portrait_hdpi.png"  gap:platform="android" gap:density="hdpi"/>
+    <gap:splash src="images/system/splash/splash_android_320x480px_portrait_mdpi.png"  gap:platform="android" gap:density="mdpi"/>
+    <gap:splash src="images/system/splash/splash_android_200x320px_portrait_ldpi.png"  gap:platform="android" gap:density="ldpi"/>
+    <gap:splash src="images/system/splash/splash_android_1280x720px_landscape_xhdpi.png" gap:platform="android" gap:density="xhdpi" width="1280" height="720" />
+    <gap:splash src="images/system/splash/splash_android_800x480px_landscape_hdpi.png"  gap:platform="android" gap:density="hdpi" width="800" height="480" />
+    <gap:splash src="images/system/splash/splash_android_480x320px_landscape_mdpi.png"  gap:platform="android" gap:density="mdpi" width="480" height="320" />
+    <gap:splash src="images/system/splash/splash_android_320x200px_landscape_ldpi.png"  gap:platform="android" gap:density="ldpi" width="320" height="200" />
 
 
     <preference name="android-minSdkVersion" value="11" />
     <preference name="android-maxSdkVersion" value="17" />         
    
     <!-- iOS  -->
-    <icon src="images/icon/icon_ios_57px_iphone.png" gap:platform="ios" width="57" height="57" /> -->
-    <icon src="images/icon/icon_ios_72px_ipad.png" gap:platform="ios" width="72" height="72" />
-    <icon src="images/icon/icon_ios_114px_iphone4_retina.png" gap:platform="ios" width="114" height="114" />
-    <icon src="images/icon/icon_ios_144px_ipad3_retina.png" gap:platform="ios" width="144" height="144" />
+    <icon src="images/system/icon/icon_ios_57px_iphone.png" gap:platform="ios" width="57" height="57" /> -->
+    <icon src="images/system/icon/icon_ios_72px_ipad.png" gap:platform="ios" width="72" height="72" />
+    <icon src="images/system/icon/icon_ios_114px_iphone4_retina.png" gap:platform="ios" width="114" height="114" />
+    <icon src="images/system/icon/icon_ios_144px_ipad3_retina.png" gap:platform="ios" width="144" height="144" />
     
-    <gap:splash src="images/splash/splash_ios_320x480px_iphone_portrait.png" gap:platform="ios" width="320" height="480" />
-    <gap:splash src="images/splash/splash_ios_640x960px_iphone_retina_portrait.png" gap:platform="ios" width="640" height="960" />
-    <gap:splash src="images/splash/splash_ios_640x1136px_iphone_2x_retina_portrait.png" gap:platform="ios" width="640" height="1136" />
-    <gap:splash src="images/splash/splash_ios_1024x748px_ipad_landscape.png" gap:platform="ios" width="1024" height="768" />
-    <gap:splash src="images/splash/splash_ios_768x1004px_ipad_portrait.png" gap:platform="ios" width="768" height="1024" />
-    <gap:splash src="images/splash/splash_ios_2048x1496px_ipad_2x_retina_landscape.png" gap:platform="ios" width="2048" height="1496" />
-    <gap:splash src="images/splash/splash_ios_1536x2048px_ipad_2x_retina_portrait.png" gap:platform="ios" width="1536" height="2008" />
+    <gap:splash src="images/system/splash/splash_ios_320x480px_iphone_portrait.png" gap:platform="ios" width="320" height="480" />
+    <gap:splash src="images/system/splash/splash_ios_640x960px_iphone_retina_portrait.png" gap:platform="ios" width="640" height="960" />
+    <gap:splash src="images/system/splash/splash_ios_640x1136px_iphone_2x_retina_portrait.png" gap:platform="ios" width="640" height="1136" />
+    <gap:splash src="images/system/splash/splash_ios_1024x748px_ipad_landscape.png" gap:platform="ios" width="1024" height="768" />
+    <gap:splash src="images/system/splash/splash_ios_768x1004px_ipad_portrait.png" gap:platform="ios" width="768" height="1024" />
+    <gap:splash src="images/system/splash/splash_ios_2048x1496px_ipad_2x_retina_landscape.png" gap:platform="ios" width="2048" height="1496" />
+    <gap:splash src="images/system/splash/splash_ios_1536x2048px_ipad_2x_retina_portrait.png" gap:platform="ios" width="1536" height="2008" />
     
     <preference name="webviewbounce" value="true" />        
     <preference name="stay-in-webview" value="false" />
