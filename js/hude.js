@@ -104,19 +104,12 @@ function tphLadeVeranstatungen() {
     });
 }
 
-function tphExifReader(img) {
-    // http://blog.nihilogic.dk/2008/05/reading-exif-data-with-javascript.html
-    var lat = $('#' + img).exif("GPSLatitude");
-    var lon = $('#' + img).exif("GPSLongitude");
-    var latlon = tphDMSDec(lat, lon);
-    return latlon;
-}
-
 function tphDMSDec(lat, lon) {
     //http://en.wikipedia.org/wiki/Geographic_coordinate_conversion
-    lat = (lat[0][1] * 60 + lat[0][2]) / 3600 + lat[0][0];
-    lon = (lon[0][1] * 60 + lon[0][2]) / 3600 + lon[0][0];
+    lat = (lat[0]['numerator'] * 60 + lat[1]['numerator']) / 3600 + lat[2]['numerator'];
+    lon = (lon[0]['numerator'] * 60 + lon[1]['numerator']) / 3600 + lon[2]['numerator'];
     var latlon = new Array(lat, lon);
+    console.log(latlon);
     return latlon;
 }
 

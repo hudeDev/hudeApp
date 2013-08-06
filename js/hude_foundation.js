@@ -94,6 +94,20 @@ function tphAudioStoppen() {
     audioTimer = null;
     pausePos = 0;
 }
+// Berechnet die dezimalen Koordinaten von Degree Minute Second
+function tphConvertDMStoDec(dmsArray) {
+    var DEG = dmsArray[0]['numerator'];
+    var MIN = dmsArray[1]['numerator'];
+    var SEC = dmsArray[2]['numerator'];
+    var DEC = '';
+    if (DEG < 0) {
+        DEC = (Math.ceil(((DEG * 1) - (MIN / 60) - (SEC / 3600)) * 10000)) / 10000;
+    }
+    else {
+        DEC = (Math.floor(((DEG * 1) + (MIN / 60) + (SEC / 3600)) * 10000)) / 10000;
+    }
+    return DEC;
+}
 
 // Enthält die Liste der zur downloadenen Dateien
 function tphDownloadOrdnerDateien() {
@@ -163,6 +177,29 @@ function tphGoogleMapsBildMitMarker(lat, lon, zoom, elementID) {
         $('.tphGoogleMapsBild').append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
     }
     return bildpfad;
+}
+
+function tphGPSAbstand(lat1, lon1, lat2, lon2) {
+    /*
+     * http://snipplr.com/view/25479/ (letzter Abruf: 22.07.2013)
+     */
+    var R = 6371;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    if (d > 1) {
+        alert('das war wohl nichts');
+        return Math.round(d) + "km";
+    }
+    else if (d <= 1) {
+        d = Math.round(d * 1000)
+        if (d <= 100) {
+            alert('gefunden');
+        }
+        return d
+    }
 }
 
 // Wechselt die Überschrift im Header
@@ -350,7 +387,7 @@ function tphLocalStorageAuselsen() {
     console.log(print_r(tphStorage));
 }
 
-function tphNutzeGPS(option) {
+function tphNutzeGPS(option, latImg, lonImg) {
     var lat;
     var lon;
 
@@ -359,9 +396,8 @@ function tphNutzeGPS(option) {
     function tphNutzeGPSSuccess(position) {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
+
         if (Connection.ETHERNET || Connection.WIFI || Connection.CELL_3G || Connection.CELL_4G) {
-            
-            
             $('.tphGoogleMapsKarte').css('height', $(window).height() * 0.9);
             $('.tphGoogleMapsKarte').css('width', $(window).width() * 0.9);
             var aktuellePosition = new google.maps.LatLng(lat, lon);
@@ -376,49 +412,54 @@ function tphNutzeGPS(option) {
                 'radius': 15,
                 'clickable': false
             });
-
-            switch (option) {
-                case 'tphParklaetzeHude':
-                    var parkplaetze = tphParkplaetze();
-                    var icon = new google.maps.MarkerImage("http://m.touristik-palette-hude.de/download/image/parking.png");
-                    for (var i = 0; i < parkplaetze.length; i++) {
-                        /* 
-                         * bounds: true richtet die Karte so aus, dass alle Marker zu sehen sind.
-                         * bounds: false fügt alle Marker lediglich der Karte hinzu
-                         */     $('.tphGoogleMapsKarte').gmap('addMarker', {'id': 'tphParkplatz-' + i, 'position': parkplaetze[i], 'bounds': true, 'icon': icon});
-                    }
-                    break;
-                case 'tphSpielplätze':
-                    var spielplaetze = tphSpielplaetze();
-                    var icon = new google.maps.MarkerImage("http://m.touristik-palette-hude.de/download/image/playground.png");
-                    for (var i = 0; i < spielplaetze.length; i++) {
-                        /* 
-                         * bounds: true richtet die Karte so aus, dass alle Marker zu sehen sind.
-                         * bounds: false fügt alle Marker lediglich der Karte hinzu
-                         */
-                        $('.tphGoogleMapsKarte').gmap('addMarker', {'id': 'tphSpielplatz-' + i, 'position': spielplaetze[i], 'bounds': true, 'icon': icon});
-                    }
-                    break;
-                case 'tphHudePadd':
-                    var hudePadd = tphHuderPadd();
-                    var koordinaten = new Array();
-                    for (var i = 0; i < hudePadd.length; i++) {
-                        koordinaten.push(new google.maps.LatLng(hudePadd[i][0], hudePadd[i][1]));
-                    }
-                    $('.tphGoogleMapsKarte').gmap('addShape', 'Polyline', {
-                        'path': koordinaten,
-                        'strokeColor': '#c00',
-                        'strokeThickness': 5
-                    });
-
-                    break;
-            }
         } else {
             console.log('KEINE AUSREICHENDE DATENVERBINDUNG');
             $('.tphGoogleMapsKarte').html('<div id="tphGoogleMapsKarte">' + print_r(navigator) + '</div>');
             cosole.log(print_r(navigator));
             console.log('ENDE');
         }
+
+        switch (option) {
+            case 'tphParklaetzeHude':
+                var parkplaetze = tphParkplaetze();
+                var icon = new google.maps.MarkerImage("http://m.touristik-palette-hude.de/download/image/parking.png");
+                for (var i = 0; i < parkplaetze.length; i++) {
+                    /* 
+                     * bounds: true richtet die Karte so aus, dass alle Marker zu sehen sind.
+                     * bounds: false fügt alle Marker lediglich der Karte hinzu
+                     */     $('.tphGoogleMapsKarte').gmap('addMarker', {'id': 'tphParkplatz-' + i, 'position': parkplaetze[i], 'bounds': true, 'icon': icon});
+                }
+                break;
+            case 'tphSpielplätze':
+                var spielplaetze = tphSpielplaetze();
+                var icon = new google.maps.MarkerImage("http://m.touristik-palette-hude.de/download/image/playground.png");
+                for (var i = 0; i < spielplaetze.length; i++) {
+                    /* 
+                     * bounds: true richtet die Karte so aus, dass alle Marker zu sehen sind.
+                     * bounds: false fügt alle Marker lediglich der Karte hinzu
+                     */
+                    $('.tphGoogleMapsKarte').gmap('addMarker', {'id': 'tphSpielplatz-' + i, 'position': spielplaetze[i], 'bounds': true, 'icon': icon});
+                }
+                break;
+            case 'tphHudePadd':
+                var hudePadd = tphHuderPadd();
+                var koordinaten = new Array();
+                for (var i = 0; i < hudePadd.length; i++) {
+                    koordinaten.push(new google.maps.LatLng(hudePadd[i][0], hudePadd[i][1]));
+                }
+                $('.tphGoogleMapsKarte').gmap('addShape', 'Polyline', {
+                    'path': koordinaten,
+                    'strokeColor': '#c00',
+                    'strokeThickness': 5
+                });
+                break;
+            case 'tphFotojagd' :
+                console.log(latImg);
+                console.log(lonImg);
+                break;
+
+        }
+
     }
 
     function tphNutzeGPSError() {
@@ -477,6 +518,18 @@ function tphQRCodeScan() {
         alert('nene');         //$.mobile.changePage('#tphDialogQRCodeFehler', 'none', true, true);
         // hudeOpenDialog('dialog_qr-code_scan_fehler.html');
     }
+}
+
+// Eine Zahl x wird auf n Nachkommastelen gerundet
+function tphRundeNachkommastellen(x, n) {
+    if (n < 1 || n > 14)
+        return false;
+    var e = Math.pow(10, n);
+    var k = (Math.round(x * e) / e).toString();
+    if (k.indexOf('.') === -1)
+        k += '.';
+    k += e.toString().substring(1);
+    return k.substring(0, k.indexOf('.') + n + 1);
 }
 
 // Fügt die einzelnen Fragen zur Überprüfung hinzu
@@ -586,11 +639,14 @@ function tphSchnitzeljagdPlanetenlehrpfadAbiturC() {
     richtig += tphUeberpruefeMultipleChoice('plpAbiC37');
     $('#tphSchnitzeljagdPlanetenlehrpfadAbiturCErgebnis').html('<p id="tphSchnitzeljagdPlanetenlehrpfadAbiturCErgebnis"><h1>Sie haben ' + richtig + ' von 37 Fragen richtig beantwortet!</h1></p>');
 }
+
+
 // Setzt die Einstellungen in der Einstellungsseite
 function tphSetzeEinstellungenAufSeite() {
     var tphSprache = tphHoleSprache();
     var tphZielgruppe = tphHoleZielgruppe();
     var tphAudioPlayer = tphHoldeAudioPlayer();
+    tphSetzeFotojagdBilder();
     console.log(tphSprache);
     // Zeigt nur den Text auf deutsch an
     if (tphSprache === 'de') {
@@ -629,7 +685,6 @@ function tphSetzeEinstellungenAufSeite() {
         $('.tphZielgruppeBestager').show();
     }
 
-
     if (tphAudioPlayer === 'false' || tphAudioPlayer === false) {
         $('.tphPlayerControl').hide();
         $('.tphPlayerKeineDateien').show();
@@ -656,6 +711,53 @@ function tphSetzeEinstellungenAufSeite() {
         $('nav').removeClass('expanded');
     }
 }
+
+function dumm(vasr) {
+    console.log('dumm');
+    image = document.getElementById(vasr);
+    bildAnchor = EXIF.getData(image, function() {
+        // GPS-Daten aus dem Bild auslesen
+        latFotojagd = EXIF.getTag(this, "GPSLatitude");
+        lonFotojagd = EXIF.getTag(this, "GPSLongitude");
+        // GPS-Daten von Grad, Minute, Sekunde ins Dezimale umrechnen
+        latFotojagd = tphConvertDMStoDec(latFotojagd);
+        lonFotojagd = tphConvertDMStoDec(lonFotojagd);
+        console.log(latFotojagd + 'xxx ' + lonFotojagd);
+        //tphSchnitzeljagdFotojagdAenderTitel(latFotojagd, lonFotojagd, imgID);
+    });
+}
+
+
+/*
+ * Schreibt die IDs in den localStorage und setzt diese false (nicht gefunden)
+ * @returns {undefined}
+ */
+function tphSetzeFotojagdBilder() {
+    // LocalStorage initialisieren
+    var tphStorage = tphLadeLocalStorage();
+    // Bilder der Schnitzeljagd heraussuchen, dazu nur Bilder verwenden, die Kind eines Ankers sind
+    $('a:has(img) img').each(function() {
+        // Klasse des Bildes abfragen
+        var klasse = $(this).attr('class');
+        // ID des Bildes abfragen
+        var imgID = $(this).attr('id');
+        // Prüfen ob die Klasse 'fotojagd' ist
+        if (klasse === 'fotojagd') {
+            // Überprüfen ob ID bereits im localStorage vorhanden ist.
+            if (tphStorage.getItem(imgID) === null) {
+                /*
+                 * ID nicht vorhanden, wird diese in den localStorage geschreiben
+                 * und auf false gesetzt (Bild nicht gefunden). 
+                 */
+                tphStorage.setItem(imgID, false);
+                console.log('eingefügt');
+            } else {
+                console.log('schon vorhanden');
+            }
+        }
+    });
+}
+
 // Speichert die Schriftgroesse im localStorage
 function tphSpeicherSchriftgroesse(tphSchriftgroesse) {
     console.log(tphSchriftgroesse);

@@ -1,0 +1,68 @@
+<script type="text/javascript" src="js/slimbox2.js"></script>
+<link rel="stylesheet" href="css/slimbox2.css" type="text/css" media="screen" />
+<div class="large-6 small-6 columns">
+    <a href="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_01.jpg" rel="lightbox">
+        <img id="ein" class="fotojagd" src="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_01.jpg"/>
+    </a>
+</div>
+<div class="large-6 small-6 columns">
+    <a href="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_02.jpg" rel="lightbox">
+        <img id="2" class="th fotojagd" src="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_02.jpg"/>
+    </a>
+</div>
+<div class="large-6 small-6 columns">
+    <a href="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_03.jpg" rel="lightbox">
+        <img id="3" class="fotojagd" src="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_03.jpg"/>
+    </a>
+</div>
+<div class="large-6 small-6 columns">
+    <a href="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_04.jpg" rel="lightbox">
+        <img id="4" class="fotojagd" src="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_04.jpg"/>
+    </a>
+</div>
+<div class="large-6 small-6 columns">
+    <a href="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_05.jpg" rel="lightbox">
+        <img id="5" src="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_05.jpg"/>
+    </a>
+</div>
+<div class="large-6 small-6 columns">
+    <a href="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_06.jpg" rel="lightbox">
+        <img id="6" class="fotojagd" src="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_06.jpg"/>
+    </a>
+</div>
+<div class="large-6 small-6 columns">
+    <a href="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_07.jpg" rel="lightbox">
+        <img id="7" class="fotojagd" src="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_07.jpg"/>
+    </a>
+</div>
+<div class="large-6 small-6 columns">
+    <a href="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_08.jpg" rel="lightbox">
+        <img id="8" class="fotojagd" src="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_08.jpg"/>
+    </a>
+</div>
+<div class="large-6 small-6 columns">
+    <a href="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_09.jpg" rel="lightbox">
+        <img id="9" class="fotojagd" src="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_09.jpg"/>
+    </a>
+</div>
+<div class="large-6 small-6 columns">
+    <a href="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_10.jpg" rel="lightbox">
+        <img id="10" class="fotojagd" src="images/schnitzeljagd/fotojagd/hude/schnitzeljagd_fotojagd_hude_10.jpg"/>
+    </a>
+</div>
+<div class="large-6 small-6 columns">
+    &nbsp;
+</div>
+<script>
+    $(function() {
+        tphHeaderUberschriftAendern('Fotojagd Hude');
+        tphSetzeEinstellungenAufSeite();
+    });
+    $('a:has(img)').each(function() {
+        var rel = $(this).attr('rel');
+        if (rel == 'lightbox') {
+            var imgID = $(this).find('img').attr('id');
+            $(this).attr('title', '<a onclick="dumm(\'' + imgID + '\')">Gefunden!</a>');
+        }
+    });
+</script>
