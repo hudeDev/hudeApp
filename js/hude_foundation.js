@@ -467,8 +467,11 @@ function tphNutzeGPS(option, latImg, lonImg, imgID) {
                 });
                 break;
             case 'tphFotojagd':
+                console.log('tphNutzeGPS');
                 var abstand = tphGPSAbstand(lat, lon, latImg, lonImg);
-                if (abstand === true) {
+                alert('Abstand: ' + abstand);
+                if (abstand === true || abstand === 'true') {
+                    alert('TRUE')
                     var imgSrc = $('#' + imgID).attr('src');
                     console.log('bild gefunden: ' + imgSrc);
                     tphSetzeFotojagdBildGefundenLocalStorage(imgSrc);
@@ -743,6 +746,7 @@ function tphSetzeEinstellungenAufSeite() {
 }
 
 function tphHoleGPSAusBild(imgID) {
+    alert('tphHoleGPSAusBild');
     image = document.getElementById(imgID);
     bildAnchor = EXIF.getData(image, function() {
         // GPS-Daten aus dem Bild auslesen
@@ -786,6 +790,7 @@ function tphSpeicherFotojagdBilderImLocalStorage() {
         }
     });
 }
+
 /*
  * Holt die Bilder und deren Wert aus dem localStorage und überprüft ob sie
  * gefunden wurden oder nicht. Der aktuelle Stand wird auf im Ergebnisfeld der
