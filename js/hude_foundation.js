@@ -896,10 +896,14 @@ function tphSpielplaetze() {
 
 // Löscht den, für die Navigation in der App, unnötigen Teil der URL
 function tphSplitURL(url) {
-    var domain = 'http://m.touristik-palette-hude.de/index.html';
+    var domain = 'http://m.touristik-palette-hude.de/tphSeiteIndex.html';
     if (url.indexOf(domain) !== -1) {
         url = url.replace(domain, '').trim();
-        $.mobile.changePage(url, 'none', true, true);
+        var hash = (url.replace(/^#/, '') || 'blank') + '.';
+        alert(url + ' -> ' + hash);
+        var datei = hash + 'html';
+        $('.tphContent').load(datei);
+        //$.mobile.changePage(url, 'none', true, true);
     } else {
         // hudeOpenDialog('dialog_qr-code_ungueltig.html');
         $.mobile.changePage('#tphDialogQRCodeUngueltig', 'none', true, true);
