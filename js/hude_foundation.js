@@ -189,16 +189,29 @@ function tphGPSAbstand(lat1, lon1, lat2, lon2) {
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
+    console.log('d ohne: ' + d);
     if (d > 1) {
-        alert('das war wohl nichts');
+        console.log('1 ' + Math.round(d) + "km");
+        //return false; // Entfernung = Kilometer
         return Math.round(d) + "km";
     }
-    else if (d <= 1) {
-        d = Math.round(d * 1000)
-        if (d <= 100) {
-            alert('gefunden');
+    if (d <= 1) {
+        console.log('d <= 1' + d);
+        console.log('Math.round(d * 1000): ' + Math.round(d * 1000));
+        // Meter berechnend
+        d = Math.round(d * 1000);
+        // Erlaubte Distanz zum OBjekt
+        var tphErlaubteDistanz = 100;
+        // Objekt gefunden wenn die Distanz (d) zum Objekt kleiner oder gleich 
+        // der erlaubten Distanz (tphErlaubteDistanz) ist.
+        if (d <= tphErlaubteDistanz) {
+            console.log(d + ' ###');
+            return true;
+        } else {
+            console.log('ELSE');
+            // Entfernung vom Objekt größer als die erlaubte Distanz
+            return d;
         }
-        return d
     }
 }
 
@@ -387,7 +400,7 @@ function tphLocalStorageAuselsen() {
     console.log(print_r(tphStorage));
 }
 
-function tphNutzeGPS(option, latImg, lonImg) {
+function tphNutzeGPS(option, latImg, lonImg, imgID) {
     var lat;
     var lon;
 
@@ -453,13 +466,17 @@ function tphNutzeGPS(option, latImg, lonImg) {
                     'strokeThickness': 5
                 });
                 break;
-            case 'tphFotojagd' :
-                console.log(latImg);
-                console.log(lonImg);
+            case 'tphFotojagd':
+                var abstand = tphGPSAbstand(lat, lon, latImg, lonImg);
+                if (abstand === true) {
+                    var imgSrc = $('#' + imgID).attr('src');
+                    console.log('bild gefunden: ' + imgSrc);
+                    tphSetzeFotojagdBildGefundenLocalStorage(imgSrc);
+                } else {
+                    alert('Nicht gefunden');
+                }
                 break;
-
         }
-
     }
 
     function tphNutzeGPSError() {
@@ -646,8 +663,6 @@ function tphSetzeEinstellungenAufSeite() {
     var tphSprache = tphHoleSprache();
     var tphZielgruppe = tphHoleZielgruppe();
     var tphAudioPlayer = tphHoldeAudioPlayer();
-    tphSetzeFotojagdBilder();
-    console.log(tphSprache);
     // Zeigt nur den Text auf deutsch an
     if (tphSprache === 'de') {
         $('.tphSpracheDE').show();
@@ -703,6 +718,21 @@ function tphSetzeEinstellungenAufSeite() {
         closeEffect: 'none'
     });
 
+    $("a.fotojagd").each(function() {
+        $(this).fancybox({
+            openEffect: 'none',
+            closeEffect: 'none',
+            //$(".fancybox").fancybox({
+            title: function() {
+                var imgID = $(this).find('img').attr('id');
+                return '<a onclick="tphHoleGPSAusBild(\'' + imgID + '\')">Gefunden!</a>';
+            }
+        });
+    });
+
+    tphHoleFotojagdBilderAusLocalStorage();
+    tphSpeicherFotojagdBilderImLocalStorage();
+
     // Zum Seitenanfang springen
     $(window).scrollTop(0);
 
@@ -712,9 +742,8 @@ function tphSetzeEinstellungenAufSeite() {
     }
 }
 
-function dumm(vasr) {
-    console.log('dumm');
-    image = document.getElementById(vasr);
+function tphHoleGPSAusBild(imgID) {
+    image = document.getElementById(imgID);
     bildAnchor = EXIF.getData(image, function() {
         // GPS-Daten aus dem Bild auslesen
         latFotojagd = EXIF.getTag(this, "GPSLatitude");
@@ -722,38 +751,102 @@ function dumm(vasr) {
         // GPS-Daten von Grad, Minute, Sekunde ins Dezimale umrechnen
         latFotojagd = tphConvertDMStoDec(latFotojagd);
         lonFotojagd = tphConvertDMStoDec(lonFotojagd);
-        console.log(latFotojagd + 'xxx ' + lonFotojagd);
-        //tphSchnitzeljagdFotojagdAenderTitel(latFotojagd, lonFotojagd, imgID);
+        //console.log(latFotojagd + 'xxx ' + lonFotojagd);
+        tphNutzeGPS('tphFotojagd', latFotojagd, lonFotojagd, imgID);
     });
 }
 
+function tphSetzeFotojagdBildGefundenLocalStorage(imgSrc) {
+    var tphStorage = tphLadeLocalStorage();
+    tphStorage.setItem(imgSrc, true);
+    console.log('Wert im LS: ' + tphStorage.getItem(imgSrc));
+    tphHoleFotojagdBilderAusLocalStorage();
+}
 
 /*
  * Schreibt die IDs in den localStorage und setzt diese false (nicht gefunden)
  * @returns {undefined}
  */
-function tphSetzeFotojagdBilder() {
+function tphSpeicherFotojagdBilderImLocalStorage() {
+    console.log('tphSpeicherFotojagdBilderImLocalStorage');
     // LocalStorage initialisieren
     var tphStorage = tphLadeLocalStorage();
-    // Bilder der Schnitzeljagd heraussuchen, dazu nur Bilder verwenden, die Kind eines Ankers sind
-    $('a:has(img) img').each(function() {
-        // Klasse des Bildes abfragen
-        var klasse = $(this).attr('class');
-        // ID des Bildes abfragen
-        var imgID = $(this).attr('id');
-        // Prüfen ob die Klasse 'fotojagd' ist
-        if (klasse === 'fotojagd') {
-            // Überprüfen ob ID bereits im localStorage vorhanden ist.
-            if (tphStorage.getItem(imgID) === null) {
-                /*
-                 * ID nicht vorhanden, wird diese in den localStorage geschreiben
-                 * und auf false gesetzt (Bild nicht gefunden). 
+    // Link des Ankers == Bildpfad als Index benutzen
+    $('a:has(img)').each(function() {
+        // Wenn der Anker die Klasse 'fotojagd' enthält
+        if ($(this).hasClass('fotojagd')) {
+            // Und dieser noch nicht noch nicht im localStorage gesetzt ist
+            if (tphStorage.getItem($(this).attr('href')) === null) {
+                /* 
+                 * Wird dieser im localStorage als false (nicht gefunden) 
+                 * gespeichert
                  */
-                tphStorage.setItem(imgID, false);
-                console.log('eingefügt');
-            } else {
-                console.log('schon vorhanden');
+                tphStorage.setItem($(this).attr('href'), false);
             }
+        }
+    });
+}
+/*
+ * Holt die Bilder und deren Wert aus dem localStorage und überprüft ob sie
+ * gefunden wurden oder nicht. Der aktuelle Stand wird auf im Ergebnisfeld der
+ * jeweiligen Fotojagd angezeigt.
+ * @returns {undefined}
+ */
+function tphHoleFotojagdBilderAusLocalStorage() {
+    // Bilder die als Parent einen Link mit der Klasse 'fotojagd' werden geladen
+    // LocalStorage initialisieren
+    var tphStorage = tphLadeLocalStorage();
+    /* Bilder der Schnitzeljagd auf Seite heraussuchen, dazu nur Bilder 
+     * verwenden, die Kind eines Ankers mit der Klasse 'fotojagd'
+     */
+    var anzahlBilderInsgesamt = 0;
+    var anzahlBilderGefunden = 0;
+    $('a:has(img)').each(function() {
+        // Wenn der Anker die Klasse 'fotojagd' enthält
+        if ($(this).hasClass('fotojagd')) {
+            // Ist dieser Wert true  (gefunden) oder nicht
+            console.log('Aktuelle Bild: ' + $(this).attr('href'));
+            console.log(anzahlBilderGefunden + '/' + anzahlBilderInsgesamt);
+            if (tphStorage.getItem($(this).attr('href')) === 'true') {
+                console.log('Bild true: ' + $(this).attr('href'));
+                var imgID = $(this).find('img').attr('id');
+                $('#' + imgID).hide();
+                $(this).attr('href', '');
+                // Anzahl der gefundenen Bilder für Ergebnis erhöhen
+                anzahlBilderGefunden++;
+                // Anzahl der Bilder insgesamt für Ergebnis erhöhen
+                anzahlBilderInsgesamt++;
+                console.log(anzahlBilderGefunden + '/' + anzahlBilderInsgesamt);
+            } else {
+                // Anzahl der Bilder insgesamt für Ergebnis erhöhen
+                anzahlBilderInsgesamt++;
+            }
+        }
+    });
+    console.log(anzahlBilderGefunden + '/' + anzahlBilderInsgesamt);
+    $('#tphSchnitzeljagdFotojagdErgebnis').html('<div id="tphSchnitzeljagdFotojagdErgebnis">Bereits gefunden ' + anzahlBilderGefunden + '/' + anzahlBilderInsgesamt + ' Bildern und deren Position!</div>');
+}
+
+/*
+ * Setzt die Bilder im localStorage auf 'false' (nicht gefunden), um das Spiel
+ * von vorne zu starten.
+ * @returns {undefined}
+ */
+function tphSetzeFotojagdBilderAufNichtGefunden() {
+    // Bilder die als Parent einen Link mit der Klasse 'fotojagd' werden geladen
+    // LocalStorage initialisieren
+    var tphStorage = tphLadeLocalStorage();
+    /* Bilder der Schnitzeljagd auf Seite heraussuchen, dazu nur Bilder 
+     * verwenden, die Kind eines Ankers mit der Klasse 'fotojagd'
+     */
+    var anzahlBilderInsgesamt = 0;
+    var anzahlBilderGefunden = 0;
+    $('a:has(img)').each(function() {
+        // Wenn der Anker die Klasse 'fotojagd' enthält
+        if ($(this).hasClass('fotojagd')) {
+            // Ist dieser Wert true  (gefunden) oder nicht
+            tphStorage.setItem($(this).attr('href'), false);
+            $('#tphSchnitzeljagdFotojagdErgebnis').html('<div id="tphSchnitzeljagdFotojagdErgebnis">Bereits gefunden: ' + anzahlBilderGefunden + '/' + anzahlBilderInsgesamt + ' Bildern und deren Position!</div>');
         }
     });
 }
