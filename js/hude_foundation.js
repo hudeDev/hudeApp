@@ -900,8 +900,8 @@ function tphSplitURL(url) {
     if (url.indexOf(domain) !== -1) {
         url = url.replace(domain, '').trim();
         var hash = (url.replace(/^#/, '') || 'blank') + '.';
-        alert(url + ' -> ' + hash);
         var datei = hash + 'html';
+        alert(url + ' -> ' + hash + ' aufruf: ' + datei);
         $('.tphContent').load(datei);
         //$.mobile.changePage(url, 'none', true, true);
     } else {
