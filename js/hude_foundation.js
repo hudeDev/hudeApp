@@ -749,9 +749,13 @@ function tphHoleGPSAusBild(imgID) {
     alert('tphHoleGPSAusBild');
     image = document.getElementById(imgID);
     bildAnchor = EXIF.getData(image, function() {
-        // GPS-Daten aus dem Bild auslesen
-        latFotojagd = EXIF.getTag(this, "GPSLatitude");
-        lonFotojagd = EXIF.getTag(this, "GPSLongitude");
+        try {
+            // GPS-Daten aus dem Bild auslesen
+            latFotojagd = EXIF.getTag(this, "GPSLatitude");
+            lonFotojagd = EXIF.getTag(this, "GPSLongitude");
+        } catch (e) {
+            alert('FEHLER: ' + e);
+        }
         // GPS-Daten von Grad, Minute, Sekunde ins Dezimale umrechnen
         latFotojagd = tphConvertDMStoDec(latFotojagd);
         lonFotojagd = tphConvertDMStoDec(lonFotojagd);
