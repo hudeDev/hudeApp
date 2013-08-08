@@ -583,9 +583,17 @@ var EXIF = (function() {
         }
         return true;
     }
-
+    /*
     function getTag(img, tag) {
         if (!imageHasData(img)) return;
+        return img.exifdata[tag];
+    }
+    */
+    function getTag(img, tag) {
+        if (!imageHasData(img)) {
+            alert(img);
+            return;
+        }
         return img.exifdata[tag];
     }
 
