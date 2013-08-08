@@ -535,8 +535,8 @@ function tphQRCodeScan() {
                 }
         );
     } catch (exception) {
-        alert('nene');         //$.mobile.changePage('#tphDialogQRCodeFehler', 'none', true, true);
-        // hudeOpenDialog('dialog_qr-code_scan_fehler.html');
+        var datei = 'tphSeiteQRCodeFehler.html';
+        $('.tphContent').load(datei);
     }
 }
 
@@ -747,15 +747,17 @@ function tphSetzeEinstellungenAufSeite() {
 
 function tphHoleGPSAusBild(imgID) {
     alert('tphHoleGPSAusBild');
-    image = document.getElementById(imgID);
-    bildAnchor = EXIF.getData(image, function() {
+    var image = document.getElementById(imgID);
+    var bildAnchor = EXIF.getData(image, function() {
         try {
+            alert('TRY');
             // GPS-Daten aus dem Bild auslesen
-            latFotojagd = EXIF.getTag(this, "GPSLatitude");
-            lonFotojagd = EXIF.getTag(this, "GPSLongitude");
+            var latFotojagd = EXIF.getTag(this, "GPSLatitude");
+            var lonFotojagd = EXIF.getTag(this, "GPSLongitude");
         } catch (e) {
             alert('FEHLER: ' + e);
         }
+        alert('aus dem try raus');
         // GPS-Daten von Grad, Minute, Sekunde ins Dezimale umrechnen
         latFotojagd = tphConvertDMStoDec(latFotojagd);
         lonFotojagd = tphConvertDMStoDec(lonFotojagd);
@@ -926,6 +928,14 @@ function tphUeberpruefeMultipleChoice(name) {
         return 0;
     }
 }
+
+function tphDateisystem(option) {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (filesystem, option) {
+        console.log(option);
+    }, tphErstelleOrdnerErrorCallback);
+}
+
+
 
 /*
  * 
