@@ -530,8 +530,8 @@ function tphQRCodeScan() {
                     tphSplitURL(result.text);
                 },
                 function(error) {
-                    $.mobile.changePage('#tphDialogQRCodeFehler', 'none', true, true);
-//hudeOpenDialog('dialog_qr-code_scan_fehler.html');
+                    var datei = 'tphSeiteQRCodeFehler.html';
+                    $('.tphContent').load(datei);
                 }
         );
     } catch (exception) {
@@ -905,8 +905,8 @@ function tphSplitURL(url) {
         $('.tphContent').load(datei);
         //$.mobile.changePage(url, 'none', true, true);
     } else {
-        // hudeOpenDialog('dialog_qr-code_ungueltig.html');
-        $.mobile.changePage('#tphDialogQRCodeUngueltig', 'none', true, true);
+        var datei = 'tphSeiteQRCodeUngueltig.html';
+        $('.tphContent').load(datei);
     }
 }
 

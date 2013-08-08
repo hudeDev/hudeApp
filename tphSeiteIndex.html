@@ -471,14 +471,14 @@
                 // hash and adds the class "selected" to any matching nav link.
                 $(window).hashchange(function() {
                     var hash = location.hash;
-                    var datei;
+                    // var datei;
 
                     if (hash !== '#tphSeiteIndex') {
                         hash = (hash.replace(/^#/, '') || 'blank') + '.';
-                        datei = hash + 'html';
+                        var datei = hash + 'html';
                         $('.tphContent').load(datei);
                     }
-                    $('.tphFooter').load('_footer.html');
+                    //$('.tphFooter').load('_footer.html');
                 });
 
                 // Since the event is only triggered when the hash changes, we need to trigger
