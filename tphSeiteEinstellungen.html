@@ -1,9 +1,11 @@
+<img src="images/tphLogo.png" />
 <div class="section-container accordion" data-section="accordion">
     <section>
         <p class="title" data-section-title><a href="#">Download Audio</a></p>
         <div class="content" data-section-content>
-            <p>Um die Audio-Inhalte anhören zu können, müssen diese heruntergeladen werden. Wir empfehlen dazu eine WLAN-Verbindung! Sie haben bereits <strong><span id="tphAnzahlAudioBereitsGeladen"></span> von <span id="tphAnzahlAudioInsgesamt"></span></strong> heruntergeladen.</p>
-            <span onclick="tphZugriffDateisystem('download')" class="large button expand">Download Audio-Inhalte</span>
+            <p>Um die Audio-Inhalte anhören zu können, müssen diese heruntergeladen werden. Wir empfehlen dazu eine WLAN-Verbindung! Sie haben bereits <strong><span id="tphAnzahlAudioHeruntergeladen"></span> von <span id="tphAnzahlAudioInsgesamt"></span></strong> heruntergeladen.</p>
+            <span><a id="tphDownloadAudioButton" class="large button expand" onclick="tphDateisystem('download')">Download Audio-Inhalte</a></span>
+            <p id="tphDownloadStatus"></p>
         </div>
     </section>
     <section>
@@ -90,11 +92,18 @@
         <p class="title" data-section-title><a href="#">Admin</a></p>
         <div class="content" data-section-content>
             <ul class="button-group">
-                <li><a href="#" onclick="tphLocalStorageAuselsen();" class="small button">Zeige LS</a></li>
-                <li><a href="#" onclick="tphLoescheLocalStorage();" class="small button">Löschen LS</a></li>
-                <li><a href="#" class="small button">Button 3</a></li>
+                <li><a onclick="tphLocalStorageAuselsen();" class="small button">Zeige LS</a></li>
+                <li><a onclick="tphLoescheLocalStorage();" class="small button">Löschen LS</a></li>
+                <li><a onclick="tphDateisystem('erstellen');" class="small button">Option erstellen</a></li>
+                <li><a onclick="tphDateisystem('loeschen')" class="small button">Option löschen</a></li>
+                <li><a onclick="tphDateisystem('auslesenHude')" class="small button">Option auslesenHude</a></li>
+                <li><a onclick="tphDateisystem('auslesenAudio')" class="small button">Option auslesenAudio</a></li>
+                <li><a onclick="tphDateisystem('download')" class="small button">Option download</a></li>
+                <li><a onclick="tphDateisystem('audioVorhanden', 'hude-info.mp3')" class="small button">Option audioVorhanden JA</a></li>
+                <li><a onclick="tphDateisystem('audioVorhanden', 'benjami-info.mp3')" class="small button">Option audioVorhanden NEIN</a></li>
             </ul>
         </div>
+        <div id="consolelog"></div>
     </section>
 </div>
 <script>

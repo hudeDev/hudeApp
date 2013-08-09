@@ -10,12 +10,14 @@ function tphAppStart() {
         tphStorage.setItem('tphErsterStart', new Date().getTime());
         // Einstellen der Sprache auf deutsch
         tphStorage.setItem('tphSprache', 'de');
+        // Einstellen der Sprache auf deutsch
+        tphStorage.setItem('tphSpracheAudio', 'de');
         // Schriftgroesse auf normal setzen
         tphStorage.setItem('tphSchriftgroesse', 'normal');
         // Zielgruppeneinstellungen auf 'keine Angabe' einstellen
         tphStorage.setItem('tphZielgruppe', 'keine');
-        // Audio-Player auf false setzen, damit dieser nicht angezeigt wird
-        tphStorage.setItem('tphPlayer', false);
+        // Anzahl der Audio-Dateien, die heruntergeladen wurden.
+        tphStorage.setItem('tphAudioDateienHeruntergeladen', 0);
         console.log(tphErsterStart);
     } else {
         console.log(print_r(tphStorage));
@@ -69,21 +71,6 @@ function tphAudioPause() {
     }
 }
 
-
-
-// Gibt den Pfad zur Audio-Datei zurück, die für die eingestellte Sprache benötigt wird.
-function tphAudioSprachenPfad(filepath, audioSelect) {
-    if (audioSelect === 'de') {
-        return filepath;
-    } else {
-        var i = filepath.indexOf(".");
-        if (i > 0) {
-            filepath = filepath.slice(0, i) + '_' + audioSelect + '.mp3';
-            return filepath;
-        }
-    }
-}
-
 // Stoppt die gestartete Audio-Datei
 function tphAudioStoppen() {
     if (audio) {
@@ -110,8 +97,8 @@ function tphConvertDMStoDec(dmsArray) {
 }
 
 // Enthält die Liste der zur downloadenen Dateien
-function tphDownloadOrdnerDateien() {
-    var dateien = new Array('http://m.touristik-palette-hude.de/download/audio/erde.mp3', 'http://m.touristik-palette-hude.de/download/audio/neptun.mp3', 'http://m.touristik-palette-hude.de/download/audio/unterkuenfte.mp3', 'http://m.touristik-palette-hude.de/download/audio/gastronomie.mp3', 'http://m.touristik-palette-hude.de/download/audio/planetenlehrpfad.mp3', 'http://m.touristik-palette-hude.de/download/audio/uranus.mp3', 'http://m.touristik-palette-hude.de/download/audio/hude-info.mp3', 'http://m.touristik-palette-hude.de/download/audio/pluto.mp3', 'http://m.touristik-palette-hude.de/download/audio/urwaldhasbruch.mp3', 'http://m.touristik-palette-hude.de/download/audio/jupiter.mp3', 'http://m.touristik-palette-hude.de/download/audio/saturn.mp3', 'http://m.touristik-palette-hude.de/download/audio/venus.mp3', 'http://m.touristik-palette-hude.de/download/audio/klosterbezirk.mp3', 'http://m.touristik-palette-hude.de/download/audio/schenke_und_remise.mp3', 'http://m.touristik-palette-hude.de/download/audio/vielstedter_bauernhaus.mp3', 'http://m.touristik-palette-hude.de/download/audio/kulturpfad.mp3', 'http://m.touristik-palette-hude.de/download/audio/skulpturenufer-und-haus.mp3', 'http://m.touristik-palette-hude.de/download/audio/wassermuehle.mp3', 'http://m.touristik-palette-hude.de/download/audio/mars.mp3', 'http://m.touristik-palette-hude.de/download/audio/sonne.mp3', 'http://m.touristik-palette-hude.de/download/audio/wittemoor.mp3', 'http://m.touristik-palette-hude.de/download/audio/merkur.mp3', 'http://m.touristik-palette-hude.de/download/audio/strassedermegalithkultur.mp3', 'http://m.touristik-palette-hude.de/download/audio/zeitstrahl2000.mp3', 'http://m.touristik-palette-hude.de/download/audio/museum.mp3', 'http://m.touristik-palette-hude.de/download/audio/torkapelle.mp3', 'http://m.touristik-palette-hude.de/download/audio/hude-info_en.mp3');
+function tphAudioDateien() {
+    var dateien = new Array('http://m.touristik-palette-hude.de/download/audio/de/erde.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/neptun.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/unterkuenfte.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/gastronomie.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/planetenlehrpfad.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/uranus.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/hude-info.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/pluto.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/urwaldhasbruch.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/jupiter.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/saturn.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/venus.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/klosterbezirk.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/schenke_und_remise.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/vielstedter_bauernhaus.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/kulturpfad.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/skulpturenufer-und-haus.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/wassermuehle.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/mars.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/sonne.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/wittemoor.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/merkur.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/strassedermegalithkultur.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/zeitstrahl2000.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/museum.mp3', 'http://m.touristik-palette-hude.de/download/audio/de/torkapelle.mp3', 'http://m.touristik-palette-hude.de/download/audio/en/hude-info.mp3');
     return dateien;
 }
 
@@ -134,12 +121,20 @@ function tphEinstellungenSetzen() {
     console.log(schriftgroesse);
     $('input[name="tphSchriftgroesse"][value="' + schriftgroesse + '"]').attr('checked', 'checked');
     var sprache = tphHoleSprache();
-    console.log(sprache);
+    console.log('Text: ' + sprache);
     $('input[name="tphSprache"][value="' + sprache + '"]').attr('checked', 'checked');
+    var spracheAudio = tphHoleSpracheAudio();
+    console.log('Audio: ' + spracheAudio);
+    $('input[name="tphSpracheAudio"][value="' + spracheAudio + '"]').attr('checked', 'checked');
     var zielgruppe = tphHoleZielgruppe();
     //$('input[name="tphZielgruppe"][value="' + zielgruppe + '"').attr('checked', 'checked');
     $('input[name="tphZielgruppe"][value="' + zielgruppe + '"]').attr('checked', 'checked');
     console.log(zielgruppe);
+    var audioDateienInsgesamt = tphAudioDateien().length;
+    $('#tphAnzahlAudioInsgesamt').text(audioDateienInsgesamt);
+    var audioHeruntergeladen = tphHoleAudioDateienHeruntergeladen();
+    $('#tphAnzahlAudioHeruntergeladen').text(audioHeruntergeladen);
+    console.log(audioHeruntergeladen + '/' + audioDateienInsgesamt);
 }
 
 // Überprüft ob Änderungen an den Einstellungen gemacht wurden
@@ -151,6 +146,9 @@ function tphEinstellungenUeberwacher() {
         }
         if (tphAktion === 'tphSprache') {
             tphSpeicherSprache($(this).val());
+        }
+        if (tphAktion === 'tphSpracheAudio') {
+            tphSpeicherSpracheAudio($(this).val());
         }
         if (tphAktion === 'tphZielgruppe') {
             tphSpeicherZielgruppe($(this).val());
@@ -189,15 +187,11 @@ function tphGPSAbstand(lat1, lon1, lat2, lon2) {
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
-    console.log('d ohne: ' + d);
     if (d > 1) {
-        console.log('1 ' + Math.round(d) + "km");
         //return false; // Entfernung = Kilometer
         return Math.round(d) + "km";
     }
     if (d <= 1) {
-        console.log('d <= 1' + d);
-        console.log('Math.round(d * 1000): ' + Math.round(d * 1000));
         // Meter berechnend
         d = Math.round(d * 1000);
         // Erlaubte Distanz zum OBjekt
@@ -205,10 +199,8 @@ function tphGPSAbstand(lat1, lon1, lat2, lon2) {
         // Objekt gefunden wenn die Distanz (d) zum Objekt kleiner oder gleich 
         // der erlaubten Distanz (tphErlaubteDistanz) ist.
         if (d <= tphErlaubteDistanz) {
-            console.log(d + ' ###');
             return true;
         } else {
-            console.log('ELSE');
             // Entfernung vom Objekt größer als die erlaubte Distanz
             return d;
         }
@@ -219,6 +211,12 @@ function tphGPSAbstand(lat1, lon1, lat2, lon2) {
 function tphHeaderUberschriftAendern(neueUeberschrift) {
     $('#tphHeaderUeberschrift').text(neueUeberschrift);
     tphSetzeEinstellungenAufSeite();
+}
+
+function tphHoleAudioDateienHeruntergeladen() {
+    console.log('tphHoleAudioDateienHeruntergeladen');
+    var tphStorage = tphLadeLocalStorage();
+    return tphStorage.getItem('tphAudioDateienHeruntergeladen');
 }
 
 // Lädt die Schriftgröße aus dem localStorage
@@ -233,6 +231,13 @@ function tphHoleSprache() {
     console.log('tphHoleSprache');
     var tphStorage = tphLadeLocalStorage();
     return tphStorage.getItem('tphSprache');
+}
+
+// Lädt die Sprache aus dem localStorage
+function tphHoleSpracheAudio() {
+    console.log('tphHoleSprache');
+    var tphStorage = tphLadeLocalStorage();
+    return tphStorage.getItem('tphSpracheAudio');
 }
 
 // Lädt die Zielgruppe aus dem localStorage
@@ -399,7 +404,14 @@ function tphLocalStorageAuselsen() {
     var tphStorage = tphLadeLocalStorage();
     console.log(print_r(tphStorage));
 }
-
+/*
+ * 
+ * @param {type} option Gibt an welche Aktion durchgeführt werden soll, wenn die GPS-Daten abgerufen wurden
+ * @param {type} latImg Latitude-Angabe des Bildes
+ * @param {type} lonImg Longitude-Angabe des Bildes
+ * @param {type} imgID ID des Bildes
+ * @returns {undefined}
+ */
 function tphNutzeGPS(option, latImg, lonImg, imgID) {
     var lat;
     var lon;
@@ -471,7 +483,6 @@ function tphNutzeGPS(option, latImg, lonImg, imgID) {
                 var abstand = tphGPSAbstand(lat, lon, latImg, lonImg);
                 alert('Abstand: ' + abstand);
                 if (abstand === true || abstand === 'true') {
-                    alert('TRUE')
                     var imgSrc = $('#' + imgID).attr('src');
                     console.log('bild gefunden: ' + imgSrc);
                     tphSetzeFotojagdBildGefundenLocalStorage(imgSrc);
@@ -521,6 +532,7 @@ function tphParkplaetze() {
     parkplaetze.sort();
     return parkplaetze;
 }
+
 function tphQRCodeScan() {
 // Startet den QR-Code-Scanner function tphQRCodeScan() {
     try {
@@ -663,9 +675,14 @@ function tphSchnitzeljagdPlanetenlehrpfadAbiturC() {
 
 // Setzt die Einstellungen in der Einstellungsseite
 function tphSetzeEinstellungenAufSeite() {
+    console.log($('#tphPlayer').is(":visible"));
+    console.log($('.tphPlayerControl').is(":visible"));
+    console.log($('.tphPlayerKeineDateien').is(":visible"));
+    console.log($('.tphSpracheDE').is(':visible'));
+    console.log($('.tphPlayerControl').toggle());
+    console.log($('.tphPlayerKeineDateien').toggle());
     var tphSprache = tphHoleSprache();
     var tphZielgruppe = tphHoleZielgruppe();
-    var tphAudioPlayer = tphHoldeAudioPlayer();
     // Zeigt nur den Text auf deutsch an
     if (tphSprache === 'de') {
         $('.tphSpracheDE').show();
@@ -703,24 +720,24 @@ function tphSetzeEinstellungenAufSeite() {
         $('.tphZielgruppeBestager').show();
     }
 
-    if (tphAudioPlayer === 'false' || tphAudioPlayer === false) {
-        $('.tphPlayerControl').hide();
-        $('.tphPlayerKeineDateien').show();
-    } else {
-        $('.tphPlayerControl').show();
-        $('.tphPlayerKeineDateien').hide();
-    }
+//    if (tphAudioPlayer === 'false' || tphAudioPlayer === false) {
+//        $('.tphPlayerControl').hide();
+//        $('.tphPlayerKeineDateien').show();
+//    } else {
+//        $('.tphPlayerControl').show();
+//        $('.tphPlayerKeineDateien').hide();
+//    }
     // Zurück-Button ermöglichen
     $('a.back').click(function() {
         parent.history.back();
         return false;
     });
-    // Galerie 
+    // Galerie von Bildern auf verschiedenen Positionen initialisieren
     $(".tphGalerie").fancybox({
         openEffect: 'none',
         closeEffect: 'none'
     });
-
+    // Fotojagd initialisieren
     $("a.fotojagd").each(function() {
         $(this).fancybox({
             openEffect: 'none',
@@ -732,6 +749,7 @@ function tphSetzeEinstellungenAufSeite() {
             }
         });
     });
+    
 
     tphHoleFotojagdBilderAusLocalStorage();
     tphSpeicherFotojagdBilderImLocalStorage();
@@ -862,6 +880,11 @@ function tphSetzeFotojagdBilderAufNichtGefunden() {
     });
 }
 
+function tphSpeicherDateienHeruntergeladen(anzahl) {
+    var tphStorage = tphLadeLocalStorage();
+    return tphStorage.setItem('tphAudioDateienHeruntergeladen', anzahl);
+}
+
 // Speichert die Schriftgroesse im localStorage
 function tphSpeicherSchriftgroesse(tphSchriftgroesse) {
     console.log(tphSchriftgroesse);
@@ -875,6 +898,14 @@ function tphSpeicherSprache(tphSprache) {
     // deutsch, englisch, plattdeutsch
     var tphStorage = tphLadeLocalStorage();
     tphStorage.setItem('tphSprache', tphSprache);
+}
+
+// Speichert die Sprache für Audio-Dateien im localStorage
+function tphSpeicherSpracheAudio(tphSpracheAudio) {
+    console.log(tphSpracheAudio);
+    // deutsch, englisch, plattdeutsch
+    var tphStorage = tphLadeLocalStorage();
+    tphStorage.setItem('tphSpracheAudio', tphSpracheAudio);
 }
 
 // Speichert die Zielgruppe im localStorage
@@ -896,7 +927,11 @@ function tphSpielplaetze() {
     return spielplaetze;
 }
 
-// Löscht den, für die Navigation in der App, unnötigen Teil der URL
+/*
+ * 
+ * @param {type} Die URL, zu der navigiert werden soll.
+ * @returns {undefined}
+ */
 function tphSplitURL(url) {
     var domain = 'http://m.touristik-palette-hude.de/tphSeiteIndex.html';
     if (url.indexOf(domain) !== -1) {
@@ -929,267 +964,187 @@ function tphUeberpruefeMultipleChoice(name) {
     }
 }
 
-function tphDateisystem(option) {
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (filesystem, option) {
-        console.log(option);
-    }, tphErstelleOrdnerErrorCallback);
-}
-
-
-
 /*
  * 
- * @param {String} option Legt fest welche Operation nach dem Zugriff auf das Dateisystem durchgeführt werden soll.
- * @param {String} filename Gibt an welche Datei abgespielt werden soll.
- * @returns {undefined}  */
-function tphZugriffDateisystem(option, filename) {
-    switch (option) {
-        case 'erstellen':
-            console.log('case: "erstelle"');
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, tphErstelleOrdnerSuccessCallback, tphErstelleOrdnerErrorCallback);
-            break;
-        case 'download':
-            console.log('case: "download"');
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, tphDownloadSuccessCallback, tphDownloadErrorCallback);
-            break;
-        case 'loesche':
-            console.log('case: "loesche"');
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, tphLoescheOrdnerSuccessCallback, tphLoescheOrdnerErrorCallback);
-            break;
-        case 'auslesen':
-            console.log('case: "auslesen"');
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, tphAuslesenOrdnerSuccessCallback, tphAuslesenOrdnerErrorCallback);
-            break;
-        case 'audioAbspielen':
-            console.log('case: "abspielen"');
-            // Abspielen der Datei
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(filesystem) {
-                filesystem.root.getDirectory('Hude/audio', {create: true, exclusive: false}, function(directory) {
+ * @param {String} option Welche Aktion nach dem Zugriff auf das Dateisystem durchgeführt werden soll.
+ * @param {String} dateiname Dateiname der Audio-Datei.
+ * @returns {undefined}
+ */
+function tphDateisystem(option, dateiname) {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(filesystem) {
+        switch (option) {
+            case 'erstellen':
+                console.log('erstellen');
+                // Erstellt den Ordner Hude auf dem Dateisystem
+                filesystem.root.getDirectory('Hude', {create: true, exclusive: false}, function() {
+                    console.log('Ordner wurde erstellt!');
+                    $('#consolelog').append('<p>Ordner wurde erstellt!</p>');
+                    filesystem.root.getDirectory('audio', {create: true, exclusive: false}, function() {}, function() {});
+                }, function() {
+                    console.log('Beim erstellen des Ordners ist ein Fehler aufgetreten');
+                    $('#consolelog').append('<p>Beim erstellen des Ordners ist ein Fehler aufgetreten</p>');
+                });
+                break;
+            case 'auslesenHude':
+                console.log('auslesenHude');
+                filesystem.root.getDirectory('Hude', {create: false, exclusive: false}, function(directory) {
+                    console.log('Ordner Hude auslesen:');
+                    // Directory reader initialisieren
                     var directoryReader = directory.createReader();
+                    // Liste aller Einträge im Ordner ausgeben:
                     directoryReader.readEntries(function(entries) {
                         for (var i = 0; i < entries.length; i++) {
-                            //console.log(entries[i].name + ' <-> ' + filename);
-                            if (entries[i].name === filename) {
-                                var filepath = entries[i].fullPath;
-                                // Hole Spracheinstellungen
-                                var db = tphInitiateLocalStorage();
-                                var audioSelect = db.getItem('audioSelect');
-                                // Dateipfad zur eingestellten Sprache
-                                filepath = tphAudioSprachenPfad(filepath, audioSelect);
-                                // Abspielen der Datei starten
-                                tphAudioAbspielen(filepath);
-                            }
+                            console.log(print_r(entries[i]));
+                            $('#consolelog').append('<p>' + print_r(entries[i]) + '</p>');
                         }
                     }, function() {
-                        console.log('directoryReader - fehler');
+                        $('#consolelog').append('<p>Fehler Directory Reader</p>');
                     });
-                }, function(error) {
-                    console.log(print_r(error));
-                });
-            }, null);
-            break;
-        case 'audioUeberpruefen':
-            var db = tphInitiateLocalStorage();
-            var returner = false;
-            // Überprüfen ob Orner & Dateien vorhanden sind
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(filesystem) {
-                var db = tphInitiateLocalStorage();
-                // Überprüfen ob Ordner vorhanden ist
-                filesystem.root.getDirectory('Hude', {create: false, exclusive: false}, function() {
-                    db.setItem('tphPlayer', false);
                 }, function() {
-                    db.setItem('tphPlayer', false);
+                    console.log('Fehler beim Auslesen von "Hude"');
+                    $('#consolelog').append('<p>Hude Zugriff fehlgeschlagen</p>');
                 });
+                break;
+            case 'auslesenAudio':
+                console.log('auslesenAudio');
                 filesystem.root.getDirectory('Hude/audio', {create: false, exclusive: false}, function(directory) {
-                    db.setItem('tphPlayer', false);
-                    // Überprüfen ob Dateien vorhanden sind
-                    var dateien = tphDownloadOrdnerDateien();
-                    // Directory initialisieren
+                    console.log('Ordner Hude auslesen:');
+                    // Directory reader initialisieren
                     var directoryReader = directory.createReader();
-                    // Ordner auslesen
+                    // Liste aller Einträge im Ordner ausgeben:
                     directoryReader.readEntries(function(entries) {
-                        db.setItem('tphPlayer', false);
-
-                        console.log('Anzahl der MP3s: ' + entries.length);
-                        // Array mit den URI zum Download der Dateien
-                        var dateien = tphDownloadOrdnerDateien();
-                        // Anzahl der Dateien im Array
-                        var anzahlDateien = dateien.length;
-                        // Anzahl der Dateien im Ordner 'Hude/audio'
-                        var anzahlEntries = entries.length;
-                        // Unterschied zwischen Dateien in Dateiliste und den Dateien auf dem Dateisystem
-                        if (anzahlDateien !== anzahlEntries) {
-                            if (anzahlDateien > anzahlEntries) {
-                                // Nicht alle MP3s wurden vom Server heruntergeladen
-                                console.log(anzahlDateien + ' > ' + anzahlEntries);
-                                $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">' + anzahlEntries + '</span>');
-                                $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateien + '</span>');
-                                // Im localStorage festhalten: nicht alle Dateien vorhanden
-                                db.setItem('tphPlayer', false);
-                                returner = false;
-                            }
-                        } else {
-                            // Im localStorage festhalten: alle Dateien vorhanden
-                            db.setItem('tphPlayer', true);
-                            // Informationen auf der Einstellungen-Seite über die heruntergeladenen Dateien
-                            $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">' + anzahlEntries + '</span>');
-                            $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateien + '</span>');
-                            returner = true;
+                        for (var i = 0; i < entries.length; i++) {
+                            console.log(entries[i].fullPath);
+                            $('#consolelog').append('<br/>' + entries[i].fullPath + '<br/>');
+                            console.log(entries[i].name);
+                            $('#consolelog').append('<br/>' + entries[i].name + '<br/>');
                         }
                     }, function() {
-                        console.log('directoryReader - fehler');
+                        $('#consolelog').append('<p>Fehler Directory Reader</p>');
                     });
-                    if (returner) {
-                        return returner;
-                    } else {
-                        return returner;
+                }, function() {
+                    console.log('Fehler beim Auslesen von "Hude/audio"');
+                    $('#consolelog').append('<p>Hude/audio Zugriff fehlgeschlagen</p>');
+                });
+                break;
+            case 'loeschen':
+                console.log('loeschen');
+                filesystem.root.getDirectory('Hude', {}, function(directory) {
+                    directory.removeRecursively(function(s) {
+                        console.log(print_r(s));
+                        $('#consolelog').append('<p>' + print_r(s) + '</p>');
+                    }, function(e) {
+                        console.log(print_r(e));
+                        $('#consolelog').append('<p>' + print_r(e) + '</p>');
+                    });
+                }, function() {
+                    $('#consolelog').append('<p>Zugriff Ordner Hude fehlgeschlagen</p>');
+                });
+                break;
+            case 'download':
+                filesystem.root.getDirectory('Hude', {create: true, exclusive: false}, function(directory) {
+                    var ft = new FileTransfer();
+                    var uri;
+                    var file;
+                    var downloadPfad;
+                    var pfad = directory.fullPath;
+                    var dateien = tphAudioDateien();
+                    var anzahlDateienGesamt = dateien.length;
+                    var tphStorage = tphLadeLocalStorage();
+                    // Zurücksetzen der Anzeige in den Einstellungen von bereits heruntergeladenen Dateien und der zu ladenen Dateien.
+                    $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">0</span>');
+                    $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + dateien.length + '</span>');
+                    // Download der Dateien starten
+                    for (var i = 0; i < dateien.length; i++) {
+                        uri = encodeURI(dateien[i]);
+                        file = tphDownloadPfad(uri);
+                        downloadPfad = pfad + '/' + file;
+                        // Funktion die den Fortschritt der Datei angibt
+                        ft.onprogress = function(progressEvent) {
+                            $('#tphDownloadStatus').html('<p id="tphDownloadStatus">Download wird ausgeführt ...</p>');
+                            if (progressEvent.lengthComputable) {
+                                var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+                                console.log(perc + '% geladen' + downloadPfad);
+                                $('#tphDownloadStatus').append('<p>' + print_r(progressEvent) + '</p>');
+                                if (progressEvent.loaded === progressEvent.total) {                                    
+                                    var anzahlHeruntergeladen = tphStorage.getItem('tphAudioDateienHeruntergeladen');
+                                    var anzahlDateien = tphAudioDateien().length;
+                                    console.log(anzahlHeruntergeladen);
+                                    if (anzahlHeruntergeladen < anzahlDateien) {
+                                        anzahlHeruntergeladen++;
+                                        tphSpeicherDateienHeruntergeladen(anzahlHeruntergeladen);
+                                        $('#tphAnzahlAudioHeruntergeladen').text(anzahlHeruntergeladen);   
+                                    }
+                                }
+                            } else {
+                                console.log('Kann Status nicht anzeigen - es wird geladen');
+                            }
+                        };
+                        // Funktion die den Download startet.
+                        ft.download(uri, downloadPfad,
+                                function(entry) {
+                                    $('#tphDownloadStatus').html('<p id="tphDownloadStatus">Download abgeschlossen</p>');
+                                    //console.log(print_r(entry));
+                                },
+                                function(error) {
+                                    $('#tphDownloadStatus').html('<p id="tphDownloadStatus"><strong style="color: red;">Fehler beim Download: ' + error.code + '</strong></p>');
+                                    console.log('Crap something went wrong...');
+                                });
+                    }
+                }, function(e) {
+                    console.log('Dateisystem fuckup' + print_r(e));
+                    $('#consolelog').append('<p>Dateisystem fuckup <br/>' + print_r(e) + '</p>');
+                });
+                break;
+            case 'audioVorhanden':
+                // Holt die eingestellte Sprache für Audio-Dateien
+                var tphSpracheAudio = tphHoleSpracheAudio();
+                // Annahme Audio-Datei ist nicht vorhanden
+                var tphAudioVorhanden = false;
+                // Variable für den Pfad zur Datei
+                var tphAudioPfad = 'Hude/audio/' + tphSpracheAudio + '/';
+                //alert('audioVorhanden ' + dateiname);
+                // Überprüfen ob Datei im Dateisystem vorhanden ist
+                filesystem.root.getDirectory(tphAudioPfad, {create: false, exclusive: false}, function(directory) {
+                    console.log('Ordner Hude auslesen: ' + tphAudioPfad);
+                    // Directory reader initialisieren
+                    var directoryReader = directory.createReader();
+                    // Liste aller Einträge im Ordner ausgeben:
+                    directoryReader.readEntries(function(entries) {
+                        for (var i = 0; i < entries.length; i++) {
+                            // Audio Datei vorhanden
+                            if (entries[i].name === dateiname) {
+                                // setzen der Variable auf true
+                                tphAudioVorhanden = 'true';
+                                tphAudioPfad = entries[i].fullPath;
+                                // Play-Button hinzufügen
+                                $('#tphPlayButton').html('<a id=\"tphPlayButton\" href=\"#\" onclick=\"tphAudioAbspielen(\'' + tphAudioPfad + '\')\"> \n\
+                                <img src=\"images/toolbar/icon-play.png\" /> \n\
+                            </a>');
+                                alert('Gefunden');
+                            } else {
+                            }
+                        }
+                    }, function() {
+                        $('#consolelog').append('<p>Fehler Directory Reader</p>');
+                    });
+                    if (tphAudioVorhanden === true || tphAudioVorhanden === 'true') {
+                        console.log(tphAudioPfad);
+                        $('#consolelog').append('<p>' + tphAudioPfad + '</p>');
                     }
                 }, function() {
-                    console.log('7');
-                    var anzahlDateien = tphDownloadOrdnerDateien();
-                    $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">0</span>');
-                    $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateien.length + '</span>');
+                    console.log('Fehler beim Auslesen von "Hude/audio"');
+                    $('#consolelog').append('<p>Hude/audio Zugriff fehlgeschlagen</p>');
                 });
-            }, null);
-            break;
-        default:
-            console.log('default:');
-            break;
-    }
-    /*
-     * Wird ausgeführt, wennn der Zugriff auf das Dateisystem gewährt wurde.
-     */
-    function tphErstelleOrdnerSuccessCallback(filesystem) {
-        console.log('Zugriff auf das Dateisystem? - Gewährt!');
-        console.log('Bereite Erstellen des Ordners vor.');
-        tphErstelleOrdner(filesystem);
-    }
-
-    /*
-     * Wird ausgeführt, wennn der Zugriff auf das Dateisystem fehlgeschlagen ist.
-     */
-    function tphErstelleOrdnerErrorCallback(error) {
-        console.log('Zugriff auf das Dateisystem? - Verweigert!');
-        console.log(print_r(error));
-    }
-    /*
-     * Erstellen des Ordners "Hude" auf dem Dateisystem
-     */
-    function tphErstelleOrdner(filesystem) {
-        filesystem.root.getDirectory('Hude', {create: true, exclusive: false}, tphErstelleOrdnerErstellenSuccessCallback, tphErstelleOrdnerErrorCallback);
-    }
-
-    function tphErstelleOrdnerErstellenSuccessCallback(directory) {
-        console.log('Ordner "Hude" wird erstellt! - Erfolgreich');
-    }
-
-    function tphErstelleOrdnerErrorCallback(error) {
-        console.log('tphErstelleOrdnerErrorCallback(error)');
-    }
-
-    function tphDownloadSuccessCallback(filesystem) {
-        filesystem.root.getDirectory('Hude', {create: true, exclusive: false}, tphDownloadOrdnerSuccessCallback, null);
-    }
-
-    function tphDownloadErrorCallback(error) {
-        console.log('#1');
-    }
-
-    function tphDownloadOrdnerSuccessCallback(directory) {
-        var ft = new FileTransfer();
-        var uri;
-        var file;
-        var downloadPfad;
-        var pfad = directory.fullPath;
-        var dateien = tphDownloadOrdnerDateien();
-        // Zurücksetzen der Anzeige in den Einstellungen von bereits heruntergeladenen Dateien und der zu ladenen Dateien.
-        $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">0</span>');
-        $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + dateien.length + '</span>');
-        // Download der Dateien starten
-        for (var i = 0; i < dateien.length; i++) {
-            uri = encodeURI(dateien[i]);
-            file = tphDownloadPfad(uri);
-            downloadPfad = pfad + '/' + file;
-            // Funktion die den Fortschritt der Datei angibt
-            ft.onprogress = function(progressEvent) {
-                $('#tphDownloadStatus').html('<p id="tphDownloadStatus">Download wird ausgeführt ...</p>');
-                if (progressEvent.lengthComputable) {
-                    var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-                    console.log(perc + '% geladen' + downloadPfad);
-                    $('#tphDownloadStatus').append('<p>' + print_r(progressEvent) + '</p>');
-                    if (progressEvent.loaded === progressEvent.total) {
-                        var tphAnzahlAudioBereitsGeladen = parseInt($('#tphAnzahlAudioBereitsGeladen').text()) + 1;
-                        $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">' + tphAnzahlAudioBereitsGeladen + '</span>');
-                    }
-                } else {
-                    console.log('Kann Status nicht anzeigen - es wird geladen');
-                }
-            };
-            // Funktion die den Download startet.
-            ft.download(uri, downloadPfad,
-                    function(entry) {
-                        $('#tphDownloadStatus').html('<p id="tphDownloadStatus">Download abgeschlossen</p>');
-                        //console.log(print_r(entry));
-                    },
-                    function(error) {
-                        $('#tphDownloadStatus').html('<p id="tphDownloadStatus"><strong style="color: red;">Fehler beim Download: ' + error.code + '</strong></p>');
-                        console.log('Crap something went wrong...');
-                    });
+                break;
+            default:
+                console.log('Mit der Option hat ewas nichte geklappt');
+                $('#consolelog').append('<p>Mit der Option hat ewas nichte geklappt</p>');
+                break;
         }
-    }
-
-    function tphLoescheOrdnerSuccessCallback(filesystem) {
-        console.log('tphLoescheOrdnerSuccessCallback(filesystem)');
-        filesystem.root.getDirectory('Hude', {}, tphLoescheOrdnerLoeschenSuccessCallback, tphLoescheOrdnerLoeschenErrorCallback);
-    }
-
-    function tphLoescheOrdnerErrorCallback(error) {
-        console.log('tphLoescheOrdnerErrorCallback(error)');
-    }
-
-    function tphLoescheOrdnerLoeschenSuccessCallback(directory) {
-        console.log('Funktion zum Löschen wird ausgeführt');
-        directory.removeRecursively(function(s) {
-            console.log(print_r(s));
-        }, function(e) {
-            console.log(print_r(e));
-        });
-        console.log('Funktion zum Löschen wurde ausgeführt');
-    }
-
-    function tphLoescheOrdnerLoeschenErrorCallback(error) {
-        console.log('tphLoescheOrdnerLoeschenErrorCallback(error)' + error.code);
-    }
-
-    function tphAuslesenOrdnerSuccessCallback(filesystem) {
-        filesystem.root.getDirectory('Hude/audio', {create: true, exclusive: false}, tphAuslesenOrdnerLesenSuccessCallback, tphAuslesenOrdnerLesenErrorCallback);
-    }
-
-    function tphAuslesenOrdnerErrorCallback(error) {
-        console.log('tphAuslesenOrdnerErrorCallback(error)');
-    }
-
-    function tphAuslesenOrdnerLesenSuccessCallback(directory) {
-        // Get a directory reader
-        var directoryReader = directory.createReader();
-        // Get a list of all the entries in the directory
-        directoryReader.readEntries(tphAuslesenOrdnerLesenDirReaderSuccessCallback, tphAuslesenOrdnerLesenDirReaderErrorCallback);
-    }
-
-    function tphAuslesenOrdnerLesenErrorCallback(error) {
-        console.log('tphAuslesenOrdnerLesenErrorCallback(error)');
-
-    }
-
-    function tphAuslesenOrdnerLesenDirReaderSuccessCallback(entries) {
-        for (var i = 0; i < entries.length; i++) {
-            console.log(i + ' ' + entries[i].name);
-        }
-    }
-
-    function tphAuslesenOrdnerLesenDirReaderErrorCallback(error) {
-        console.log('tphAuslesenOrdnerLesenDirReaderErrorCallback(error)');
-    }
+    }, function(e) {
+        console.log('Dateisystem fuckup' + print_r(e));
+        $('#consolelog').append('<p>Dateisystem fuckup <br/>' + print_r(e) + '</p>');
+    });
 }
-
-
+// 1111-940 = 171
