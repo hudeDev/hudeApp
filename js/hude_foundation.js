@@ -839,7 +839,7 @@ function tphHoleFotojagdBilderAusLocalStorage() {
             if (tphStorage.getItem($(this).attr('href')) === 'true') {
                 console.log('Bild true: ' + $(this).attr('href'));
                 var imgID = $(this).find('img').attr('id');
-                $('#' + imgID).hide();
+                //$('#' + imgID).hide();
                 $(this).attr('href', '');
                 // Anzahl der gefundenen Bilder für Ergebnis erhöhen
                 anzahlBilderGefunden++;
