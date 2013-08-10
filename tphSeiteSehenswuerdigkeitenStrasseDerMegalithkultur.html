@@ -16,26 +16,26 @@
                     <div class="row">
                         <!-- Kontrollelement: Abspielen -->
                         <div class="small-4 columns">
-                            <a href="#" onclick="tphZugriffDateisystem('audioAbspielen', 'hude-info.mp3');">
-                                <img src="images/player/tph_play.png" />
+                            <a id="tphPlayButton" href="#">
+                                <img src="images/toolbar/icon-play.png" />
                             </a>
                         </div>
                         <!-- Kontrollelement: Pause -->
                         <div class="small-4 columns">
-                            <a href="#" onclick="tphAudioPause();">
-                                <img src="images/player/tph_pause.png" />
+                            <a id="tphPauseButton" href="#" onclick="tphAudioPause();">
+                                <img src="images/toolbar/icon-pause.png" />
                             </a>
                         </div>
                         <!-- Kontrollelement: Stop -->
-                        <div class="small-4 columns">
+                        <div id="tphStopButton" class="small-4 columns">
                             <a href="#" onclick="tphAudioStoppen();">
-                                <img src="images/player/tph_stop.png" />
+                                <img src="images/toolbar/icon-stop.png" />
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="tphPlayerKeineDateien">
-                    <p>Sie habe keine Audio-Inhalte heruntergeladen. Dies können Sie in den Einstellungen nachholen. Dazu klicken Sie bitte <a href="#tphSeiteEinstellungen">hier</a> und wählen "Download starten".</p>
+                    <<p>Sie habe keine Audio-Inhalte heruntergeladen oder die von Ihnen gewählte Audio-Sprache ist noch nicht verfügbar. Haben Sie noch keine Audio-Inhalte heruntergeladen, können Sie dies in den Einstellungen nachholen. Dazu klicken Sie bitte <a href="#tphSeiteEinstellungen">hier</a> und wählen "Download starten".</p>
                 </div>
             </div>
         </div>
@@ -86,5 +86,6 @@
                                 $(function() {
                                     tphHeaderUberschriftAendern('Überschrift');
                                     tphSetzeEinstellungenAufSeite();
+                                    tphDateisystem('audioVorhanden', 'strassedermegalithkultur.mp3');
                                 });
 </script>

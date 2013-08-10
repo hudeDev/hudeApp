@@ -106,7 +106,7 @@
   init : false
         -->
         <div id="tphHeader" class="fixed">
-            <nav class="top-bar" data-options="custom_back_text:true;back_text:Zurück;is_hover:false;">
+            <nav class="top-bar" data-options="custom_back_text:true;back_text:Zurück;is_hover:false; enable:mobile only">
                 <ul class="title-area">
                     <!-- Title Area -->
                     <li class="name">
@@ -243,7 +243,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#tphSeiteSehenswuerdigkeitenArtesischerBrunnen">
+                                            <a href="#tphSeiteSehenswuerdigkeitenVielstedterBauernhaus">
                                                 <span class="tphSpracheDE">Vielstedter Bauernhaus</span> <!-- auf deutsch -->
                                                 <span class="tphSpracheEN">Vielstedter farmhouse</span> <!-- auf englisch -->
                                                 <span class="tphSprachePD">Vielstedter Buurhuus</span> <!-- auf plattdeutsch -->
@@ -424,34 +424,36 @@
         </div>
         <div class="tphContent">
             <br/>
-            <div class="row">
-                <div class="large-4 small-4 columns"><a href="#tphSeiteHudeInfo"><img src="images/icons_hude_info.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#tphSeiteSehenswuerdigkeiten"><img src="images/icons_hude_sehenswuerdigkeiten.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#tphSeiteUnterkuenfte"><img src="images/icons_hude_unterkuenfte.png" /></a></div>
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                <div class="large-4 small-4 columns"><a href="#tphSeiteGastronomie"><img src="images/icons_hude_gastronomie.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#tphSeiteECAutomaten"><img src="images/icons_hude_automaten.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#tphSeiteEinkaufen"><img src="images/icons_hude_einkaufen.png" /></a></div>
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                <div class="large-4 small-4 columns"><a href="#tphSeiteParkmoeglichkeiten"><img src="images/icons_hude_parken.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#tphSeiteGesundheit"><img src="images/icons_hude_gesundheit.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#tphSeiteVeranstaltungen"><img src="images/icons_hude_veranstaltungen.png" /></a></div>
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                <div class="large-4 small-4 columns"><a href="#tphSeiteHudePerfekt"><img src="images/icons_hude_perfekt.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#tphSeiteSchnitzeljagd"><img src="images/icons_hude_schnitzeljagd.png" /></a></div>
-                <div class="large-4 small-4 columns"><a href="#tphSeiteSpielplaetze"><img src="images/icons_hude_perfekt.png" /></a></div>
+            <div class="tphDashboard">
+                <div class="row">
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteHudeInfo"><img src="images/icons_hude_info.png" /></a></div>
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteSehenswuerdigkeiten"><img src="images/icons_hude_sehenswuerdigkeiten.png" /></a></div>
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteUnterkuenfte"><img src="images/icons_hude_unterkuenfte.png" /></a></div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteGastronomie"><img src="images/icons_hude_gastronomie.png" /></a></div>
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteECAutomaten"><img src="images/icons_hude_automaten.png" /></a></div>
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteEinkaufen"><img src="images/icons_hude_einkaufen.png" /></a></div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteParkmoeglichkeiten"><img src="images/icons_hude_parken.png" /></a></div>
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteGesundheit"><img src="images/icons_hude_gesundheit.png" /></a></div>
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteVeranstaltungen"><img src="images/icons_hude_veranstaltungen.png" /></a></div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteHudePerfekt"><img src="images/icons_hude_perfekt.png" /></a></div>
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteSchnitzeljagd"><img src="images/icons_hude_schnitzeljagd.png" /></a></div>
+                    <div class="large-4 small-4 columns"><a href="#tphSeiteSpielplaetze"><img src="images/icons_hude_perfekt.png" /></a></div>
+                </div>
             </div>
         </div>
         <div class="row" id="puffer">
@@ -459,7 +461,7 @@
         </div>
         <div class="tphFooter">
             <div class="row tphFooter">
-                <div class="large-3 small-3 columns"><a href="tphSeiteIndex.html"><img width="32" height="32" src="images/toolbar/icon-home.png" /></a></div>
+                <div class="large-3 small-3 columns"><a href="#tphDashboard"><img width="32" height="32" src="images/toolbar/icon-home.png" /></a></div>
                 <div class="large-3 small-3 columns"><a href="#" onclick="tphQRCodeScan();"><img width="32" height="32"  src="images/toolbar/icon-qr.png" /></a></div>
                 <div class="large-3 small-3 columns"><a href="#tphSeitePosition"><img width="32" height="32"  src="images/toolbar/icon-location.png" /></a></div>
                 <div class="large-3 small-3 columns"><a href="#tphSeiteEinstellungen"><img width="32" height="32"  src="images/toolbar/icon-einstellungen.png" /></a></div>
@@ -500,21 +502,21 @@
                 // hash and adds the class "selected" to any matching nav link.
                 $(window).hashchange(function() {
                     var hash = location.hash;
-                    // var datei;
-
                     if (hash !== '#tphSeiteIndex') {
                         hash = (hash.replace(/^#/, '') || 'blank') + '.';
                         var datei = hash + 'html';
+                        if (hash !== 'blank.') {
+                            tphAudioStoppen();
+                        }
                         $('.tphContent').load(datei);
                     }
-                    //$('.tphFooter').load('_footer.html');
                 });
 
                 // Since the event is only triggered when the hash changes, we need to trigger
                 // the event now, to handle the hash the page may have loaded with.
                 $(window).hashchange();
                 tphSetzeEinstellungenAufSeite();
-                $('#puffer').css('height', Math.round($('nav').height() * 1.2));
+
             });
         </script>
 

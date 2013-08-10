@@ -5,8 +5,8 @@ function tphAppStart() {
     // Überprüfen ob die App zum ersten Mal startet
     var tphErsterStart = tphStorage.getItem('tphErsterStart'); // Enthält den Zeitstempel des ersten Starts
     if (tphErsterStart === null) {
-        // App startet zum ersten Mal
-        // Zeit des ersten Starts festlegen
+// App startet zum ersten Mal
+// Zeit des ersten Starts festlegen
         tphStorage.setItem('tphErsterStart', new Date().getTime());
         // Einstellen der Sprache auf deutsch
         tphStorage.setItem('tphSprache', 'de');
@@ -14,6 +14,9 @@ function tphAppStart() {
         tphStorage.setItem('tphSpracheAudio', 'de');
         // Schriftgroesse auf normal setzen
         tphStorage.setItem('tphSchriftgroesse', 'normal');
+        // Größe der Schriftgröße 'normal'
+        var tphSchriftgroesseNormal = parseInt($('.tphContent').css('font-size'));
+        tphStorage.setItem('tphSchriftgroesseNormal', tphSchriftgroesseNormal);
         // Zielgruppeneinstellungen auf 'keine Angabe' einstellen
         tphStorage.setItem('tphZielgruppe', 'keine');
         // Anzahl der Audio-Dateien, die heruntergeladen wurden.
@@ -27,7 +30,6 @@ function tphAppStart() {
 var audio = null;
 var audioTimer = null;
 var pausePos = 0;
-
 // Spielt die Audio-Datei ab
 function tphAudioAbspielen(file) {
     console.log(file);
@@ -37,15 +39,12 @@ function tphAudioAbspielen(file) {
         alert('code: ' + error.code + '\n' +
                 'message: ' + error.message + '\n');
     });
-
     // get audio duration
     var duration = audio.getDuration();
     //$('#tphAudioDauer').html('<span id="tphAudioDauer">' + duration + '</span>');
     // play audio
     audio.play();
-
     audio.seekTo(pausePos * 1000);
-
     // update audio position every second
     if (audioTimer === null) {
         audioTimer = setInterval(function() {
@@ -158,7 +157,7 @@ function tphEinstellungenUeberwacher() {
 
 // Generiert den Pfad für das GoogleMaps Bild
 function tphGoogleMapsBildMitMarker(lat, lon, zoom, elementID) {
-    // Latitude & Longitude zu einer Koordiate zusammenfassen
+// Latitude & Longitude zu einer Koordiate zusammenfassen
     var koordinaten = lat + ',' + lon;
     // Größe des Bildes errechnen
     var breite = $(window).width() * 0.9;
@@ -168,10 +167,10 @@ function tphGoogleMapsBildMitMarker(lat, lon, zoom, elementID) {
     var bildpfad = 'https://maps.googleapis.com/maps/api/staticmap?center=' + koordinaten + '&zoom=' + zoom + '&size=' + abmessung + '&markers=color:red||' + koordinaten + '&sensor=false';
     // Bild in den Quellcode einfügen
     if (elementID !== null) {
-        //$('#' + elementID).html('<div id="' + elementID + '" class="tphGoogleMapsBild" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
+//$('#' + elementID).html('<div id="' + elementID + '" class="tphGoogleMapsBild" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
         $('#' + elementID).append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
     } else {
-        //$('.tphGoogleMapsBild').html('<div class="tphGoogleMapsBild" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
+//$('.tphGoogleMapsBild').html('<div class="tphGoogleMapsBild" style="text-align: center;"><img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" /></div>');
         $('.tphGoogleMapsBild').append('<img src="' + bildpfad + '" width="' + breite + '" height="' + hoehe + '" />');
     }
     return bildpfad;
@@ -188,11 +187,11 @@ function tphGPSAbstand(lat1, lon1, lat2, lon2) {
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
     if (d > 1) {
-        //return false; // Entfernung = Kilometer
+//return false; // Entfernung = Kilometer
         return Math.round(d) + "km";
     }
     if (d <= 1) {
-        // Meter berechnend
+// Meter berechnend
         d = Math.round(d * 1000);
         // Erlaubte Distanz zum OBjekt
         var tphErlaubteDistanz = 100;
@@ -201,7 +200,7 @@ function tphGPSAbstand(lat1, lon1, lat2, lon2) {
         if (d <= tphErlaubteDistanz) {
             return true;
         } else {
-            // Entfernung vom Objekt größer als die erlaubte Distanz
+// Entfernung vom Objekt größer als die erlaubte Distanz
             return d;
         }
     }
@@ -224,6 +223,13 @@ function tphHoleSchriftgroesse() {
     console.log('tphHoleSchriftgroesse');
     var tphStorage = tphLadeLocalStorage();
     return tphStorage.getItem('tphSchriftgroesse');
+}
+
+// Lädt die normale Schriftgröße vom ersten Start
+function tphHoleSchriftgroesseNormal() {
+    console.log('tphHoleSchriftgroesseNormal');
+    var tphStorage = tphLadeLocalStorage();
+    return tphStorage.getItem('tphSchriftgroesseNormal');
 }
 
 // Lädt die Sprache aus dem localStorage
@@ -415,13 +421,10 @@ function tphLocalStorageAuselsen() {
 function tphNutzeGPS(option, latImg, lonImg, imgID) {
     var lat;
     var lon;
-
     navigator.geolocation.getCurrentPosition(tphNutzeGPSSuccess, tphNutzeGPSError, {maximumAge: 0, timeout: 15000, enableHighAccuracy: true});
-
     function tphNutzeGPSSuccess(position) {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
-
         if (Connection.ETHERNET || Connection.WIFI || Connection.CELL_3G || Connection.CELL_4G) {
             $('.tphGoogleMapsKarte').css('height', $(window).height() * 0.9);
             $('.tphGoogleMapsKarte').css('width', $(window).width() * 0.9);
@@ -675,12 +678,16 @@ function tphSchnitzeljagdPlanetenlehrpfadAbiturC() {
 
 // Setzt die Einstellungen in der Einstellungsseite
 function tphSetzeEinstellungenAufSeite() {
-    console.log($('#tphPlayer').is(":visible"));
-    console.log($('.tphPlayerControl').is(":visible"));
-    console.log($('.tphPlayerKeineDateien').is(":visible"));
-    console.log($('.tphSpracheDE').is(':visible'));
     var tphSprache = tphHoleSprache();
     var tphZielgruppe = tphHoleZielgruppe();
+    var tphSchriftgroesse = tphHoleSchriftgroesse();
+    var tphSchriftgroesseNormal = tphHoleSchriftgroesseNormal();
+
+//
+
+    $('#puffer').css('height', Math.round($('nav').height() * 1.2));
+//
+
     // Zeigt nur den Text auf deutsch an
     if (tphSprache === 'de') {
         $('.tphSpracheDE').show();
@@ -693,7 +700,7 @@ function tphSetzeEinstellungenAufSeite() {
         $('.tphSpracheEN').show();
         $('.tphSprachePD').hide();
     }
-    // Zeigt nur den Text auf plattdeutsch an
+// Zeigt nur den Text auf plattdeutsch an
     if (tphSprache === 'pd') {
         $('.tphSpracheDE').hide();
         $('.tphSpracheEN').hide();
@@ -718,6 +725,22 @@ function tphSetzeEinstellungenAufSeite() {
         $('.tphZielgruppeBestager').show();
     }
 
+    if (tphSchriftgroesse === 'normal') {
+        tphSchriftgroesseNormal += 'px';
+        $('.tphContent').css('font-size', tphSchriftgroesseNormal);
+    }
+    if (tphSchriftgroesse === 'mittel') {
+        tphSchriftgroesseMittel = parseInt(tphSchriftgroesseNormal) + 2;
+        tphSchriftgroesseMittel += 'px';
+        $('.tphContent').css('font-size', tphSchriftgroesseMittel);
+    }
+    if (tphSchriftgroesse === 'gross') {
+        tphSchriftgroesseGross = parseInt(tphSchriftgroesseNormal) + 4;
+        tphSchriftgroesseGross += 'px';
+        $('.tphContent').css('font-size', tphSchriftgroesseGross);
+    }
+    $('.tphDashboard').css('font-size', tphSchriftgroesseNormal);
+
     // Zurück-Button ermöglichen
     $('a.back').click(function() {
         parent.history.back();
@@ -740,16 +763,15 @@ function tphSetzeEinstellungenAufSeite() {
             }
         });
     });
-
-
     tphHoleFotojagdBilderAusLocalStorage();
     tphSpeicherFotojagdBilderImLocalStorage();
-
     // Zum Seitenanfang springen
     $(window).scrollTop(0);
-
     // Schließt Navigations-Panel nach dem Laden einer Seite
     $('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
+
+    console.log('CONTENT: ' + $('.tphContent').css('font-size'));
+    console.log('DASH: ' + $('.tphDashboard').css('font-size'));
 }
 
 function tphHoleGPSAusBild(imgID) {
@@ -790,9 +812,9 @@ function tphSpeicherFotojagdBilderImLocalStorage() {
     var tphStorage = tphLadeLocalStorage();
     // Link des Ankers == Bildpfad als Index benutzen
     $('a:has(img)').each(function() {
-        // Wenn der Anker die Klasse 'fotojagd' enthält
+// Wenn der Anker die Klasse 'fotojagd' enthält
         if ($(this).hasClass('fotojagd')) {
-            // Und dieser noch nicht noch nicht im localStorage gesetzt ist
+// Und dieser noch nicht noch nicht im localStorage gesetzt ist
             if (tphStorage.getItem($(this).attr('href')) === null) {
                 /* 
                  * Wird dieser im localStorage als false (nicht gefunden) 
@@ -811,8 +833,8 @@ function tphSpeicherFotojagdBilderImLocalStorage() {
  * @returns {undefined}
  */
 function tphHoleFotojagdBilderAusLocalStorage() {
-    // Bilder die als Parent einen Link mit der Klasse 'fotojagd' werden geladen
-    // LocalStorage initialisieren
+// Bilder die als Parent einen Link mit der Klasse 'fotojagd' werden geladen
+// LocalStorage initialisieren
     var tphStorage = tphLadeLocalStorage();
     /* Bilder der Schnitzeljagd auf Seite heraussuchen, dazu nur Bilder 
      * verwenden, die Kind eines Ankers mit der Klasse 'fotojagd'
@@ -820,9 +842,9 @@ function tphHoleFotojagdBilderAusLocalStorage() {
     var anzahlBilderInsgesamt = 0;
     var anzahlBilderGefunden = 0;
     $('a:has(img)').each(function() {
-        // Wenn der Anker die Klasse 'fotojagd' enthält
+// Wenn der Anker die Klasse 'fotojagd' enthält
         if ($(this).hasClass('fotojagd')) {
-            // Ist dieser Wert true  (gefunden) oder nicht
+// Ist dieser Wert true  (gefunden) oder nicht
             console.log('Aktuelle Bild: ' + $(this).attr('href'));
             console.log(anzahlBilderGefunden + '/' + anzahlBilderInsgesamt);
             if (tphStorage.getItem($(this).attr('href')) === 'true') {
@@ -836,7 +858,7 @@ function tphHoleFotojagdBilderAusLocalStorage() {
                 anzahlBilderInsgesamt++;
                 console.log(anzahlBilderGefunden + '/' + anzahlBilderInsgesamt);
             } else {
-                // Anzahl der Bilder insgesamt für Ergebnis erhöhen
+// Anzahl der Bilder insgesamt für Ergebnis erhöhen
                 anzahlBilderInsgesamt++;
             }
         }
@@ -851,8 +873,8 @@ function tphHoleFotojagdBilderAusLocalStorage() {
  * @returns {undefined}
  */
 function tphSetzeFotojagdBilderAufNichtGefunden() {
-    // Bilder die als Parent einen Link mit der Klasse 'fotojagd' werden geladen
-    // LocalStorage initialisieren
+// Bilder die als Parent einen Link mit der Klasse 'fotojagd' werden geladen
+// LocalStorage initialisieren
     var tphStorage = tphLadeLocalStorage();
     /* Bilder der Schnitzeljagd auf Seite heraussuchen, dazu nur Bilder 
      * verwenden, die Kind eines Ankers mit der Klasse 'fotojagd'
@@ -860,9 +882,9 @@ function tphSetzeFotojagdBilderAufNichtGefunden() {
     var anzahlBilderInsgesamt = 0;
     var anzahlBilderGefunden = 0;
     $('a:has(img)').each(function() {
-        // Wenn der Anker die Klasse 'fotojagd' enthält
+// Wenn der Anker die Klasse 'fotojagd' enthält
         if ($(this).hasClass('fotojagd')) {
-            // Ist dieser Wert true  (gefunden) oder nicht
+// Ist dieser Wert true  (gefunden) oder nicht
             tphStorage.setItem($(this).attr('href'), false);
             $('#tphSchnitzeljagdFotojagdErgebnis').html('<div id="tphSchnitzeljagdFotojagdErgebnis">Bereits gefunden: ' + anzahlBilderGefunden + '/' + anzahlBilderInsgesamt + ' Bildern und deren Position!</div>');
         }
@@ -877,7 +899,8 @@ function tphSpeicherDateienHeruntergeladen(anzahl) {
 // Speichert die Schriftgroesse im localStorage
 function tphSpeicherSchriftgroesse(tphSchriftgroesse) {
     console.log(tphSchriftgroesse);
-    // normal, mittel, gross     var tphStorage = tphLadeLocalStorage();
+    // normal, mittel, gross     
+    var tphStorage = tphLadeLocalStorage();
     tphStorage.setItem('tphSchriftgroesse', tphSchriftgroesse);
 }
 
@@ -1056,7 +1079,7 @@ function tphDateisystem(option, dateiname) {
                             if (progressEvent.lengthComputable) {
                                 var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
                                 console.log(perc + '% geladen' + downloadPfad);
-                                $('#tphDownloadStatus').append('<p>' + print_r(progressEvent) + '</p>');
+                                $('#tphDownloadStatus').text('<p><strong>' + (Math.floor(progressEvent.loaded / progressEvent.total * 100)) + '</strong></p>');
                                 if (progressEvent.loaded === progressEvent.total) {
                                     var anzahlHeruntergeladen = tphStorage.getItem('tphAudioDateienHeruntergeladen');
                                     var anzahlDateien = tphAudioDateien().length;
@@ -1105,19 +1128,18 @@ function tphDateisystem(option, dateiname) {
                     // Liste aller Einträge im Ordner ausgeben:
                     directoryReader.readEntries(function(entries) {
                         for (var i = 0; i < entries.length; i++) {
-                            // Audio Datei vorhanden
+// Audio Datei vorhanden
                             if (entries[i].name === dateiname) {
-                                // setzen der Variable auf true
+// setzen der Variable auf true
                                 tphAudioVorhanden = 'true';
                                 tphAudioPfad = entries[i].fullPath;
                                 // Play-Button hinzufügen
                                 $('#tphPlayButton').html('<a id=\"tphPlayButton\" href=\"#\" onclick=\"tphAudioAbspielen(\'' + tphAudioPfad + '\')\"> \n\
                                 <img src=\"images/toolbar/icon-play.png\" /> \n\
                            </a>');
-                                $('.tphPlayerControl').append('funny story');
                                 $('.tphPlayerControl').show();
                                 $('.tphPlayerKeineDateien').hide();
-                                //alert('Gefunden');
+                                alert('Gefunden');
                             } else {
                             }
                         }
@@ -1143,4 +1165,18 @@ function tphDateisystem(option, dateiname) {
         $('#consolelog').append('<p>Dateisystem fuckup <br/>' + print_r(e) + '</p>');
     });
 }
+
+String.prototype.fileExists = function() {
+    filename = this.trim();
+
+    var response = jQuery.ajax({
+        url: filename,
+        type: 'HEAD',
+        async: false
+    }).status;
+
+    return (response != "200") ? false : true;
+}
+
+
 // 1111-940 = 171
