@@ -16,20 +16,20 @@
                     <div class="row">
                         <!-- Kontrollelement: Abspielen -->
                         <div class="small-4 columns">
-                            <a href="#" onclick="tphZugriffDateisystem('audioAbspielen', 'hude-info.mp3');">
-                                <img src="images/player/tph_play.png" />
+                            <a id="tphPlayButton" href="#">
+                                <img src="images/toolbar/icon-play.png" />
                             </a>
                         </div>
                         <!-- Kontrollelement: Pause -->
                         <div class="small-4 columns">
-                            <a href="#" onclick="tphAudioPause();">
-                                <img src="images/player/tph_pause.png" />
+                            <a id="tphPauseButton" href="#" onclick="tphAudioPause();">
+                                <img src="images/toolbar/icon-pause.png" />
                             </a>
                         </div>
                         <!-- Kontrollelement: Stop -->
-                        <div class="small-4 columns">
+                        <div id="tphStopButton" class="small-4 columns">
                             <a href="#" onclick="tphAudioStoppen();">
-                                <img src="images/player/tph_stop.png" />
+                                <img src="images/toolbar/icon-stop.png" />
                             </a>
                         </div>
                     </div>
@@ -404,6 +404,7 @@
     $(function() {
         tphHeaderUberschriftAendern('Klosterbezirk');
         tphSetzeEinstellungenAufSeite();
+        tphDateisystem('audioVorhanden', 'klosterbezirk.mp3');
     });
 </script>
 

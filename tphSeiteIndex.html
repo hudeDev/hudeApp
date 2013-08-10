@@ -27,14 +27,14 @@
         <script src="js/binaryajax.js"></script>
         <script src="js/exif.js"></script>
 
-        
+
         <script>
             document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
                 tphAppStart();
                 document.addEventListener("backbutton", function(event) {
-                    //parent.history.back();
-                    event.preventDefault();
+                    parent.history.back();
+                    //event.preventDefault();
                 }, false);
             }
         </script>
@@ -42,14 +42,15 @@
             * {
                 margin: 0;
             }
-            html, body {
-                /* height: 100%; */
+            body {
+                padding-top: 0;
             }
             .tphContent {
                 /* margin-bottom: 20px; */
             }
             .tphFooter {
-                background-color: black;
+                /* background-color: black; */
+                background-color: #fff;
                 position: fixed;
                 bottom: 0px;
                 left: 0px;
@@ -58,6 +59,8 @@
             /* Überschrift */
             #tphHeaderUeberschrift {
                 color: white;
+                background-color: #008A7E;
+                padding-top: 0;
             }
 
             table {
@@ -70,14 +73,26 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
-            .large .button .expand {
-                background-color: red;
+            .top-bar {
+                background-color: #008A7E;
             }
-
-            .tphKlappmenu {
-                background-color: red;
+            .top-bar-section ul {
+                background-color: #008A7E;
             }
-
+            .top-bar-section li a:not(.button) {
+                background-color: #008A7E;
+            }
+            .top-bar-section ul li.hover > a {
+                background: none repeat scroll 0 0 #008A7E;
+                color: white;
+            }
+            .top-bar.expanded .toggle-topbar a {
+                color: #fff;
+            }
+            img.tphTitelBild {
+                display: block;
+                margin: auto;
+            }
         </style>
     </head>
     <body>
@@ -98,7 +113,7 @@
                         <h1 id="tphHeaderUeberschrift">Hude</h1>
                     </li>
                     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-                    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+                    <li class="toggle-topbar menu-icon"><a id="tphMenu" href="#"><span>Menu</span></a></li>
                 </ul>
                 <section class="top-bar-section">
                     <!-- Left Nav Section -->
@@ -408,6 +423,7 @@
             </nav>
         </div>
         <div class="tphContent">
+            <br/>
             <div class="row">
                 <div class="large-4 small-4 columns"><a href="#tphSeiteHudeInfo"><img src="images/icons_hude_info.png" /></a></div>
                 <div class="large-4 small-4 columns"><a href="#tphSeiteSehenswuerdigkeiten"><img src="images/icons_hude_sehenswuerdigkeiten.png" /></a></div>

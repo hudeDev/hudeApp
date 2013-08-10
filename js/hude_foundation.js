@@ -679,8 +679,6 @@ function tphSetzeEinstellungenAufSeite() {
     console.log($('.tphPlayerControl').is(":visible"));
     console.log($('.tphPlayerKeineDateien').is(":visible"));
     console.log($('.tphSpracheDE').is(':visible'));
-    console.log($('.tphPlayerControl').toggle());
-    console.log($('.tphPlayerKeineDateien').toggle());
     var tphSprache = tphHoleSprache();
     var tphZielgruppe = tphHoleZielgruppe();
     // Zeigt nur den Text auf deutsch an
@@ -720,13 +718,6 @@ function tphSetzeEinstellungenAufSeite() {
         $('.tphZielgruppeBestager').show();
     }
 
-//    if (tphAudioPlayer === 'false' || tphAudioPlayer === false) {
-//        $('.tphPlayerControl').hide();
-//        $('.tphPlayerKeineDateien').show();
-//    } else {
-//        $('.tphPlayerControl').show();
-//        $('.tphPlayerKeineDateien').hide();
-//    }
     // Zurück-Button ermöglichen
     $('a.back').click(function() {
         parent.history.back();
@@ -749,7 +740,7 @@ function tphSetzeEinstellungenAufSeite() {
             }
         });
     });
-    
+
 
     tphHoleFotojagdBilderAusLocalStorage();
     tphSpeicherFotojagdBilderImLocalStorage();
@@ -757,10 +748,8 @@ function tphSetzeEinstellungenAufSeite() {
     // Zum Seitenanfang springen
     $(window).scrollTop(0);
 
-    // Panel nach klick minimieren
-    if ($('nav').hasClass('expanded')) {
-        $('nav').removeClass('expanded');
-    }
+    // Schließt Navigations-Panel nach dem Laden einer Seite
+    $('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
 }
 
 function tphHoleGPSAusBild(imgID) {
@@ -979,7 +968,9 @@ function tphDateisystem(option, dateiname) {
                 filesystem.root.getDirectory('Hude', {create: true, exclusive: false}, function() {
                     console.log('Ordner wurde erstellt!');
                     $('#consolelog').append('<p>Ordner wurde erstellt!</p>');
-                    filesystem.root.getDirectory('audio', {create: true, exclusive: false}, function() {}, function() {});
+                    filesystem.root.getDirectory('audio', {create: true, exclusive: false}, function() {
+                    }, function() {
+                    });
                 }, function() {
                     console.log('Beim erstellen des Ordners ist ein Fehler aufgetreten');
                     $('#consolelog').append('<p>Beim erstellen des Ordners ist ein Fehler aufgetreten</p>');
@@ -1066,14 +1057,14 @@ function tphDateisystem(option, dateiname) {
                                 var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
                                 console.log(perc + '% geladen' + downloadPfad);
                                 $('#tphDownloadStatus').append('<p>' + print_r(progressEvent) + '</p>');
-                                if (progressEvent.loaded === progressEvent.total) {                                    
+                                if (progressEvent.loaded === progressEvent.total) {
                                     var anzahlHeruntergeladen = tphStorage.getItem('tphAudioDateienHeruntergeladen');
                                     var anzahlDateien = tphAudioDateien().length;
                                     console.log(anzahlHeruntergeladen);
                                     if (anzahlHeruntergeladen < anzahlDateien) {
                                         anzahlHeruntergeladen++;
                                         tphSpeicherDateienHeruntergeladen(anzahlHeruntergeladen);
-                                        $('#tphAnzahlAudioHeruntergeladen').text(anzahlHeruntergeladen);   
+                                        $('#tphAnzahlAudioHeruntergeladen').text(anzahlHeruntergeladen);
                                     }
                                 }
                             } else {
@@ -1105,6 +1096,8 @@ function tphDateisystem(option, dateiname) {
                 var tphAudioPfad = 'Hude/audio/' + tphSpracheAudio + '/';
                 //alert('audioVorhanden ' + dateiname);
                 // Überprüfen ob Datei im Dateisystem vorhanden ist
+                $('.tphPlayerControl').hide();
+                $('.tphPlayerKeineDateien').show();
                 filesystem.root.getDirectory(tphAudioPfad, {create: false, exclusive: false}, function(directory) {
                     console.log('Ordner Hude auslesen: ' + tphAudioPfad);
                     // Directory reader initialisieren
@@ -1120,8 +1113,11 @@ function tphDateisystem(option, dateiname) {
                                 // Play-Button hinzufügen
                                 $('#tphPlayButton').html('<a id=\"tphPlayButton\" href=\"#\" onclick=\"tphAudioAbspielen(\'' + tphAudioPfad + '\')\"> \n\
                                 <img src=\"images/toolbar/icon-play.png\" /> \n\
-                            </a>');
-                                alert('Gefunden');
+                           </a>');
+                                $('.tphPlayerControl').append('funny story');
+                                $('.tphPlayerControl').show();
+                                $('.tphPlayerKeineDateien').hide();
+                                //alert('Gefunden');
                             } else {
                             }
                         }
