@@ -682,7 +682,6 @@ function tphSetzeEinstellungenAufSeite() {
     var tphZielgruppe = tphHoleZielgruppe();
     var tphSchriftgroesse = tphHoleSchriftgroesse();
     var tphSchriftgroesseNormal = tphHoleSchriftgroesseNormal();
-
 //
 
     $('#puffer').css('height', Math.round($('nav').height() * 1.2));
@@ -740,7 +739,6 @@ function tphSetzeEinstellungenAufSeite() {
         $('.tphContent').css('font-size', tphSchriftgroesseGross);
     }
     $('.tphDashboard').css('font-size', tphSchriftgroesseNormal);
-
     // Zurück-Button ermöglichen
     $('a.back').click(function() {
         parent.history.back();
@@ -769,30 +767,31 @@ function tphSetzeEinstellungenAufSeite() {
     $(window).scrollTop(0);
     // Schließt Navigations-Panel nach dem Laden einer Seite
     $('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
-
-    console.log('CONTENT: ' + $('.tphContent').css('font-size'));
-    console.log('DASH: ' + $('.tphDashboard').css('font-size'));
 }
 
 function tphHoleGPSAusBild(imgID) {
     alert('tphHoleGPSAusBild');
     var image = document.getElementById(imgID);
     var bildAnchor = EXIF.getData(image, function() {
-        try {
-            alert('TRY');
-            // GPS-Daten aus dem Bild auslesen
-            var latFotojagd = EXIF.getTag(this, "GPSLatitude");
-            var lonFotojagd = EXIF.getTag(this, "GPSLongitude");
-        } catch (e) {
-            alert('FEHLER: ' + e);
-        }
-        alert('aus dem try raus');
+        alert('TRY');
+        // GPS-Daten aus dem Bild auslesen
+        var latFotojagd = EXIF.getTag(this, "GPSLatitude");
+        var lonFotojagd = EXIF.getTag(this, "GPSLongitude");
+        $('#tphNormal').text(latFotojagd + ' / ' + lonFotojagd);
         // GPS-Daten von Grad, Minute, Sekunde ins Dezimale umrechnen
         latFotojagd = tphConvertDMStoDec(latFotojagd);
+        console.log(latFotojagd);
         lonFotojagd = tphConvertDMStoDec(lonFotojagd);
+        console.log(lonFotojagd);
         //console.log(latFotojagd + 'xxx ' + lonFotojagd);
         tphNutzeGPS('tphFotojagd', latFotojagd, lonFotojagd, imgID);
     });
+}
+
+function tphHolseGPSAusBildJquery(imgID) {
+    lonFotojagd = $('#' + imgID).exif("GPSLongitude");
+    latFotojagd = $('#' + imgID).exif("GPSLatitude");
+    $('#tphJquery').text(latFotojagd + ' / ' + lonFotojagd);
 }
 
 function tphSetzeFotojagdBildGefundenLocalStorage(imgSrc) {
@@ -1168,13 +1167,11 @@ function tphDateisystem(option, dateiname) {
 
 String.prototype.fileExists = function() {
     filename = this.trim();
-
     var response = jQuery.ajax({
         url: filename,
         type: 'HEAD',
         async: false
     }).status;
-
     return (response != "200") ? false : true;
 }
 
