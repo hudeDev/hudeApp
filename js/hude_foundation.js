@@ -210,12 +210,39 @@ function tphGPSAbstand(lat1, lon1, lat2, lon2) {
 function tphHeaderUberschriftAendern(neueUeberschrift) {
     $('#tphHeaderUeberschrift').text(neueUeberschrift);
     tphSetzeEinstellungenAufSeite();
+    tphVersteckeOS();
 }
 
 function tphHoleAudioDateienHeruntergeladen() {
     console.log('tphHoleAudioDateienHeruntergeladen');
     var tphStorage = tphLadeLocalStorage();
     return tphStorage.getItem('tphAudioDateienHeruntergeladen');
+}
+
+// Holt das Betriebssystem des Geräts
+function tphHoleOS() {
+    var OSName = "Unknown OS";
+    if (navigator.appVersion.indexOf("Win") !== -1)
+        OSName = "Windows";
+    if (navigator.appVersion.indexOf("Mac") !== -1)
+        OSName = "MacOS";
+    if (navigator.appVersion.indexOf("X11") !== -1)
+        OSName = "UNIX";
+    if (navigator.appVersion.indexOf("Linux") !== -1)
+        OSName = "Linux";
+    return OSName;
+}
+
+function tphVersteckeOS() {
+    var tphOS = tphHoleOS();
+    if (tphOS === 'Linux')
+        $('.tphVersteckeAndroid').hide();
+    if (tphOS === 'MacOS')
+        $('.tphVersteckeiOS').hide();
+    if (tphOS === 'Windows')
+        $('.tphVersteckeWindows').hide();
+    if (tphOS === 'X11')
+        $('.tphVersteckUnix').hide();
 }
 
 // Lädt die Schriftgröße aus dem localStorage
@@ -786,12 +813,6 @@ function tphHoleGPSAusBild(imgID) {
         //console.log(latFotojagd + 'xxx ' + lonFotojagd);
         tphNutzeGPS('tphFotojagd', latFotojagd, lonFotojagd, imgID);
     });
-}
-
-function tphHolseGPSAusBildJquery(imgID) {
-    lonFotojagd = $('#' + imgID).exif("GPSLongitude");
-    latFotojagd = $('#' + imgID).exif("GPSLatitude");
-    $('#tphJquery').text(latFotojagd + ' / ' + lonFotojagd);
 }
 
 function tphSetzeFotojagdBildGefundenLocalStorage(imgSrc) {
