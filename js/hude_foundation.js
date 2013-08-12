@@ -233,6 +233,7 @@ function tphHoleOS() {
     return OSName;
 }
 
+// Versteckt die Ansicht für ein bestimmtes Betriebssystem 
 function tphVersteckeOS() {
     var tphOS = tphHoleOS();
     if (tphOS === 'Linux')
@@ -448,10 +449,13 @@ function tphLocalStorageAuselsen() {
 function tphNutzeGPS(option, latImg, lonImg, imgID) {
     var lat;
     var lon;
+    console.log('-1 ' + option + ' xx ' + latImg + ' xx ' + lonImg + ' xx ' + imgID);
     navigator.geolocation.getCurrentPosition(tphNutzeGPSSuccess, tphNutzeGPSError, {maximumAge: 0, timeout: 15000, enableHighAccuracy: true});
     function tphNutzeGPSSuccess(position) {
+        console.log('0 ' + option + ' xx ' + latImg + ' xx ' + lonImg + ' xx ' + imgID);
         lat = position.coords.latitude;
         lon = position.coords.longitude;
+        console.log('1 ' + option + ' xx ' + latImg + ' xx ' + lonImg + ' xx ' + imgID);
         if (Connection.ETHERNET || Connection.WIFI || Connection.CELL_3G || Connection.CELL_4G) {
             $('.tphGoogleMapsKarte').css('height', $(window).height() * 0.9);
             $('.tphGoogleMapsKarte').css('width', $(window).width() * 0.9);
@@ -473,7 +477,7 @@ function tphNutzeGPS(option, latImg, lonImg, imgID) {
             cosole.log(print_r(navigator));
             console.log('ENDE');
         }
-
+        console.log('3 ' + option + ' xx ' + latImg + ' xx ' + lonImg + ' xx ' + imgID);
         switch (option) {
             case 'tphParklaetzeHude':
                 var parkplaetze = tphParkplaetze();
@@ -507,18 +511,6 @@ function tphNutzeGPS(option, latImg, lonImg, imgID) {
                     'strokeColor': '#c00',
                     'strokeThickness': 5
                 });
-                break;
-            case 'tphFotojagd':
-                console.log('tphNutzeGPS');
-                var abstand = tphGPSAbstand(lat, lon, latImg, lonImg);
-                alert('Abstand: ' + abstand);
-                if (abstand === true || abstand === 'true') {
-                    var imgSrc = $('#' + imgID).attr('src');
-                    console.log('bild gefunden: ' + imgSrc);
-                    tphSetzeFotojagdBildGefundenLocalStorage(imgSrc);
-                } else {
-                    alert('Nicht gefunden');
-                }
                 break;
         }
     }
@@ -709,11 +701,7 @@ function tphSetzeEinstellungenAufSeite() {
     var tphZielgruppe = tphHoleZielgruppe();
     var tphSchriftgroesse = tphHoleSchriftgroesse();
     var tphSchriftgroesseNormal = tphHoleSchriftgroesseNormal();
-//
-
     $('#puffer').css('height', Math.round($('nav').height() * 1.2));
-//
-
     // Zeigt nur den Text auf deutsch an
     if (tphSprache === 'de') {
         $('.tphSpracheDE').show();
@@ -756,12 +744,12 @@ function tphSetzeEinstellungenAufSeite() {
         $('.tphContent').css('font-size', tphSchriftgroesseNormal);
     }
     if (tphSchriftgroesse === 'mittel') {
-        tphSchriftgroesseMittel = parseInt(tphSchriftgroesseNormal) + 2;
+        var tphSchriftgroesseMittel = parseInt(tphSchriftgroesseNormal) + 2;
         tphSchriftgroesseMittel += 'px';
         $('.tphContent').css('font-size', tphSchriftgroesseMittel);
     }
     if (tphSchriftgroesse === 'gross') {
-        tphSchriftgroesseGross = parseInt(tphSchriftgroesseNormal) + 4;
+        var tphSchriftgroesseGross = parseInt(tphSchriftgroesseNormal) + 4;
         tphSchriftgroesseGross += 'px';
         $('.tphContent').css('font-size', tphSchriftgroesseGross);
     }
@@ -781,44 +769,73 @@ function tphSetzeEinstellungenAufSeite() {
         $(this).fancybox({
             openEffect: 'none',
             closeEffect: 'none',
-            //$(".fancybox").fancybox({
             title: function() {
                 var imgID = $(this).find('img').attr('id');
                 return '<a onclick="tphHoleGPSAusBild(\'' + imgID + '\')">Gefunden!</a>';
             }
         });
     });
+    // Überprüfen welche Bilder im localStorage gespeichert sind
+
     tphHoleFotojagdBilderAusLocalStorage();
     tphSpeicherFotojagdBilderImLocalStorage();
     // Zum Seitenanfang springen
     $(window).scrollTop(0);
     // Schließt Navigations-Panel nach dem Laden einer Seite
     $('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
+    
+    $('#tphHeader').click(function() {
+        $(window).scrollTop(0);
+    });
 }
 
 function tphHoleGPSAusBild(imgID) {
-    alert('tphHoleGPSAusBild');
+    console.log('tphHoleGPSAusBild');
     var image = document.getElementById(imgID);
-    var bildAnchor = EXIF.getData(image, function() {
-        alert('TRY');
+    EXIF.getData(image, function() {
         // GPS-Daten aus dem Bild auslesen
         var latFotojagd = EXIF.getTag(this, "GPSLatitude");
         var lonFotojagd = EXIF.getTag(this, "GPSLongitude");
-        $('#tphNormal').text(latFotojagd + ' / ' + lonFotojagd);
         // GPS-Daten von Grad, Minute, Sekunde ins Dezimale umrechnen
         latFotojagd = tphConvertDMStoDec(latFotojagd);
-        console.log(latFotojagd);
         lonFotojagd = tphConvertDMStoDec(lonFotojagd);
-        console.log(lonFotojagd);
-        //console.log(latFotojagd + 'xxx ' + lonFotojagd);
-        tphNutzeGPS('tphFotojagd', latFotojagd, lonFotojagd, imgID);
+        console.log(latFotojagd + ' xxx ' + lonFotojagd + ' xxx ' + imgID);
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var latGPS = position.coords.latitude;
+            var lonGPS = position.coords.longitude;
+            var gpsAbstand = tphGPSAbstand(latGPS, lonGPS, latFotojagd, lonFotojagd);
+            // Abstand zum Objekt ist ok
+            if (gpsAbstand === true) {
+                var img = $('#' + imgID);
+                // Schließen der Bildanzeige
+                $.fancybox.close();
+                // Pfad des Bildes holen
+                var imgSrc = img.attr('src');
+                // Bild ausblenden
+                img.fadeOut();
+                // Pfad im localStorage als gefunden setzen
+                var tphStorage = tphLadeLocalStorage();
+                tphStorage.setItem(imgID, true);
+                // Box mit Bild gefunden
+                $.fancybox.open(
+                        {href: imgSrc, title: '<h4>BILD GEFUNDEN!</h4>'}
+                );
+                var anzahlBilderGefunden = parseInt($('#tphAnzahlBilderGefunden').text() + 1);
+                $('#tphAnzahlBilderGefunden').text(anzahlBilderGefunden);
+            }
+        }, function(error) {
+            console.log('KEIN GPS');
+        }, {maximumAge: 0, timeout: 15000, enableHighAccuracy: true});
+        //tphNutzeGPS('tphFotojagd', latFotojagd, lonFotojagd, imgID);
     });
 }
 
 function tphSetzeFotojagdBildGefundenLocalStorage(imgSrc) {
+    console.log(imgSrc);
+    console.log('Wert im LS vor: ' + tphStorage.getItem(imgSrc));
     var tphStorage = tphLadeLocalStorage();
     tphStorage.setItem(imgSrc, true);
-    console.log('Wert im LS: ' + tphStorage.getItem(imgSrc));
+    console.log('Wert im LS nach: ' + tphStorage.getItem(imgSrc));
     tphHoleFotojagdBilderAusLocalStorage();
 }
 
@@ -830,17 +847,18 @@ function tphSpeicherFotojagdBilderImLocalStorage() {
     console.log('tphSpeicherFotojagdBilderImLocalStorage');
     // LocalStorage initialisieren
     var tphStorage = tphLadeLocalStorage();
-    // Link des Ankers == Bildpfad als Index benutzen
+    // id des Bildes als Index für Fotojagd benutzen
     $('a:has(img)').each(function() {
 // Wenn der Anker die Klasse 'fotojagd' enthält
         if ($(this).hasClass('fotojagd')) {
-// Und dieser noch nicht noch nicht im localStorage gesetzt ist
-            if (tphStorage.getItem($(this).attr('href')) === null) {
+// Und diese ID noch nicht im localStorage gesetzt ist
+            if (tphStorage.getItem($(this).find('img').attr('id')) === null) {
                 /* 
-                 * Wird dieser im localStorage als false (nicht gefunden) 
+                 * Wird diese ID im localStorage als false (nicht gefunden) 
                  * gespeichert
                  */
-                tphStorage.setItem($(this).attr('href'), false);
+//console.log('Wird gespeichert: ' + $(this).find('img').attr('id'));
+                tphStorage.setItem($(this).find('img').attr('id'), false);
             }
         }
     });
@@ -861,30 +879,26 @@ function tphHoleFotojagdBilderAusLocalStorage() {
      */
     var anzahlBilderInsgesamt = 0;
     var anzahlBilderGefunden = 0;
+    console.log(anzahlBilderGefunden + ' / ' + anzahlBilderInsgesamt);
     $('a:has(img)').each(function() {
 // Wenn der Anker die Klasse 'fotojagd' enthält
         if ($(this).hasClass('fotojagd')) {
-// Ist dieser Wert true  (gefunden) oder nicht
-            console.log('Aktuelle Bild: ' + $(this).attr('href'));
-            console.log(anzahlBilderGefunden + '/' + anzahlBilderInsgesamt);
-            if (tphStorage.getItem($(this).attr('href')) === 'true') {
-                console.log('Bild true: ' + $(this).attr('href'));
-                var imgID = $(this).find('img').attr('id');
-                //$('#' + imgID).hide();
-                $(this).attr('href', '');
+            var imgID = $(this).find('img').attr('id');
+            // Ist dieser Wert true (gefunden) oder nicht
+            if (tphStorage.getItem(imgID) === true || tphStorage.getItem(imgID) === 'true') {
+// wird das Bild nicht mehr angezeigt
+                $('#' + imgID).hide();
                 // Anzahl der gefundenen Bilder für Ergebnis erhöhen
                 anzahlBilderGefunden++;
                 // Anzahl der Bilder insgesamt für Ergebnis erhöhen
                 anzahlBilderInsgesamt++;
-                console.log(anzahlBilderGefunden + '/' + anzahlBilderInsgesamt);
             } else {
 // Anzahl der Bilder insgesamt für Ergebnis erhöhen
                 anzahlBilderInsgesamt++;
             }
         }
     });
-    console.log(anzahlBilderGefunden + '/' + anzahlBilderInsgesamt);
-    $('#tphSchnitzeljagdFotojagdErgebnis').html('<div id="tphSchnitzeljagdFotojagdErgebnis">Bereits gefunden ' + anzahlBilderGefunden + '/' + anzahlBilderInsgesamt + ' Bildern und deren Position!</div>');
+    $('#tphSchnitzeljagdFotojagdErgebnis').html('<div id="tphSchnitzeljagdFotojagdErgebnis"><p><br/>Bereits gefunden <span id="tphAnzahlBilderGefunden">' + anzahlBilderGefunden + '</span>/<span id="tphAnzalhBilderInsgesamt">' + anzahlBilderInsgesamt + '</span> Bildern und deren Position!</p></div>');
 }
 
 /*
@@ -901,14 +915,23 @@ function tphSetzeFotojagdBilderAufNichtGefunden() {
      */
     var anzahlBilderInsgesamt = 0;
     var anzahlBilderGefunden = 0;
+    var imgIDsZumLoeschen = new Array();
     $('a:has(img)').each(function() {
-// Wenn der Anker die Klasse 'fotojagd' enthält
         if ($(this).hasClass('fotojagd')) {
-// Ist dieser Wert true  (gefunden) oder nicht
-            tphStorage.setItem($(this).attr('href'), false);
-            $('#tphSchnitzeljagdFotojagdErgebnis').html('<div id="tphSchnitzeljagdFotojagdErgebnis">Bereits gefunden: ' + anzahlBilderGefunden + '/' + anzahlBilderInsgesamt + ' Bildern und deren Position!</div>');
+            anzahlBilderInsgesamt++;
+            var imgID = $(this).find('img').attr('id');
+            // ID dem Array hinzufügen, das im Anschluss die IDs im localStorage 
+            // zurücksetzt
+            imgIDsZumLoeschen.push(imgID);
+            // Bilder wieder anzeigen
+            $('#' + imgID).show();
         }
     });
+    // IDs der Bilder im localStorage false setzen
+    for (var i = 0; i < imgIDsZumLoeschen.length; i++) {
+        tphStorage.setItem(imgIDsZumLoeschen[i], false);
+    }
+    $('#tphSchnitzeljagdFotojagdErgebnis').html('<div id="tphSchnitzeljagdFotojagdErgebnis"><p><br/>Bereits gefunden <span id="tphAnzahlBilderGefunden">' + anzahlBilderGefunden + '</span>/<span id="tphAnzalhBilderInsgesamt">' + anzahlBilderInsgesamt + '</span> Bildern und deren Position!</p></div>');
 }
 
 function tphSpeicherDateienHeruntergeladen(anzahl) {

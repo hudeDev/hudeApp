@@ -57,49 +57,11 @@
         <img id="tphFotojagdHude11" src="images/schnitzeljagd/fotojagd/IMG_20130606_142019.jpg" alt="image" class="th round">
     </a>
 </div>
-<div class="large-6 small-6 columns">
-    <img id="ega" src="images/schnitzeljagd/fotojagd/IMG_20130606_142019.jpg" class="th round" />
-</div>
-<div id="tphNormal" class="large-6 small-6 columns" style="background-color: red"></div>
-<div id="tphJquery" class="large-6 small-6 columns" style="background-color: blue"></div>
 <div class="large-12 small-12 columns">
     <a class="button large expand" onclick="tphSetzeFotojagdBilderAufNichtGefunden();">Neustarten</a>
 </div>
 <script>
         $(function() {
             tphHeaderUberschriftAendern('Fotojagd Hude');
-            tphSetzeEinstellungenAufSeite();
-
-            var OSName = "Unknown OS";
-            if (navigator.appVersion.indexOf("Win") != -1)
-                OSName = "Windows";
-            if (navigator.appVersion.indexOf("Mac") != -1)
-                OSName = "MacOS";
-            if (navigator.appVersion.indexOf("X11") != -1)
-                OSName = "UNIX";
-            if (navigator.appVersion.indexOf("Linux") != -1)
-                OSName = "Linux";
-
-            $('#tphNormal').text(OSName);
-
-            $('#ega').click(function() {
-                var imgID = $(this).attr('id');
-                console.log(imgID);
-                var image = document.getElementById(imgID);
-                var bildAnchor = EXIF.getData(image, function() {
-                    alert('TRY');
-                    // GPS-Daten aus dem Bild auslesen
-                    var latFotojagd = EXIF.getTag(this, "GPSLatitude");
-                    var lonFotojagd = EXIF.getTag(this, "GPSLongitude");
-                    $('#tphNormal').text(latFotojagd + ' / ' + lonFotojagd);
-                    // GPS-Daten von Grad, Minute, Sekunde ins Dezimale umrechnen
-                    latFotojagd = tphConvertDMStoDec(latFotojagd);
-                    console.log(latFotojagd);
-                    lonFotojagd = tphConvertDMStoDec(lonFotojagd);
-                    console.log(lonFotojagd);
-                    //console.log(latFotojagd + 'xxx ' + lonFotojagd);
-                    tphNutzeGPS('tphFotojagd', latFotojagd, lonFotojagd, imgID);
-                });
-            });
         });
 </script>
