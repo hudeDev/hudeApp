@@ -782,11 +782,18 @@ function tphSetzeEinstellungenAufSeite() {
     // Zum Seitenanfang springen
     $(window).scrollTop(0);
     // Schließt Navigations-Panel nach dem Laden einer Seite
-    $('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
+    
     
     $('#tphHeader').click(function() {
         $(window).scrollTop(0);
     });
+    
+    $('a').click(function() {
+        console.log('link gegklickt');
+        $(this).focus();
+    });
+    
+    $('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
 }
 
 function tphHoleGPSAusBild(imgID) {

@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    -webkit-user-select: none;
+}
+body {
+    padding-top: 0;
+}
+.tphContent {
+    /* margin-bottom: 20px; */
+}
+.tphFooter {
+    /* background-color: black; */
+    background-color: #fff;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+/* Überschrift */
+#tphHeaderUeberschrift {
+    color: white;
+    background-color: #008A7E;
+    padding-top: 0;
+}
+
+table {
+    width: 100%;
+    border: 0;
+}
+p a {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.top-bar {
+    background-color: #008A7E;
+}
+.top-bar-section ul {
+    background-color: #008A7E;
+}
+.top-bar-section li a:not(.button) {
+    background-color: #008A7E;
+}
+.top-bar-section ul li.hover > a {
+    background: none repeat scroll 0 0 #008A7E;
+    color: white;
+    font-weight: 500;
+}
+.top-bar.expanded .toggle-topbar a {
+    color: #fff;
+}
+img.tphTitelBild {
+    display: block;
+    margin: auto;
+}
+.section-container.auto > section > .title a, .section-container.auto > .section > .title a, .section-container.vertical-tabs > section > .title a, .section-container.vertical-tabs > .section > .title a, .section-container.vertical-nav > section > .title a, .section-container.vertical-nav > .section > .title a, .section-container.horizontal-nav > section > .title a, .section-container.horizontal-nav > .section > .title a, .section-container.accordion > section > .title a, .section-container.accordion > .section > .title a
+{
+    color: #fff;
+}
+.section-container.auto > section > .title, .section-container.auto > .section > .title, .section-container.vertical-tabs > section > .title, .section-container.vertical-tabs > .section > .title, .section-container.vertical-nav > section > .title, .section-container.vertical-nav > .section > .title, .section-container.horizontal-nav > section > .title, .section-container.horizontal-nav > .section > .title, .section-container.accordion > section > .title, .section-container.accordion > .section > .title
+{
+    background-color: #008a7e;
+    cursor: pointer;
+    border-top-width: 0px;
+    border-right-width-value: 0px;
+    border-bottom-width: 0px;
+    border-left-width-value: 0px;
+    border-top-style: solid;
+    border-right-style-value: solid;
+    border-bottom-style: solid;
+    border-left-style-value: solid;
+    border-top-color: #008a7e;
+    border-right-color-value: #008a7e;
+    border-bottom-color: #008a7e;
+    border-left-color-value: #008a7e;
+    border-image-source: none;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-width: 1 1 1 1;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+}
+
+.section-container.auto > section.active > .title, .section-container.auto > .section.active > .title, .section-container.vertical-tabs > section.active > .title, .section-container.vertical-tabs > .section.active > .title, .section-container.vertical-nav > section.active > .title, .section-container.vertical-nav > .section.active > .title, .section-container.horizontal-nav > section.active > .title, .section-container.horizontal-nav > .section.active > .title, .section-container.accordion > section.active > .title, .section-container.accordion > .section.active > .title
+{
+    background-color: #02b0a2;
+}
+
+.section-container.auto > section > .title:hover, .section-container.auto > .section > .title:hover, .section-container.vertical-tabs > section > .title:hover, .section-container.vertical-tabs > .section > .title:hover, .section-container.vertical-nav > section > .title:hover, .section-container.vertical-nav > .section > .title:hover, .section-container.horizontal-nav > section > .title:hover, .section-container.horizontal-nav > .section > .title:hover, .section-container.accordion > section > .title:hover, .section-container.accordion > .section > .title:hover
+{
+    background-color: #02b0a2;
+}
+
+container.horizontal-nav, .section-container.accordion {
+    border-top: 0px solid #CCCCCC;
+}
+
+.section-container.auto > section > .content, .section-container.auto > .section > .content, .section-container.vertical-tabs > section > .content, .section-container.vertical-tabs > .section > .content, .section-container.vertical-nav > section > .content, .section-container.vertical-nav > .section > .content, .section-container.horizontal-nav > section > .content, .section-container.horizontal-nav > .section > .content, .section-container.accordion > section > .content, .section-container.accordion > .section > .content {
+    background-color: white;
+    border: 0px solid #CCCCCC;
+    padding: 0.9375em;
+}
+
+.section-container.auto > section.active > .title a, .section-container.auto > .section.active > .title a, .section-container.vertical-tabs > section.active > .title a, .section-container.vertical-tabs > .section.active > .title a, .section-container.vertical-nav > section.active > .title a, .section-container.vertical-nav > .section.active > .title a, .section-container.horizontal-nav > section.active > .title a, .section-container.horizontal-nav > .section.active > .title a, .section-container.accordion > section.active > .title a, .section-container.accordion > .section.active > .title a {
+    color: #fff;
+}
+
+.section-container.auto > section > .title, .section-container.auto > .section > .title, .section-container.vertical-tabs > section > .title, .section-container.vertical-tabs > .section > .title, .section-container.vertical-nav > section > .title, .section-container.vertical-nav > .section > .title, .section-container.horizontal-nav > section > .title, .section-container.horizontal-nav > .section > .title, .section-container.accordion > section > .title, .section-container.accordion > .section > .title { 
+    background-color: #008A7E; 
+    border: 0 solid #008A7E; 
+    cursor: pointer; 
+}
+
+button, .button, .button:hover {
+    background-color: #008A7E;
+    border-color: #02b0a2;
+    border-style: solid;
+    border-width: 1px;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0 0 1.25em;
+    padding: 0.75em 1.5em 0.8125em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button:hover {
+    border-color: #008A7E;
+    background-color: #02b0a2;
+}
+a .subheader {
+    font-size: 0.9em;
+    color: #fff;
+    font-weight: 200;
+    line-height: 1.4;
+    margin-bottom: 0.5em;
+    margin-top: 0.2em;
+}

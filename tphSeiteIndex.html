@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="css/foundation.css">
         <link rel="stylesheet" href="css/jquery.fancybox.css">
         <link rel="stylesheet" href="css/jquery.fancybox-buttons.css">
+        <link rel="stylesheet" href="css/hude.css">
         <script src="js/vendor/custom.modernizr.js"></script>
         <!-- Phonegap Abhängigkeiten -->
         <script src="phonegap.js"></script>
@@ -19,81 +20,19 @@
         <script src="js/jquery.exif.js" type="text/javascript"></script>
         <script src="js/jquery.fancybox.js" type="text/javascript"></script>
         <script src="js/jquery.fancybox-buttons.js" type="text/javascript"></script>
-        <script src="js/fastclick.js"></script>
         <script src="js/print_r.js"></script>
-        <!-- <script src="js/hude.js"></script> -->
         <script src="js/hude_foundation.js"></script>
-
         <script src="js/binaryajax.js"></script>
         <script src="js/exif.js"></script>
-
-
         <script>
             document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
                 tphAppStart();
                 document.addEventListener("backbutton", function(event) {
                     parent.history.back();
-                    //event.preventDefault();
                 }, false);
             }
         </script>
-        <style>
-            * {
-                margin: 0;
-            }
-            body {
-                padding-top: 0;
-            }
-            .tphContent {
-                /* margin-bottom: 20px; */
-            }
-            .tphFooter {
-                /* background-color: black; */
-                background-color: #fff;
-                position: fixed;
-                bottom: 0px;
-                left: 0px;
-                width: 100%;
-            }
-            /* Überschrift */
-            #tphHeaderUeberschrift {
-                color: white;
-                background-color: #008A7E;
-                padding-top: 0;
-            }
-
-            table {
-                width: 100%;
-                border: 0;
-            }
-            p a {
-                width: 100%;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .top-bar {
-                background-color: #008A7E;
-            }
-            .top-bar-section ul {
-                background-color: #008A7E;
-            }
-            .top-bar-section li a:not(.button) {
-                background-color: #008A7E;
-            }
-            .top-bar-section ul li.hover > a {
-                background: none repeat scroll 0 0 #008A7E;
-                color: white;
-            }
-            .top-bar.expanded .toggle-topbar a {
-                color: #fff;
-            }
-            img.tphTitelBild {
-                display: block;
-                margin: auto;
-            }
-        </style>
     </head>
     <body>
         <div id="tphHeader" class="fixed">
@@ -104,7 +43,11 @@
                         <h1 id="tphHeaderUeberschrift">Hude</h1>
                     </li>
                     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-                    <li class="toggle-topbar menu-icon"><a id="tphMenu" href="#"><span>Menu</span></a></li>
+                    <li class="toggle-topbar menu-icon">
+                        <a id="tphMenu" href="#">
+                            <span>Menu</span>
+                        </a>
+                    </li>
                 </ul>
                 <section class="top-bar-section">
                     <!-- Left Nav Section -->
@@ -392,18 +335,20 @@
                         <li class="has-dropdown">
                             <a href="#tphSeiteSchnitzeljagd">Schnitzeljagd</a>
                             <ul class="dropdown">
-                                <li class="has-dropdown"><a href="#">Planetenabitur</a>
+                                <li class="has-dropdown">
+                                    <a href="#tphSeiteSchnitzeljagd">Planetenabitur</a>
                                     <ul class="dropdown">
                                         <li><a href="#tphSeiteSchnitzeljagdPlanetenabiturA">Planetenabitur A</a></li>
                                         <li><a href="#tphSeiteSchnitzeljagdPlanetenabiturB">Planetenabitur B</a></li>
                                         <li><a href="#tphSeiteSchnitzeljagdPlanetenabiturC">Planetenabitur C</a></li>
                                     </ul>
                                 </li>
-                                <li class="has-dropdown"><a href="#">Fotojagd</a>
+                                <li class="has-dropdown">
+                                    <a href="#tphSeiteSchnitzeljagd">Fotojagd</a>
                                     <ul class="dropdown">
                                         <li><a href="#tphSeiteSchnitzeljagdFotojagdHude">Hude</a></li>
-                                        <li><a href="#">Klosterbezirk</a></li>
-                                        <li><a href="#">Skulpturenufer</a></li>
+                                        <li><a href="#tphSeiteSchnitzeljagdFotojagdKlosterbezirk">Klosterbezirk</a></li>
+                                        <li><a href="#tphSeiteSchnitzeljagdFotojagdSkulpturenufer">Skulpturenufer</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -467,7 +412,6 @@
                     ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
                     '.js><\/script>')
         </script>
-
         <script src="js/foundation.min.js"></script>
         <script src="js/foundation/foundation.js"></script>
         <script src="js/foundation/foundation.alerts.js"></script>
@@ -511,6 +455,5 @@
 
             });
         </script>
-
     </body>
 </html>
