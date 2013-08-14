@@ -1190,7 +1190,7 @@ function tphDateisystem(option, dateiname) {
                            </a>');
                                 $('.tphPlayerControl').show();
                                 $('.tphPlayerKeineDateien').hide();
-                                alert('Gefunden');
+                                //alert('Gefunden');
                             } else {
                             }
                         }
