@@ -5,8 +5,10 @@ function tphAppStart() {
     // Überprüfen ob die App zum ersten Mal startet
     var tphErsterStart = tphStorage.getItem('tphErsterStart'); // Enthält den Zeitstempel des ersten Starts
     if (tphErsterStart === null) {
-// App startet zum ersten Mal
-// Zeit des ersten Starts festlegen
+        /* 
+         * App startet zum ersten Mal
+         * Zeit des ersten Starts festlegen
+         */
         tphStorage.setItem('tphErsterStart', new Date().getTime());
         // Einstellen der Sprache auf deutsch
         tphStorage.setItem('tphSprache', 'de');
@@ -782,17 +784,17 @@ function tphSetzeEinstellungenAufSeite() {
     // Zum Seitenanfang springen
     $(window).scrollTop(0);
     // Schließt Navigations-Panel nach dem Laden einer Seite
-    
-    
+
+
     $('#tphHeader').click(function() {
         $(window).scrollTop(0);
     });
-    
+
     $('a').click(function() {
         console.log('link gegklickt');
         $(this).focus();
     });
-    
+
     $('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
 }
 
@@ -1000,7 +1002,6 @@ function tphSplitURL(url) {
         url = url.replace(domain, '').trim();
         var hash = (url.replace(/^#/, '') || 'blank') + '.';
         var datei = hash + 'html';
-        alert(url + ' -> ' + hash + ' aufruf: ' + datei);
         $('.tphContent').load(datei);
         //$.mobile.changePage(url, 'none', true, true);
     } else {
