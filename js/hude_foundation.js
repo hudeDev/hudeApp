@@ -535,13 +535,7 @@ function tphNutzeGPS(option) {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
         try {
-            if (Connection.ETHERNET || Connection.WIFI || Connection.CELL_3G || Connection.CELL_4G) {
-
-                $.getScript("http://maps.google.com/maps/api/js?sensor=true", function() {
-                    alert("Script loaded and executed.");
-                    // here you can use anything you defined in the loaded script
-                });
-                
+            if (Connection.ETHERNET || Connection.WIFI || Connection.CELL_3G || Connection.CELL_4G) {                
                 $('.tphGoogleMapsKarte').css('height', $(window).height() * 0.9);
                 $('.tphGoogleMapsKarte').css('width', $(window).width() * 0.9);
                 var aktuellePosition = new google.maps.LatLng(lat, lon);
