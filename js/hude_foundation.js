@@ -465,6 +465,15 @@ function tphHuderPadd() {
     return wegpunkte;
 }
 
+function tphHuderPaddSights() {
+    var sights = new Array();
+    sights.push('53.118264,8.4481');
+    sights.push('53.116928,8.44859');
+    sights.push('53.100746,8.451452');
+    sights.push('53.109645,8.461692');
+    return sights;
+}
+
 // Aktiviert den localStorage des Geräts und das localStorage Objekt zurück
 function tphLadeLocalStorage() {
     try {
@@ -592,6 +601,14 @@ function tphNutzeGPS(option) {
                     'strokeColor': '#c00',
                     'strokeThickness': 5
                 });
+                var hudePaddSights = tphHuderPaddSights();
+                for (var i = 0; i < hudePaddSights.length; i++) {
+                    /* 
+                     * bounds: true richtet die Karte so aus, dass alle Marker zu sehen sind.
+                     * bounds: false fügt alle Marker lediglich der Karte hinzu
+                     */
+                    $('.tphGoogleMapsKarte').gmap('addMarker', {'id': 'tphHuderPaddSights-' + i, 'position': hudePaddSights[i], 'bounds': true});
+                }
                 break;
         }
     }
