@@ -142,3 +142,8 @@ a .subheader {
     margin-bottom: 0.5em;
     margin-top: 0.2em;
 }
+
+.tphGoogleMapsKarte {
+   text-align: center; 
+   margin: 0 auto; 
+}
