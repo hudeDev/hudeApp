@@ -3,7 +3,11 @@
         <script type="text/javascript">
             function load()
             {
-                window.location.href = "tphSeiteIndex.html#tphSeiteIndex";
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                    window.location.href = "tphSeiteIndex.html#tphSeiteIndex";
+                } else {
+                    window.location.href = "http://gastinhude.de";
+                }
             }
         </script>
     </head>

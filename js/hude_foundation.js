@@ -38,8 +38,8 @@ function tphAudioAbspielen(file) {
     audio = new Media(file, function() { // success callback
         console.log("playAudio():Audio Success");
     }, function(error) { // error callback
-        alert('code: ' + error.code + '\n' +
-                'message: ' + error.message + '\n');
+        //alert('code: ' + error.code + '\n' +
+        //        'message: ' + error.message + '\n');
     });
     // get audio duration
     var duration = audio.getDuration();
