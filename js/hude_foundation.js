@@ -82,6 +82,28 @@ function tphAudioStoppen() {
     audioTimer = null;
     pausePos = 0;
 }
+// Prüft die Internetverbindung
+function tphCheckInternetConnection() {
+    var xhr = new XMLHttpRequest();
+    var file = "http://www.touristik-palette-hude.de/images/tp-schriftzug.png";
+    var randomNum = Math.round(Math.random() * 10000);
+     
+    xhr.open('HEAD', file + "?rand=" + randomNum, false);
+     
+    try {
+        xhr.send();
+         
+        if (xhr.status >= 200 && xhr.status < 304) {
+            console.log("200");
+            return true;
+        } else {
+            console.log("FEHLER");
+            return false;
+        }
+    } catch (e) {
+        return false;
+    }
+}
 // Berechnet die dezimalen Koordinaten von Degree Minute Second
 function tphConvertDMStoDec(dmsArray) {
     var DEG = dmsArray[0]['numerator'];
@@ -332,6 +354,10 @@ function tphVersteckeOS() {
         $('.tphVersteckUnix').hide();
 }
 
+function tphZurueck() {
+    parent.history.back();
+}
+
 // Lädt die Schriftgröße aus dem localStorage
 function tphHoleSchriftgroesse() {
     console.log('tphHoleSchriftgroesse');
@@ -513,6 +539,7 @@ function tphLadeVeranstaltungen() {
                 append += '</div>';
                 append += '</div>';
             }
+            $('.tphAjaxLoader').hide();
             $('#tphVeranstaltungen').append(append);
         },
         error: function(XHR, textStatus, errorThrown) {
@@ -559,6 +586,7 @@ function tphNutzeGPS(option) {
                     'radius': 15,
                     'clickable': false
                 });
+                $('.tphAjaxLoader').hide();
             } else {
                 console.log('KEINE AUSREICHENDE DATENVERBINDUNG');
                 $('.tphGoogleMapsKarte').html('<div id="tphGoogleMapsKarte">' + print_r(navigator) + '</div>');
@@ -899,6 +927,8 @@ function tphSetzeEinstellungenAufSeite() {
     });
 
     $('.top-bar, [data-topbar]').css('height', '').removeClass('expanded');
+    
+    tphVersteckeOS();
 }
 
 /*
@@ -1143,8 +1173,8 @@ function tphDateisystem(option, dateiname) {
                         var anzahlDateienGesamt = dateien.length;
                         var tphStorage = tphLadeLocalStorage();
                         // Zurücksetzen der Anzeige in den Einstellungen von bereits heruntergeladenen Dateien und der zu ladenen Dateien.
-                        $('#tphAnzahlAudioBereitsGeladen').html('<span id="tphAnzahlAudioBereitsGeladen">0</span>');
-                        $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + dateien.length + '</span>');
+                        $('#tphAnzahlAudioHeruntergeladen').html('<span id="tphAnzahlAudioHeruntergeladen">0</span>');
+                        $('#tphAnzahlAudioInsgesamt').html('<span id="tphAnzahlAudioInsgesamt">' + anzahlDateienGesamt + '</span>');
                         // Download der Dateien starten
                         for (var i = 0; i < dateien.length; i++) {
                             uri = encodeURI(dateien[i]);
@@ -1157,7 +1187,7 @@ function tphDateisystem(option, dateiname) {
                                 if (progressEvent.lengthComputable) {
                                     var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
                                     //console.log(perc + '% geladen' + downloadPfad);
-                                    $('#tphDownloadStatus').html('<p><strong>' + (Math.floor(progressEvent.loaded / progressEvent.total * 100)) + '</strong></p>');
+                                    $('#tphDownloadStatus').html('<p><strong>Download wird ausgeführt: ' + (Math.floor(progressEvent.loaded / progressEvent.total * 100)) + '</strong></p>');
                                     if (progressEvent.loaded === progressEvent.total) {
                                         var anzahlHeruntergeladen = tphStorage.getItem('tphAudioDateienHeruntergeladen');
                                         var anzahlDateien = tphAudioDateien().length;
